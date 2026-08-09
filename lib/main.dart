@@ -1,0 +1,86 @@
+
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:storio_app/routes/routes.dart';
+import 'package:storio_app/routes/routes_name.dart';
+import 'package:storio_app/splash_screen.dart';
+import 'package:sizer/sizer.dart';
+import 'package:storio_app/utils/app_colors.dart';
+import 'package:storio_app/utils/sizes.dart';
+void main(){
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Sizer(builder: (context,orientation,screenType){
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: RoutesName.splash_screen,
+        onGenerateRoute: Routes.generateRoute,
+        theme: ThemeData(
+            textTheme: GoogleFonts.interTextTheme(
+              ThemeData.light().textTheme,
+            ).apply(
+              bodyColor: AppColors.primary,
+              displayColor: AppColors.primary
+            ),
+
+            inputDecorationTheme: InputDecorationTheme(
+              filled: true,
+              fillColor: Colors.white70,
+
+              hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
+
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: AppColors.secondary, width: 1),
+              ),
+
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: AppColors.secondary, width: 1.5),
+              ),
+
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Colors.red, width: 1),
+              ),
+
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Colors.red, width: 1.5),
+              ),
+
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                minimumSize: const Size.fromHeight(48),
+                //fixedSize: Size.fromWidth(double.maxFinite),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(AppSizes.buttonRadius),
+                ),
+                textStyle: TextStyle(
+                  fontSize: AppSizes.sectionTitle,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          scaffoldBackgroundColor: AppColors.background
+
+        ),
+      );
+    });
+  }
+}
