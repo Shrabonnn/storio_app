@@ -13,4 +13,6 @@ class RoutesName {
   static const activity_manage = "activity_manage";
   static const activity_manage_category = "activity_manage_category";
   static const activity_manage_details = "activity_manage_details";
+  static const contact = "contact";
+  static const contact_message_details = "contact_message_details";
 }

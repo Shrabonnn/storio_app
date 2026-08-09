@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/model/institure/key_metrics_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/utils/sizes.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
@@ -34,19 +35,17 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
   final TextEditingController visionController = TextEditingController();
   String vision = "";
 
+  // Infrastructure controller
   final infrastructuresLabelController = TextEditingController();
   final infrastructuresValueController = TextEditingController();
-
   List<InfrastructureItemModel> infrastructures = [];
 
 
-
+  // Metrics controller
   final metricsLabelController = TextEditingController();
   final metricsValueController = TextEditingController();
   IconData selectedMetricIcon = Icons.people_alt_outlined;
-  
-
-  List<InfrastructureItemModel> keyMertics = [];
+  List<KeyMetricsModel> keyMertics = [];
 
   bool isKeyMetricsExpanded = false;
   bool isinfrastructuresExpanded = false;
@@ -243,7 +242,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                       onSave: () {
                         setState(() {
                           keyMertics.add(
-                            InfrastructureItemModel(
+                            KeyMetricsModel(
                               label: metricsLabelController.text.trim(),
                               value: metricsValueController.text.trim(),
                               iconData: selectedMetricIcon,
@@ -334,12 +333,12 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                         FormFieldData(
                           title: "Infrastructures Level",
                           hint: "e.g. Classrooms",
-                          controller: metricsLabelController,
+                          controller: infrastructuresLabelController,
                         ),
                         FormFieldData(
                           title: "Value",
                           hint: "e.g. 20",
-                          controller: metricsValueController,
+                          controller: infrastructuresValueController,
                         ),
                       ],
 

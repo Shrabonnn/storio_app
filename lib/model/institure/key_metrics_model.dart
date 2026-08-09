@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-class InfrastructureItemModel {
+class KeyMetricsModel {
   final String label;
   final String value;
+  final IconData?iconData;
 
-
-  InfrastructureItemModel({
+  KeyMetricsModel({
     required this.label,
-    required this.value,
+    required this.value,  this.iconData,
   });
 }

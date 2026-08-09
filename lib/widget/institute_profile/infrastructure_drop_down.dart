@@ -41,7 +41,8 @@ class InfrastructureDropDown extends StatelessWidget {
               SizedBox(height: AppSizes.smallGap),
               TextField(
                 controller: field.controller,
-
+                minLines: 1,
+                maxLines: 3,
                 decoration: InputDecoration(
                   hintText: field.hint,
                   border: OutlineInputBorder(

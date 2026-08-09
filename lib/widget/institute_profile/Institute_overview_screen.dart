@@ -42,7 +42,6 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
             TextTitleWidget(
               title: widget.title,
               size: AppSizes.sectionTitle,
-
               color: AppColors.primary,
             ),
             if (widget.showIcon)
@@ -60,42 +59,45 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
           ],
         ),
 
-        SizedBox(height: AppSizes.smallGap),
-
-
-        Container(
-          width: 100.w,
-         // padding: EdgeInsets.symmetric(horizontal: AppSizes.smallPadding),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(AppSizes.cardRadius),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.08),
-                blurRadius: 2,
-                spreadRadius: 2,
-                offset: Offset(0,0),
-              )
-            ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.all( AppSizes.cardPadding),
-            child: AnimatedSize(
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (widget.isExpanded && widget.expandableChild != null) ...[
-                    widget.expandableChild!,
-                    SizedBox(height: AppSizes.sectionGap),
+        if(widget.child != null || (widget.isExpanded && widget.expandableChild !=null)) ...[
+          SizedBox(height: AppSizes.smallGap),
+          Container(
+            width: 100.w,
+            // padding: EdgeInsets.symmetric(horizontal: AppSizes.smallPadding),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(AppSizes.cardRadius),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 2,
+                  spreadRadius: 2,
+                  offset: Offset(0,0),
+                )
+              ],
+            ),
+            child: Padding(
+              padding: EdgeInsets.all( AppSizes.cardPadding),
+              child: AnimatedSize(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (widget.isExpanded && widget.expandableChild != null) ...[
+                      widget.expandableChild!,
+                      SizedBox(height: AppSizes.sectionGap),
+                    ],
+                    if (widget.child != null) widget.child!,
                   ],
-                  if (widget.child != null) widget.child!,
-                ],
+                ),
               ),
             ),
           ),
-        ),
+        ]
+
+
+
       ],
     );
   }

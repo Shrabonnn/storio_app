@@ -12,6 +12,7 @@ import '../widget/institute_profile/infrastructure_drop_down.dart';
 import '../widget/textStyle/text_body_style.dart';
 import '../widget/universal/custom_app_bar.dart';
 import '../widget/universal/custom_card.dart' ;
+import '../widget/universal/custom_drop_down.dart';
 import '../widget/universal/custom_text_field.dart';
 
 class ActivityManageDetailsScreen extends StatefulWidget {
@@ -29,6 +30,13 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
   final TextEditingController metaTitleController = TextEditingController();
   final TextEditingController metaDescriptionController = TextEditingController();
   final TextEditingController metaSummaryController = TextEditingController();
+
+  final List<String> statusList = [
+    "Draft",
+    "Published",
+    "Scheduled",
+    "Cancelled",
+  ];
 
 
 
@@ -80,7 +88,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                         // Activities
                         TextBodyStyleWidget(title: "Activities", color: AppColors.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
-                        CustomTextFieldWidget(hintText: "annual-tech-conference-2025", controller: activityController,minLines: 2,),
+                        CustomTextFieldWidget(hintText: "annual-tech-conference-2025", controller: activityController,),
                         SizedBox(height: AppSizes.itemGap),
 
                       ],
@@ -120,6 +128,45 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
                     SizedBox(height: AppSizes.sectionGap,),
 
+                    // Activity Setting
+                    CustomCard(child: Column(
+                      children: [
+                        InstituteOverviewScreen(
+                          title: "Activity Screen",
+                          isExpanded: false,
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            children: [
+                              // Title
+                              TextBodyStyleWidget(title: "Author Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                              SizedBox(height: AppSizes.appbarGap),
+                              CustomTextFieldWidget(hintText: "Hasibul Islam",controller: titleController),
+                              SizedBox(height: AppSizes.itemGap),
+
+
+                              // Activities
+                              TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.cardTitle,),
+                              SizedBox(height: AppSizes.appbarGap),
+                              CustomDropdown(
+                                items: statusList,
+                                initialValue: "Draft",
+                                width: 100.w,
+                                height: 4.5.h,
+                                onChanged: (value) {
+                                  print("Selected: $value");
+
+                                },
+                              ),
+
+                            ],
+
+
+                          ),)
+                      ],
+                    )),
+
+                    SizedBox(height: AppSizes.sectionGap,),
+
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
@@ -137,7 +184,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                     SizedBox(height: AppSizes.sectionGap,),
 
 
-                    // Activity Setting
+                    // Seo Setting
                     CustomCard(child: InstituteOverviewScreen(
                       title: "SEO Settings",
                       showIcon: true,
@@ -168,6 +215,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                           ),
                         ],
 
+                        // If click add add on third place , if click the final save btn then add to DB
                         onSave: () {
                           setState(() {
                             activitySeoSetting.add(
@@ -187,7 +235,19 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                         },
 
                       ),
-                    ),)
+                    ),),
+
+                    SizedBox(height: AppSizes.sectionGap,),
+                    Row(
+                      mainAxisAlignment: .spaceBetween,
+                      children: [
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.green.shade200,foregroundColor: Colors.black,),
+                        SizedBox(width: AppSizes.appbarGap,),
+                        Flexible(child: CustomButton(text: "Save", onTap: (){},)),
+                      ],
+                    )
+
+
                   ],
                 )
 

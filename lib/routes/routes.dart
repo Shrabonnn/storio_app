@@ -6,6 +6,8 @@ import 'package:storio_app/view/activity_category_screen.dart';
 import 'package:storio_app/view/activity_manage_details_screen.dart';
 import 'package:storio_app/view/activity_manage_screen.dart';
 import 'package:storio_app/view/bottom_navbar.dart';
+import 'package:storio_app/view/contact_message_details.dart';
+import 'package:storio_app/view/contact_screen.dart';
 import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
 import 'package:storio_app/view/institute_profile_screen.dart';
@@ -46,6 +48,10 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> ActivityCategoryScreen());
       case RoutesName.activity_manage_details:
         return MaterialPageRoute(builder: (context)=> ActivityManageDetailsScreen());
+      case RoutesName.contact:
+        return MaterialPageRoute(builder: (context)=> ContactScreen());
+      case RoutesName.contact_message_details:
+        return MaterialPageRoute(builder: (context)=> ContactMessageDetails(name: "Maiyasha", email: "maiyasha@gmail.com", phone: "01714532456", dateTime: "10:00 AM . August 2026", subject: "Re admission", message: "Please Admit your child", status: "new"));
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
           body: Center(

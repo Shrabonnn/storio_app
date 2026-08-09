@@ -149,7 +149,9 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.phone_in_talk_outlined,
           label: "Contact",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.contact);
+          },
         ),
         ActionTile(
           icon: Icons.help_outline,
