@@ -8,8 +8,12 @@ import 'package:storio_app/view/activity_manage_screen.dart';
 import 'package:storio_app/view/bottom_navbar.dart';
 import 'package:storio_app/view/contact_message_details.dart';
 import 'package:storio_app/view/contact_screen.dart';
+import 'package:storio_app/view/content_details.dart';
 import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
+import 'package:storio_app/view/gallery/add_gallery_images.dart';
+import 'package:storio_app/view/gallery/gallery_manage_screen.dart';
+import 'package:storio_app/view/gallery/manage_albums.dart';
 import 'package:storio_app/view/institute_profile_screen.dart';
 import 'package:storio_app/view/login_screen.dart';
 import 'package:storio_app/view/media_manage_details_screen.dart';
@@ -52,6 +56,14 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> ContactScreen());
       case RoutesName.contact_message_details:
         return MaterialPageRoute(builder: (context)=> ContactMessageDetails(name: "Maiyasha", email: "maiyasha@gmail.com", phone: "01714532456", dateTime: "10:00 AM . August 2026", subject: "Re admission", message: "Please Admit your child", status: "new"));
+      case RoutesName.content_details:
+        return MaterialPageRoute(builder: (context)=> ContentDetails());
+      case RoutesName.gallery_manage:
+        return MaterialPageRoute(builder: (context)=> GalleryManageScreen());
+      case RoutesName.gallery_add_image:
+        return MaterialPageRoute(builder: (context)=> AddGalleryImages());
+      case RoutesName.manage_album:
+        return MaterialPageRoute(builder: (context)=> ManageAlbums());
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
           body: Center(

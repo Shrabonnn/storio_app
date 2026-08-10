@@ -14,6 +14,7 @@ import '../widget/universal/custom_card.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../widget/universal/custom_drop_down.dart';
+import '../widget/universal/custom_image_picker.dart';
 import '../widget/universal/custom_text_field.dart';
 
 
@@ -34,21 +35,6 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
 
   int selectedIndex = 0;
 
-  // image upload
-  final ImagePicker picker = ImagePicker();
-  XFile? selectedFile;
-  Future<void> _pickImage() async {
-    print("Clicked");
-    final image = await picker.pickImage(
-      source: ImageSource.gallery,
-    );
-
-    if (image != null) {
-      setState(() {
-        selectedFile = image;
-      });
-    }
-  }
 
 
 
@@ -179,7 +165,17 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
                         ],
                       ),
                       SizedBox(height: AppSizes.sectionGap),
-                      isUploadSelected ? _buildUpload() : _buildLibrary(),
+                      isUploadSelected ? CustomImagePicker(
+                        title: "Upload Institute Logo",
+                        subtitle: "Choose your institute logo",
+                        supportedText: "Supported: JPG • PNG",
+                        maxSizeText: "Maximum file size: 5 MB",
+                        onImageSelected: (file) {
+                          if (file != null) {
+                            print(file.path);
+                          }
+                        },
+                      ) : _buildLibrary(),
                       SizedBox(height: AppSizes.sectionGap),
                       ElevatedButton(
                         onPressed: () {},
@@ -196,67 +192,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
     );
   }
 
-  Center _buildUpload() => Center(child: InkWell(
-    borderRadius: BorderRadius.circular(AppSizes.cardRadius),
-    onTap: _pickImage,
-    child: Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        vertical: 6.h,
-        horizontal: AppSizes.screenPadding,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(AppSizes.cardRadius),
-        border: Border.all(
-          color: Colors.grey.shade300,
-          width: 2,
-        ),
-      ),
-      child: Column(
-        children: [
-          Icon(
-            Icons.cloud_upload_outlined,
-            size: 80,
-            color: AppColors.primary,
-          ),
 
-          SizedBox(height: AppSizes.sectionGap),
-
-          TextTitleWidget(
-            title: "Upload Media",
-          ),
-
-          SizedBox(height: AppSizes.appbarGap),
-
-          TextBodyStyleWidget(
-            title: "Tap here to choose files from gallery",
-          ),
-
-          SizedBox(height: AppSizes.sectionGap),
-
-          CustomButton(
-            text: "Browse Files",
-            onTap: _pickImage,
-          ),
-
-          SizedBox(height: AppSizes.sectionGap),
-
-          TextBodyStyleWidget(
-            title: "Supported: JPG • PNG • PDF",
-            size: AppSizes.cardSubTitle,
-          ),
-
-          SizedBox(height: 4),
-
-          TextBodyStyleWidget(
-            title: "Maximum file size: 10 MB",
-            size: AppSizes.cardSubTitle,
-          ),
-        ],
-      ),
-    ),
-  ));
 
   Column _buildLibrary() {
     return Column(

@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/widget/custom_button/custom_buttom.dart';
-import 'package:storio_app/widget/textStyle/text_body_style.dart';
+import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
-import '../routes/routes_name.dart';
-import '../utils/app_colors.dart';
-import '../utils/sizes.dart';
-import '../widget/universal/image_card.dart';
-import '../widget/universal/custom_app_bar.dart';
-import '../widget/universal/custom_card.dart';
-import '../widget/universal/custom_drop_down.dart';
+import '../../routes/routes_name.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/sizes.dart';
+import '../../widget/custom_button/custom_buttom.dart';
+import '../../widget/textStyle/text_body_style.dart';
+import '../../widget/universal/custom_app_bar.dart';
+import '../../widget/universal/custom_card.dart';
+import '../../widget/universal/custom_drop_down.dart';
+import '../../widget/universal/image_card.dart';
 
-class ActivityManageScreen extends StatefulWidget {
-  const ActivityManageScreen({super.key});
+class GalleryManageScreen extends StatefulWidget {
+  const GalleryManageScreen({super.key});
 
   @override
-  State<ActivityManageScreen> createState() => _ActivityManageScreenState();
+  State<GalleryManageScreen> createState() => _GalleryManageScreenState();
 }
 
-class _ActivityManageScreenState extends State<ActivityManageScreen> {
-
-
+class _GalleryManageScreenState extends State<GalleryManageScreen> {
   final List<String> statusList = [
-    "All",
-    "Published",
-    "Scheduled",
-    "Archived",
+    "All Images",
+    "Uncategorized",
+    "Featured",
+    "Hidden",
+    "Study Tour Bandarban",
   ];
 
   int selectedStatus = 0;
@@ -36,7 +36,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Activity Manage",
+            title: "Gallery Management",
             showBackButton: true,
           ),
           SliverPadding(
@@ -63,43 +63,55 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(width: AppSizes.appbarGap,),
+                          SizedBox(width: AppSizes.appbarGap),
                           CustomDropdown(
-                            items: ["Bulk Action","Publish Selected","Move to Drafts","Move to Bin"],
+                            items: [
+                              "Bulk Action",
+                              "Make Visible",
+                              "Make Hidden",
+                              "Delete Selected",
+                            ],
                             initialValue: "Bulk Action",
                             width: 32.w,
                             height: 4.5.h,
                             onChanged: (value) {
                               print("Selected: $value");
-
                             },
                           ),
                         ],
                       ),
                       SizedBox(height: AppSizes.smallGap),
                       Row(
-                        children:List.generate(statusList.length, (index){
-                          return Expanded(child: Padding(
-                            padding: EdgeInsets.only(
-                              right: index == statusList.length - 1
-                                  ? 0
-                                  : AppSizes.appbarGap,
-                            ),
-                            child: CustomButton(
+                        children: List.generate(statusList.length, (index) {
+                          return Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                right: index == statusList.length - 1
+                                    ? 0
+                                    : AppSizes.appbarGap,
+                              ),
+                              child: CustomButton(
                                 text: statusList[index],
                                 height: 4.5.h,
                                 size: AppSizes.cardSubTitle,
                                 borderSide: BorderSide(
                                   color: AppColors.primary,
-                                  width: 1,),
-                                backgroundColor: selectedStatus == index? Colors.white : AppColors.primary,
-                                foregroundColor: selectedStatus== index ? AppColors.primary : Colors.white,
-                                onTap: (){
+                                  width: 1,
+                                ),
+                                backgroundColor: selectedStatus == index
+                                    ? Colors.white
+                                    : AppColors.primary,
+                                foregroundColor: selectedStatus == index
+                                    ? AppColors.primary
+                                    : Colors.white,
+                                onTap: () {
                                   setState(() {
-                                    selectedStatus =index;
+                                    selectedStatus = index;
                                   });
-                                }),
-                          ),);
+                                },
+                              ),
+                            ),
+                          );
                         }),
                       ),
                       SizedBox(height: AppSizes.sectionGap),
@@ -109,7 +121,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: 3,
                         itemBuilder: (_, index) {
-                          return  ImageCard(
+                          return ImageCard(
                             image: Image.asset(
                               "assets/images/institute.png",
                               width: double.infinity,
@@ -134,114 +146,102 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                               ),
                             ),
 
-                            title: TextBodyStyleWidget(
-                              title: "A Sunny Day",
-                              size: AppSizes.sectionTitle,
-                              color: AppColors.primary,
-                            ),
-
                             child: Column(
                               children: [
-
                                 Row(
                                   children: [
                                     Icon(
-                                      Icons.category,
+                                      Icons.photo_album_outlined,
                                       color: AppColors.primary,
                                       size: AppSizes.icon,
                                     ),
 
-                                    SizedBox(
-                                      width: AppSizes.appbarGap,
-                                    ),
+                                    SizedBox(width: AppSizes.appbarGap),
 
-                                    const Text("Category"),
+                                    TextTitleWidget(title: "Uncategorized",color: AppColors.primary,),
 
-                                    const Spacer(),
-
-                                    const Text("Sunny Day"),
                                   ],
                                 ),
 
-                                SizedBox(
-                                  height: AppSizes.appbarGap,
-                                ),
+                                SizedBox(height: AppSizes.appbarGap),
 
                                 Row(
                                   children: [
                                     Icon(
-                                      Icons.person,
+                                      Icons.image,
                                       color: AppColors.primary,
                                       size: AppSizes.icon,
                                     ),
 
-                                    SizedBox(
-                                      width: AppSizes.appbarGap,
+                                    SizedBox(width: AppSizes.appbarGap),
+
+                                    Flexible(child: const Text("Image Name")),
+
+                                  ],
+                                ),
+                                SizedBox(height: AppSizes.appbarGap),
+
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.image_aspect_ratio,
+                                      color: AppColors.primary,
+                                      size: AppSizes.icon,
                                     ),
 
-                                    const Text("Author"),
+                                    SizedBox(width: AppSizes.appbarGap),
 
-                                    const Spacer(),
+                                    Flexible(child: const Text("Image Size")),
 
-                                    const Text("Alfa"),
                                   ],
                                 ),
 
-                                SizedBox(
-                                  height: AppSizes.sectionGap,
-                                ),
+                                SizedBox(height: AppSizes.sectionGap),
 
-                                CustomButton(
-                                  text: "View Details",
-                                  height: 4.5.h,
-                                  onTap: () {},
-                                ),
+                                Row(
+                                  mainAxisAlignment: .spaceBetween,
+                                  children: [
+                                    Flexible(child: CustomButton(text: "Edit", onTap: (){},)),
+                                    SizedBox(width: AppSizes.appbarGap,),
+                                    CustomButton(text: "Delete", onTap: (){},width: 30.w,backgroundColor: Colors.red,foregroundColor: Colors.white,),
+
+
+                                  ],
+                                )
                               ],
                             ),
                           );
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),
-
               ]),
             ),
           ),
-
         ],
       ),
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
-
             heroTag: "addCategory",
             backgroundColor: AppColors.primary,
             onPressed: () {
-              Navigator.pushNamed(context, RoutesName.activity_manage_category);
+              Navigator.pushNamed(context, RoutesName.manage_album);
             },
-            child: const Icon(
-              Icons.grid_view_rounded,
-              color: Colors.white,
-            ),
+            child: const Icon(Icons.grid_view_rounded, color: Colors.white),
           ),
 
           SizedBox(height: AppSizes.itemGap),
 
           FloatingActionButton(
-
-
             heroTag: "add",
             backgroundColor: AppColors.primary,
             onPressed: () {
-              Navigator.pushNamed(context, RoutesName.activity_manage_details);
-
+              Navigator.pushNamed(context, RoutesName.gallery_add_image);
             },
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
+            child: const Icon(Icons.add, color: Colors.white),
           ),
         ],
       ),

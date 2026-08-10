@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/widget/institute_profile/Institute_overview_screen.dart';
 
 import '../model/activity/activity_details_seo_settings_model.dart';
@@ -31,6 +33,9 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
   final TextEditingController metaDescriptionController = TextEditingController();
   final TextEditingController metaSummaryController = TextEditingController();
 
+
+
+
   final List<String> statusList = [
     "Draft",
     "Published",
@@ -59,6 +64,30 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
   List<ActivityDetailsSeoSettingModel> activitySeoSetting = [];
   bool isActivitySettingSeoExpanded = false;
+
+
+
+  @override
+  void initState() {
+    super.initState();
+
+
+  }
+
+  @override
+  void dispose() {
+
+
+    titleController.dispose();
+    activityController.dispose();
+    authorNameController.dispose();
+    tagNameController.dispose();
+    metaTitleController.dispose();
+    metaDescriptionController.dispose();
+    metaSummaryController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +157,95 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
                     SizedBox(height: AppSizes.sectionGap,),
 
+                    // Content
+                    CustomCard(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          TextBodyStyleWidget(
+                            title: "Content",
+                            color: AppColors.primary,
+                            size: AppSizes.sectionTitle,
+                          ),
+
+                          SizedBox(height: AppSizes.appbarGap),
+
+                          Column(
+                            children: [
+
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: AppSizes.smallPadding,
+                                    vertical: 8,
+                                  ),
+                                  child: Wrap(
+                                    spacing: 4,
+                                    runSpacing: 4,
+                                    children: [
+
+                                      _editorOption("paragraph"),
+                                      _editorOption("Default"),
+                                      _editorOption("14px"),
+
+                                      _editorIcon("B"),
+                                      _editorIcon("I"),
+                                      _editorIcon("U"),
+                                      _editorIcon("S"),
+
+                                      const Text(
+                                        "x²",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+
+                                      SizedBox(width: 6),
+
+                                      Container(
+                                        width: 1,
+                                        height: 25,
+                                        color: Colors.grey.shade300,
+                                      ),
+
+
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: AppSizes.appbarGap,),
+
+
+
+                              Divider(
+                                height: 1,
+                                color: Colors.grey.shade300,
+                              ),
+
+                              SizedBox(height: AppSizes.appbarGap,),
+                              // Small preview area
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.pushNamed(context, RoutesName.content_details);
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.all(AppSizes.smallPadding),
+                                  child: TextBodyStyleWidget(title: "Write content here...",size: AppSizes.cardTitle,),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+
+
+                    SizedBox(height: AppSizes.sectionGap,),
+
                     // Activity Setting
                     CustomCard(child: Column(
                       children: [
@@ -167,6 +285,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
                     SizedBox(height: AppSizes.sectionGap,),
 
+                    //Tag
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
@@ -181,6 +300,8 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
 
                     )),
+
+
                     SizedBox(height: AppSizes.sectionGap,),
 
 
@@ -238,6 +359,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                     ),),
 
                     SizedBox(height: AppSizes.sectionGap,),
+
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
@@ -259,4 +381,42 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
       ),
     );
   }
+}
+Widget _editorOption(String text) {
+  return Container(
+    margin: EdgeInsets.only(right: 5),
+    padding: EdgeInsets.symmetric(
+      horizontal: 10,
+      vertical: 5,
+    ),
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: Colors.grey.shade400,
+      ),
+      borderRadius: BorderRadius.circular(4),
+    ),
+    child: Text(
+      text,
+      style: TextStyle(
+        fontSize: 12,
+        color: Colors.grey.shade700,
+      ),
+    ),
+  );
+}
+
+Widget _editorIcon(String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(
+      horizontal: 5,
+    ),
+    child: Text(
+      text,
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: Colors.grey.shade700,
+      ),
+    ),
+  );
 }

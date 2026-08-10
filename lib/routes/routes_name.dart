@@ -15,4 +15,8 @@ class RoutesName {
   static const activity_manage_details = "activity_manage_details";
   static const contact = "contact";
   static const contact_message_details = "contact_message_details";
+  static const content_details = "content_details";
+  static const gallery_manage = "gallery_manage";
+  static const gallery_add_image = "gallery_add_image";
+  static const manage_album = "manage_album";
 }

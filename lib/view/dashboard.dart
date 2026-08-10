@@ -606,7 +606,7 @@ class _DashboardState extends State<Dashboard> {
           icon: Icons.image_outlined,
           label: "Gallery",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.gallery_manage);
           },
         ),
         ActionTile(
