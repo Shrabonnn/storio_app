@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../routes/routes_name.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
@@ -12,7 +13,10 @@ import '../../widget/universal/custom_image_picker.dart';
 import '../../widget/universal/custom_text_field.dart';
 
 class AddGalleryImages extends StatefulWidget {
-  const AddGalleryImages({super.key});
+  const AddGalleryImages({super.key, this.isEdit =false});
+
+  final bool isEdit;
+
 
   @override
   State<AddGalleryImages> createState() => _AddGalleryImagesState();
@@ -51,7 +55,7 @@ class _AddGalleryImagesState extends State<AddGalleryImages> {
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Add New Gallery Image",
+            title: widget.isEdit ? "Edit Images" : "Add New Gallery Image",
             showBackButton: true,
           ),
           SliverPadding(
@@ -61,22 +65,56 @@ class _AddGalleryImagesState extends State<AddGalleryImages> {
                 Column(
 
                   children: [
-                    CustomImagePicker(
-                      title: "Upload Institute Logo",
-                      subtitle: "Choose New Photo",
-                      supportedText: "Supported: JPG • PNG",
-                      maxSizeText: "Maximum file size: 5 MB",
-                      onImageSelected: (file) {
-                        if (file != null) {
-                          print(file.path);
-                        }
-                      },
-                    ),
-                    SizedBox(height: AppSizes.sectionGap,),
+
 
                     CustomCard(child: Column(
                      crossAxisAlignment: .start,
                      children: [
+
+                       // Images
+                       Column(
+                         crossAxisAlignment: .center,
+                         children: [
+                           Row(
+                             mainAxisAlignment: .spaceBetween,
+                             children: [
+                               TextBodyStyleWidget(title: "Gallery Images", color: AppColors.primary,size: AppSizes.cardTitle,),
+                               SizedBox(width: AppSizes.appbarGap),
+                               CustomButton(
+                                 height: 4.h,
+                                 width: 30.w,
+                                 text: widget.isEdit ? "Change Image":"Select Image",
+                                 onTap: (){
+                                   Navigator.pushNamed(context, RoutesName.media_manage_details);
+                                 },
+                               ),
+                             ],
+                           ),
+                           SizedBox(height: AppSizes.itemGap),
+
+                           widget.isEdit  ? Container(
+                             width: 100.w,
+                             height: 20.h,
+                             decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(AppSizes.cardRadius),
+                             ),
+                             clipBehavior: Clip.antiAlias,
+                             child: Image.asset(
+                               'assets/images/institute.png',
+                               fit: BoxFit.fitWidth,
+                             ),
+                           ):TextBodyStyleWidget(title: "Click 'Add Photos' to start adding pictures.",size: AppSizes.cardTitle,),
+
+
+
+                         ],
+
+
+                       ),
+
+                       SizedBox(height: AppSizes.itemGap),
+
+
                        // Title
                        TextBodyStyleWidget(title: "Filename", color: AppColors.primary,size: AppSizes.cardTitle,),
                        SizedBox(height: AppSizes.appbarGap),

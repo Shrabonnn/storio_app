@@ -201,7 +201,17 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                                 Row(
                                   mainAxisAlignment: .spaceBetween,
                                   children: [
-                                    Flexible(child: CustomButton(text: "Edit", onTap: (){},)),
+                                    Flexible(child: CustomButton(text: "Edit", onTap: (){
+                                      Navigator.pushNamed(
+                                        context,
+                                        RoutesName.gallery_add_image,
+                                        // when data are comes from API here send the model data also
+                                        // from next page it will show
+                                        arguments: {
+                                          'isEdit': true,
+                                        },
+                                      );
+                                    },)),
                                     SizedBox(width: AppSizes.appbarGap,),
                                     CustomButton(text: "Delete", onTap: (){},width: 30.w,backgroundColor: Colors.red,foregroundColor: Colors.white,),
 
@@ -239,7 +249,9 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
             heroTag: "add",
             backgroundColor: AppColors.primary,
             onPressed: () {
-              Navigator.pushNamed(context, RoutesName.gallery_add_image);
+              Navigator.pushNamed(context, RoutesName.gallery_add_image,arguments: {
+                'isEdit': false,
+              },);
             },
             child: const Icon(Icons.add, color: Colors.white),
           ),

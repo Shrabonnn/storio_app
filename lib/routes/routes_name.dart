@@ -19,4 +19,6 @@ class RoutesName {
   static const gallery_manage = "gallery_manage";
   static const gallery_add_image = "gallery_add_image";
   static const manage_album = "manage_album";
+  static const promotion = "promotion";
+  static const add_promotion = "add_promotion";
 }

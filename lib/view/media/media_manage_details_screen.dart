@@ -4,18 +4,18 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
-import '../routes/routes_name.dart';
-import '../utils/sizes.dart';
-import '../widget/custom_button/custom_buttom.dart';
-import '../widget/institute_profile/Institute_overview_screen.dart';
-import '../widget/textStyle/text_body_style.dart';
-import '../widget/universal/custom_app_bar.dart';
-import '../widget/universal/custom_card.dart';
+import '../../routes/routes_name.dart';
+import '../../utils/sizes.dart';
+import '../../widget/custom_button/custom_buttom.dart';
+import '../../widget/institute_profile/Institute_overview_screen.dart';
+import '../../widget/textStyle/text_body_style.dart';
+import '../../widget/universal/custom_app_bar.dart';
+import '../../widget/universal/custom_card.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-import '../widget/universal/custom_drop_down.dart';
-import '../widget/universal/custom_image_picker.dart';
-import '../widget/universal/custom_text_field.dart';
+import '../../widget/universal/custom_drop_down.dart';
+import '../../widget/universal/custom_image_picker.dart';
+import '../../widget/universal/custom_text_field.dart';
 
 
 class MediaManageDetailsScreen extends StatefulWidget {

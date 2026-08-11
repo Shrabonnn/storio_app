@@ -12,13 +12,15 @@ import 'package:storio_app/view/content_details.dart';
 import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
 import 'package:storio_app/view/gallery/add_gallery_images.dart';
-import 'package:storio_app/view/gallery/gallery_manage_screen.dart';
+import 'package:storio_app/view/gallery/gallery_management_screen.dart';
 import 'package:storio_app/view/gallery/manage_albums.dart';
 import 'package:storio_app/view/institute_profile_screen.dart';
 import 'package:storio_app/view/login_screen.dart';
-import 'package:storio_app/view/media_manage_details_screen.dart';
-import 'package:storio_app/view/media_manage_screen.dart';
+import 'package:storio_app/view/media/media_manage_details_screen.dart';
+import 'package:storio_app/view/media/media_manage_screen.dart';
 import 'package:storio_app/view/profile_screen.dart';
+import 'package:storio_app/view/promotion/add_promotion.dart';
+import 'package:storio_app/view/promotion/promotion_management_screen.dart';
 import 'package:storio_app/view/settings_screen.dart';
 
 class Routes {
@@ -61,9 +63,21 @@ class Routes {
       case RoutesName.gallery_manage:
         return MaterialPageRoute(builder: (context)=> GalleryManageScreen());
       case RoutesName.gallery_add_image:
-        return MaterialPageRoute(builder: (context)=> AddGalleryImages());
+
+        final args = setting.arguments as Map<String, dynamic>?;
+
+        return MaterialPageRoute(builder: (context)=> AddGalleryImages(
+          isEdit: args?['isEdit'] ?? false,
+        ));
       case RoutesName.manage_album:
         return MaterialPageRoute(builder: (context)=> ManageAlbums());
+      case RoutesName.promotion:
+        return MaterialPageRoute(builder: (context)=> PromotionManagementScreen());
+      case RoutesName.add_promotion:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddPromotion(
+          isEdit: args?['isEdit'] ?? false,
+        ));
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
           body: Center(

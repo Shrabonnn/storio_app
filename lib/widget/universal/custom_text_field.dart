@@ -8,18 +8,35 @@ class CustomTextFieldWidget extends StatelessWidget {
   final String hintText;
   final int?minLines;
   final int?maxLines;
+  final bool isDatePicker;
 
   const CustomTextFieldWidget({
     super.key,
     required this.controller,
     required this.hintText, this.minLines, this.maxLines,
+    this.isDatePicker = false,
   });
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null) {
+      controller.text =
+      "${pickedDate.month.toString().padLeft(2, '0')}/"
+          "${pickedDate.day.toString().padLeft(2, '0')}/"
+          "${pickedDate.year.toString().substring(2)}";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 100.w,
-
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(AppSizes.cardRadius),
@@ -28,30 +45,56 @@ class CustomTextFieldWidget extends StatelessWidget {
             color: Colors.black.withOpacity(0.08),
             blurRadius: 2,
             spreadRadius: 2,
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
           ),
         ],
       ),
       child: Padding(
         padding: EdgeInsets.all(AppSizes.cardPadding),
-        child: TextFormField(
+        child: Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            TextFormField(
+              controller: controller,
+              readOnly: isDatePicker,
 
-          minLines: minLines ?? 1,
-          maxLines: maxLines ?? 2,
-          controller: controller,
-          style: TextStyle(
-            fontSize: AppSizes.cardSubTitle,
-            fontWeight: FontWeight.w500,
-          ),
-          decoration: InputDecoration(
-            hintText: hintText,
-            isCollapsed: true,
-            border: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            contentPadding: EdgeInsets.zero,
-          ),
+              minLines: minLines ?? 1,
+              maxLines: maxLines ?? 2,
+
+              onTap: isDatePicker
+                  ? () => _selectDate(context)
+                  : null,
+
+              style: TextStyle(
+                fontSize: AppSizes.cardSubTitle,
+                fontWeight: FontWeight.w500,
+              ),
+
+              decoration: InputDecoration(
+                hintText: hintText,
+                isCollapsed: true,
+
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+
+                contentPadding: EdgeInsets.zero,
+
+
+                suffix: null,
+              ),
+            ),
+
+            if (isDatePicker)
+              GestureDetector(
+                onTap: () => _selectDate(context),
+                child: const Icon(
+                  Icons.calendar_month_outlined,
+                  size: 20,
+                ),
+              ),
+          ],
         ),
       ),
     );

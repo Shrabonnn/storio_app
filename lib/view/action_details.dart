@@ -166,12 +166,16 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.image_outlined,
           label: "Media",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.media_manage);
+          },
         ),
         ActionTile(
           icon: Icons.campaign_outlined,
           label: "Promotion",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.promotion);
+          },
         ),
         ActionTile(
           icon: Icons.record_voice_over_outlined,

@@ -45,20 +45,6 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
 
 
-  final ImagePicker picker = ImagePicker();
-  XFile? selectedFile;
-  Future<void> _pickImage() async {
-    print("Clicked From Activity Manage Details");
-    final image = await picker.pickImage(
-      source: ImageSource.gallery,
-    );
-
-    if (image != null) {
-      setState(() {
-        selectedFile = image;
-      });
-    }
-  }
 
 
 
@@ -139,7 +125,9 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                               height: 4.h,
                               width: 30.w,
                               text: "Add Photos",
-                              onTap: _pickImage,
+                              onTap: (){
+                                Navigator.pushNamed(context, RoutesName.media_manage_details);
+                              },
                             ),
                           ],
                         ),
@@ -255,14 +243,14 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                           child: Column(
                             crossAxisAlignment: .start,
                             children: [
-                              // Title
+                              // Authon Name
                               TextBodyStyleWidget(title: "Author Name", color: AppColors.primary,size: AppSizes.cardTitle,),
                               SizedBox(height: AppSizes.appbarGap),
                               CustomTextFieldWidget(hintText: "Hasibul Islam",controller: titleController),
                               SizedBox(height: AppSizes.itemGap),
 
 
-                              // Activities
+                              // Status
                               TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.cardTitle,),
                               SizedBox(height: AppSizes.appbarGap),
                               CustomDropdown(
