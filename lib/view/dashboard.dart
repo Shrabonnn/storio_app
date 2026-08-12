@@ -613,7 +613,7 @@ class _DashboardState extends State<Dashboard> {
           icon: Icons.emoji_events_outlined,
           label: "Result",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.exam_result);
           },
         ),
       ],

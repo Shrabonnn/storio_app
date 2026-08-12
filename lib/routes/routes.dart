@@ -21,6 +21,8 @@ import 'package:storio_app/view/media/media_manage_screen.dart';
 import 'package:storio_app/view/profile_screen.dart';
 import 'package:storio_app/view/promotion/add_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
+import 'package:storio_app/view/result/exam_result_screen.dart';
+import 'package:storio_app/view/result/publish_result.dart';
 import 'package:storio_app/view/settings_screen.dart';
 
 class Routes {
@@ -78,6 +80,10 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> AddPromotion(
           isEdit: args?['isEdit'] ?? false,
         ));
+      case RoutesName.exam_result:
+        return MaterialPageRoute(builder: (context)=> ExamResultScreen());
+      case RoutesName.publish_result:
+        return MaterialPageRoute(builder: (context)=> PublishResult());
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
           body: Center(

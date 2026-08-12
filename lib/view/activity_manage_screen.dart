@@ -10,6 +10,7 @@ import '../widget/universal/image_card.dart';
 import '../widget/universal/custom_app_bar.dart';
 import '../widget/universal/custom_card.dart';
 import '../widget/universal/custom_drop_down.dart';
+import '../widget/universal/status_button_row.dart';
 
 class ActivityManageScreen extends StatefulWidget {
   const ActivityManageScreen({super.key});
@@ -77,30 +78,19 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                         ],
                       ),
                       SizedBox(height: AppSizes.smallGap),
-                      Row(
-                        children:List.generate(statusList.length, (index){
-                          return Expanded(child: Padding(
-                            padding: EdgeInsets.only(
-                              right: index == statusList.length - 1
-                                  ? 0
-                                  : AppSizes.appbarGap,
-                            ),
-                            child: CustomButton(
-                                text: statusList[index],
-                                height: 4.5.h,
-                                size: AppSizes.cardSubTitle,
-                                borderSide: BorderSide(
-                                  color: AppColors.primary,
-                                  width: 1,),
-                                backgroundColor: selectedStatus == index? Colors.white : AppColors.primary,
-                                foregroundColor: selectedStatus== index ? AppColors.primary : Colors.white,
-                                onTap: (){
-                                  setState(() {
-                                    selectedStatus =index;
-                                  });
-                                }),
-                          ),);
-                        }),
+                      StatusButtonRow(
+                        items: statusList,
+                        selectedIndex: selectedStatus,
+                        onSelected: (index) {
+                          setState(() {
+                            selectedStatus = index;
+                          });
+                        },
+                        onTap: (status) {
+                          // Set with API
+
+                          print("Clicked: $status");
+                        },
                       ),
                       SizedBox(height: AppSizes.sectionGap),
                       ListView.builder(

@@ -22,27 +22,7 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        //add
-        builder: (context, child) {
-          return Center(
-            child: Container(
-              width: 412,
-              height: 915,
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 20,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: child!,
-            ),
-          );
-        },
+
 
         localizationsDelegates: const [
           FlutterQuillLocalizations.delegate,

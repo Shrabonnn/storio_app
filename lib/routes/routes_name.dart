@@ -21,4 +21,6 @@ class RoutesName {
   static const manage_album = "manage_album";
   static const promotion = "promotion";
   static const add_promotion = "add_promotion";
+  static const exam_result = "exam_result";
+  static const publish_result = "publish_result";
 }

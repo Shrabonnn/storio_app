@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/utils/app_colors.dart';
 
 import '../utils/sizes.dart';
 import '../widget/universal/custom_app_bar.dart';
@@ -45,7 +46,7 @@ class _ContentDetailsState extends State<ContentDetails> {
       SnackBar(
         content: Text(
           "Content saved successfully",
-          style: TextStyle(fontSize: AppSizes.body),
+          style: TextStyle(fontSize: AppSizes.cardTitle),
         ),
         behavior: SnackBarBehavior.floating,
       ),
@@ -59,6 +60,8 @@ class _ContentDetailsState extends State<ContentDetails> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       floatingActionButton: FloatingActionButton.extended(
+        foregroundColor: Colors.white,
+        backgroundColor: AppColors.primary,
         onPressed: _isSaving ? null : _handleSave,
         icon: _isSaving
             ? SizedBox(
@@ -72,7 +75,7 @@ class _ContentDetailsState extends State<ContentDetails> {
             : Icon(Icons.save_outlined, size: AppSizes.icon),
         label: Text(
           _isSaving ? "Saving..." : "Save",
-          style: TextStyle(fontSize: AppSizes.buttonText),
+          style: TextStyle(fontWeight: FontWeight.bold,fontSize: AppSizes.cardSubTitle),
         ),
       ),
       body: CustomScrollView(
@@ -116,66 +119,109 @@ class _ContentDetailsState extends State<ContentDetails> {
                           controller: _contentController,
                           config: QuillSimpleToolbarConfig(
                             multiRowsDisplay: true,
-                            showDividers: true,
-                            toolbarRunSpacing: AppSizes.smallPadding / 2,
-                            toolbarIconAlignment: WrapAlignment.start,
+                            showDividers: false,
 
-                            // Text
+                            toolbarRunSpacing: AppSizes.smallPadding / 2,
+                            toolbarIconAlignment: WrapAlignment.spaceBetween,
+                            toolbarIconCrossAlignment: WrapCrossAlignment.center,
+
+                            // TEXT
+
                             showFontFamily: true,
                             showFontSize: true,
 
-                            // Basic formatting
+                            // Font sizes
+                            buttonOptions: QuillSimpleToolbarButtonOptions(
+                              fontSize: QuillToolbarFontSizeButtonOptions(
+                                items: const {
+                                  '12': '12',
+                                  '13': '13',
+                                  '14': '14',
+                                  '15': '15',
+                                  '16': '16',
+                                  '18': '18',
+                                  '20': '20',
+                                  '24': '24',
+                                  '28': '28',
+                                  '32': '32',
+                                },
+                              ),
+                            ),
+
+
+                            // BASIC FORMATTING
+
                             showBoldButton: true,
                             showItalicButton: true,
                             showUnderLineButton: true,
                             showStrikeThrough: true,
 
-                            // Script
-                            showSubscript: true,
-                            showSuperscript: true,
 
-                            // Color
-                            showColorButton: true,
-                            showBackgroundColorButton: true,
 
-                            // Clear formatting
-                            showClearFormat: true,
 
-                            // Heading
+                            // COLOR
+
+                            showColorButton: false,
+                            showBackgroundColorButton: false,
+
+
+                            // HEADING
+
                             showHeaderStyle: true,
 
-                            // Alignment
+
+                            // ALIGNMENT
+
                             showAlignmentButtons: true,
                             showLeftAlignment: true,
                             showCenterAlignment: true,
                             showRightAlignment: true,
                             showJustifyAlignment: true,
 
-                            // Lists
+
+                            // LIST
+
                             showListNumbers: true,
                             showListBullets: true,
                             showListCheck: true,
 
-                            // Code / Quote
-                            showInlineCode: true,
-                            showCodeBlock: true,
-                            showQuote: true,
 
-                            // Indent
+                            // INDENT
+
                             showIndent: true,
 
-                            // Link
+
+                            // LINK
+
                             showLink: true,
 
-                            // History
+
+                            // HISTORY
+
                             showUndo: true,
                             showRedo: true,
 
-                            // Search
+
+                            // SEARCH
+
                             showSearchButton: true,
 
-                            // Direction
-                            showDirection: true,
+
+                            // REMOVE THESE
+
+                            showSubscript: true,
+                            showSuperscript: true,
+                            showInlineCode: true,
+                            showCodeBlock: true,
+                            showQuote: true,
+                            showDirection: false,
+
+                            // Clipboard buttons
+                            showClipboardCut: true,
+                            showClipboardCopy: true,
+                            showClipboardPaste: true,
+
+
                           ),
                         ),
                       ),
@@ -198,22 +244,22 @@ class _ContentDetailsState extends State<ContentDetails> {
                               customStyles: DefaultStyles(
                                 paragraph: DefaultTextBlockStyle(
                                   TextStyle(
-                                    fontSize: AppSizes.body,
+                                    fontSize: AppSizes.cardSubTitle,
                                     height: 1.5,
                                     color: Colors.black87,
                                   ),
                                   const HorizontalSpacing(0, 0),
-                                  const VerticalSpacing(6, 0),
+                                  const VerticalSpacing(3, 0),
                                   const VerticalSpacing(0, 0),
                                   null,
                                 ),
                                 placeHolder: DefaultTextBlockStyle(
                                   TextStyle(
-                                    fontSize: AppSizes.body,
+                                    fontSize: AppSizes.sectionTitle,
                                     color: Colors.grey.shade500,
                                   ),
                                   const HorizontalSpacing(0, 0),
-                                  const VerticalSpacing(6, 0),
+                                  const VerticalSpacing(3, 0),
                                   const VerticalSpacing(0, 0),
                                   null,
                                 ),
