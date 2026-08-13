@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
+import 'package:storio_app/view/FAQ/edit_faq.dart';
+import 'package:storio_app/view/FAQ/faq_management_screen.dart';
 import 'package:storio_app/view/action_details.dart';
 import 'package:storio_app/view/activity_category_screen.dart';
 import 'package:storio_app/view/activity_manage_details_screen.dart';
@@ -24,6 +26,9 @@ import 'package:storio_app/view/promotion/promotion_management_screen.dart';
 import 'package:storio_app/view/result/exam_result_screen.dart';
 import 'package:storio_app/view/result/publish_result.dart';
 import 'package:storio_app/view/settings_screen.dart';
+import 'package:storio_app/view/testimonial/add_new_testimonial.dart';
+import 'package:storio_app/view/testimonial/edit_testimonial.dart';
+import 'package:storio_app/view/testimonial/testimonial_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings setting){
@@ -84,6 +89,16 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> ExamResultScreen());
       case RoutesName.publish_result:
         return MaterialPageRoute(builder: (context)=> PublishResult());
+      case RoutesName.testimonial:
+        return MaterialPageRoute(builder: (context)=> TestimonialScreen());
+      case RoutesName.add_new_testimonial:
+        return MaterialPageRoute(builder: (context)=> AddNewTestimonial());
+      case RoutesName.edit_testimonial:
+        return MaterialPageRoute(builder: (context)=> EditTestimonial());
+      case RoutesName.faq:
+        return MaterialPageRoute(builder: (context)=> FaqManagementScreen());
+      case RoutesName.edit_faq:
+        return MaterialPageRoute(builder: (context)=> EditFaq());
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
           body: Center(

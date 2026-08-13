@@ -23,4 +23,9 @@ class RoutesName {
   static const add_promotion = "add_promotion";
   static const exam_result = "exam_result";
   static const publish_result = "publish_result";
+  static const testimonial = "testimonial";
+  static const add_new_testimonial = "add_new_testimonial";
+  static const edit_testimonial = "edit_testimonial";
+  static const faq = "faq";
+  static const edit_faq = "edit_faq";
 }

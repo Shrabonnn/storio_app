@@ -1,12 +1,16 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
 import '../../utils/sizes.dart';
+import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_text_field.dart';
+import '../../widget/universal/file_picker.dart';
 import '../../widget/universal/status_button_row.dart';
 
 class PublishResult extends StatefulWidget {
@@ -30,14 +34,28 @@ class _PublishResultState extends State<PublishResult> {
 
   int selectedStatus = 0;
 
+
+  // need to create controller for public and academic result publish
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    examNameController.dispose();
+    classNameController.dispose();
+    academicaYearController.dispose();
+    totalExaminessController.dispose();
+    passController.dispose();
+    failController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Exam Results",
-            subtitle: "Academic Records",
+            title: "Publish Results",
             showBackButton: true,
           ),
           SliverPadding(
@@ -67,66 +85,250 @@ class _PublishResultState extends State<PublishResult> {
 
                   ],
                 ),
-                CustomCard(child: Column(
-                  crossAxisAlignment: .start,
+
+                // School result
+                if(selectedStatus == 0)
+                  CustomCard(child: Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      TextTitleWidget(title: "Publish New Result",color: AppColors.primary,),
+                      TextBodyStyleWidget(title: "School Level",),
+                      Divider(),
+                      SizedBox(height: AppSizes.smallGap,),
+
+                      TextBodyStyleWidget(title: "Exam Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "e.g. Annual Exam", controller: examNameController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "Class Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "e.g. Class Ten", controller: classNameController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "Academic Year", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "2026", controller: academicaYearController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "Total Examinees", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "100", controller: totalExaminessController),
+                      SizedBox(height: AppSizes.itemGap),
+
+
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Column(
+                              children: [
+                                TextBodyStyleWidget(title: "Passed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                SizedBox(height: AppSizes.appbarGap),
+                                CustomTextFieldWidget(hintText: "70", controller: passController),
+                                SizedBox(height: AppSizes.itemGap),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: AppSizes.smallGap,),
+
+                          Flexible(
+                            child: Column(
+                              children: [
+                                TextBodyStyleWidget(title: "Failed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                SizedBox(height: AppSizes.appbarGap),
+                                CustomTextFieldWidget(hintText: "30", controller: failController),
+                                SizedBox(height: AppSizes.itemGap),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+
+
+                      Row(
+                        children: [
+                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: AppColors.primary,),
+                          SizedBox(width: AppSizes.appbarGap,),
+                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        ],
+                      ),
+                      SizedBox(height: AppSizes.appbarGap),
+                      FilePickerWidget()
+
+
+
+
+                    ],
+                  )),
+
+                // Public result
+                if(selectedStatus == 1)
+                  CustomCard(child: Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      TextTitleWidget(title: "Publish New Result",color: AppColors.primary,),
+                      TextBodyStyleWidget(title: "Public Level",),
+                      Divider(),
+                      SizedBox(height: AppSizes.smallGap,),
+
+                      TextBodyStyleWidget(title: "Exam Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "e.g. S.S.C H.S.C", controller: examNameController),
+                      SizedBox(height: AppSizes.itemGap),
+
+
+                      TextBodyStyleWidget(title: "Academic Year", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "2026", controller: academicaYearController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "Total Examinees", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "100", controller: totalExaminessController),
+                      SizedBox(height: AppSizes.itemGap),
+
+
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Column(
+                              children: [
+                                TextBodyStyleWidget(title: "Passed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                SizedBox(height: AppSizes.appbarGap),
+                                CustomTextFieldWidget(hintText: "70", controller: passController),
+                                SizedBox(height: AppSizes.itemGap),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: AppSizes.smallGap,),
+
+                          Flexible(
+                            child: Column(
+                              children: [
+                                TextBodyStyleWidget(title: "Failed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                SizedBox(height: AppSizes.appbarGap),
+                                CustomTextFieldWidget(hintText: "30", controller: failController),
+                                SizedBox(height: AppSizes.itemGap),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+
+                      TextBodyStyleWidget(title: "GPA A+ Recipients", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "0", controller: totalExaminessController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "GPA A Recipients", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "0", controller: totalExaminessController),
+                      SizedBox(height: AppSizes.itemGap),
+
+
+                      Row(
+                        children: [
+                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: AppColors.primary,),
+                          SizedBox(width: AppSizes.appbarGap,),
+                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        ],
+                      ),
+                      SizedBox(height: AppSizes.appbarGap),
+                      FilePickerWidget()
+
+
+
+
+                    ],
+                  )),
+
+
+                // Admission result
+                if(selectedStatus == 2)
+                  CustomCard(child: Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      TextTitleWidget(title: "Publish New Result",color: AppColors.primary,),
+                      TextBodyStyleWidget(title: "A Level",),
+                      Divider(),
+                      SizedBox(height: AppSizes.smallGap,),
+
+                      TextBodyStyleWidget(title: "Exam Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "e.g. Admission Test 2024", controller: examNameController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "Program/Class", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "e.g. Class Ten", controller: classNameController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "Academic Year", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "2026", controller: academicaYearController),
+                      SizedBox(height: AppSizes.itemGap),
+
+                      TextBodyStyleWidget(title: "Total Examinees", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      SizedBox(height: AppSizes.appbarGap),
+                      CustomTextFieldWidget(hintText: "100", controller: totalExaminessController),
+                      SizedBox(height: AppSizes.itemGap),
+
+
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Column(
+                              children: [
+                                TextBodyStyleWidget(title: "Passed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                SizedBox(height: AppSizes.appbarGap),
+                                CustomTextFieldWidget(hintText: "70", controller: passController),
+                                SizedBox(height: AppSizes.itemGap),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: AppSizes.smallGap,),
+
+                          Flexible(
+                            child: Column(
+                              children: [
+                                TextBodyStyleWidget(title: "Failed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                SizedBox(height: AppSizes.appbarGap),
+                                CustomTextFieldWidget(hintText: "30", controller: failController),
+                                SizedBox(height: AppSizes.itemGap),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+
+
+                      Row(
+                        children: [
+                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: AppColors.primary,),
+                          SizedBox(width: AppSizes.appbarGap,),
+                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        ],
+                      ),
+                      SizedBox(height: AppSizes.appbarGap),
+                      FilePickerWidget()
+
+
+
+
+                    ],
+                  )),
+
+
+                SizedBox(height: AppSizes.sectionGap,),
+
+                Row(
+                  mainAxisAlignment: .spaceBetween,
                   children: [
-                    TextTitleWidget(title: "Publish New Result",color: AppColors.primary,),
-                    TextBodyStyleWidget(title: "School Level",),
-                    Divider(),
-                    SizedBox(height: AppSizes.smallGap,),
-
-                    TextBodyStyleWidget(title: "Exam Name", color: AppColors.primary,size: AppSizes.cardTitle,),
-                    SizedBox(height: AppSizes.appbarGap),
-                    CustomTextFieldWidget(hintText: "e.g. Annual Exam", controller: examNameController),
-                    SizedBox(height: AppSizes.itemGap),
-
-                    TextBodyStyleWidget(title: "Class Name", color: AppColors.primary,size: AppSizes.cardTitle,),
-                    SizedBox(height: AppSizes.appbarGap),
-                    CustomTextFieldWidget(hintText: "e.g. Class Ten", controller: classNameController),
-                    SizedBox(height: AppSizes.itemGap),
-
-                    TextBodyStyleWidget(title: "Academic Year", color: AppColors.primary,size: AppSizes.cardTitle,),
-                    SizedBox(height: AppSizes.appbarGap),
-                    CustomTextFieldWidget(hintText: "2026", controller: academicaYearController),
-                    SizedBox(height: AppSizes.itemGap),
-
-                    TextBodyStyleWidget(title: "Total Examinees", color: AppColors.primary,size: AppSizes.cardTitle,),
-                    SizedBox(height: AppSizes.appbarGap),
-                    CustomTextFieldWidget(hintText: "100", controller: totalExaminessController),
-                    SizedBox(height: AppSizes.itemGap),
-
-
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            children: [
-                              TextBodyStyleWidget(title: "Passed", color: AppColors.primary,size: AppSizes.cardTitle,),
-                              SizedBox(height: AppSizes.appbarGap),
-                              CustomTextFieldWidget(hintText: "70", controller: passController),
-                              SizedBox(height: AppSizes.itemGap),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: AppSizes.smallGap,),
-
-                        Flexible(
-                          child: Column(
-                            children: [
-                              TextBodyStyleWidget(title: "Failed", color: AppColors.primary,size: AppSizes.cardTitle,),
-                              SizedBox(height: AppSizes.appbarGap),
-                              CustomTextFieldWidget(hintText: "30", controller: failController),
-                              SizedBox(height: AppSizes.itemGap),
-                            ],
-                          ),
-                        )
-                      ],
-                    )
-
-
-
+                    CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                    SizedBox(width: AppSizes.appbarGap,),
+                    Flexible(child: CustomButton(text: "Publish Result", onTap: (){},)),
                   ],
-                ))
+                ),
               ]),
             ),
           ),

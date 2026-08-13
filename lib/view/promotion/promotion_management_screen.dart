@@ -46,7 +46,7 @@ class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
                     CustomCard(
                       child: Column(
                         children: [
-                          // Search
+                          // Search & Dropdown
                           Row(
                             children: [
                               Expanded(

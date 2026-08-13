@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/view/testimonial/testimonial_screen.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
 import '../routes/routes_name.dart';
@@ -156,7 +157,9 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.help_outline,
           label: "FAQ",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.faq);
+          },
         ),
         ActionTile(
           icon: Icons.hexagon_outlined,
@@ -180,7 +183,9 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.record_voice_over_outlined,
           label: "Testimonial",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.testimonial);
+          },
         ),
         ActionTile(
           icon: Icons.videocam_outlined,

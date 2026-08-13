@@ -6,10 +6,12 @@ import '../../utils/sizes.dart';
 import '../textStyle/text_title_style.dart';
 
 class CustomStatusBadge extends StatelessWidget {
-  const CustomStatusBadge({super.key, required this.title, this.backgroundColor});
+  const CustomStatusBadge({super.key, required this.title, this.backgroundColor, this.foregroundColor, this.size});
 
   final String title;
   final Color? backgroundColor;
+  final Color? foregroundColor;
+  final double ? size;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +21,7 @@ class CustomStatusBadge extends StatelessWidget {
           color: backgroundColor ?? AppColors.primary.withOpacity(0.1),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: TextTitleWidget(title: title,color: AppColors.primary,size: AppSizes.cardSubTitle,)
+        child: TextTitleWidget(title: title,color: foregroundColor ?? AppColors.primary,size: size ?? AppSizes.cardSubTitle,)
     );
   }
 }
