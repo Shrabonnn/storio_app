@@ -122,36 +122,26 @@ class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: .spaceBetween,
                         children: [
-                          CustomStatusBadge(title: "Published"),
+                          CustomStatusBadge(title: "Published",size: AppSizes.cardTitle,),
 
-                          SizedBox(width: AppSizes.smallGap),
 
-                          // Open Now
-                          CustomStatusBadge(
-                            title: "Open Now",
-                            backgroundColor: Colors.orange.withOpacity(
-                              0.2,
-                            ),
-                          ),
-
-                          const Spacer(),
 
                           // More
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.more_vert),
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                          ),
+                          InkWell(
+                            onTap: (){},
+                              child: Icon(Icons.more_vert))
                         ],
                       ),
 
                       SizedBox(height: AppSizes.smallGap),
 
+
                       TextTitleWidget(
                         title: "Admission Going On",
                         color: AppColors.primary,
+                        maxLines: 1,
                       ),
 
                       SizedBox(height: AppSizes.appbarGap),

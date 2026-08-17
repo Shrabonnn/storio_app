@@ -7,12 +7,22 @@ import 'package:storio_app/view/action_details.dart';
 import 'package:storio_app/view/activity_category_screen.dart';
 import 'package:storio_app/view/activity_manage_details_screen.dart';
 import 'package:storio_app/view/activity_manage_screen.dart';
+import 'package:storio_app/view/blog/add_new_blog.dart';
+import 'package:storio_app/view/blog/blog_management_screen.dart';
+import 'package:storio_app/view/blog/manage_blog_category.dart';
+import 'package:storio_app/view/blog/view_blog_screen.dart';
 import 'package:storio_app/view/bottom_navbar.dart';
+import 'package:storio_app/view/career/add_new_job_circular.dart';
+import 'package:storio_app/view/career/career_management_screen.dart';
 import 'package:storio_app/view/contact_message_details.dart';
 import 'package:storio_app/view/contact_screen.dart';
 import 'package:storio_app/view/content_details.dart';
 import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
+import 'package:storio_app/view/event/add_new_event.dart';
+import 'package:storio_app/view/event/event_management_screen.dart';
+import 'package:storio_app/view/event/manage_event_category.dart';
+import 'package:storio_app/view/event/view_event_screen.dart';
 import 'package:storio_app/view/gallery/add_gallery_images.dart';
 import 'package:storio_app/view/gallery/gallery_management_screen.dart';
 import 'package:storio_app/view/gallery/manage_albums.dart';
@@ -99,6 +109,35 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> FaqManagementScreen());
       case RoutesName.edit_faq:
         return MaterialPageRoute(builder: (context)=> EditFaq());
+      case RoutesName.career:
+        return MaterialPageRoute(builder: (context)=> CareerManagementScreen());
+      case RoutesName.add_new_job_circular:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewJobCircular(
+          isEdit: args?['isEdit'] ?? false,
+        ));
+      case RoutesName.blog:
+        return MaterialPageRoute(builder: (context)=> BlogManagementScreen());
+      case RoutesName.manage_blog_category:
+        return MaterialPageRoute(builder: (context)=> ManageBlogCategory());
+      case RoutesName.view_blog:
+        return MaterialPageRoute(builder: (context)=> ViewBlogScreen());
+      case RoutesName.add_blog:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddBlog(
+          isEdit: args?['isEdit'] ?? false,
+        ));
+      case RoutesName.event:
+        return MaterialPageRoute(builder: (context)=> EventManagementScreen());
+      case RoutesName.manage_event_category:
+        return MaterialPageRoute(builder: (context)=> ManageEventCategory());
+      case RoutesName.view_event:
+        return MaterialPageRoute(builder: (context)=> ViewEventScreen());
+      case RoutesName.add_new_event:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewEvent(
+          isEdit: args?['isEdit'] ?? false,
+        ));
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
           body: Center(

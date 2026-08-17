@@ -200,7 +200,7 @@ class _AddPromotionState extends State<AddPromotion> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.green.shade200,foregroundColor: Colors.black,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text: "Create Promotion", onTap: (){},)),
                       ],

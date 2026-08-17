@@ -104,7 +104,7 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.menu_book_outlined,
           label: "Blog",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.blog);
           },
         ),
         ActionTile(
@@ -118,7 +118,7 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.event_outlined,
           label: "Event",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.event);
           },
         ),
         ActionTile(
@@ -145,7 +145,9 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.work_outline,
           label: "Career",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.career);
+          },
         ),
         ActionTile(
           icon: Icons.phone_in_talk_outlined,

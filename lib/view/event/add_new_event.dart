@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/routes/routes_name.dart';
-import 'package:storio_app/widget/institute_profile/Institute_overview_screen.dart';
+import 'package:storio_app/widget/universal/custom_drop_down.dart';
 
-import '../model/activity/activity_details_seo_settings_model.dart';
-import '../model/form_field/form_feild_data.dart';
-import '../utils/app_colors.dart';
-import '../utils/sizes.dart';
-import '../widget/custom_button/custom_buttom.dart';
-import '../widget/institute_profile/infrastructure_drop_down.dart';
-import '../widget/quill/editor_icon.dart';
-import '../widget/quill/editor_option.dart';
-import '../widget/textStyle/text_body_style.dart';
-import '../widget/universal/custom_app_bar.dart';
-import '../widget/universal/custom_card.dart' ;
-import '../widget/universal/custom_drop_down.dart';
-import '../widget/universal/custom_text_field.dart';
+import '../../model/activity/activity_details_seo_settings_model.dart';
+import '../../model/form_field/form_feild_data.dart';
+import '../../routes/routes_name.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/sizes.dart';
+import '../../widget/custom_button/custom_buttom.dart';
+import '../../widget/institute_profile/Institute_overview_screen.dart';
+import '../../widget/institute_profile/infrastructure_drop_down.dart';
+import '../../widget/quill/editor_icon.dart';
+import '../../widget/quill/editor_option.dart';
+import '../../widget/textStyle/text_body_style.dart';
+import '../../widget/universal/custom_app_bar.dart';
+import '../../widget/universal/custom_card.dart';
+import '../../widget/universal/custom_text_field.dart';
+import '../../widget/universal/status_button_row.dart';
 
-class ActivityManageDetailsScreen extends StatefulWidget {
-  const ActivityManageDetailsScreen({super.key});
+class AddNewEvent extends StatefulWidget {
+  const AddNewEvent({super.key, this.isEdit=false});
+  final bool isEdit;
 
   @override
-  State<ActivityManageDetailsScreen> createState() => _ActivityManageDetailsScreenState();
+  State<AddNewEvent> createState() => _AddNewEventState();
 }
 
-class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScreen> {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController activityController = TextEditingController();
-  final TextEditingController authorNameController = TextEditingController();
-  final TextEditingController tagNameController = TextEditingController();
-  final TextEditingController metaTitleController = TextEditingController();
-  final TextEditingController metaDescriptionController = TextEditingController();
-  final TextEditingController metaSummaryController = TextEditingController();
+class _AddNewEventState extends State<AddNewEvent> {
+  final TextEditingController jonTitleController = TextEditingController();
+  final TextEditingController designationController = TextEditingController();
+  final TextEditingController companyNameController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController vacancyCountController = TextEditingController();
+  final TextEditingController applicationDeadlineController = TextEditingController();
+  final TextEditingController applicationMethodController = TextEditingController();
 
 
 
@@ -41,12 +42,17 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
   final List<String> statusList = [
     "Draft",
     "Published",
-    "Scheduled",
-    "Cancelled",
+    "Archived",
   ];
 
+  String selectedStatus = "Draft";
 
+  final List<String> categoryList = [
+    "Day",
+    "Night",
+  ];
 
+  String selectedCategory = "Day";
 
 
 
@@ -64,26 +70,27 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
   @override
   void dispose() {
-
-
-    titleController.dispose();
-    activityController.dispose();
-    authorNameController.dispose();
-    tagNameController.dispose();
-    metaTitleController.dispose();
-    metaDescriptionController.dispose();
-    metaSummaryController.dispose();
-
     super.dispose();
+    applicationMethodController.dispose();
+    applicationDeadlineController.dispose();
+    vacancyCountController.dispose();
+    descriptionController.dispose();
+    locationController.dispose();
+    companyNameController.dispose();
+    jonTitleController.dispose();
+    designationController.dispose();
+
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Activity Manage Detail",
+            title:widget.isEdit? "Edit Post":"Create New Post",
             showBackButton: true,
           ),
           SliverPadding(
@@ -95,18 +102,48 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
+
+
+
                         // Title
-                        TextBodyStyleWidget(title: "Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Event Title*", color: AppColors.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
-                        CustomTextFieldWidget(hintText: "e.g., Annual Tech Conference 2025", controller: titleController),
+                        CustomTextFieldWidget(hintText: "e.g. Annual Sports Day 2026", controller: jonTitleController),
                         SizedBox(height: AppSizes.itemGap),
 
 
-                        // Activities
-                        TextBodyStyleWidget(title: "Activities", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        Row(
+
+                          children: [
+                            Flexible(
+                              child: Column(
+                                children: [
+                                  TextBodyStyleWidget(title: "Start Date & Time *", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                  SizedBox(height: AppSizes.appbarGap),
+                                  CustomTextFieldWidget(hintText: "mm/dd/yy", controller: companyNameController,isDatePicker: true,),
+                                  SizedBox(height: AppSizes.itemGap),
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: AppSizes.smallGap,),
+                            Flexible(
+                              child: Column(
+                                children: [
+                                  TextBodyStyleWidget(title: "End Date & Time", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                  SizedBox(height: AppSizes.appbarGap),
+                                  CustomTextFieldWidget(hintText: "mm/dd/yy", controller: companyNameController,isDatePicker: true,),
+                                  SizedBox(height: AppSizes.itemGap),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+
+
+                        // AUTHOR
+                        TextBodyStyleWidget(title: "Location", color: AppColors.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
-                        CustomTextFieldWidget(hintText: "annual-tech-conference-2025", controller: activityController,),
-                        SizedBox(height: AppSizes.itemGap),
+                        CustomTextFieldWidget(hintText: "e.g. Auditorium, School Field, Online", controller: designationController,),
 
                       ],
 
@@ -115,18 +152,18 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                     SizedBox(height: AppSizes.sectionGap,),
 
                     // Images
-                    CustomCard(child: Column(
+                    CustomCard(child:  Column(
                       crossAxisAlignment: .center,
                       children: [
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Gallery Images", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Featured Image", color: AppColors.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               height: 4.h,
                               width: 30.w,
-                              text: "Add Photos",
+                              text: widget.isEdit ? "Change Image":"Select Image",
                               onTap: (){
                                 Navigator.pushNamed(context, RoutesName.media_manage_details);
                               },
@@ -135,15 +172,25 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                         ),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Click 'Add Photos' to start adding pictures.",size: AppSizes.cardTitle,),
-
+                        widget.isEdit  ? Container(
+                          width: 100.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(AppSizes.cardRadius),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: Image.asset(
+                            'assets/images/institute.png',
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ):TextBodyStyleWidget(title: "Recommended size: 1200x600px for banners, 600x600px for cards.",size: AppSizes.cardTitle,maxLines: 2,),
 
 
 
                       ],
 
 
-                    )),
+                    ),),
 
                     SizedBox(height: AppSizes.sectionGap,),
 
@@ -154,7 +201,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                         children: [
 
                           TextBodyStyleWidget(
-                            title: "Content",
+                            title: "Event Description",
                             color: AppColors.primary,
                             size: AppSizes.sectionTitle,
                           ),
@@ -224,7 +271,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.all(AppSizes.smallPadding),
-                                  child: TextBodyStyleWidget(title: "Write content here...",size: AppSizes.cardTitle,),
+                                  child: TextBodyStyleWidget(title: "Write event description here...",size: AppSizes.cardTitle,),
                                 ),
                               )
                             ],
@@ -236,54 +283,29 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
                     SizedBox(height: AppSizes.sectionGap,),
 
-                    // Activity Setting
-                    CustomCard(child: Column(
-                      children: [
-                        InstituteOverviewScreen(
-                          title: "Activity Screen",
-                          isExpanded: false,
-                          child: Column(
-                            crossAxisAlignment: .start,
-                            children: [
-                              // Authon Name
-                              TextBodyStyleWidget(title: "Author Name", color: AppColors.primary,size: AppSizes.cardTitle,),
-                              SizedBox(height: AppSizes.appbarGap),
-                              CustomTextFieldWidget(hintText: "Hasibul Islam",controller: titleController),
-                              SizedBox(height: AppSizes.itemGap),
-
-
-                              // Status
-                              TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.cardTitle,),
-                              SizedBox(height: AppSizes.appbarGap),
-                              CustomDropdown(
-                                items: statusList,
-                                initialValue: "Draft",
-                                width: 100.w,
-                                height: 4.5.h,
-                                onChanged: (value) {
-                                  print("Selected: $value");
-
-                                },
-                              ),
-
-                            ],
-
-
-                          ),)
-                      ],
-                    )),
-
-                    SizedBox(height: AppSizes.sectionGap,),
-
-                    //Tag
+                    // Status
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
 
                         // Tag
-                        TextBodyStyleWidget(title: "Add Tags", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
-                        CustomTextFieldWidget(hintText: "add tags...", controller: tagNameController),
+                        CustomDropdown(
+                          items: statusList,
+                          initialValue: selectedStatus,
+                          width: 100.w,
+
+                          onChanged: (value) {
+                            print("Selected: $value");
+                            setState(() {
+                              selectedStatus = value.toString();
+                            });
+
+
+                          },
+                        ),
+
 
 
                       ],
@@ -291,8 +313,41 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
                     )),
 
+                    SizedBox(height: AppSizes.sectionGap,),
+
+
+                    //Category
+                    CustomCard(child: Column(
+                      crossAxisAlignment: .start,
+                      children: [
+
+                        // Tag
+                        TextBodyStyleWidget(title: "Category", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        SizedBox(height: AppSizes.appbarGap),
+                        CustomDropdown(
+                          items: categoryList,
+                          initialValue: selectedCategory,
+                          width: 100.w,
+
+                          onChanged: (value) {
+                            print("Selected: $value");
+                            setState(() {
+                              selectedStatus = value.toString();
+                            });
+
+
+                          },
+                        ),
+
+
+
+                      ],
+
+
+                    )),
 
                     SizedBox(height: AppSizes.sectionGap,),
+
 
 
                     // Seo Setting
@@ -312,52 +367,35 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                           FormFieldData(
                             title: "Meta Title",
                             hint: "SEO Title",
-                            controller: metaTitleController,
+                            controller: jonTitleController,
                           ),
                           FormFieldData(
                             title: "Meta Description",
                             hint: "SEO Description",
-                            controller: metaDescriptionController,
+                            controller: descriptionController,
+
                           ),
-                          FormFieldData(
-                            title: "Excerpt/Short Summary",
-                            hint: "Brief Summary",
-                            controller: metaSummaryController,
-                          ),
-                        ],
 
-                        // If click add add on third place , if click the final save btn then add to DB
-                        onSave: () {
-                          setState(() {
-                            activitySeoSetting.add(
-                              ActivityDetailsSeoSettingModel(
-                              metaTitle: metaTitleController.text.trim(),
-                                metaDescription: metaDescriptionController.text.trim(),
-                                metaSummary: metaSummaryController.text.trim()
-                              ),
-                            );
+                        ], onSave: () {  },
 
-                            metaTitleController.clear();
-                            metaDescriptionController.clear();
-                            metaSummaryController.clear();
 
-                            isActivitySettingSeoExpanded = false;
-                          });
-                        },
 
                       ),
                     ),),
 
                     SizedBox(height: AppSizes.sectionGap,),
-
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
-                        Flexible(child: CustomButton(text: "Save", onTap: (){},)),
+                        Flexible(child: CustomButton(text:widget.isEdit? "Edit Post":"Save Post", onTap: (){},)),
                       ],
                     ),
+                    SizedBox(height: AppSizes.sectionGap),
+
+
+
 
 
 
