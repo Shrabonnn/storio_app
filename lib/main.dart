@@ -58,26 +58,26 @@ class MyApp extends StatelessWidget {
               ),
 
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                 borderSide: BorderSide(color: AppColors.secondary, width: 1),
               ),
 
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: AppColors.secondary, width: 1.5),
+                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+                borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
               ),
 
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                 borderSide: const BorderSide(color: Colors.red, width: 1),
               ),
 
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                 borderSide: const BorderSide(color: Colors.red, width: 1.5),
               ),
 
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppSizes.buttonRadius)),
             ),
 
             elevatedButtonTheme: ElevatedButtonThemeData(

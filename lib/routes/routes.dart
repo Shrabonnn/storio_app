@@ -12,10 +12,13 @@ import 'package:storio_app/view/blog/blog_management_screen.dart';
 import 'package:storio_app/view/blog/manage_blog_category.dart';
 import 'package:storio_app/view/blog/view_blog_screen.dart';
 import 'package:storio_app/view/bottom_navbar.dart';
+import 'package:storio_app/view/calender/add_new_event_calender.dart';
+import 'package:storio_app/view/calender/calender_screen.dart';
+import 'package:storio_app/view/calender/calender_setting.dart';
 import 'package:storio_app/view/career/add_new_job_circular.dart';
 import 'package:storio_app/view/career/career_management_screen.dart';
-import 'package:storio_app/view/contact_message_details.dart';
-import 'package:storio_app/view/contact_screen.dart';
+import 'package:storio_app/view/contact/contact_message_details.dart';
+import 'package:storio_app/view/contact/contact_screen.dart';
 import 'package:storio_app/view/content_details.dart';
 import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
@@ -30,6 +33,9 @@ import 'package:storio_app/view/institute_profile_screen.dart';
 import 'package:storio_app/view/login_screen.dart';
 import 'package:storio_app/view/media/media_manage_details_screen.dart';
 import 'package:storio_app/view/media/media_manage_screen.dart';
+import 'package:storio_app/view/notice/add_new_notice.dart';
+import 'package:storio_app/view/notice/notice_management_screen.dart';
+import 'package:storio_app/view/notice/view_notice_screen.dart';
 import 'package:storio_app/view/profile_screen.dart';
 import 'package:storio_app/view/promotion/add_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
@@ -138,6 +144,29 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> AddNewEvent(
           isEdit: args?['isEdit'] ?? false,
         ));
+      case RoutesName.notice:
+        return MaterialPageRoute(builder: (context)=> NoticeManagementScreen());
+      case RoutesName.view_notice:
+        return MaterialPageRoute(builder: (context)=> ViewNoticeScreen());
+      case RoutesName.add_new_notice:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewNotice(
+          isEdit: args?['isEdit'] ?? false,
+        ));
+      case RoutesName.calender:
+        return MaterialPageRoute(builder: (context)=> CalenderScreen());
+      case RoutesName.add_new_event_calender:
+        return MaterialPageRoute(builder: (context)=> AddNewEventCalender());
+      case RoutesName.calender_setting:
+        return MaterialPageRoute(builder: (context)=> CalenderSetting());
+
+
+
+
+
+
+
+
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
           body: Center(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/utils/sizes.dart';
 
 class SearchTextField extends StatelessWidget {
   const SearchTextField({super.key, required this.hinText, this.width, this.height, required this.controller});

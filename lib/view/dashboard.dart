@@ -564,7 +564,7 @@ class _DashboardState extends State<Dashboard> {
           icon: Icons.notifications_none,
           label: "Notice",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.notice);
           },
         ),
         ActionTile(
@@ -578,21 +578,21 @@ class _DashboardState extends State<Dashboard> {
           icon: Icons.menu_book_outlined,
           label: "Blog",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.blog);
           },
         ),
         ActionTile(
           icon: Icons.calendar_month_outlined,
           label: "Calendar",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.calender);
           },
         ),
         ActionTile(
           icon: Icons.event_outlined,
           label: "Event",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.event);
           },
         ),
         ActionTile(

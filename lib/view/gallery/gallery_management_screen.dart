@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
+import 'package:storio_app/widget/universal/search_text_field.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/app_colors.dart';
@@ -19,7 +20,12 @@ class GalleryManageScreen extends StatefulWidget {
   State<GalleryManageScreen> createState() => _GalleryManageScreenState();
 }
 
+
 class _GalleryManageScreenState extends State<GalleryManageScreen> {
+
+
+  final TextEditingController searchController = TextEditingController();
+
   final List<String> statusList = [
     "All Images",
     "Uncategorized",
@@ -48,21 +54,8 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                     crossAxisAlignment: .start,
                     children: [
                       Row(
-                        mainAxisAlignment: .spaceBetween,
                         children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 4.5.h,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: "Search...",
-                                  prefixIcon: const Icon(Icons.search),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
+                          Flexible(child: SearchTextField(hinText: "Search...", controller: searchController)),
                           SizedBox(width: AppSizes.appbarGap),
                           CustomDropdown(
                             items: [
@@ -72,8 +65,8 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                               "Delete Selected",
                             ],
                             initialValue: "Bulk Action",
-                            width: 32.w,
                             height: 4.5.h,
+                            width: 32.w,
                             onChanged: (value) {
                               print("Selected: $value");
                             },

@@ -38,5 +38,10 @@ class RoutesName {
   static const view_event = "view_event";
   static const add_new_event = "add_new_event";
   static const manage_event_category = "manage_event_category";
-
+  static const notice = "notice";
+  static const view_notice = "view_notice";
+  static const add_new_notice = "add_new_notice";
+  static const calender = "calender";
+  static const calender_setting = "calender_setting";
+  static const add_new_event_calender = "add_new_event_calender";
 }

@@ -9,7 +9,7 @@ import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_app_bar.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
-import '../widget/universal/custom_drop_down.dart';
+import '../../widget/universal/custom_drop_down.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
