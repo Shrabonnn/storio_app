@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
 import '../../utils/app_colors.dart';
@@ -7,6 +8,7 @@ import '../../utils/sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
+import '../../widget/universal/custom_card2.dart';
 
 class ContactMessageDetails extends StatelessWidget {
   final String name;
@@ -214,29 +216,12 @@ class ContactMessageDetails extends StatelessWidget {
                       SizedBox(height: AppSizes.itemGap),
 
                       // Message
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.all(AppSizes.smallPadding),
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF8FAFD),
-                          borderRadius: BorderRadius.circular(
-                            AppSizes.cardRadius,
-                          ),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                          ),
-                        ),
+                      CustomCard2(child: Padding(
+                        padding:  EdgeInsets.all(AppSizes.smallPadding),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              subject,
-                              style: TextStyle(
-                                color: Colors.grey.shade800,
-                                fontSize: AppSizes.cardTitle,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                            TextTitleWidget(title: subject,color: AppColors.primary,),
 
                             SizedBox(height: AppSizes.itemGap),
 
@@ -247,7 +232,7 @@ class ContactMessageDetails extends StatelessWidget {
                                   width: 4,
                                   height: 20,
                                   decoration: BoxDecoration(
-                                    color: Colors.grey.shade500,
+                                    color: AppColors.secondary,
                                     borderRadius: BorderRadius.circular(2),
                                   ),
                                 ),
@@ -255,35 +240,19 @@ class ContactMessageDetails extends StatelessWidget {
                                 SizedBox(width: AppSizes.appbarGap),
 
                                 Expanded(
-                                  child: Text(
-                                    message,
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: AppSizes.cardSubTitle,
-                                    ),
-                                  ),
+                                  child: TextBodyStyleWidget(title: message),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      ),
+                      ),),
 
                       SizedBox(height: AppSizes.itemGap),
 
                       // Submitted On
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.all(AppSizes.smallPadding),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(
-                            AppSizes.cardRadius,
-                          ),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                          ),
-                        ),
+                      CustomCard2(child: Padding(
+                        padding:  EdgeInsets.all(AppSizes.smallPadding),
                         child: Row(
                           children: [
                             Icon(
@@ -297,28 +266,14 @@ class ContactMessageDetails extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Submitted On",
-                                  style: TextStyle(
-                                    color: Colors.grey.shade700,
-                                    fontSize: AppSizes.cardSubTitle,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                TextBodyStyleWidget(title: "Submitted On",color: AppColors.primary,),
 
-                                Text(
-                                  dateTime,
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: AppSizes.cardSubTitle,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                                TextBodyStyleWidget(title: dateTime,color: AppColors.primary,)
                               ],
                             ),
                           ],
                         ),
-                      ),
+                      ),),
 
                       SizedBox(height: AppSizes.itemGap),
 

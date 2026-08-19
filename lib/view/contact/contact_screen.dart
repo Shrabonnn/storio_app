@@ -86,8 +86,6 @@ class _ContactScreenState extends State<ContactScreen> {
                                 onTap: () {},
                                 height: 4.h,
                                 width: 30.w,
-                                backgroundColor: Colors.grey.shade300,
-                                foregroundColor: AppColors.primary,
                               ),
                             ],
                           ),

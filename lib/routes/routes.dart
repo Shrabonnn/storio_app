@@ -29,6 +29,7 @@ import 'package:storio_app/view/event/view_event_screen.dart';
 import 'package:storio_app/view/gallery/add_gallery_images.dart';
 import 'package:storio_app/view/gallery/gallery_management_screen.dart';
 import 'package:storio_app/view/gallery/manage_albums.dart';
+import 'package:storio_app/view/hero/hero_section_manager_screen.dart';
 import 'package:storio_app/view/institute_profile_screen.dart';
 import 'package:storio_app/view/login_screen.dart';
 import 'package:storio_app/view/media/media_manage_details_screen.dart';
@@ -45,6 +46,8 @@ import 'package:storio_app/view/settings_screen.dart';
 import 'package:storio_app/view/testimonial/add_new_testimonial.dart';
 import 'package:storio_app/view/testimonial/edit_testimonial.dart';
 import 'package:storio_app/view/testimonial/testimonial_screen.dart';
+import 'package:storio_app/view/video/add_new_video.dart';
+import 'package:storio_app/view/video/video_management_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings setting){
@@ -159,7 +162,15 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> AddNewEventCalender());
       case RoutesName.calender_setting:
         return MaterialPageRoute(builder: (context)=> CalenderSetting());
-
+      case RoutesName.video:
+        return MaterialPageRoute(builder: (context)=> VideoManagementScreen());
+      case RoutesName.add_new_video:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewVideo(
+          isEdit: args?['isEdit'] ?? false,
+        ));
+      case RoutesName.hero:
+        return MaterialPageRoute(builder: (context)=> HeroSectionManagerScreen());
 
 
 

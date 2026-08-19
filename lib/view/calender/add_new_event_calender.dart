@@ -9,6 +9,7 @@ import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
+import '../../widget/universal/custom_card2.dart';
 import '../../widget/universal/custom_drop_down.dart';
 import '../../widget/universal/custom_text_field.dart';
 
@@ -191,7 +192,6 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                     )),
 
                     SizedBox(height: AppSizes.sectionGap,),
-
 
 
 

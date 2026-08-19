@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/textStyle/text_body_style.dart';
+import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
+import 'package:storio_app/widget/universal/custom_card2.dart';
+import 'package:storio_app/widget/universal/info_item_card.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/app_colors.dart';
@@ -127,9 +131,35 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
                       ),
 
-                    ))
+                    )),
+
+                    SizedBox(height: AppSizes.sectionGap,),
+
+
+                    CustomCard(child: Column(
+                      crossAxisAlignment: .start,
+                      children: [
+                        TextTitleWidget( title: "Calendar Statistics",color: AppColors.primary,),
+                        SizedBox(height: AppSizes.smallGap,),
+                        Row(
+                          children: [
+                            Flexible(child:
+                            calenderStatisticWidget(title: "Working Days",value: "21",)),
+                            SizedBox(width: AppSizes.appbarGap,),
+                            Flexible(child:
+                            calenderStatisticWidget(title: "Holidays",value: "2",)),
+                            SizedBox(width: AppSizes.appbarGap,),
+                            Flexible(child:
+                            calenderStatisticWidget(title: "Major Exams",value: "0",)),
+                          ],
+                        )
+                      ],
+
+                    )),
+
                   ],
                 ),
+
 
 
               ]),
@@ -184,5 +214,28 @@ class _CalenderScreenState extends State<CalenderScreen> {
         ],
       ),
     );
+  }
+}
+
+class calenderStatisticWidget extends StatelessWidget {
+  const calenderStatisticWidget({
+    super.key, required this.title, required this.value,
+  });
+  final String title;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomCard2(child: Padding(
+      padding:  EdgeInsets.all(AppSizes.smallPadding),
+      child: Column(
+        crossAxisAlignment: .center,
+        children: [
+          TextBodyStyleWidget(title: title,color: AppColors.primary,),
+          SizedBox(height: AppSizes.appbarGap,),
+          TextBodyStyleWidget(title: value,color: AppColors.primary,),
+        ],
+      ),
+    ));
   }
 }

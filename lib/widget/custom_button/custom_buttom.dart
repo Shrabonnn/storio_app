@@ -13,6 +13,7 @@ class CustomButton extends StatelessWidget {
   final Color ? backgroundColor;
   final Color ? foregroundColor;
   final BorderSide? borderSide;
+  final IconData? icon;
 
   const CustomButton({
     super.key,
@@ -22,7 +23,7 @@ class CustomButton extends StatelessWidget {
     this.size,
     this.height,
     this.backgroundColor,
-    this.foregroundColor, this.borderSide,
+    this.foregroundColor, this.borderSide, this.icon,
   });
 
   @override
@@ -45,16 +46,26 @@ class CustomButton extends StatelessWidget {
           ),
 
         ),
-        child: Text(
-          text,
-          maxLines: 1,
-          softWrap: false,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: size ?? AppSizes.cardSubTitle ,
-            fontWeight: FontWeight.w600,
-          ),
+        child: Row(
+          mainAxisAlignment: .center,
+          children: [
+            if(icon !=null)...[
+              Icon(icon),
+              SizedBox(width: AppSizes.appbarGap,)
+
+            ],
+            Text(
+              text,
+              maxLines: 1,
+              softWrap: false,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: size ?? AppSizes.cardSubTitle ,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
     );

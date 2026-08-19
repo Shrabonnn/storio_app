@@ -166,7 +166,9 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.hexagon_outlined,
           label: "Hero-Slide",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.hero);
+          },
         ),
         ActionTile(
           icon: Icons.image_outlined,
@@ -192,7 +194,9 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.videocam_outlined,
           label: "Video",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.video);
+          },
         ),
       ],
     );
