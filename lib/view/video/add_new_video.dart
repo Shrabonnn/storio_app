@@ -135,7 +135,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
 
                                 TextBodyStyleWidget(title: "Platform", color: AppColors.primary,size: AppSizes.sectionTitle,),
                                 SizedBox(height: AppSizes.appbarGap,),
-                                CustomDropdown(items: platformType,initialValue: selectedPlatformType,width: 35.w,)
+                                CustomDropdown(items: platformType,initialValue: selectedPlatformType,width: 38.w,)
 
                               ],
                             )

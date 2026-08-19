@@ -97,7 +97,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 child: TextBodyStyleWidget(
                   title: item,
                   color: Colors.white,
-                  size: AppSizes.cardSubTitle,
+                  size: AppSizes.cardTitle,
                 ),
               );
             }).toList();

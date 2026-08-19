@@ -54,15 +54,17 @@ class CustomButton extends StatelessWidget {
               SizedBox(width: AppSizes.appbarGap,)
 
             ],
-            Text(
-              text,
-              maxLines: 1,
-              softWrap: false,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: size ?? AppSizes.cardSubTitle ,
-                fontWeight: FontWeight.w600,
+            Flexible(
+              child: Text(
+                text,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: size ?? AppSizes.cardTitle ,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],

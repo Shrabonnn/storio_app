@@ -90,7 +90,7 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.notifications_none,
           label: "Notice",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.notice);
           },
         ),
         ActionTile(
@@ -111,7 +111,7 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.calendar_month_outlined,
           label: "Calendar",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.calender);
           },
         ),
         ActionTile(
@@ -125,14 +125,14 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.camera_outlined,
           label: "Activity",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.activity_manage);
           },
         ),
         ActionTile(
           icon: Icons.image_outlined,
           label: "Gallery",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.gallery_manage);
           },
         ),
         ActionTile(
