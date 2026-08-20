@@ -9,12 +9,13 @@ class CustomTextFieldWidget extends StatelessWidget {
   final int?minLines;
   final int?maxLines;
   final bool isDatePicker;
+  final VoidCallback?onChange;
 
   const CustomTextFieldWidget({
     super.key,
     required this.controller,
     required this.hintText, this.minLines, this.maxLines,
-    this.isDatePicker = false,
+    this.isDatePicker = false, this.onChange,
   });
 
   Future<void> _selectDate(BuildContext context) async {
@@ -85,6 +86,7 @@ class CustomTextFieldWidget extends StatelessWidget {
                 suffix: null,
               ),
             ),
+
 
             if (isDatePicker)
               GestureDetector(

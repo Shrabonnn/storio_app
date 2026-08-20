@@ -47,4 +47,9 @@ class RoutesName {
   static const video = "video";
   static const add_new_video = "add_new_video";
   static const hero = "hero";
+  static const add_new_hero_slide = "add_new_hero_slide";
+  static const admission = "admission";
+  static const view_admission = "view_admission";
+  static const admission_form_builder = "admission_form_builder";
+  static const admission_general_setting = "admission_general_setting";
 }

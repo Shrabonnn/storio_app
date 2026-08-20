@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:storio_app/routes/routes.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
@@ -9,9 +10,12 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/utils/sizes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:storio_app/viewModel/hero_view_model.dart';
 
 void main(){
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_)=> HeroProvider())
+  ],child: MyApp(),),);
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

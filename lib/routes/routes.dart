@@ -7,6 +7,10 @@ import 'package:storio_app/view/action_details.dart';
 import 'package:storio_app/view/activity_category_screen.dart';
 import 'package:storio_app/view/activity_manage_details_screen.dart';
 import 'package:storio_app/view/activity_manage_screen.dart';
+import 'package:storio_app/view/admission/admission_form_builder.dart';
+import 'package:storio_app/view/admission/admission_management_screen.dart';
+import 'package:storio_app/view/admission/general_setting.dart';
+import 'package:storio_app/view/admission/view_admission_screen.dart';
 import 'package:storio_app/view/blog/add_new_blog.dart';
 import 'package:storio_app/view/blog/blog_management_screen.dart';
 import 'package:storio_app/view/blog/manage_blog_category.dart';
@@ -29,6 +33,7 @@ import 'package:storio_app/view/event/view_event_screen.dart';
 import 'package:storio_app/view/gallery/add_gallery_images.dart';
 import 'package:storio_app/view/gallery/gallery_management_screen.dart';
 import 'package:storio_app/view/gallery/manage_albums.dart';
+import 'package:storio_app/view/hero/add_new_hero_slide.dart';
 import 'package:storio_app/view/hero/hero_section_manager_screen.dart';
 import 'package:storio_app/view/institute_profile_screen.dart';
 import 'package:storio_app/view/login_screen.dart';
@@ -171,6 +176,16 @@ class Routes {
         ));
       case RoutesName.hero:
         return MaterialPageRoute(builder: (context)=> HeroSectionManagerScreen());
+      case RoutesName.add_new_hero_slide:
+        return MaterialPageRoute(builder: (context)=> AddNewHeroSlide());
+      case RoutesName.admission:
+        return MaterialPageRoute(builder: (context)=> AdmissionManagementScreen());
+      case RoutesName.admission_form_builder:
+        return MaterialPageRoute(builder: (context)=> AdmissionFormBuilder());
+      case RoutesName.admission_general_setting:
+        return MaterialPageRoute(builder: (context)=> GeneralSetting());
+      case RoutesName.view_admission:
+        return MaterialPageRoute(builder: (context)=> ViewAdmissionScreen());
 
 
 

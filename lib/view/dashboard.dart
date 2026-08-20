@@ -571,7 +571,7 @@ class _DashboardState extends State<Dashboard> {
           icon: Icons.school_outlined,
           label: "Admission",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.admission);
           },
         ),
         ActionTile(
