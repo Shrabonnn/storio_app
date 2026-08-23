@@ -22,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         slivers: [
           CustomSliverAppBar(title: "Settings"),
           SliverPadding(
-            padding: EdgeInsetsGeometry.all(4.w),
+            padding: EdgeInsetsGeometry.all(AppSizes.screenPadding),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 CustomCard(
@@ -56,18 +56,18 @@ class SettingListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 2.w),
+      padding:  EdgeInsets.symmetric(horizontal: AppSizes.smallPadding),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(icon,size: AppSizes.icon,color: AppColors.primary,),
-          SizedBox(width: 3.w,),
+          Icon(icon,size: AppSizes.iconLarge,color: AppColors.primary,),
+          SizedBox(width: AppSizes.smallGap,),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextTitleWidget(title: "${title}",size: AppSizes.cardTitle,color: AppColors.primary,),
-                TextBodyStyleWidget(title: "${subtitle}",size: AppSizes.cardSubTitle,maxLines: 1,),
+                TextTitleWidget(title: "${title}",size: AppSizes.sectionTitle,color: AppColors.primary,),
+                TextBodyStyleWidget(title: "${subtitle}",size: AppSizes.cardTitle,maxLines: 1,),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/widget/textStyle/text_body_style.dart';
 
 class InfoRow extends StatelessWidget {
   final IconData?icon;
@@ -17,7 +18,7 @@ class InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 2.w),
+      padding:  EdgeInsets.symmetric(vertical: AppSizes.contentPadding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -25,16 +26,9 @@ class InfoRow extends StatelessWidget {
             width: 30.w,
             child: Row(
               children: [
-                Icon(icon, size: 16, color: Colors.grey),
-                const SizedBox(width: 8),
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: AppSizes.body,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                Icon(icon, size: AppSizes.iconSmall, color: Colors.grey),
+                 SizedBox(width: AppSizes.smallGap),
+                TextBodyStyleWidget(title: label)
               ],
             ),
           ),
@@ -43,15 +37,7 @@ class InfoRow extends StatelessWidget {
 
           // Value column (left-aligned, starts right after label column)
           Expanded(
-            child: Text(
-              value,
-              textAlign: TextAlign.left,
-              style:  TextStyle(
-                fontSize: AppSizes.body,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
+            child: TextBodyStyleWidget(title: value,color: Colors.black,)
           ),
         ],
       ),

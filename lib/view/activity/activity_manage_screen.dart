@@ -3,14 +3,14 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 
-import '../routes/routes_name.dart';
-import '../utils/app_colors.dart';
-import '../utils/sizes.dart';
-import '../widget/universal/image_card.dart';
-import '../widget/universal/custom_app_bar.dart';
-import '../widget/universal/custom_card.dart';
-import '../widget/universal/custom_drop_down.dart';
-import '../widget/universal/status_button_row.dart';
+import '../../routes/routes_name.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/sizes.dart';
+import '../../widget/universal/image_card.dart';
+import '../../widget/universal/custom_app_bar.dart';
+import '../../widget/universal/custom_card.dart';
+import '../../widget/universal/custom_drop_down.dart';
+import '../../widget/universal/status_button_row.dart';
 
 class ActivityManageScreen extends StatefulWidget {
   const ActivityManageScreen({super.key});

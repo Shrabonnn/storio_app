@@ -52,4 +52,10 @@ class RoutesName {
   static const view_admission = "view_admission";
   static const admission_form_builder = "admission_form_builder";
   static const admission_general_setting = "admission_general_setting";
+
+  // organization
+  static const card_manage = "card_manage";
+  static const add_new_card_manage = "add_new_card_manage";
+  static const important_links = "important_links";
+  static const add_new_links = "add_new_links";
 }

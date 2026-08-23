@@ -65,7 +65,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
             subtitle: "Manage your institute information",
           ),
           SliverPadding(
-            padding: EdgeInsets.all(4.w),
+            padding: EdgeInsets.all(AppSizes.screenPadding),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 CustomCard(
@@ -279,7 +279,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                             child: Icon(keyMertics.isEmpty ? Icons.people_alt_outlined : keyMertics.last.iconData, size:AppSizes.iconLarge),
                           ),
                         ),
-                        SizedBox(width: 2.5.w),
+                        SizedBox(width: AppSizes.smallGap),
                         Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

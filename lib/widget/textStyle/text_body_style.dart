@@ -7,13 +7,14 @@ class TextBodyStyleWidget extends StatelessWidget {
   final double? size;
   final Color? color;
   final int? maxLines;
+  final bool fontbold;
 
   const TextBodyStyleWidget({
     super.key,
     required this.title,
     this.size,
     this.color,
-    this.maxLines,
+    this.maxLines, this.fontbold = true,
   });
 
   @override
@@ -25,7 +26,7 @@ class TextBodyStyleWidget extends StatelessWidget {
       style: TextStyle(
         color: color ?? Colors.black54,
         fontSize: size?.sp ?? AppSizes.cardSubTitle,
-        fontWeight: FontWeight.w600,
+        fontWeight: fontbold ? FontWeight.w600 :FontWeight.normal  ,
       ),
     );
   }

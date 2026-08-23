@@ -6,10 +6,10 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
-import '../utils/sizes.dart';
-import '../widget/custom_button/custom_buttom.dart';
-import '../widget/universal/custom_app_bar.dart';
-import '../widget/universal/custom_text_field.dart';
+import '../../utils/sizes.dart';
+import '../../widget/custom_button/custom_buttom.dart';
+import '../../widget/universal/custom_app_bar.dart';
+import '../../widget/universal/custom_text_field.dart';
 
 class ActivityCategoryScreen extends StatefulWidget {
   const ActivityCategoryScreen({super.key});

@@ -97,7 +97,7 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.school_outlined,
           label: "Admission",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.dasboard);
+            Navigator.pushNamed(context, RoutesName.admission);
           },
         ),
         ActionTile(
@@ -207,12 +207,17 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.badge_outlined,
           label: "Card Manage",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.card_manage);
+          },
         ),
         ActionTile(
           icon: Icons.link,
           label: "Links",
-          onTap: () {},
+          onTap: () {
+
+            Navigator.pushNamed(context, RoutesName.important_links);
+          },
         ),
         ActionTile(
           icon: Icons.chat_bubble_outline,

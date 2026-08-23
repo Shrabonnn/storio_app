@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+
+class IconList {
+  static const  List<IconData> iconList = [
+    Icons.school_outlined,
+    Icons.people_outline,
+    Icons.menu_book_outlined,
+    Icons.emoji_events_outlined,
+    Icons.workspace_premium_outlined,
+    Icons.track_changes_outlined,
+    Icons.star_border,
+    Icons.business_center_outlined,
+    Icons.laptop_outlined,
+
+    Icons.bar_chart_outlined,
+    Icons.book_outlined,
+    Icons.bookmark_border,
+    Icons.calendar_today_outlined,
+    Icons.access_time_outlined,
+    Icons.alarm_outlined,
+    Icons.location_on_outlined,
+    Icons.account_balance_outlined,
+    Icons.domain_outlined,
+    Icons.favorite_border,
+
+    Icons.sentiment_satisfied_outlined,
+    Icons.monitor_heart_outlined,
+    Icons.coffee_outlined,
+    Icons.restaurant_outlined,
+    Icons.music_note_outlined,
+    Icons.mic_none_outlined,
+    Icons.videocam_outlined,
+    Icons.work_outline,
+    Icons.campaign_outlined,
+    Icons.build_outlined,
+
+    Icons.public_outlined,
+    Icons.flight_outlined,
+    Icons.rocket_launch_outlined,
+    Icons.shield_outlined,
+    Icons.lock_outline,
+    Icons.key_outlined,
+    Icons.lightbulb_outline,
+    Icons.bolt_outlined,
+    Icons.local_fire_department_outlined,
+    Icons.sports_soccer_outlined,
+
+    Icons.palette_outlined,
+    Icons.calculate_outlined,
+    Icons.code_outlined,
+    Icons.memory_outlined,
+    Icons.science_outlined,
+    Icons.computer_outlined,
+    Icons.phone_android_outlined,
+    Icons.email_outlined,
+    Icons.notifications_none,
+  ];
+}

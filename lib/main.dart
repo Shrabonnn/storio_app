@@ -13,9 +13,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:storio_app/viewModel/hero_view_model.dart';
 
 void main(){
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_)=> HeroProvider())
-  ],child: MyApp(),),);
+  runApp( MyApp(),);
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,7 +21,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context,orientation,screenType){
-      return MaterialApp(
+      return MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_)=> HeroProvider())
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
 
@@ -46,8 +47,8 @@ class MyApp extends StatelessWidget {
             textTheme: GoogleFonts.interTextTheme(
               ThemeData.light().textTheme,
             ).apply(
-              bodyColor: AppColors.primary,
-              displayColor: AppColors.primary
+                bodyColor: AppColors.primary,
+                displayColor: AppColors.primary
             ),
 
             inputDecorationTheme: InputDecorationTheme(
@@ -99,10 +100,10 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-          scaffoldBackgroundColor: AppColors.background
+            scaffoldBackgroundColor: AppColors.background
 
         ),
-      );
+      ));
     });
   }
 }

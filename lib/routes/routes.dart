@@ -4,9 +4,9 @@ import 'package:storio_app/splash_screen.dart';
 import 'package:storio_app/view/FAQ/edit_faq.dart';
 import 'package:storio_app/view/FAQ/faq_management_screen.dart';
 import 'package:storio_app/view/action_details.dart';
-import 'package:storio_app/view/activity_category_screen.dart';
-import 'package:storio_app/view/activity_manage_details_screen.dart';
-import 'package:storio_app/view/activity_manage_screen.dart';
+import 'package:storio_app/view/activity/activity_category_screen.dart';
+import 'package:storio_app/view/activity/activity_manage_details_screen.dart';
+import 'package:storio_app/view/activity/activity_manage_screen.dart';
 import 'package:storio_app/view/admission/admission_form_builder.dart';
 import 'package:storio_app/view/admission/admission_management_screen.dart';
 import 'package:storio_app/view/admission/general_setting.dart';
@@ -42,6 +42,10 @@ import 'package:storio_app/view/media/media_manage_screen.dart';
 import 'package:storio_app/view/notice/add_new_notice.dart';
 import 'package:storio_app/view/notice/notice_management_screen.dart';
 import 'package:storio_app/view/notice/view_notice_screen.dart';
+import 'package:storio_app/view/organization/card/add_new_card.dart';
+import 'package:storio_app/view/organization/card/card_management_screen.dart';
+import 'package:storio_app/view/organization/links/add_new_link.dart';
+import 'package:storio_app/view/organization/links/education_board_notices.dart';
 import 'package:storio_app/view/profile_screen.dart';
 import 'package:storio_app/view/promotion/add_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
@@ -186,6 +190,26 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> GeneralSetting());
       case RoutesName.view_admission:
         return MaterialPageRoute(builder: (context)=> ViewAdmissionScreen());
+
+
+
+      // organization
+      case RoutesName.card_manage:
+        return MaterialPageRoute(builder: (context)=> CardManagementScreen());
+      case RoutesName.add_new_card_manage:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewCard(
+          isEdit: args?['isEdit'] ?? false,
+        ));
+      case RoutesName.important_links:
+        return MaterialPageRoute(builder: (context)=> EducationBoardNotices());
+      case RoutesName.add_new_links:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewLink(
+          isEdit: args?['isEdit'] ?? false,
+        ));
+
+
 
 
 

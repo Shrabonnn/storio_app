@@ -352,7 +352,9 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       TextTitleWidget(title: "Notices",color: AppColors.primary,),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, RoutesName.notice);
+                        },
                         child: Row(
                           children: [
                             TextBodyStyleWidget(title: "View All",color: AppColors.primary,),
@@ -450,7 +452,9 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       TextTitleWidget(title: "Upcoming Events",color: AppColors.primary,),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, RoutesName.event);
+                        },
                         child: Row(
                           children: [
                             TextBodyStyleWidget(title: "View All",color: AppColors.primary,),

@@ -9,7 +9,7 @@ class HeroProvider extends ChangeNotifier {
   String buttonLink = '';
 
   File? selectedImage;
-  Color selectedColor = Colors.blue;
+  Color selectedColor = Colors.lightBlueAccent;
   Color titleColor = Colors.white;
   Color subtitleColor = Colors.white;
   Color buttonBackgroundColor = AppColors.primary;
@@ -49,10 +49,25 @@ class HeroProvider extends ChangeNotifier {
 
   void setColor(Color color) {
     selectedColor = color;
-
-    // Color select করলে image remove
     selectedImage = null;
 
+    notifyListeners();
+  }
+
+  void setTitleColor (Color color){
+    titleColor = color;
+    notifyListeners();
+  }
+  void setSubtitleColor(Color color) {
+    subtitleColor = color;
+    notifyListeners();
+  }
+  void setButtonTextColor(Color color) {
+    buttonTextColor = color;
+    notifyListeners();
+  }
+  void setButtonBackgroundColor(Color color) {
+    buttonBackgroundColor = color;
     notifyListeners();
   }
 }

@@ -5,19 +5,19 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/widget/institute_profile/Institute_overview_screen.dart';
 
-import '../model/activity/activity_details_seo_settings_model.dart';
-import '../model/form_field/form_feild_data.dart';
-import '../utils/app_colors.dart';
-import '../utils/sizes.dart';
-import '../widget/custom_button/custom_buttom.dart';
-import '../widget/institute_profile/infrastructure_drop_down.dart';
-import '../widget/quill/editor_icon.dart';
-import '../widget/quill/editor_option.dart';
-import '../widget/textStyle/text_body_style.dart';
-import '../widget/universal/custom_app_bar.dart';
-import '../widget/universal/custom_card.dart' ;
-import '../widget/universal/custom_drop_down.dart';
-import '../widget/universal/custom_text_field.dart';
+import '../../model/activity/activity_details_seo_settings_model.dart';
+import '../../model/form_field/form_feild_data.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/sizes.dart';
+import '../../widget/custom_button/custom_buttom.dart';
+import '../../widget/institute_profile/infrastructure_drop_down.dart';
+import '../../widget/quill/editor_icon.dart';
+import '../../widget/quill/editor_option.dart';
+import '../../widget/textStyle/text_body_style.dart';
+import '../../widget/universal/custom_app_bar.dart';
+import '../../widget/universal/custom_card.dart' ;
+import '../../widget/universal/custom_drop_down.dart';
+import '../../widget/universal/custom_text_field.dart';
 
 class ActivityManageDetailsScreen extends StatefulWidget {
   const ActivityManageDetailsScreen({super.key});
