@@ -90,9 +90,9 @@ class ContactMessageDetails extends StatelessWidget {
                               color: Colors.grey,
                             ),
                             onSelected: (value) {
-                              if (value == "eew") {
+                              if (value == "new") {
                                 onNew?.call();
-                              }else if (value == "eead") {
+                              }else if (value == "read") {
                                 onRead?.call();
                               }else if (value == "replied") {
                                 onReply?.call();

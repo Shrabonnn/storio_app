@@ -162,6 +162,12 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                       case MoreMenuAction.delete:
                                       // delete
                                         break;
+                                      case MoreMenuAction.changePassword:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                      case MoreMenuAction.suspend:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
                                     }
                                   },
                                 ),

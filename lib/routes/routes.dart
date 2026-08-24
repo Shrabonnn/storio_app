@@ -46,6 +46,16 @@ import 'package:storio_app/view/organization/card/add_new_card.dart';
 import 'package:storio_app/view/organization/card/card_management_screen.dart';
 import 'package:storio_app/view/organization/links/add_new_link.dart';
 import 'package:storio_app/view/organization/links/education_board_notices.dart';
+import 'package:storio_app/view/organization/role/role_management_screen.dart';
+import 'package:storio_app/view/organization/staff/add_new_staff.dart';
+import 'package:storio_app/view/organization/staff/manage_staff_department.dart';
+import 'package:storio_app/view/organization/staff/staff_management_screen.dart';
+import 'package:storio_app/view/organization/staff/view_staff_screen.dart';
+import 'package:storio_app/view/organization/team/add_new_team_member.dart';
+import 'package:storio_app/view/organization/team/manage_team_section.dart';
+import 'package:storio_app/view/organization/team/team_management_screen.dart';
+import 'package:storio_app/view/organization/team/view_team_screen.dart';
+import 'package:storio_app/view/organization/user/user_management_screen.dart';
 import 'package:storio_app/view/profile_screen.dart';
 import 'package:storio_app/view/promotion/add_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
@@ -206,8 +216,37 @@ class Routes {
       case RoutesName.add_new_links:
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewLink(
-          isEdit: args?['isEdit'] ?? false,
-        ));
+          isEdit: args?['isEdit'] ?? false,));
+      case RoutesName.staff_manage:
+        return MaterialPageRoute(builder: (context)=> StaffManagementScreen());
+      case RoutesName.view_staff_manage:
+        return MaterialPageRoute(builder: (context)=> ViewStaffScreen());
+      case RoutesName.add_new_staff_manage:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewStaff(
+          isEdit: args?['isEdit'] ?? false,));
+      case RoutesName.manage_staff_department:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ManageStaffDepartment(
+          isEdit: args?['isEdit'] ?? false,));
+      case RoutesName.team_manage:
+        return MaterialPageRoute(builder: (context)=> TeamManagementScreen());
+      case RoutesName.view_team_manage:
+        return MaterialPageRoute(builder: (context)=> ViewTeamScreen());
+      case RoutesName.add_new_team_member:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewTeamMember(
+          isEdit: args?['isEdit'] ?? false,));
+      case RoutesName.manage_team_section:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ManageTeamSection(
+          isEdit: args?['isEdit'] ?? false,));
+      case RoutesName.role:
+        return MaterialPageRoute(builder: (context)=> RoleManagementScreen());
+      case RoutesName.user:
+        return MaterialPageRoute(builder: (context)=> UserManagementScreen());
+
+
 
 
 

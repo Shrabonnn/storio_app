@@ -58,4 +58,14 @@ class RoutesName {
   static const add_new_card_manage = "add_new_card_manage";
   static const important_links = "important_links";
   static const add_new_links = "add_new_links";
+  static const staff_manage = "staff_manage";
+  static const view_staff_manage = "view_staff_manage";
+  static const add_new_staff_manage = "add_new_staff_manage";
+  static const manage_staff_department = "manage_staff_department";
+  static const team_manage = "team_manage";
+  static const view_team_manage = "view_team_manage";
+  static const add_new_team_member = "add_new_team_member";
+  static const manage_team_section = "manage_team_section";
+  static const role = "role";
+  static const user = "user";
 }

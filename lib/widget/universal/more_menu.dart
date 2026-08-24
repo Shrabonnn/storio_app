@@ -6,6 +6,8 @@ enum MoreMenuAction {
   edit,
   view,
   delete,
+  changePassword,
+  suspend
 }
 class MoreMenu extends StatelessWidget {
   final List<MoreMenuAction> items;

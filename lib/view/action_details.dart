@@ -227,12 +227,16 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.person_outline,
           label: "Staff",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.staff_manage);
+          },
         ),
         ActionTile(
           icon: Icons.groups_outlined,
           label: "Team",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.team_manage);
+          },
         ),
       ],
     );
@@ -243,12 +247,16 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.hub_outlined,
           label: "Role",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.role);
+          },
         ),
         ActionTile(
           icon: Icons.supervisor_account_outlined,
           label: "Users",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.user);
+          },
         ),
       ],
     );

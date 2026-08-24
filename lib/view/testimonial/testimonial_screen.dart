@@ -122,20 +122,10 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      TextTitleWidget(
-                                        title: "John Kabir",
-                                        size: 18,
-                                        color: AppColors.primary,
-                                      ),
-
-                                      CustomStatusBadge(
-                                        title: "PUBLISHED",
-                                        backgroundColor: Colors.green.shade100,
-                                      ),
-                                    ],
+                                  TextTitleWidget(
+                                    title: "John Kabir",
+                                    size: 18,
+                                    color: AppColors.primary,
                                   ),
 
                                   SizedBox(height: AppSizes.appbarGap),
@@ -155,6 +145,12 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                                       Icon(Icons.star, color: Colors.amber, size: 20),
                                       Icon(Icons.star_border, color: Colors.grey, size: 20),
                                       Icon(Icons.star_border, color: Colors.grey, size: 20),
+
+                                      Spacer(),
+                                      CustomStatusBadge(
+                                        title: "PUBLISHED",
+
+                                      ),
                                     ],
                                   ),
                                 ],

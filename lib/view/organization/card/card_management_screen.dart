@@ -70,21 +70,21 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                             children: [
                               Container(
                                   decoration: BoxDecoration(
-                                    color: AppColors.cartBackgroundLight,
-                                    borderRadius: BorderRadius.circular(AppSizes.cardRadius)
+                                      color: AppColors.cartBackgroundLight,
+                                      borderRadius: BorderRadius.circular(AppSizes.cardRadius)
                                   ),child: Padding(
-                                    padding:  EdgeInsets.all(AppSizes.cardRadius),
-                                    child: Icon(Icons.person,color: AppColors.primary,size: AppSizes.appBarIcon,),
+                                padding:  EdgeInsets.all(AppSizes.cardRadius),
+                                child: Icon(Icons.person,color: AppColors.primary,size: AppSizes.appBarIcon,),
 
-                                  // image or icon
-                                  /*Image.asset(
+                                // image or icon
+                                /*Image.asset(
                                     'assets/images/person.png',
                                     width: AppSizes.appBarIcon,
                                     height: AppSizes.appBarIcon,
                                     fit: BoxFit.cover,
                                   )*/
 
-                                  )),
+                              )),
                               Spacer(),
                               GestureDetector(onTap: (){
                                 Navigator.pushNamed(context, RoutesName.add_new_card_manage,arguments: {
