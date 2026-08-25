@@ -67,5 +67,11 @@ class RoutesName {
   static const add_new_team_member = "add_new_team_member";
   static const manage_team_section = "manage_team_section";
   static const role = "role";
+  static const add_new_role = "add_new_role";
   static const user = "user";
+  static const add_new_user = "add_new_user";
+  static const view_user_details = "view_user_details";
+  static const leadership_message = "leadership_message";
+  static const view_leadership_message = "view_leadership_message";
+  static const new_section_leadership_message = "new_section_leadership_message";
 }

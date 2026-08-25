@@ -55,7 +55,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                   children: [
                     Row(
                       children: [
-                        Flexible(child: SearchTextField(hinText: "Search...", controller: searchController)),
+                        Flexible(child: SearchTextField(onChanged:(value){},hinText: "Search...", controller: searchController)),
                         SizedBox(width: AppSizes.appbarGap),
                         CustomDropdown(
                           items:dropDownStatusList ,

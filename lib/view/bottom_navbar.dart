@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
 import 'package:storio_app/view/institute_profile_screen.dart';
+import 'package:storio_app/view/notice/notice_management_screen.dart';
 import 'package:storio_app/view/settings_screen.dart';
 
 import '../utils/app_colors.dart';
@@ -18,7 +19,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   final screens = [
     const Dashboard(),
-    const InstituteProfileScreen(),
+    const NoticeManagementScreen(),
     const CustomizationScreen(),
     const InstituteProfileScreen(),
     const SettingsScreen(),
@@ -54,7 +55,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications, size: 20),
-              label: "Notification",
+              label: "Notice",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.dashboard_customize, size: 20),

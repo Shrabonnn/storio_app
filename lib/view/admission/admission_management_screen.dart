@@ -53,7 +53,7 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchTextField(hinText: "Search by student name, email, or application", controller: searchController),
+                          child: SearchTextField(onChanged:(value){},hinText: "Search by student name, email, or application", controller: searchController),
                         ),
 
                       ],

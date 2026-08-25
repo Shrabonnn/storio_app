@@ -117,6 +117,27 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
 
         ],
       ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+
+
+          FloatingActionButton(
+
+
+            heroTag: "add",
+            backgroundColor: AppColors.primary,
+            onPressed: () {
+              Navigator.pushNamed(context, RoutesName.add_new_role);
+
+            },
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

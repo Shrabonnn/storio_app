@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
+import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
+import 'package:storio_app/widget/universal/custom_status_badge.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/app_colors.dart';
@@ -107,21 +109,13 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                               fit: BoxFit.cover,
                             ),
 
-                            status: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(
-                                  AppSizes.buttonRadius,
-                                ),
-                              ),
-                              child: TextBodyStyleWidget(
-                                title: "Published",
-                                color: Colors.white,
-                              ),
+                            status: Row(
+                              mainAxisAlignment: .end,
+                              children: [
+                                CustomStatusBadge(title: "Published",size: AppSizes.cardTitle,backgroundColor: AppColors.primary,foregroundColor: Colors.white,),
+                                SizedBox(width: AppSizes.smallGap,),
+                                ViewButton(onTap: (){})
+                              ],
                             ),
 
                             title: TextBodyStyleWidget(
@@ -176,16 +170,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                                     const Text("Alfa"),
                                   ],
                                 ),
-
-                                SizedBox(
-                                  height: AppSizes.sectionGap,
-                                ),
-
-                                CustomButton(
-                                  text: "View Details",
-                                  height: 4.5.h,
-                                  onTap: () {},
-                                ),
+                                
                               ],
                             ),
                           );

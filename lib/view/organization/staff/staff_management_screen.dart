@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/status_button_row.dart';
 
 import '../../../routes/routes_name.dart';
@@ -55,7 +56,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchTextField(hinText: "Search staff...", controller: searchController),
+                          child: SearchTextField(onChanged:(value){},hinText: "Search staff...", controller: searchController),
                         ),
 
 
@@ -135,6 +136,9 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                                     ],
                                   ),
                                 ),
+                                ViewButton(onTap: (){
+                                  Navigator.pushNamed(context, RoutesName.view_staff_manage);
+                                },)
                               ],
                             ),
 
@@ -168,18 +172,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                               ],
                             ),
 
-                            SizedBox(height: AppSizes.itemGap),
-                            // Edit + Delete buttons
-                            Row(
-                              children: [
 
-                                Flexible(child: CustomButton(icon: Icons.remove_red_eye_outlined,text: "View Details", onTap: (){
-                                  Navigator.pushNamed(context, RoutesName.view_staff_manage);
-                                })),
-
-
-                              ],
-                            ),
                           ],
                         ),
                       ),

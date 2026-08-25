@@ -38,6 +38,20 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
   String selectedStatus = "Hello Bangladesh";
   bool isVisible = false;
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    fullNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    positionController.dispose();
+    departmentController.dispose();
+    qualificationController.dispose();
+    joinDateController.dispose();
+    descriptionController.dispose();
+  }
+
 
 
   @override

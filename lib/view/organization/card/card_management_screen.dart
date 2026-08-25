@@ -41,7 +41,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchTextField(hinText: "Search cards...", controller: searchController),
+                          child: SearchTextField(onChanged:(value){},hinText: "Search cards...", controller: searchController),
                         ),
 
 

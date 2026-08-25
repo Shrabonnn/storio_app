@@ -63,7 +63,7 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: SearchTextField(
+                          child: SearchTextField(onChanged:(value){},
                             hinText: 'Search exams...',
                             controller: searchController,
                           ),

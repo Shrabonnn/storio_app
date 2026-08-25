@@ -50,7 +50,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
 
                     Row(
                       children: [
-                        Expanded(child: SearchTextField(hinText: "Search FAQ...",controller: searchController,)),
+                        Expanded(child: SearchTextField(onChanged:(value){},hinText: "Search FAQ...",controller: searchController,)),
                       ],
                     ),
 

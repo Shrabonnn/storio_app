@@ -66,6 +66,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                       children: [
                         Expanded(
                           child: SearchTextField(
+                            onChanged:(value){},
                             hinText: "Search...",
                             controller: searchController,
                           ),

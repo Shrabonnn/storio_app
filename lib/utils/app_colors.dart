@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class AppColors {
   static const Color secondary = Color(0XFF58769E);
   static const Color primary = Color(0xFF1A437A);
@@ -9,6 +11,7 @@ class AppColors {
 
   static Color get cartBackgroundLight =>
   cartbackground.withValues(alpha: 0.3);
+
 
 
 

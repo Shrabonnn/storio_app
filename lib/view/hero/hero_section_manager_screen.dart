@@ -75,6 +75,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                         children: [
                           Expanded(
                             child: SearchTextField(
+                              onChanged:(value){},
                               hinText: "Search by heading",
                               controller: searchController,
                             ),

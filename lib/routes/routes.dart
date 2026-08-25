@@ -44,8 +44,12 @@ import 'package:storio_app/view/notice/notice_management_screen.dart';
 import 'package:storio_app/view/notice/view_notice_screen.dart';
 import 'package:storio_app/view/organization/card/add_new_card.dart';
 import 'package:storio_app/view/organization/card/card_management_screen.dart';
+import 'package:storio_app/view/organization/leadership/leadership_messages_screen.dart';
+import 'package:storio_app/view/organization/leadership/new_section_leadership_message.dart';
+import 'package:storio_app/view/organization/leadership/view_leadership_message.dart';
 import 'package:storio_app/view/organization/links/add_new_link.dart';
 import 'package:storio_app/view/organization/links/education_board_notices.dart';
+import 'package:storio_app/view/organization/role/add_new_role.dart';
 import 'package:storio_app/view/organization/role/role_management_screen.dart';
 import 'package:storio_app/view/organization/staff/add_new_staff.dart';
 import 'package:storio_app/view/organization/staff/manage_staff_department.dart';
@@ -55,7 +59,9 @@ import 'package:storio_app/view/organization/team/add_new_team_member.dart';
 import 'package:storio_app/view/organization/team/manage_team_section.dart';
 import 'package:storio_app/view/organization/team/team_management_screen.dart';
 import 'package:storio_app/view/organization/team/view_team_screen.dart';
+import 'package:storio_app/view/organization/user/add_new_user.dart';
 import 'package:storio_app/view/organization/user/user_management_screen.dart';
+import 'package:storio_app/view/organization/user/view_user_details.dart';
 import 'package:storio_app/view/profile_screen.dart';
 import 'package:storio_app/view/promotion/add_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
@@ -167,7 +173,10 @@ class Routes {
           isEdit: args?['isEdit'] ?? false,
         ));
       case RoutesName.notice:
-        return MaterialPageRoute(builder: (context)=> NoticeManagementScreen());
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> NoticeManagementScreen(
+          showBackButton: args?['showBackButton'] ?? false,
+        ));
       case RoutesName.view_notice:
         return MaterialPageRoute(builder: (context)=> ViewNoticeScreen());
       case RoutesName.add_new_notice:
@@ -243,8 +252,27 @@ class Routes {
           isEdit: args?['isEdit'] ?? false,));
       case RoutesName.role:
         return MaterialPageRoute(builder: (context)=> RoleManagementScreen());
+      case RoutesName.add_new_role:
+        return MaterialPageRoute(builder: (context)=> AddNewRole());
+
       case RoutesName.user:
         return MaterialPageRoute(builder: (context)=> UserManagementScreen());
+      case RoutesName.add_new_user:
+        final args = setting.arguments as Map<String ,dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewUser(
+          isEdit: args?['isEdit'] ?? false,
+        ));
+      case RoutesName.view_user_details:
+        return MaterialPageRoute(builder: (context)=> ViewUserDetails());
+      case RoutesName.leadership_message:
+        return MaterialPageRoute(builder: (context)=> LeadershipMessagesScreen());
+      case RoutesName.view_leadership_message:
+        return MaterialPageRoute(builder: (context)=> ViewLeadershipMessage());
+      case RoutesName.new_section_leadership_message:
+        final args = setting.arguments as Map<String ,dynamic>?;
+        return MaterialPageRoute(builder: (context)=> NewSectionLeadershipMessage(
+          isEdit: args?['isEdit'] ?? false,
+        ));
 
 
 

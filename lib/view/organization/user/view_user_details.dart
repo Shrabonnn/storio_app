@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/widget/universal/info_row_widget.dart';
-
-import '../../../routes/routes_name.dart';
-import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
-import '../../../widget/custom_button/custom_buttom.dart';
+import 'package:storio_app/widget/universal/custom_card.dart';
 import '../../../widget/textStyle/text_body_style.dart';
-import '../../../widget/textStyle/text_title_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
 import '../../../widget/universal/custom_card2.dart';
 import '../../../widget/universal/custom_status_badge.dart';
 import '../../../widget/universal/image_card.dart';
-import '../../../widget/universal/info_item_card.dart';
-
-class ViewStaffScreen extends StatefulWidget {
-  const ViewStaffScreen({super.key});
+import '../../../routes/routes_name.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/sizes.dart';
+import '../../../widget/universal/info_row_widget.dart';
+class ViewUserDetails extends StatefulWidget {
+  const ViewUserDetails({super.key});
 
   @override
-  State<ViewStaffScreen> createState() => _ViewStaffScreenState();
+  State<ViewUserDetails> createState() => _ViewUserDetailsState();
 }
 
-class _ViewStaffScreenState extends State<ViewStaffScreen> {
+class _ViewUserDetailsState extends State<ViewUserDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Emma Stone",
-            subtitle: "Sr. Advisor Marketing",
+            title: "John Chena",
+            subtitle: "CEO at Hello Bangladesh ",
             showBackButton: true,
           ),
           SliverPadding(
@@ -42,53 +38,46 @@ class _ViewStaffScreenState extends State<ViewStaffScreen> {
               delegate: SliverChildListDelegate([
                 Column(
                   children: [
-                    ImageCard(
-                      image: Image.asset(
-                        "assets/images/person.png",
-
-                        width: double.infinity,
-                        height: 14.h,
-                        fit: BoxFit.fitHeight,
-                      ),
+                    CustomCard(
 
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(mainAxisAlignment: .spaceBetween,
+                          Row(
                             children: [
-                              CustomStatusBadge(title: "ACTIVE",size: AppSizes.cardTitle,),
+                              CustomStatusBadge(title: "DEV",size: AppSizes.cardTitle,backgroundColor: Colors.green.shade100,),
+                              SizedBox(width: AppSizes.itemGap,),
+
+                              CustomStatusBadge(title: "VISIBLE",size: AppSizes.cardTitle,),
+                              Spacer(),
                               Row(
                                 children: [
                                   GestureDetector(
                                       onTap: (){
-                                        Navigator.pushNamed(context, RoutesName.add_new_staff_manage,arguments: {
+                                        Navigator.pushNamed(context, RoutesName.add_new_team_member,arguments: {
                                           'isEdit' : true,
                                         });
                                       },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: AppColors.primary,)),
-                                  SizedBox(width: AppSizes.itemGap,),
-                                  Icon(Icons.delete_outline_outlined,size: AppSizes.iconLarge,color: Colors.red,)
+
                                 ],
                               )
                             ],
                           ),
-                          SizedBox(height: AppSizes.smallGap),
+                          SizedBox(height: AppSizes.itemGap),
                           CustomCard2(child: Padding(
                             padding:  EdgeInsets.all(AppSizes.contentPadding),
                             child: Column(
                               crossAxisAlignment: .start,
                               children: [
-                                InfoRowWidget(icon: Icons.email_outlined, title: "Email", value: "check@gmail.com"),
+                                InfoRowWidget(icon: Icons.badge_outlined, title: "Designation", value: "CEO"),
                                 SizedBox(height: AppSizes.smallGap,),
-                                InfoRowWidget(icon: Icons.phone, title: "Phone", value: "01712340000"),
-                                SizedBox(height: AppSizes.smallGap,),
-
-
-                                InfoRowWidget(icon: Icons.school_outlined, title: "Qualification", value: "MSC in Marketing"),
-                                SizedBox(height: AppSizes.smallGap,),
-                                InfoRowWidget(icon: Icons.workspace_premium, title: "Experience", value: "check@gmail.com"),
+                                InfoRowWidget(icon: Icons.phone, title: "Phone Number", value: "01789734725"),
                                 SizedBox(height: AppSizes.smallGap,),
 
-                                InfoRowWidget(icon: Icons.calendar_month_outlined, title: "Join Date", value: "Apr 2, 2026"),
+                                InfoRowWidget(icon: Icons.location_on_outlined, title: "Address", value: "N/A"),
+                                SizedBox(height: AppSizes.smallGap,),
+
+                                InfoRowWidget(icon: Icons.calendar_month_outlined, title: "Joined", value: "Aug 24, 2026"),
 
 
 

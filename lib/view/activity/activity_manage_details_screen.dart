@@ -83,7 +83,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Activity Manage Detail",
+            title: "Activity Manage Details",
             showBackButton: true,
           ),
           SliverPadding(

@@ -90,7 +90,9 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.notifications_none,
           label: "Notice",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.notice);
+            Navigator.pushNamed(context, RoutesName.notice,arguments: {
+              'showBackButton' :true,
+            });
           },
         ),
         ActionTile(
@@ -222,7 +224,9 @@ class _ActionDetailsState extends State<ActionDetails> {
         ActionTile(
           icon: Icons.chat_bubble_outline,
           label: "Leadership\nMessage",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, RoutesName.leadership_message);
+          },
         ),
         ActionTile(
           icon: Icons.person_outline,

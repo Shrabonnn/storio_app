@@ -54,7 +54,7 @@ class _CareerManagementScreenState extends State<CareerManagementScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: SearchTextField(
+                          child: SearchTextField(onChanged:(value){},
                             hinText: 'Search by title or company...',
                             controller: searchController,
                           ),

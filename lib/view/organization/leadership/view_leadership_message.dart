@@ -14,22 +14,21 @@ import '../../../widget/universal/custom_status_badge.dart';
 import '../../../widget/universal/image_card.dart';
 import '../../../widget/universal/info_item_card.dart';
 
-class ViewStaffScreen extends StatefulWidget {
-  const ViewStaffScreen({super.key});
+class ViewLeadershipMessage extends StatefulWidget {
+  const ViewLeadershipMessage({super.key});
 
   @override
-  State<ViewStaffScreen> createState() => _ViewStaffScreenState();
+  State<ViewLeadershipMessage> createState() => _ViewLeadershipMessageState();
 }
 
-class _ViewStaffScreenState extends State<ViewStaffScreen> {
+class _ViewLeadershipMessageState extends State<ViewLeadershipMessage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Emma Stone",
-            subtitle: "Sr. Advisor Marketing",
+            title: "MR. Motiur Rahman",
             showBackButton: true,
           ),
           SliverPadding(
@@ -45,9 +44,8 @@ class _ViewStaffScreenState extends State<ViewStaffScreen> {
                     ImageCard(
                       image: Image.asset(
                         "assets/images/person.png",
-
                         width: double.infinity,
-                        height: 14.h,
+                        height: 16.h,
                         fit: BoxFit.fitHeight,
                       ),
 
@@ -56,12 +54,12 @@ class _ViewStaffScreenState extends State<ViewStaffScreen> {
                         children: [
                           Row(mainAxisAlignment: .spaceBetween,
                             children: [
-                              CustomStatusBadge(title: "ACTIVE",size: AppSizes.cardTitle,),
+                              CustomStatusBadge(title: "Published / Draft",size: AppSizes.cardTitle,),
                               Row(
                                 children: [
                                   GestureDetector(
                                       onTap: (){
-                                        Navigator.pushNamed(context, RoutesName.add_new_staff_manage,arguments: {
+                                        Navigator.pushNamed(context, RoutesName.new_section_leadership_message,arguments: {
                                           'isEdit' : true,
                                         });
                                       },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: AppColors.primary,)),
@@ -77,19 +75,23 @@ class _ViewStaffScreenState extends State<ViewStaffScreen> {
                             child: Column(
                               crossAxisAlignment: .start,
                               children: [
-                                InfoRowWidget(icon: Icons.email_outlined, title: "Email", value: "check@gmail.com"),
+                                InfoRowWidget(icon: Icons.badge, title: "Role", value: "CEO "),
                                 SizedBox(height: AppSizes.smallGap,),
-                                InfoRowWidget(icon: Icons.phone, title: "Phone", value: "01712340000"),
-                                SizedBox(height: AppSizes.smallGap,),
-
-
-                                InfoRowWidget(icon: Icons.school_outlined, title: "Qualification", value: "MSC in Marketing"),
-                                SizedBox(height: AppSizes.smallGap,),
-                                InfoRowWidget(icon: Icons.workspace_premium, title: "Experience", value: "check@gmail.com"),
+                                InfoRowWidget(icon: Icons.apartment_outlined, title: "Company", value: "ACS Famous"),
                                 SizedBox(height: AppSizes.smallGap,),
 
-                                InfoRowWidget(icon: Icons.calendar_month_outlined, title: "Join Date", value: "Apr 2, 2026"),
+                                Row(
+                                  crossAxisAlignment: .start,
+                                  children: [
+                                    Icon(Icons.file_copy_outlined,color: AppColors.primary,size: AppSizes.icon,),
 
+                                    SizedBox(width: AppSizes.appbarGap,),
+                                    Flexible(
+                                      child: TextBodyStyleWidget(title: "Message: Team, let’s stay focused and keep supporting each other.Every challenge is an opportunity to improve and grow.Take ownership of your work and communicate openly. Let’s work together, stay consistent, and achieve our goals.I believe in this team—let’s make it happen!",color: AppColors.primary,fontbold: false,maxLines: 35,
+                                      ),
+                                    ),
+                                  ],
+                                ),
 
 
                               ],

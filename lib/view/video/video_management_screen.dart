@@ -61,7 +61,7 @@ class _VideoManagementScreenState extends State<VideoManagementScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: SearchTextField(
+                          child: SearchTextField(onChanged:(value){},
                             hinText: 'Search videos...',
                             controller: searchController,
                           ),

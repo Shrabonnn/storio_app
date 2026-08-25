@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
 import '../../routes/routes_name.dart';
@@ -16,7 +17,9 @@ import '../../widget/universal/more_menu.dart';
 import '../../widget/universal/search_text_field.dart';
 
 class NoticeManagementScreen extends StatefulWidget {
-  const NoticeManagementScreen({super.key});
+  const NoticeManagementScreen({super.key,  this.showBackButton= false});
+  final bool showBackButton;
+
 
   @override
   State<NoticeManagementScreen> createState() => _NoticeManagementScreenState();
@@ -55,7 +58,8 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
         slivers: [
           CustomSliverAppBar(
             title: "Notice Board",
-            showBackButton: true,
+            showBackButton:  widget.showBackButton,
+
           ),
           SliverPadding(
             padding: EdgeInsetsGeometry.only(top:AppSizes.screenPadding,left: AppSizes.screenPadding,right: AppSizes.screenPadding),
@@ -65,7 +69,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                   children: [
                     Row(
                       children: [
-                        Flexible(child: SearchTextField(hinText: "Search...", controller: searchController)),
+                        Flexible(child: SearchTextField(onChanged:(value){},hinText: "Search...", controller: searchController)),
                         SizedBox(width: AppSizes.appbarGap),
                         CustomDropdown(
                           items:dropDownStatusList ,
@@ -141,35 +145,42 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
 
 
-                                MoreMenu(
-                                  items: const [
-                                    MoreMenuAction.edit,
-                                    MoreMenuAction.view,
-                                    MoreMenuAction.delete,
+                                Row(
+                                  children: [
+                                    ViewButton(onTap: (){
+                                      Navigator.pushNamed(context, RoutesName.view_notice);
+                                    }),
+                                    MoreMenu(
+                                      items: const [
+                                        MoreMenuAction.edit,
+                                        MoreMenuAction.view,
+                                        MoreMenuAction.delete,
+                                      ],
+                                      onSelected: (action) {
+                                        switch (action) {
+                                          case MoreMenuAction.edit:
+                                            Navigator.pushNamed(context, RoutesName.add_new_notice,arguments: {
+                                              'isEdit' : true,
+                                            });
+                                            break;
+
+                                          case MoreMenuAction.view:
+                                            Navigator.pushNamed(context, RoutesName.view_notice);
+                                            break;
+
+                                          case MoreMenuAction.delete:
+                                          // delete
+                                            break;
+                                          case MoreMenuAction.changePassword:
+                                            // TODO: Handle this case.
+                                            throw UnimplementedError();
+                                          case MoreMenuAction.suspend:
+                                            // TODO: Handle this case.
+                                            throw UnimplementedError();
+                                        }
+                                      },
+                                    ),
                                   ],
-                                  onSelected: (action) {
-                                    switch (action) {
-                                      case MoreMenuAction.edit:
-                                        Navigator.pushNamed(context, RoutesName.add_new_notice,arguments: {
-                                          'isEdit' : true,
-                                        });
-                                        break;
-
-                                      case MoreMenuAction.view:
-                                        Navigator.pushNamed(context, RoutesName.view_notice);
-                                        break;
-
-                                      case MoreMenuAction.delete:
-                                      // delete
-                                        break;
-                                      case MoreMenuAction.changePassword:
-                                        // TODO: Handle this case.
-                                        throw UnimplementedError();
-                                      case MoreMenuAction.suspend:
-                                        // TODO: Handle this case.
-                                        throw UnimplementedError();
-                                    }
-                                  },
                                 ),
                               ],
                             ),
@@ -203,13 +214,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                 Flexible(child: TextBodyStyleWidget(title: "Last Updated: Jun 8, 2026",maxLines: 1,size: AppSizes.cardTitle)),
                               ],
                             ),
-                            SizedBox(height: AppSizes.smallGap),
 
-                            CustomButton(
-                                height:4.5.h,
-                                size:AppSizes.cardTitle,text: "View Details", onTap: () {
-                              Navigator.pushNamed(context, RoutesName.view_notice);
-                            }),
 
 
 

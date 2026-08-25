@@ -50,7 +50,7 @@ class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
                           Row(
                             children: [
                               Expanded(
-                                child: SearchTextField(
+                                child: SearchTextField(onChanged:(value){},
                                   hinText: "Search promotions...",
                                   controller: searchController,
                                 ),

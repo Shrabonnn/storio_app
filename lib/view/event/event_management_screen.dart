@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/custom_button/view_button.dart';
+import 'package:storio_app/widget/universal/more_menu.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/app_colors.dart';
@@ -51,7 +53,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchTextField(hinText: "Search", controller: searchController),
+                          child: SearchTextField(onChanged:(value){},hinText: "Search", controller: searchController),
                         ),
 
 
@@ -89,13 +91,41 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
 
 
                               // More
-                              InkWell(
-                                  onTap: (){},
-                                  child: Icon(Icons.more_vert))
+                              Row(
+
+                                children: [
+                                  ViewButton(onTap: (){
+                                    Navigator.pushNamed(context, RoutesName.view_event);
+                                  }),
+                                  MoreMenu(items: [
+                                    MoreMenuAction.edit,
+                                    MoreMenuAction.view,
+                                    MoreMenuAction.delete,
+                                  ], onSelected: (action){
+                                    switch (action){
+
+                                      case MoreMenuAction.edit:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                      case MoreMenuAction.view:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                      case MoreMenuAction.delete:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                      case MoreMenuAction.changePassword:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                      case MoreMenuAction.suspend:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                    }
+                                  })
+                                ],
+                              )
                             ],
                           ),
 
-                          SizedBox(height: AppSizes.smallGap),
 
 
                           TextTitleWidget(
@@ -122,17 +152,8 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                           ),
 
 
-                          SizedBox(height: AppSizes.smallGap),
 
-                          Divider(),
 
-                          SizedBox(height: AppSizes.smallGap),
-
-                          CustomButton(
-                              height:4.5.h,
-                              size:AppSizes.cardTitle,text: "View Details", onTap: () {
-                            Navigator.pushNamed(context, RoutesName.view_event);
-                          }),
 
 
 

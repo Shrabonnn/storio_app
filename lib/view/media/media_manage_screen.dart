@@ -36,7 +36,7 @@ class _MediaManageScreenState extends State<MediaManageScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: SearchTextField(
+                          child: SearchTextField(onChanged:(value){},
                               hinText: "Search Media...",
                               controller: searchController)
                         ),

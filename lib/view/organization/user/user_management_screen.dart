@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/info_row_widget.dart';
 
 import '../../../routes/routes_name.dart';
@@ -53,7 +54,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchTextField(hinText: "Search users...", controller: searchController),
+                          child: SearchTextField(onChanged:(value){},hinText: "Search users...", controller: searchController),
                         ),
 
 
@@ -87,13 +88,13 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                   height: 60,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: AppColors.cartBackgroundLight,
+                                    color: AppColors.primary,
                                     border: Border.all(
                                       color: AppColors.cartBackgroundLight,
                                       width: 1,
                                     ),
                                   ),
-                                  child: Center(child: TextTitleWidget(title: name.isNotEmpty ? name[0].toUpperCase()+name[1].toUpperCase() : "?",color: AppColors.primary,size: 19.sp,)),
+                                  child: Center(child: TextTitleWidget(title: name.isNotEmpty ? name[0].toUpperCase()+name[1].toUpperCase() : "?",color: Colors.white,size: 19.sp,)),
                                 ),
 
                                 SizedBox(width: AppSizes.smallGap),
@@ -124,46 +125,61 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                       ),
                                       SizedBox(height: AppSizes.appbarGap),
 
-                                      CustomStatusBadge(
-                                        title: "ACTIVE",
 
-                                      ),
                                     ],
                                   ),
                                 ),
                                 SizedBox(width: AppSizes.sectionGap,),
-                                MoreMenu(
-                                  items: const [
-                                    MoreMenuAction.edit,
-                                    MoreMenuAction.view,
-                                    MoreMenuAction.changePassword,
-                                    MoreMenuAction.suspend,
-                                    MoreMenuAction.delete,
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        ViewButton(onTap: (){
+                                          Navigator.pushNamed(context, RoutesName.view_user_details);
+                                        }),
+                                        MoreMenu(
+                                          items: const [
+                                            MoreMenuAction.edit,
+                                            MoreMenuAction.view,
+                                            MoreMenuAction.changePassword,
+                                            MoreMenuAction.suspend,
+                                            MoreMenuAction.delete,
+                                          ],
+                                          onSelected: (action) {
+                                            switch (action) {
+                                              case MoreMenuAction.edit:
+                                                Navigator.pushNamed(context, RoutesName.add_new_user,arguments: {
+                                                  'isEdit' : true,
+                                                });
+                                                break;
+
+                                              case MoreMenuAction.view:
+                                                //Navigator.pushNamed(context, RoutesName.view_notice);
+                                                break;
+
+                                              case MoreMenuAction.changePassword:
+                                                //Navigator.pushNamed(context, RoutesName.view_notice);
+                                                break;
+                                              case MoreMenuAction.suspend:
+                                                //Navigator.pushNamed(context, RoutesName.view_notice);
+                                                break;
+
+                                              case MoreMenuAction.delete:
+                                              // delete
+                                                break;
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: AppSizes.appbarGap),
+                                    CustomStatusBadge(
+                                      title: "ACTIVE",
+
+
+                                    ),
+
                                   ],
-                                  onSelected: (action) {
-                                    switch (action) {
-                                      case MoreMenuAction.edit:
-                                        Navigator.pushNamed(context, RoutesName.add_new_notice,arguments: {
-                                          'isEdit' : true,
-                                        });
-                                        break;
-
-                                      case MoreMenuAction.view:
-                                        Navigator.pushNamed(context, RoutesName.view_notice);
-                                        break;
-
-                                      case MoreMenuAction.changePassword:
-                                        Navigator.pushNamed(context, RoutesName.view_notice);
-                                        break;
-                                      case MoreMenuAction.suspend:
-                                        Navigator.pushNamed(context, RoutesName.view_notice);
-                                        break;
-
-                                      case MoreMenuAction.delete:
-                                      // delete
-                                        break;
-                                    }
-                                  },
                                 ),
                               ],
                             ),
@@ -175,18 +191,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                             SizedBox(height: AppSizes.appbarGap,),
                             InfoRowWidget(icon: Icons.calendar_month_outlined, title: "Joined", value: "Jun 15, 2026"),
 
-                            SizedBox(height: AppSizes.itemGap),
-                            // Edit + Delete buttons
-                            Row(
-                              children: [
 
-                                Flexible(child: CustomButton(icon: Icons.remove_red_eye_outlined,text: "View Details", onTap: (){
-                                  Navigator.pushNamed(context, RoutesName.view_team_manage);
-                                })),
-
-
-                              ],
-                            ),
                           ],
                         ),
                       ),
@@ -207,7 +212,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
             heroTag: "add",
             backgroundColor: AppColors.primary,
             onPressed: () {
-              Navigator.pushNamed(context, RoutesName.add_new_team_member);
+              Navigator.pushNamed(context, RoutesName.add_new_user);
 
             },
             child: const Icon(

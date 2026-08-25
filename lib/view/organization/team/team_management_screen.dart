@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storio_app/widget/custom_button/view_button.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
@@ -50,7 +51,7 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchTextField(hinText: "Search by name, title, role...", controller: searchController),
+                          child: SearchTextField(onChanged:(value){},hinText: "Search by name, title, role...", controller: searchController),
                         ),
 
 
@@ -90,7 +91,7 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: AppColors.primary,
+                                      color: AppColors.cartBackgroundLight,
                                       width: 1,
                                     ),
                                   ),
@@ -104,35 +105,51 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                                 SizedBox(width: AppSizes.smallGap),
 
                                 Expanded(
-                                  child: Column(
+                                  child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: .spaceBetween,
                                     children: [
-                                      TextTitleWidget(
-                                        title: "John Chena",
-                                        size: AppSizes.sectionTitle,
-                                        color: AppColors.primary,
+                                      Column(
+                                        crossAxisAlignment: .start,
+                                        children: [
+                                          TextTitleWidget(
+                                            title: "John Chena",
+                                            size: AppSizes.sectionTitle,
+                                            color: AppColors.primary,
+                                          ),
+
+                                          SizedBox(height: AppSizes.appbarGap),
+
+                                          TextBodyStyleWidget(
+                                            title: "Designation CEO",
+                                            size: AppSizes.cardTitle,
+                                            color: AppColors.primary,
+                                          ),
+
+                                          SizedBox(height: AppSizes.appbarGap),
+                                          TextBodyStyleWidget(
+                                            title: "Section  Hello Bangladesh",
+                                            size: AppSizes.cardTitle,
+                                            color: AppColors.primary,
+                                          ),
+
+                                        ],
                                       ),
+                                      Column(
+                                        crossAxisAlignment: .end,
+                                        children: [
+                                          ViewButton(onTap: (){
+                                            Navigator.pushNamed(context, RoutesName.view_team_manage);
+                                          }),
+                                          SizedBox(height: AppSizes.smallGap),
 
-                                      SizedBox(height: AppSizes.appbarGap),
+                                          CustomStatusBadge(
+                                            title: "VISIBLE",
 
-                                      TextBodyStyleWidget(
-                                        title: "Designation CEO",
-                                        size: AppSizes.cardTitle,
-                                        color: AppColors.primary,
-                                      ),
+                                          ),
+                                        ],
+                                      )
 
-                                      SizedBox(height: AppSizes.appbarGap),
-                                      TextBodyStyleWidget(
-                                        title: "Section  Hello Bangladesh",
-                                        size: AppSizes.cardTitle,
-                                        color: AppColors.primary,
-                                      ),
-                                      SizedBox(height: AppSizes.appbarGap),
-
-                                      CustomStatusBadge(
-                                        title: "VISIBLE",
-
-                                      ),
                                     ],
                                   ),
                                 ),
@@ -164,18 +181,7 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                               ],
                             ),
 
-                            SizedBox(height: AppSizes.itemGap),
-                            // Edit + Delete buttons
-                            Row(
-                              children: [
 
-                                Flexible(child: CustomButton(icon: Icons.remove_red_eye_outlined,text: "View Details", onTap: (){
-                                  Navigator.pushNamed(context, RoutesName.view_team_manage);
-                                })),
-
-
-                              ],
-                            ),
                           ],
                         ),
                       ),

@@ -67,7 +67,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Expanded(
-                          child: SearchTextField(hinText: "Search", controller: searchController),
+                          child: SearchTextField(onChanged:(value){},hinText: "Search", controller: searchController),
                         ),
                         SizedBox(width: AppSizes.appbarGap,),
                         CustomDropdown(

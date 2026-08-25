@@ -568,7 +568,9 @@ class _DashboardState extends State<Dashboard> {
           icon: Icons.notifications_none,
           label: "Notice",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.notice);
+            Navigator.pushNamed(context, RoutesName.notice,arguments: {
+              'showBackButton' :true,
+            });
           },
         ),
         ActionTile(
