@@ -27,8 +27,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
-
-
         localizationsDelegates: const [
           FlutterQuillLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
