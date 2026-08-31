@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/view_button.dart';
+import 'package:storio_app/widget/universal/image_circle_widget.dart';
 import 'package:storio_app/widget/universal/status_button_row.dart';
 
 import '../../../routes/routes_name.dart';
@@ -90,22 +91,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 80,
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: AppColors.primary,
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: const CircleAvatar(
-                                    backgroundImage: AssetImage(
-                                      "assets/images/person.png",
-                                    ),
-                                  ),
-                                ),
+                                ImageCircleWidget(imgPath: "assets/images/person.png"),
 
                                 SizedBox(width: AppSizes.smallGap),
 

@@ -11,14 +11,14 @@ import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_text_field.dart';
 
-class GeneralSetting extends StatefulWidget {
-  const GeneralSetting({super.key});
+class AdmissionGeneralSetting extends StatefulWidget {
+  const AdmissionGeneralSetting({super.key});
 
   @override
-  State<GeneralSetting> createState() => _GeneralSettingState();
+  State<AdmissionGeneralSetting> createState() => _AdmissionGeneralSettingState();
 }
 
-class _GeneralSettingState extends State<GeneralSetting> {
+class _AdmissionGeneralSettingState extends State<AdmissionGeneralSetting> {
 
   final TextEditingController fromTitleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();

@@ -266,8 +266,8 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                         ),
 
                         Expanded(
-                          child: Text(
-                            "Show PDF in view mode (embed PDF viewer on public page instead of showing only a download button)",
+                          child: TextBodyStyleWidget(
+                           title:  "Show PDF in view mode (embed PDF viewer on public page instead of showing only a download button ",fontbold: false,
                           ),
                         ),
                       ],

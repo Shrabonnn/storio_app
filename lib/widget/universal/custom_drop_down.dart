@@ -13,6 +13,7 @@ class CustomDropdown extends StatefulWidget {
   final ValueChanged<String?>? onChanged;
   final double? width;
   final double? height;
+  final bool enabled;
 
   const CustomDropdown({
     super.key,
@@ -21,6 +22,7 @@ class CustomDropdown extends StatefulWidget {
     this.onChanged,
     this.width,
     this.height,
+    this.enabled = true,
   });
 
   @override
@@ -122,13 +124,17 @@ class _CustomDropdownState extends State<CustomDropdown> {
             );
           }).toList(),
 
-          onChanged: (value) {
+          onChanged: widget.enabled
+              ? (value) {
             valueListenable.value = value;
+
             setState(() {
               selectiveType = value;
             });
+
             widget.onChanged?.call(value);
-          },
+          }
+              : null,
         ),
       ),
     );

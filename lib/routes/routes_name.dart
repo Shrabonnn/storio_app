@@ -74,4 +74,10 @@ class RoutesName {
   static const leadership_message = "leadership_message";
   static const view_leadership_message = "view_leadership_message";
   static const new_section_leadership_message = "new_section_leadership_message";
+
+  //Settings
+  static const general_settings = "general_settings";
+  static const security = "security";
+
+
 }

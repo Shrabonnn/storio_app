@@ -3,7 +3,7 @@ import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
 import 'package:storio_app/view/institute_profile_screen.dart';
 import 'package:storio_app/view/notice/notice_management_screen.dart';
-import 'package:storio_app/view/settings_screen.dart';
+import 'package:storio_app/view/settings/settings_screen.dart';
 
 import '../utils/app_colors.dart';
 

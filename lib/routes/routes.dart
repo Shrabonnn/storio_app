@@ -9,7 +9,7 @@ import 'package:storio_app/view/activity/activity_manage_details_screen.dart';
 import 'package:storio_app/view/activity/activity_manage_screen.dart';
 import 'package:storio_app/view/admission/admission_form_builder.dart';
 import 'package:storio_app/view/admission/admission_management_screen.dart';
-import 'package:storio_app/view/admission/general_setting.dart';
+import 'package:storio_app/view/admission/admission_general_setting.dart';
 import 'package:storio_app/view/admission/view_admission_screen.dart';
 import 'package:storio_app/view/blog/add_new_blog.dart';
 import 'package:storio_app/view/blog/blog_management_screen.dart';
@@ -67,7 +67,9 @@ import 'package:storio_app/view/promotion/add_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
 import 'package:storio_app/view/result/exam_result_screen.dart';
 import 'package:storio_app/view/result/publish_result.dart';
-import 'package:storio_app/view/settings_screen.dart';
+import 'package:storio_app/view/settings/general_settings_screen.dart';
+import 'package:storio_app/view/settings/security_screen.dart';
+import 'package:storio_app/view/settings/settings_screen.dart';
 import 'package:storio_app/view/testimonial/add_new_testimonial.dart';
 import 'package:storio_app/view/testimonial/edit_testimonial.dart';
 import 'package:storio_app/view/testimonial/testimonial_screen.dart';
@@ -206,7 +208,7 @@ class Routes {
       case RoutesName.admission_form_builder:
         return MaterialPageRoute(builder: (context)=> AdmissionFormBuilder());
       case RoutesName.admission_general_setting:
-        return MaterialPageRoute(builder: (context)=> GeneralSetting());
+        return MaterialPageRoute(builder: (context)=> AdmissionGeneralSetting());
       case RoutesName.view_admission:
         return MaterialPageRoute(builder: (context)=> ViewAdmissionScreen());
 
@@ -271,8 +273,17 @@ class Routes {
       case RoutesName.new_section_leadership_message:
         final args = setting.arguments as Map<String ,dynamic>?;
         return MaterialPageRoute(builder: (context)=> NewSectionLeadershipMessage(
-          isEdit: args?['isEdit'] ?? false,
-        ));
+          isEdit: args?['isEdit'] ?? false,));
+
+
+
+      // Settings
+      case RoutesName.general_settings:
+        return MaterialPageRoute(builder: (context)=> GeneralSettingsScreen());
+      case RoutesName.security:
+        return MaterialPageRoute(builder: (context)=> SecurityScreen());
+
+
 
 
 

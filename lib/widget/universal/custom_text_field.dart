@@ -10,12 +10,13 @@ class CustomTextFieldWidget extends StatelessWidget {
   final int?maxLines;
   final bool isDatePicker;
   final VoidCallback?onChange;
+  final bool enable;
 
   const CustomTextFieldWidget({
     super.key,
     required this.controller,
     required this.hintText, this.minLines, this.maxLines,
-    this.isDatePicker = false, this.onChange,
+    this.isDatePicker = false, this.onChange,  this.enable=true,
   });
 
   Future<void> _selectDate(BuildContext context) async {
@@ -56,6 +57,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: [
             TextFormField(
+              enabled: enable,
               controller: controller,
               readOnly: isDatePicker,
 

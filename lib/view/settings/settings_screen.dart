@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/utils/sizes.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
@@ -28,9 +29,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 CustomCard(
                     child: Column(
                       children: [
-                        SettingListWidget(icon:Icons.settings,title: "General Settings",subtitle: "Manage Institute Information",onTap: (){},),
+                        SettingListWidget(icon:Icons.settings,title: "General Settings",subtitle: "Manage Institute Information",onTap: (){
+                          Navigator.pushNamed(context, RoutesName.general_settings);
+                        },),
                         Divider(),
-                        SettingListWidget(icon:Icons.lock,title: "Security",subtitle: "Manage passwords and acces",onTap: (){},),
+                        SettingListWidget(icon:Icons.lock,title: "Security",subtitle: "Manage passwords and acces",onTap: (){
+                          Navigator.pushNamed(context, RoutesName.security);
+                        },),
                         Divider(),
                         SettingListWidget(icon:Icons.palette,title: "Themes",subtitle: "Custom appearance",onTap: (){},),
 
