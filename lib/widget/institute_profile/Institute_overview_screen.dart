@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../custom_button/custom_buttom.dart';
 import '../textStyle/text_title_style.dart';
 class InstituteOverviewScreen extends StatefulWidget {
@@ -33,6 +34,7 @@ class InstituteOverviewScreen extends StatefulWidget {
 class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,7 +44,7 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
             TextTitleWidget(
               title: widget.title,
               size: AppSizes.sectionTitle,
-              color: AppColors.primary,
+              color: color.primary,
             ),
             if (widget.showIcon)
              IconButton(
@@ -65,7 +67,7 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
             width: 100.w,
             // padding: EdgeInsets.symmetric(horizontal: AppSizes.smallPadding),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: color.cardBackground,
               borderRadius: BorderRadius.circular(AppSizes.cardRadius),
               boxShadow: [
                 BoxShadow(

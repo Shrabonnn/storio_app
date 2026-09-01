@@ -5,8 +5,9 @@ import 'package:storio_app/widget/universal/status_button_row.dart';
 
 import '../../model/result/exam_statistic.dart';
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/result/exam_info_card.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
@@ -31,6 +32,7 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -244,11 +246,11 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
         children: [
           FloatingActionButton(
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.publish_result);
             },
-            child: const Icon(Icons.add, color: Colors.white),
+            child:  Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),

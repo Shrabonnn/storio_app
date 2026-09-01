@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/app_colors.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_body_style.dart';
 import '../textStyle/text_title_style.dart';
 
@@ -25,8 +26,9 @@ class CustomTextDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return AlertDialog(
-      backgroundColor: Colors.white,
+      backgroundColor: color.cardBackground,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -37,14 +39,14 @@ class CustomTextDialog extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 18,
-            backgroundColor: AppColors.primary.withValues(alpha: .1),
-            child: Icon(icon, color: AppColors.primary),
+            backgroundColor: color.primary.withValues(alpha: .1),
+            child: Icon(icon, color: color.primary),
           ),
           SizedBox(width: 3.w),
           Expanded(
             child: TextTitleWidget(
               title: title,
-              color: AppColors.primary,
+              color: color.primary,
             ),
           ),
         ],
@@ -104,8 +106,8 @@ class CustomTextDialog extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
+                      backgroundColor: color.primary,
+                      foregroundColor: color.cardBackground,
                     ),
                     child: const Text("Save"),
                   ),

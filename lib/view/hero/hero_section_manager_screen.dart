@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_colors.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_app_bar.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 
 import '../../routes/routes_name.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/hero/preview_mode_button_row.dart';
 import '../../widget/textStyle/text_title_style.dart';
 import '../../widget/universal/custom_card.dart';
@@ -48,6 +49,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -98,7 +100,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                                 Container(
                                   height: 4.5.h,
                                   decoration: BoxDecoration(
-                                    color: AppColors.primary.withOpacity(0.06),
+                                    color: color.primary.withOpacity(0.06),
                                     border: Border(
                                       bottom: BorderSide(
                                         color: Colors.grey.shade300,
@@ -123,7 +125,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                                         child: Text(
                                           "SUPER CONTENT",
                                           style: TextStyle(
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 13,
                                           ),
@@ -135,7 +137,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                                         child: Text(
                                           "BUTTON & LINK",
                                           style: TextStyle(
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 13,
                                           ),
@@ -147,7 +149,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                                         child: Text(
                                           "STATUS",
                                           style: TextStyle(
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 13,
                                           ),
@@ -159,7 +161,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                                         child: Text(
                                           "ACTIONS",
                                           style: TextStyle(
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                             fontWeight: FontWeight.w700,
                                             fontSize: 13,
                                           ),
@@ -175,6 +177,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                                     itemCount: 2,
                                     itemBuilder: (context,index){
                                   return _superContentRow(
+                                    context: context,
                                     image: 'assets/images/institute.png',
                                     title: 'Hill View',
                                     subtitle: 'A catchy subheading goes here.Testing',
@@ -195,7 +198,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                       Column(
                         crossAxisAlignment: .start,
                         children: [
-                          TextTitleWidget(title: "Frontend Preview",color: AppColors.primary,),
+                          TextTitleWidget(title: "Frontend Preview",color: color.primary,),
                           SizedBox(height: AppSizes.appbarGap,),
 
 
@@ -290,14 +293,14 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_hero_slide);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],
@@ -306,11 +309,13 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
   }
 }
 Widget _superContentRow({
+  required BuildContext context,
   required String image,
   required String title,
   required String subtitle,
   required String buttonText,
 }) {
+  final color = context.Appcolor;
   return Container(
     height: 8.5.h,
     decoration: BoxDecoration(
@@ -361,7 +366,7 @@ Widget _superContentRow({
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    TextTitleWidget(title: title,color: AppColors.primary,maxLines: 1,),
+                    TextTitleWidget(title: title,color: color.primary,maxLines: 1,),
 
                     SizedBox(height: AppSizes.appbarGap),
 
@@ -381,7 +386,7 @@ Widget _superContentRow({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              TextTitleWidget(title: buttonText,color: AppColors.primary,maxLines: 1,),
+              TextTitleWidget(title: buttonText,color: color.primary,maxLines: 1,),
 
               SizedBox(height: AppSizes.appbarGap),
 
@@ -412,7 +417,7 @@ Widget _superContentRow({
               onTap: () {},
               child: Icon(
               Icons.edit, size: AppSizes.iconLarge,
-              color: AppColors.primary,)),
+              color: color.primary,)),
 
               SizedBox(width: 2.w),
 

@@ -10,8 +10,9 @@ import 'package:storio_app/widget/universal/image_card.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/dashboard/stat_card.dart';
 import '../../widget/universal/custom_app_bar.dart';
 
@@ -30,6 +31,7 @@ class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -140,7 +142,7 @@ class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
 
                       TextTitleWidget(
                         title: "Admission Going On",
-                        color: AppColors.primary,
+                        color: color.primary,
                         maxLines: 1,
                       ),
 
@@ -220,11 +222,11 @@ class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
         children: [
           FloatingActionButton(
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_promotion);
             },
-            child: const Icon(Icons.add, color: Colors.white),
+            child:  Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),

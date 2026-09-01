@@ -4,7 +4,8 @@ import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card2.dart';
 
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
@@ -34,6 +35,7 @@ class _CalenderSettingState extends State<CalenderSetting> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -53,7 +55,7 @@ class _CalenderSettingState extends State<CalenderSetting> {
                         children: [
                           TextTitleWidget(
                             title: "Select Weekend Days",
-                            color: AppColors.primary,
+                            color: color.primary,
                           ),
 
                           SizedBox(height: AppSizes.itemGap),
@@ -97,12 +99,12 @@ class _CalenderSettingState extends State<CalenderSetting> {
                                             }
                                           });
                                         },
-                                        activeColor: AppColors.primary,
+                                        activeColor: color.primary,
                                         materialTapTargetSize:
                                         MaterialTapTargetSize.shrinkWrap,
                                       ),
 
-                                      TextTitleWidget(title: day,color: AppColors.primary,)
+                                      TextTitleWidget(title: day,color: color.primary,)
                                     ],
                                   ),
                                 ),
@@ -118,7 +120,7 @@ class _CalenderSettingState extends State<CalenderSetting> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:"Save Settings", onTap: (){},)),
                       ],

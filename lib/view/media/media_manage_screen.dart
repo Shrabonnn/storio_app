@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
-
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/universal/custom_app_bar.dart';
+import '../../utils/theme/theme_ext.dart';
 
 class MediaManageScreen extends StatefulWidget {
   const MediaManageScreen({super.key});
@@ -23,6 +24,7 @@ class _MediaManageScreenState extends State<MediaManageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -66,7 +68,7 @@ class _MediaManageScreenState extends State<MediaManageScreen> {
                           },
                           child: Card(
                             elevation: 2,
-                            color: Colors.white,
+                            color: color.cardBackground,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(AppSizes.cardRadius),
                             ),

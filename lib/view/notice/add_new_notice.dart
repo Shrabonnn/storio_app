@@ -5,8 +5,9 @@ import 'package:storio_app/widget/universal/custom_drop_down.dart';
 import '../../model/activity/activity_details_seo_settings_model.dart';
 import '../../model/form_field/form_feild_data.dart';
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/institute_profile/Institute_overview_screen.dart';
 import '../../widget/institute_profile/infrastructure_drop_down.dart';
@@ -53,6 +54,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
 
       body: CustomScrollView(
@@ -74,7 +76,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Notice Title", controller: titleController),
 
@@ -92,7 +94,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
 
                           TextBodyStyleWidget(
                             title: "Content",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -179,7 +181,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                       children: [
 
                         // Tag
-                        TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: statusList,
@@ -204,7 +206,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                                 child: Column(
                                   crossAxisAlignment: .start,
                                   children: [
-                                    TextBodyStyleWidget(title: "Publish Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "Publish Date", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "mm/dd/yy", controller: publishDateController,isDatePicker: true,),
 
@@ -223,7 +225,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    TextBodyStyleWidget(title: "Publish Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "Publish Date", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "mm/dd/yy", controller: publishDateController,isDatePicker: true,),
 
@@ -234,7 +236,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    TextBodyStyleWidget(title: "Time", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "Time", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "2:30 PM", controller: publishTimeController,isDatePicker: true,),
 
@@ -283,7 +285,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Featured Image", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Featured Image", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               height: 4.h,
@@ -328,7 +330,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Edit Post":"Save Post", onTap: (){},)),
                       ],

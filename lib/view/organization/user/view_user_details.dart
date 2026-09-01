@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
 import '../../../widget/universal/custom_card2.dart';
@@ -8,7 +9,7 @@ import '../../../widget/universal/custom_status_badge.dart';
 import '../../../widget/universal/image_card.dart';
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
 import '../../../widget/universal/info_row_widget.dart';
 class ViewUserDetails extends StatefulWidget {
   const ViewUserDetails({super.key});
@@ -20,6 +21,7 @@ class ViewUserDetails extends StatefulWidget {
 class _ViewUserDetailsState extends State<ViewUserDetails> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -57,7 +59,7 @@ class _ViewUserDetailsState extends State<ViewUserDetails> {
                                         Navigator.pushNamed(context, RoutesName.add_new_team_member,arguments: {
                                           'isEdit' : true,
                                         });
-                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: AppColors.primary,)),
+                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: color.primary,)),
 
                                 ],
                               )

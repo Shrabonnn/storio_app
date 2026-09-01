@@ -4,8 +4,8 @@ import 'package:storio_app/widget/universal/custom_card.dart';
 import 'package:storio_app/widget/universal/info_item_card.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -24,6 +24,7 @@ class ViewBlogScreen extends StatefulWidget {
 class _ViewBlogScreenState extends State<ViewBlogScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -82,9 +83,9 @@ class _ViewBlogScreenState extends State<ViewBlogScreen> {
                             child: Column(
                               crossAxisAlignment: .start,
                               children: [
-                                TextTitleWidget(title: "Content",color: AppColors.primary,size: AppSizes.screenTitle,),
+                                TextTitleWidget(title: "Content",color: color.primary,size: AppSizes.screenTitle,),
                                 SizedBox(height: AppSizes.smallGap,),
-                                TextBodyStyleWidget(title: "Welcome to the heart of the Chittagong Hill Tracts. This year, Dhaka International School is proud to organize an immersive educational excursion to Bandarban. Beyond the breathtaking landscapes, this tour is designed to foster teamwork, cultural awareness, and a deep appreciation for Bangladesh’s natural biodiversity. Check App",color: AppColors.primary,size: AppSizes.cardTitle,maxLines: 20,),
+                                TextBodyStyleWidget(title: "Welcome to the heart of the Chittagong Hill Tracts. This year, Dhaka International School is proud to organize an immersive educational excursion to Bandarban. Beyond the breathtaking landscapes, this tour is designed to foster teamwork, cultural awareness, and a deep appreciation for Bangladesh’s natural biodiversity. Check App",color: color.primary,size: AppSizes.cardTitle,maxLines: 20,),
 
 
                               ],

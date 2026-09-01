@@ -6,7 +6,8 @@ import 'package:storio_app/widget/universal/status_button_row.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -38,6 +39,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
 
       body: CustomScrollView(
@@ -102,7 +104,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                                       TextTitleWidget(
                                         title: "Emma Stone",
                                         size: AppSizes.sectionTitle,
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                       ),
 
                                       SizedBox(height: AppSizes.appbarGap),
@@ -110,7 +112,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                                       TextBodyStyleWidget(
                                         title: "Sr. Advisor Marketing",
                                         size: AppSizes.cardTitle,
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                       ),
 
                                       SizedBox(height: AppSizes.appbarGap),
@@ -133,27 +135,27 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
 
                             Row(
                               children: [
-                                Icon(Icons.email_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                                Icon(Icons.email_outlined,color: color.primary,size: AppSizes.icon,),
                                 SizedBox(width: AppSizes.appbarGap,),
-                                TextBodyStyleWidget(title: "check@gmail.com",color: AppColors.primary,fontbold: false,
+                                TextBodyStyleWidget(title: "check@gmail.com",color: color.primary,fontbold: false,
                                 ),
                               ],
                             ),
                             SizedBox(height: AppSizes.appbarGap,),
                             Row(
                               children: [
-                                Icon(Icons.phone,color: AppColors.primary,size: AppSizes.icon,),
+                                Icon(Icons.phone,color: color.primary,size: AppSizes.icon,),
                                 SizedBox(width: AppSizes.appbarGap,),
-                                TextBodyStyleWidget(title: "01712340000",color: AppColors.primary,fontbold: false,
+                                TextBodyStyleWidget(title: "01712340000",color: color.primary,fontbold: false,
                                 ),
                               ],
                             ),
                             SizedBox(height: AppSizes.appbarGap,),
                             Row(
                               children: [
-                                Icon(Icons.calendar_month_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                                Icon(Icons.calendar_month_outlined,color: color.primary,size: AppSizes.icon,),
                                 SizedBox(width: AppSizes.appbarGap,),
-                                TextBodyStyleWidget(title: "Joined Apr 2, 2026",color: AppColors.primary,fontbold: false,
+                                TextBodyStyleWidget(title: "Joined Apr 2, 2026",color: color.primary,fontbold: false,
                                 ),
                               ],
                             ),
@@ -174,13 +176,13 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
           FloatingActionButton(
 
             heroTag: "addCategory",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.manage_staff_department);
             },
-            child: const Icon(
+            child:  Icon(
               Icons.grid_view_rounded,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
 
@@ -190,14 +192,14 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_staff_manage);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

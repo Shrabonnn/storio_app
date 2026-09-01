@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 
 import '../../model/form_field/form_feild_data.dart';
-import '../../utils/app_colors.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_body_style.dart';
 import '../textStyle/text_title_style.dart';
 
@@ -30,6 +31,7 @@ class InfrastructureDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Column(
       children: [
         ...fields.map((field) => Padding(
@@ -80,12 +82,12 @@ class InfrastructureDropDown extends StatelessWidget {
                   padding:  EdgeInsets.all(AppSizes.cardPadding),
                   decoration: BoxDecoration(
                     color: selected
-                        ? AppColors.primary.withValues(alpha: .1)
+                        ? color.primary.withValues(alpha: .1)
                         : Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(AppSizes.containerRadius),
                     border: Border.all(
                       color: selected
-                          ? AppColors.primary
+                          ? color.primary
                           : Colors.transparent,
                     ),
                   ),
@@ -93,7 +95,7 @@ class InfrastructureDropDown extends StatelessWidget {
                     icon,
                     size: AppSizes.iconLarge,
                     color: selected
-                        ? AppColors.primary
+                        ? color.primary
                         : Colors.grey,
                   ),
                 ),

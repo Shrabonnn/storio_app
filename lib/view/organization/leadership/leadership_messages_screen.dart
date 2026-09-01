@@ -3,7 +3,8 @@ import 'package:storio_app/widget/custom_button/view_button.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -21,6 +22,7 @@ class LeadershipMessagesScreen extends StatefulWidget {
 class _LeadershipMessagesScreenState extends State<LeadershipMessagesScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -51,7 +53,7 @@ class _LeadershipMessagesScreenState extends State<LeadershipMessagesScreen> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: AppColors.cartBackgroundLight,
+                                      color: color.lightVersionOfPrimaryLightVersion,
                                       width: 1,
                                     ),
                                   ),
@@ -71,7 +73,7 @@ class _LeadershipMessagesScreenState extends State<LeadershipMessagesScreen> {
                                       TextTitleWidget(
                                         title: "MR. Motiur Rahman",
                                         size: AppSizes.sectionTitle,
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                       ),
 
                                       SizedBox(height: AppSizes.appbarGap),
@@ -79,7 +81,7 @@ class _LeadershipMessagesScreenState extends State<LeadershipMessagesScreen> {
                                       TextBodyStyleWidget(
                                         title: "Role Sr. Advisor Marketing",
                                         size: AppSizes.cardTitle,
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                       ),
 
                                       SizedBox(height: AppSizes.appbarGap),
@@ -102,11 +104,11 @@ class _LeadershipMessagesScreenState extends State<LeadershipMessagesScreen> {
 
                             SizedBox(height: AppSizes.itemGap),
 
-                            TextBodyStyleWidget(title: "Message : ",color: AppColors.primary,maxLines: 1,),
+                            TextBodyStyleWidget(title: "Message : ",color: color.primary,maxLines: 1,),
 
                             SizedBox(height: AppSizes.appbarGap),
 
-                            TextBodyStyleWidget(title: "Team, let’s stay focused and keep supporting each other.Every challenge is an opportunity to improve and grow.Take ownership of your work and communicate openly. Let’s work together, stay consistent, and achieve our goals.I believe in this team—let’s make it happen!",color: AppColors.primary,fontbold: false,maxLines: 2,),
+                            TextBodyStyleWidget(title: "Team, let’s stay focused and keep supporting each other.Every challenge is an opportunity to improve and grow.Take ownership of your work and communicate openly. Let’s work together, stay consistent, and achieve our goals.I believe in this team—let’s make it happen!",color: color.primary,fontbold: false,maxLines: 2,),
 
 
                           ],
@@ -126,14 +128,14 @@ class _LeadershipMessagesScreenState extends State<LeadershipMessagesScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.new_section_leadership_message);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

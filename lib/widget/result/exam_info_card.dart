@@ -4,8 +4,9 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_card2.dart';
 
 import '../../model/result/exam_statistic.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../custom_button/custom_buttom.dart';
 import '../universal/custom_card.dart';
 
@@ -36,6 +37,7 @@ class ExamInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return CustomCard(
       child: Padding(
         padding: EdgeInsets.all(AppSizes.smallPadding),
@@ -229,8 +231,8 @@ class ExamInfoCard extends StatelessWidget {
                     text: "View Details",
                     height: 4.h,
                     size: AppSizes.cardSubTitle,
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
+                    backgroundColor: color.primary,
+                    foregroundColor: color.cardBackground,
                     onTap: onViewDetails ?? (){},
                   ),
                 ),

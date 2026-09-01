@@ -3,7 +3,8 @@ import 'package:storio_app/widget/custom_button/view_button.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -33,6 +34,7 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -91,7 +93,7 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: AppColors.cartBackgroundLight,
+                                      color: color.lightVersionOfPrimaryLightVersion,
                                       width: 1,
                                     ),
                                   ),
@@ -115,7 +117,7 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                                           TextTitleWidget(
                                             title: "John Chena",
                                             size: AppSizes.sectionTitle,
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                           ),
 
                                           SizedBox(height: AppSizes.appbarGap),
@@ -123,14 +125,14 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                                           TextBodyStyleWidget(
                                             title: "Designation CEO",
                                             size: AppSizes.cardTitle,
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                           ),
 
                                           SizedBox(height: AppSizes.appbarGap),
                                           TextBodyStyleWidget(
                                             title: "Section  Hello Bangladesh",
                                             size: AppSizes.cardTitle,
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                           ),
 
                                         ],
@@ -161,10 +163,10 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
 
                             Row(
                               children: [
-                                Icon(Icons.file_copy_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                                Icon(Icons.file_copy_outlined,color: color.primary,size: AppSizes.icon,),
                                 SizedBox(width: AppSizes.appbarGap,),
                                 Flexible(
-                                  child: TextBodyStyleWidget(title: "aaaaaaaaaaaaaaaa ",color: AppColors.primary,fontbold: false,maxLines: 2,
+                                  child: TextBodyStyleWidget(title: "aaaaaaaaaaaaaaaa ",color: color.primary,fontbold: false,maxLines: 2,
                                   ),
                                 ),
                               ],
@@ -172,10 +174,10 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                             SizedBox(height: AppSizes.appbarGap,),
                             Row(
                               children: [
-                                Icon(Icons.workspace_premium,color: AppColors.primary,size: AppSizes.icon,),
+                                Icon(Icons.workspace_premium,color: color.primary,size: AppSizes.icon,),
                                 SizedBox(width: AppSizes.appbarGap,),
                                 Flexible(
-                                  child: TextBodyStyleWidget(title: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",color: AppColors.primary,fontbold: false,maxLines: 2,
+                                  child: TextBodyStyleWidget(title: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",color: color.primary,fontbold: false,maxLines: 2,
                                   ),
                                 ),
                               ],
@@ -197,13 +199,13 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
           FloatingActionButton(
 
             heroTag: "addCategory",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.manage_team_section);
             },
-            child: const Icon(
+            child:  Icon(
               Icons.grid_view_rounded,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
 
@@ -213,14 +215,14 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_team_member);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

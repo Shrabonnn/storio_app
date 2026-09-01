@@ -4,7 +4,8 @@ import 'package:storio_app/widget/universal/info_row_widget.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -24,6 +25,7 @@ class ViewStaffScreen extends StatefulWidget {
 class _ViewStaffScreenState extends State<ViewStaffScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -64,7 +66,7 @@ class _ViewStaffScreenState extends State<ViewStaffScreen> {
                                         Navigator.pushNamed(context, RoutesName.add_new_staff_manage,arguments: {
                                           'isEdit' : true,
                                         });
-                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: AppColors.primary,)),
+                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: color.primary,)),
                                   SizedBox(width: AppSizes.itemGap,),
                                   Icon(Icons.delete_outline_outlined,size: AppSizes.iconLarge,color: Colors.red,)
                                 ],

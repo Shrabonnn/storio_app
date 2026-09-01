@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_body_style.dart';
 
 class ImageCard extends StatelessWidget {
@@ -24,12 +25,13 @@ class ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Container(
       margin: EdgeInsets.only(
         bottom: AppSizes.sectionGap,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color.cardBackground,
         borderRadius: BorderRadius.circular(
           AppSizes.cardRadius,
         ),

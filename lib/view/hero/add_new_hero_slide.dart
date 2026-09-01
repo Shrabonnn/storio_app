@@ -11,7 +11,8 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/hero/color_picket_dialog_widget.dart';
 import '../../widget/universal/custom_app_bar.dart';
 
@@ -67,6 +68,7 @@ class _AddNewHeroSlideState extends State<AddNewHeroSlide> {
   @override
   Widget build(BuildContext context) {
 
+    final color = context.Appcolor;
     final heroProvider = context.watch<HeroProvider>();
 
     return Scaffold(
@@ -100,11 +102,11 @@ class _AddNewHeroSlideState extends State<AddNewHeroSlide> {
                           Row(
                             //mainAxisAlignment: .spaceBetween,
                             children: [
-                              TextTitleWidget(title: "Title",color: AppColors.primary,),
+                              TextTitleWidget(title: "Title",color: color.primary,),
                               SizedBox(width: AppSizes.sectionGap,),
                               GestureDetector(
                                 onTap: showTitleColorPicker,
-                                  child: Icon(Icons.color_lens_outlined,size: AppSizes.icon,color: AppColors.primary,))
+                                  child: Icon(Icons.color_lens_outlined,size: AppSizes.icon,color: color.primary,))
                             ],
                           ),
 
@@ -129,11 +131,11 @@ class _AddNewHeroSlideState extends State<AddNewHeroSlide> {
                           Row(
                             //mainAxisAlignment: .spaceBetween,
                             children: [
-                              TextTitleWidget(title: "SubTitle",color: AppColors.primary,),
+                              TextTitleWidget(title: "SubTitle",color: color.primary,),
                               SizedBox(width: AppSizes.sectionGap,),
                               GestureDetector(
                                   onTap: showSubTitleColorPicker,
-                                  child: Icon(Icons.color_lens_outlined,size: AppSizes.icon,color: AppColors.primary,))
+                                  child: Icon(Icons.color_lens_outlined,size: AppSizes.icon,color: color.primary,))
                             ],
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -157,11 +159,11 @@ class _AddNewHeroSlideState extends State<AddNewHeroSlide> {
                           Row(
                             //mainAxisAlignment: .spaceBetween,
                             children: [
-                              TextTitleWidget(title: "Button Text",color: AppColors.primary,),
+                              TextTitleWidget(title: "Button Text",color: color.primary,),
                               SizedBox(width: AppSizes.sectionGap,),
                               GestureDetector(
                                   onTap: showButtonTextColorPicker,
-                                  child: Icon(Icons.color_lens_outlined,size: AppSizes.icon,color: AppColors.primary,)),
+                                  child: Icon(Icons.color_lens_outlined,size: AppSizes.icon,color: color.primary,)),
                               Spacer(),
                               GestureDetector(
                                   onTap: showButtonBackgroundColorPicker,
@@ -187,7 +189,7 @@ class _AddNewHeroSlideState extends State<AddNewHeroSlide> {
                           // BUTTON LINK
 
 
-                          TextTitleWidget(title: "Button Link",color: AppColors.primary,),
+                          TextTitleWidget(title: "Button Link",color: color.primary,),
 
                           SizedBox(height: AppSizes.appbarGap),
 
@@ -205,7 +207,7 @@ class _AddNewHeroSlideState extends State<AddNewHeroSlide> {
 
 
                       // BACKGROUND
-                      TextTitleWidget(title: "Background",color: AppColors.primary,),
+                      TextTitleWidget(title: "Background",color: color.primary,),
 
                       SizedBox(height: AppSizes.appbarGap),
 
@@ -225,10 +227,10 @@ class _AddNewHeroSlideState extends State<AddNewHeroSlide> {
                               onPressed: showColorPicker,
                               icon:  Icon(
                                 Icons.palette_outlined,
-                                color: AppColors.primary,
+                                color: color.primary,
                                 size: AppSizes.icon,
                               ),
-                              label: TextBodyStyleWidget(title: "Select Color",color: AppColors.primary,size: AppSizes.cardTitle,),
+                              label: TextBodyStyleWidget(title: "Select Color",color: color.primary,size: AppSizes.cardTitle,),
                               style: OutlinedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(AppSizes.buttonRadius),

@@ -3,8 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -23,6 +23,7 @@ class ViewEventScreen extends StatefulWidget {
 class _ViewEventScreenState extends State<ViewEventScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -82,9 +83,9 @@ class _ViewEventScreenState extends State<ViewEventScreen> {
                             child: Column(
                               crossAxisAlignment: .start,
                               children: [
-                                TextTitleWidget(title: "Content",color: AppColors.primary,size: AppSizes.screenTitle,),
+                                TextTitleWidget(title: "Content",color: color.primary,size: AppSizes.screenTitle,),
                                 SizedBox(height: AppSizes.smallGap,),
-                                TextBodyStyleWidget(title: "An annual symposium where undergraduate and graduate students present their research through oral and poster presentations across multiple disciplines.",color: AppColors.primary,size: AppSizes.cardTitle,maxLines: 20,),
+                                TextBodyStyleWidget(title: "An annual symposium where undergraduate and graduate students present their research through oral and poster presentations across multiple disciplines.",color: color.primary,size: AppSizes.cardTitle,maxLines: 20,),
 
 
                               ],

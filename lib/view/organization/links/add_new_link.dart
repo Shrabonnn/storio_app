@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
@@ -36,6 +37,7 @@ class _AddNewLinkState extends State<AddNewLink> {
   }
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -53,19 +55,19 @@ class _AddNewLinkState extends State<AddNewLink> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextBodyStyleWidget(title: "Link Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Link Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Original Website", controller: linkTitleController),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // URL SLUG
-                        TextBodyStyleWidget(title: "URL", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "URL", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "https://example.com", controller: urlController,),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Display Order", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Display Order", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "1", controller: displayOrderController,),
 
@@ -77,7 +79,7 @@ class _AddNewLinkState extends State<AddNewLink> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text:"Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text:"Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit?"Update":"Save ", onTap: (){},)),
                       ],

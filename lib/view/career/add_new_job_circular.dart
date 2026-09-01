@@ -3,8 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_drop_down.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/quill/editor_icon.dart';
 import '../../widget/quill/editor_option.dart';
@@ -80,6 +80,7 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
 
       body: CustomScrollView(
@@ -98,19 +99,19 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
                       crossAxisAlignment: .start,
                       children: [
 
-                        TextBodyStyleWidget(title: "Job Details", color: AppColors.primary,size: AppSizes.screenTitle,),
+                        TextBodyStyleWidget(title: "Job Details", color: color.primary,size: AppSizes.screenTitle,),
                         SizedBox(height: AppSizes.smallGap,),
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Job Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Job Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Job Title", controller: jonTitleController),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // Activities
-                        TextBodyStyleWidget(title: "Designation", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Designation", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "junior software engineer", controller: designationController,),
 
@@ -128,7 +129,7 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Attachment", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Attachment", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               height: 4.h,
@@ -172,7 +173,7 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
 
                           TextBodyStyleWidget(
                             title: "Content",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -257,12 +258,12 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextBodyStyleWidget(title: "Configuration", color: AppColors.primary,size: AppSizes.screenTitle,),
+                        TextBodyStyleWidget(title: "Configuration", color: color.primary,size: AppSizes.screenTitle,),
                         SizedBox(height: AppSizes.smallGap,),
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Employment Type", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Employment Type", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           width: 100.w,
@@ -272,13 +273,13 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
 
 
                         // Activities
-                        TextBodyStyleWidget(title: "Vacancy Count", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Vacancy Count", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "1", controller: designationController,),
                         SizedBox(height: AppSizes.itemGap),
 
 
-                        TextBodyStyleWidget(title: "Application Deadline", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Application Deadline", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "mm/dd/yy", controller: applicationDeadlineController,isDatePicker: true,),
 
@@ -291,7 +292,7 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
                       children: [
                         Row(
                           children: [
-                            TextBodyStyleWidget(title: "Application Method", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Application Method", color: color.primary,size: AppSizes.sectionTitle,),
 
                             SizedBox(width: AppSizes.sectionGap,),
                             Flexible(
@@ -331,7 +332,7 @@ class _AddNewJobCircularState extends State<AddNewJobCircular> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text: "Save", onTap: (){},)),
                       ],

@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:storio_app/utils/app_colors.dart';
 
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 
 class CustomCard2 extends StatelessWidget {
   const CustomCard2({super.key, required this.child});
@@ -11,16 +12,17 @@ class CustomCard2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(AppSizes.smallPadding),
       decoration: BoxDecoration(
-        color: AppColors.cartBackgroundLight.withValues(alpha: 0.2),
+        color: color.lightVersionOfPrimaryLightVersion.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(
           AppSizes.cardRadius,
         ),
         border: Border.all(
-          color: AppColors.cartBackgroundLight,
+          color: color.lightVersionOfPrimaryLightVersion,
         ),
 
       ),child: child,

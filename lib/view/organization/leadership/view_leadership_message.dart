@@ -4,7 +4,8 @@ import 'package:storio_app/widget/universal/info_row_widget.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -24,6 +25,7 @@ class ViewLeadershipMessage extends StatefulWidget {
 class _ViewLeadershipMessageState extends State<ViewLeadershipMessage> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -62,7 +64,7 @@ class _ViewLeadershipMessageState extends State<ViewLeadershipMessage> {
                                         Navigator.pushNamed(context, RoutesName.new_section_leadership_message,arguments: {
                                           'isEdit' : true,
                                         });
-                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: AppColors.primary,)),
+                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: color.primary,)),
                                   SizedBox(width: AppSizes.itemGap,),
                                   Icon(Icons.delete_outline_outlined,size: AppSizes.iconLarge,color: Colors.red,)
                                 ],
@@ -83,11 +85,11 @@ class _ViewLeadershipMessageState extends State<ViewLeadershipMessage> {
                                 Row(
                                   crossAxisAlignment: .start,
                                   children: [
-                                    Icon(Icons.file_copy_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                                    Icon(Icons.file_copy_outlined,color: color.primary,size: AppSizes.icon,),
 
                                     SizedBox(width: AppSizes.appbarGap,),
                                     Flexible(
-                                      child: TextBodyStyleWidget(title: "Message: Team, let’s stay focused and keep supporting each other.Every challenge is an opportunity to improve and grow.Take ownership of your work and communicate openly. Let’s work together, stay consistent, and achieve our goals.I believe in this team—let’s make it happen!",color: AppColors.primary,fontbold: false,maxLines: 35,
+                                      child: TextBodyStyleWidget(title: "Message: Team, let’s stay focused and keep supporting each other.Every challenge is an opportunity to improve and grow.Take ownership of your work and communicate openly. Let’s work together, stay consistent, and achieve our goals.I believe in this team—let’s make it happen!",color: color.primary,fontbold: false,maxLines: 35,
                                       ),
                                     ),
                                   ],

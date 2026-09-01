@@ -78,6 +78,7 @@ class RoutesName {
   //Settings
   static const general_settings = "general_settings";
   static const security = "security";
+  static const theme = "theme";
 
 
 }

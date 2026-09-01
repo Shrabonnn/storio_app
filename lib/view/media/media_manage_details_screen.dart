@@ -5,7 +5,8 @@ import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/institute_profile/Institute_overview_screen.dart';
 import '../../widget/textStyle/text_body_style.dart';
@@ -46,6 +47,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -71,7 +73,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
                                   hintText: "Search...",
                                   prefixIcon: const Icon(Icons.search),
                                   filled: true,
-                                  fillColor: Colors.white,
+                                  fillColor: color.cardBackground,
                                 ),
                               ),
                             ),
@@ -112,7 +114,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
                                       ),
                                       decoration: BoxDecoration(
                                         color: isUploadSelected
-                                            ? AppColors.primary
+                                            ? color.primary
                                             : Colors.transparent,
                                         borderRadius: BorderRadius.circular(
                                           AppSizes.buttonRadius,
@@ -122,7 +124,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
                                       child: TextBodyStyleWidget(
                                         title: "Upload",
                                         color: isUploadSelected
-                                            ? Colors.white
+                                            ? color.cardBackground
                                             : Colors.black,
                                         size: AppSizes.cardSubTitle,
                                       ),
@@ -142,7 +144,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
                                       ),
                                       decoration: BoxDecoration(
                                         color: !isUploadSelected
-                                            ? AppColors.primary
+                                            ? color.primary
                                             : Colors.transparent,
                                         borderRadius: BorderRadius.circular(
                                           AppSizes.buttonRadius,
@@ -153,7 +155,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
                                         title: "Library",
                                         size: AppSizes.cardSubTitle,
                                         color: !isUploadSelected
-                                            ? Colors.white
+                                            ? color.cardBackground
                                             : Colors.black,
                                       ),
                                     ),
@@ -195,6 +197,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
 
 
   Column _buildLibrary() {
+    final color = context.Appcolor;
     return Column(
       crossAxisAlignment: .start,
       children: [
@@ -218,7 +221,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
               },
               child: Card(
                 elevation: 2,
-                color: Colors.white,
+                color: color.cardBackground,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSizes.cardRadius),
                   side: BorderSide(
@@ -259,7 +262,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
         SizedBox(height: AppSizes.sectionGap),
         TextBodyStyleWidget(
           title: "Attachment Details",
-          color: AppColors.primary,
+          color: color.primary,
         ),
         SizedBox(height: AppSizes.appbarGap),
         Container(
@@ -277,13 +280,13 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
         SizedBox(height: AppSizes.itemGap),
 
         // title
-        TextBodyStyleWidget(title: "Title", color: AppColors.primary,size: AppSizes.cardTitle,),
+        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.cardTitle,),
         SizedBox(height: AppSizes.appbarGap),
         CustomTextFieldWidget(hintText: "Title", controller: titleController),
         SizedBox(height: AppSizes.itemGap),
 
         // description
-        TextBodyStyleWidget(title: "Alt/description", color: AppColors.primary,size: AppSizes.cardTitle),
+        TextBodyStyleWidget(title: "Alt/description", color: color.primary,size: AppSizes.cardTitle),
         SizedBox(height: AppSizes.appbarGap),
         CustomTextFieldWidget(
           hintText: "Description...",
@@ -292,7 +295,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
         SizedBox(height: AppSizes.itemGap),
 
         // caption
-        TextBodyStyleWidget(title: "Caption", color: AppColors.primary,size: AppSizes.cardTitle),
+        TextBodyStyleWidget(title: "Caption", color: color.primary,size: AppSizes.cardTitle),
         SizedBox(height: AppSizes.appbarGap),
         CustomTextFieldWidget(
           hintText: "Caption",
@@ -310,7 +313,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
               text: TextSpan(
                 text: "Full Name: ",
                 style: TextStyle(
-                  color: AppColors.primary,
+                  color: color.primary,
                   fontSize: AppSizes.cardSubTitle,
                 ),
                 children: [
@@ -329,7 +332,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
               text: TextSpan(
                 text: "File Type: ",
                 style: TextStyle(
-                  color: AppColors.primary,
+                  color: color.primary,
                   fontSize: AppSizes.cardSubTitle,
                 ),
                 children: [
@@ -348,7 +351,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
               text: TextSpan(
                 text: "Size: ",
                 style: TextStyle(
-                  color: AppColors.primary,
+                  color: color.primary,
                   fontSize: AppSizes.cardSubTitle,
                 ),
                 children: [

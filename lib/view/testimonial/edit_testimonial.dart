@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -32,6 +33,7 @@ class _EditTestimonialState extends State<EditTestimonial> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return  Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -61,7 +63,7 @@ class _EditTestimonialState extends State<EditTestimonial> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: AppColors.primary,
+                                  color: color.primary,
                                   width: 1,
                                 ),
                               ),
@@ -75,12 +77,12 @@ class _EditTestimonialState extends State<EditTestimonial> {
                         ),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Name*", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Name*", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "", controller: nameController),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Designation / Company *", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Designation / Company *", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "", controller: designationController),
                         SizedBox(height: AppSizes.itemGap),
@@ -90,7 +92,7 @@ class _EditTestimonialState extends State<EditTestimonial> {
                             Flexible(
                               child: Column(
                                 children: [
-                                  TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                  TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.cardTitle,),
                                   SizedBox(height: AppSizes.appbarGap),
                                   CustomDropdown(
                                     items: statusItem,
@@ -112,7 +114,7 @@ class _EditTestimonialState extends State<EditTestimonial> {
                             Flexible(
                               child: Column(
                                 children: [
-                                  TextBodyStyleWidget(title: "Rating", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                  TextBodyStyleWidget(title: "Rating", color: color.primary,size: AppSizes.cardTitle,),
                                   SizedBox(height: AppSizes.appbarGap),
                                   CustomDropdown(
                                     items: rating,
@@ -133,7 +135,7 @@ class _EditTestimonialState extends State<EditTestimonial> {
 
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Testimonial Message *", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Testimonial Message *", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "", minLines: 5,maxLines: 5,controller: messageController),
                         SizedBox(height: AppSizes.itemGap),
@@ -155,7 +157,7 @@ class _EditTestimonialState extends State<EditTestimonial> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text: "Edit Testimonial", onTap: (){},)),
                       ],

@@ -4,8 +4,8 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
@@ -35,6 +35,7 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -92,15 +93,15 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextTitleWidget(title: "Tony Stark",color: AppColors.primary,),
+                            TextTitleWidget(title: "Tony Stark",color: color.primary,),
 
                              SizedBox(height: AppSizes.itemGap),
 
-                            _infoRow("Grade", "Grade 1"),
-                            _infoRow("Admission No", "ADM-2026-0001"),
-                            _infoRow("Email", "alfasunny95@gmail.com"),
-                            _infoRow("Phone", "01793960082"),
-                            _infoRow("Date", "Apr 9, 2026"),
+                            _infoRow(context,"Grade", "Grade 1"),
+                            _infoRow(context,"Admission No", "ADM-2026-0001"),
+                            _infoRow(context,"Email", "alfasunny95@gmail.com"),
+                            _infoRow(context,"Phone", "01793960082"),
+                            _infoRow(context,"Date", "Apr 9, 2026"),
 
                             SizedBox(height: AppSizes.itemGap),
 
@@ -138,13 +139,13 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
           FloatingActionButton(
 
             heroTag: "addCategory",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.admission_general_setting);
             },
-            child: const Icon(
+            child:  Icon(
               Icons.settings,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
 
@@ -155,14 +156,14 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.admission_form_builder);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],
@@ -170,7 +171,8 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
     );
   }
 }
-Widget _infoRow(String title, String value) {
+Widget _infoRow(BuildContext context,String title, String value) {
+  final color = context.Appcolor;
   return Padding(
     padding: const EdgeInsets.only(bottom: 8),
     child: Row(
@@ -181,7 +183,7 @@ Widget _infoRow(String title, String value) {
           child: TextBodyStyleWidget(title: title)
         ),
         Expanded(
-          child: TextBodyStyleWidget(title: value,color: AppColors.primary,),
+          child: TextBodyStyleWidget(title: value,color: color.primary,),
         ),
       ],
     ),

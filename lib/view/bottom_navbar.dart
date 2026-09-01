@@ -6,6 +6,7 @@ import 'package:storio_app/view/notice/notice_management_screen.dart';
 import 'package:storio_app/view/settings/settings_screen.dart';
 
 import '../utils/app_colors.dart';
+import '../utils/theme/theme_ext.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -27,13 +28,14 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: screens[index],
       extendBody: true,
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          iconTheme: const IconThemeData(
-            color: AppColors.primary,
+          iconTheme:  IconThemeData(
+            color: color.primary,
           ),
         ),
         child: BottomNavigationBar(
@@ -44,8 +46,8 @@ class _BottomNavbarState extends State<BottomNavbar> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          selectedItemColor: AppColors.primary,
+          backgroundColor: color.cardBackground,
+          selectedItemColor: color.primary,
           unselectedItemColor: Colors.grey,
           elevation: 10,
           items: const [

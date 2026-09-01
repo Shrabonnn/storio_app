@@ -6,6 +6,7 @@ import 'package:storio_app/widget/institute_profile/information_row.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
+import '../utils/theme/theme_ext.dart';
 import '../widget/universal/custom_app_bar.dart';
 import '../widget/universal/custom_card.dart';
 
@@ -22,11 +23,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: AppColors.background,
+            backgroundColor: color.screenBackground,
           ),
           SliverPadding(
             padding: EdgeInsetsGeometry.symmetric(horizontal: 4.w),
@@ -53,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                         TextTitleWidget(
                           title: "Maiyasha Sultana",
-                          color: AppColors.primary,
+                          color: color.primary,
                           size: 18.sp,
                         ),
 
@@ -70,13 +72,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Icon(
                           Icons.person,
-                          color: AppColors.primary,
+                          color: color.primary,
                           size: 8.w,
                         ),
                         SizedBox(width: 1.w),
                         TextTitleWidget(
                           title: "Personal Information",
-                          color: AppColors.primary,
+                          color: color.primary,
                           size: 16.sp,
                         ),
                         SizedBox(width: 15.w),

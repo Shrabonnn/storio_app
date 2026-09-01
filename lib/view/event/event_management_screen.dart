@@ -4,8 +4,8 @@ import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/more_menu.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -36,6 +36,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -130,14 +131,14 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
 
                           TextTitleWidget(
                             title: "AI & Machine Learning SeminarAI ",
-                            color: AppColors.primary,
+                            color: color.primary,
                             maxLines: 1,
                           ),
 
                           SizedBox(height: AppSizes.appbarGap),
                           Row(
                             children: [
-                              Icon(Icons.calendar_month_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                              Icon(Icons.calendar_month_outlined,color: color.primary,size: AppSizes.icon,),
                               SizedBox(width: AppSizes.appbarGap,),
                               Flexible(child: TextBodyStyleWidget(title: "Aug 8, 2026, 02:51 PM",maxLines: 1,size: AppSizes.cardTitle)),
                             ],
@@ -145,7 +146,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                           SizedBox(height: AppSizes.appbarGap),
                           Row(
                             children: [
-                              Icon(Icons.location_on_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                              Icon(Icons.location_on_outlined,color: color.primary,size: AppSizes.icon,),
                               SizedBox(width: AppSizes.appbarGap,),
                               Flexible(child: TextBodyStyleWidget(title: "North South University, Bashundhara, Dhaka",maxLines: 1,size: AppSizes.cardTitle)),
                             ],
@@ -171,13 +172,13 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
           FloatingActionButton(
 
             heroTag: "addCategory",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.manage_event_category);
             },
-            child: const Icon(
+            child:  Icon(
               Icons.grid_view_rounded,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
 
@@ -187,14 +188,14 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_event);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

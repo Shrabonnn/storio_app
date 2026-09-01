@@ -5,7 +5,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -23,10 +24,23 @@ class ManageStaffDepartment extends StatefulWidget {
 }
 
 class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
+
+  final TextEditingController departmentNameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    descriptionController.dispose();
+    departmentNameController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController departmentNameController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
+    final color = context.Appcolor;
+
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -43,7 +57,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                         children: [
                           TextBodyStyleWidget(
                             title: widget.isEdit?"Edit Departments: {Name Marketing} " : "Create New Department",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.sectionGap),
@@ -51,7 +65,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                           // Title
                           TextBodyStyleWidget(
                             title: "Department Name ",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -65,7 +79,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                           // Description
                           TextBodyStyleWidget(
                             title: "Description",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -88,7 +102,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                         if(widget.isEdit)...[
                           CustomButton(text: "cancel",width: 30.w ,onTap: () {
                             Navigator.pop(context);
-                          },backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                          },backgroundColor: color.cardBackground,foregroundColor: color.primary,),
 
                           SizedBox(width: AppSizes.appbarGap,),
                         ],
@@ -104,7 +118,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                         children: [
                           TextBodyStyleWidget(
                             title: "Existing Department ( 1 )",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.itemGap),
@@ -125,7 +139,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                                             children: [
                                               TextTitleWidget(
                                                 title: "Marketing",
-                                                color: AppColors.primary,
+                                                color: color.primary,
                                                 maxLines: 1,
                                               ),
                                               SizedBox(height: AppSizes.appbarGap),
@@ -146,7 +160,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                                                       'isEdit' : true,
                                                     });
                                                   }
-                                                  ,child: Icon(Icons.edit,size: AppSizes.iconLarge, color: AppColors.primary)),
+                                                  ,child: Icon(Icons.edit,size: AppSizes.iconLarge, color: color.primary)),
                                             ],
                                             SizedBox(width: AppSizes.itemGap,),
                                             Icon(Icons.delete_outline_outlined,size: AppSizes.iconLarge, color: Colors.red),

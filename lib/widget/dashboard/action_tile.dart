@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 
-import '../../utils/app_colors.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/theme/theme_ext.dart';
 
 
 class ActionTile extends StatelessWidget {
@@ -19,6 +20,7 @@ class ActionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -27,14 +29,14 @@ class ActionTile extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(AppSizes.screenPadding),
             decoration: BoxDecoration(
-              color: AppColors.cartbackground.withValues(alpha: 0.21),
+              color: color.primaryLightVersion.withValues(alpha: 0.21),
               borderRadius: BorderRadius.circular(AppSizes.cardRadius),
-              border: Border.all(color: AppColors.secondary),
+              border: Border.all(color: color.secondary),
             ),
             child: Icon(
               icon,
               size: AppSizes.icon,
-              color: AppColors.primary,
+              color: color.primary,
             ),
           ),
           SizedBox(height: AppSizes.appbarGap),

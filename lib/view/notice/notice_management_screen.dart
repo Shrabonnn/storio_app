@@ -4,8 +4,9 @@ import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -53,6 +54,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -100,15 +102,15 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               height: 4.5.h,
                               size: AppSizes.cardSubTitle,
                               borderSide: BorderSide(
-                                color: AppColors.primary,
+                                color: color.primary,
                                 width: 1,
                               ),
                               backgroundColor: selectedStatus == index
-                                  ? Colors.white
-                                  : AppColors.primary,
+                                  ? color.cardBackground
+                                  : color.primary,
                               foregroundColor: selectedStatus == index
-                                  ? AppColors.primary
-                                  : Colors.white,
+                                  ? color.primary
+                                  : color.cardBackground,
                               onTap: () {
                                 setState(() {
                                   selectedStatus = index;
@@ -190,7 +192,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
                             TextTitleWidget(
                               title: "Holiday",
-                              color: AppColors.primary,
+                              color: color.primary,
                               maxLines: 1,
                             ),
 
@@ -209,7 +211,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
                             Row(
                               children: [
-                                Icon(Icons.calendar_month_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                                Icon(Icons.calendar_month_outlined,color: color.primary,size: AppSizes.icon,),
                                 SizedBox(width: AppSizes.appbarGap,),
                                 Flexible(child: TextBodyStyleWidget(title: "Last Updated: Jun 8, 2026",maxLines: 1,size: AppSizes.cardTitle)),
                               ],
@@ -235,14 +237,14 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_notice);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

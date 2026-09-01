@@ -3,8 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
 import 'package:storio_app/widget/universal/status_button_row.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -21,6 +21,7 @@ class ViewAdmissionScreen extends StatefulWidget {
 class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -125,10 +126,10 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                             ),
 
                             Divider(),
-                            _infoRow("Admission No", "ADM-2026-0001"),
-                            _infoRow("Email", "alfasunny95@gmail.com"),
-                            _infoRow("Phone", "01793960082"),
-                            _infoRow("Date", "Apr 9, 2026"),
+                            _infoRow(context,"Admission No", "ADM-2026-0001"),
+                            _infoRow(context,"Email", "alfasunny95@gmail.com"),
+                            _infoRow(context,"Phone", "01793960082"),
+                            _infoRow(context,"Date", "Apr 9, 2026"),
 
 
                           ],
@@ -144,9 +145,10 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
   }
 }
 
-Widget _infoRow(String title, String value) {
+Widget _infoRow(BuildContext context,String title, String value) {
+  final color = context.Appcolor;
   return Padding(
-    padding: const EdgeInsets.only(bottom: 8),
+    padding:  EdgeInsets.only(bottom: AppSizes.smallPadding),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -155,7 +157,7 @@ Widget _infoRow(String title, String value) {
             child: TextBodyStyleWidget(title: title)
         ),
         Expanded(
-          child: TextBodyStyleWidget(title: value,color: AppColors.primary,),
+          child: TextBodyStyleWidget(title: value,color: color.primary,),
         ),
       ],
     ),

@@ -3,8 +3,9 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -48,6 +49,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -106,7 +108,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: AppColors.primary,
+                                  color: color.primary,
                                   width: 1,
                                 ),
                               ),
@@ -126,7 +128,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                                   TextTitleWidget(
                                     title: "John Kabir",
                                     size: 18,
-                                    color: AppColors.primary,
+                                    color: color.primary,
                                   ),
 
                                   SizedBox(height: AppSizes.appbarGap),
@@ -134,7 +136,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                                   TextBodyStyleWidget(
                                     title: "CPES",
                                     size: 14,
-                                    color: AppColors.primary,
+                                    color: color.primary,
                                   ),
 
                                   SizedBox(height: AppSizes.appbarGap),
@@ -206,11 +208,11 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
         children: [
           FloatingActionButton(
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_testimonial);
             },
-            child: const Icon(Icons.add, color: Colors.white),
+            child:  Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),

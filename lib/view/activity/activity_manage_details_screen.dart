@@ -7,8 +7,8 @@ import 'package:storio_app/widget/institute_profile/Institute_overview_screen.da
 
 import '../../model/activity/activity_details_seo_settings_model.dart';
 import '../../model/form_field/form_feild_data.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/institute_profile/infrastructure_drop_down.dart';
 import '../../widget/quill/editor_icon.dart';
@@ -79,6 +79,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -96,14 +97,14 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                       crossAxisAlignment: .start,
                       children: [
                         // Title
-                        TextBodyStyleWidget(title: "Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g., Annual Tech Conference 2025", controller: titleController),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // Activities
-                        TextBodyStyleWidget(title: "Activities", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Activities", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "annual-tech-conference-2025", controller: activityController,),
                         SizedBox(height: AppSizes.itemGap),
@@ -121,7 +122,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Gallery Images", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Gallery Images", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               height: 4.h,
@@ -155,7 +156,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
 
                           TextBodyStyleWidget(
                             title: "Content",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -246,14 +247,14 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                             crossAxisAlignment: .start,
                             children: [
                               // Authon Name
-                              TextBodyStyleWidget(title: "Author Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                              TextBodyStyleWidget(title: "Author Name", color: color.primary,size: AppSizes.cardTitle,),
                               SizedBox(height: AppSizes.appbarGap),
                               CustomTextFieldWidget(hintText: "Hasibul Islam",controller: titleController),
                               SizedBox(height: AppSizes.itemGap),
 
 
                               // Status
-                              TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.cardTitle,),
+                              TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.cardTitle,),
                               SizedBox(height: AppSizes.appbarGap),
                               CustomDropdown(
                                 items: statusList,
@@ -281,7 +282,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                       children: [
 
                         // Tag
-                        TextBodyStyleWidget(title: "Add Tags", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Add Tags", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "add tags...", controller: tagNameController),
 
@@ -353,7 +354,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text: "Save", onTap: (){},)),
                       ],

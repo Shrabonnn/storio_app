@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -43,6 +44,7 @@ class _AddPromotionState extends State<AddPromotion> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -61,20 +63,20 @@ class _AddPromotionState extends State<AddPromotion> {
                         crossAxisAlignment: .start,
                         children: [
                           // Title
-                          TextBodyStyleWidget(title: "TItle*", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "TItle*", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "e.g. Admission Open 2026", controller: titleConroller),
                           SizedBox(height: AppSizes.itemGap),
 
 
                           // Subtitle
-                          TextBodyStyleWidget(title: "Subtitle", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Subtitle", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "Short supporting line", controller: subTitleConroller,),
                           SizedBox(height: AppSizes.itemGap),
 
                           // Subtitle
-                          TextBodyStyleWidget(title: "Badge Text", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Badge Text", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "50% off", controller: subTitleConroller,),
                           SizedBox(height: AppSizes.itemGap),
@@ -86,7 +88,7 @@ class _AddPromotionState extends State<AddPromotion> {
                               Row(
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
-                                  TextBodyStyleWidget(title: "Gallery Images", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                  TextBodyStyleWidget(title: "Gallery Images", color: color.primary,size: AppSizes.cardTitle,),
                                   SizedBox(width: AppSizes.appbarGap),
                                   CustomButton(
                                     height: 4.h,
@@ -123,12 +125,12 @@ class _AddPromotionState extends State<AddPromotion> {
                           SizedBox(height: AppSizes.itemGap),
 
                           // Description
-                          TextBodyStyleWidget(title: "Description", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Description", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "Full promotion details ...", controller: descriptionConroller,minLines: 3,maxLines: 4,),
                           SizedBox(height: AppSizes.itemGap),
 
-                          TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomDropdown(
                             items: statusList,
@@ -144,13 +146,13 @@ class _AddPromotionState extends State<AddPromotion> {
 
 
                           // Activities
-                          TextBodyStyleWidget(title: "CTA Button Label", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "CTA Button Label", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "e.g. Apply Now", controller: ctaButtonLabelConroller,),
                           SizedBox(height: AppSizes.itemGap),
 
 
-                          TextBodyStyleWidget(title: "CTA URL", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "CTA URL", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "/admissions or https:// ...", controller: ctaUrlConroller,),
                           SizedBox(height: AppSizes.itemGap),
@@ -162,7 +164,7 @@ class _AddPromotionState extends State<AddPromotion> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    TextBodyStyleWidget(title: "Start Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "Start Date", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "mm/dd/yy", controller: startDateConroller,isDatePicker: true,),
                                     SizedBox(height: AppSizes.itemGap),
@@ -173,7 +175,7 @@ class _AddPromotionState extends State<AddPromotion> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    TextBodyStyleWidget(title: "End Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "End Date", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "mm/dd/yy", controller: endDateConroller,isDatePicker: true,),
                                     SizedBox(height: AppSizes.itemGap),
@@ -183,7 +185,7 @@ class _AddPromotionState extends State<AddPromotion> {
                             ],
                           ),
 
-                          TextBodyStyleWidget(title: "Priority (higher = first)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Priority (higher = first)", color: color.primary,size: AppSizes.cardTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "0", controller: priorityConroller,),
                           SizedBox(height: AppSizes.itemGap),
@@ -200,7 +202,7 @@ class _AddPromotionState extends State<AddPromotion> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text: "Create Promotion", onTap: (){},)),
                       ],

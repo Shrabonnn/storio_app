@@ -6,7 +6,8 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_text_field.dart';
@@ -26,6 +27,7 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -42,26 +44,26 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                       TextTitleWidget(title: "Manage Category",size: AppSizes.sectionTitle,color: AppColors.primary,),
+                       TextTitleWidget(title: "Manage Category",size: AppSizes.sectionTitle,color: color.primary,),
                         SizedBox(height: AppSizes.sectionGap),
 
 
                         // Name
-                        TextBodyStyleWidget(title: "Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Name", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "annual Sports Day", controller: nameController),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // Url
-                        TextBodyStyleWidget(title: "URL Slug", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "URL Slug", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "annual-sports-day", controller: urlSlugController),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // Description
-                        TextBodyStyleWidget(title: "Description", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Description", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Brief description category", minLines: 3,maxLines: 5,controller: descriptionController),
 
@@ -76,7 +78,7 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
                         SizedBox(height: AppSizes.sectionGap),
                         Divider(),
 
-                        TextTitleWidget(title: "Existing catagories",size: AppSizes.sectionTitle,color: AppColors.primary,),
+                        TextTitleWidget(title: "Existing catagories",size: AppSizes.sectionTitle,color: color.primary,),
                         SizedBox(height: AppSizes.itemGap),
                         Column(
                           children: [

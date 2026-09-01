@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
@@ -62,6 +63,7 @@ class _AddNewRoleState extends State<AddNewRole> {
   }
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -81,7 +83,7 @@ class _AddNewRoleState extends State<AddNewRole> {
                       children: [
 
                         // Title
-                        TextBodyStyleWidget(title: "Role Name ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Role Name ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "", controller: nameController),
 
@@ -100,7 +102,7 @@ class _AddNewRoleState extends State<AddNewRole> {
                             children: [
                               TextBodyStyleWidget(
                                 title: "Assigned Permissions",
-                                color: AppColors.primary,
+                                color: color.primary,
                                 size: AppSizes.sectionTitle,
                               ),
 
@@ -125,7 +127,7 @@ class _AddNewRoleState extends State<AddNewRole> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: AppColors.primary,
+                                color: color.primary,
                               ),
                               borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                             ),
@@ -168,7 +170,7 @@ class _AddNewRoleState extends State<AddNewRole> {
                                     child: Icon(
                                       Icons.close,
                                       size: AppSizes.icon,
-                                      color: AppColors.primary,
+                                      color: color.primary,
                                     ),
                                   ),
                                 );
@@ -194,7 +196,7 @@ class _AddNewRoleState extends State<AddNewRole> {
 
                           TextBodyStyleWidget(
                             title: "Assign Permissions",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -227,7 +229,7 @@ class _AddNewRoleState extends State<AddNewRole> {
 
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: AppColors.primary,
+                                color: color.primary,
                               ),
                               borderRadius:
                               BorderRadius.circular(AppSizes.buttonRadius),
@@ -285,10 +287,10 @@ class _AddNewRoleState extends State<AddNewRole> {
                                         ),
 
                                         decoration: BoxDecoration(
-                                          color: AppColors.cartBackgroundLight,
+                                          color: color.lightVersionOfPrimaryLightVersion,
                                           border: Border(
                                             bottom: BorderSide(
-                                              color:AppColors.cartBackgroundLight,
+                                              color:color.lightVersionOfPrimaryLightVersion,
                                             ),
                                           ),
                                         ),
@@ -297,7 +299,7 @@ class _AddNewRoleState extends State<AddNewRole> {
                                           children: [
 
                                             Expanded(
-                                              child: TextTitleWidget(title: category,color: AppColors.primary,),
+                                              child: TextTitleWidget(title: category,color: color.primary,),
                                             ),
 
                                             TextButton(
@@ -357,13 +359,13 @@ class _AddNewRoleState extends State<AddNewRole> {
                                             value: isSelected,
 
                                             activeColor:
-                                            AppColors.primary,
+                                            color.primary,
 
                                             controlAffinity:
                                             ListTileControlAffinity
                                                 .leading,
 
-                                            title: TextBodyStyleWidget(title: permission,color: AppColors.primary,fontbold: false,),
+                                            title: TextBodyStyleWidget(title: permission,color: color.primary,fontbold: false,),
 
                                             onChanged: (_) {
 
@@ -404,7 +406,7 @@ class _AddNewRoleState extends State<AddNewRole> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Update Role":"Create Role", onTap: (){},)),
                       ],

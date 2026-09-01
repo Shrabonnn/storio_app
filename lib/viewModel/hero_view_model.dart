@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:storio_app/utils/app_colors.dart';
 
 class HeroProvider extends ChangeNotifier {
+
   String title = '';
   String subtitle = '';
   String buttonText = '';
@@ -10,9 +11,9 @@ class HeroProvider extends ChangeNotifier {
 
   File? selectedImage;
   Color selectedColor = Colors.lightBlueAccent;
-  Color titleColor = Colors.white;
-  Color subtitleColor = Colors.white;
-  Color buttonBackgroundColor = AppColors.primary;
+  Color titleColor = Colors.black;
+  Color subtitleColor = Colors.black;
+  Color buttonBackgroundColor = Colors.blue;
   Color buttonTextColor = Colors.white;
 
   bool get hasImage => selectedImage != null;

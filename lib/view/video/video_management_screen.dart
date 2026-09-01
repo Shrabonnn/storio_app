@@ -5,8 +5,9 @@ import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/image_card.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/search_text_field.dart';
 import '../../widget/universal/status_button_row.dart';
@@ -27,6 +28,7 @@ class _VideoManagementScreenState extends State<VideoManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -95,7 +97,7 @@ class _VideoManagementScreenState extends State<VideoManagementScreen> {
                       children: [
                         TextTitleWidget(
                           title: "Chile Part",
-                          color: AppColors.primary,
+                          color: color.primary,
                         ),
                         SizedBox(height: AppSizes.itemGap),
                         Row(
@@ -132,7 +134,7 @@ class _VideoManagementScreenState extends State<VideoManagementScreen> {
                                   child: Icon(
                                     Icons.edit,
                                     size: AppSizes.iconLarge,
-                                    color: AppColors.primary,
+                                    color: color.primary,
                                   ),
                                 ),
                                 SizedBox(width: AppSizes.smallGap),
@@ -165,11 +167,11 @@ class _VideoManagementScreenState extends State<VideoManagementScreen> {
         children: [
           FloatingActionButton(
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_video);
             },
-            child: const Icon(Icons.add, color: Colors.white),
+            child:  Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),

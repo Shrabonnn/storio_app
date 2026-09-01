@@ -5,7 +5,8 @@ import 'package:storio_app/widget/universal/custom_status_badge.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
 import '../../../widget/universal/search_text_field.dart';
@@ -23,6 +24,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -70,11 +72,11 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                             children: [
                               Container(
                                   decoration: BoxDecoration(
-                                      color: AppColors.cartBackgroundLight,
+                                      color: color.lightVersionOfPrimaryLightVersion,
                                       borderRadius: BorderRadius.circular(AppSizes.cardRadius)
                                   ),child: Padding(
                                 padding:  EdgeInsets.all(AppSizes.cardRadius),
-                                child: Icon(Icons.person,color: AppColors.primary,size: AppSizes.appBarIcon,),
+                                child: Icon(Icons.person,color: color.primary,size: AppSizes.appBarIcon,),
 
                                 // image or icon
                                 /*Image.asset(
@@ -91,13 +93,13 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                                   'isEdit':true
                                 });
 
-                              },child: Icon(Icons.edit,size: AppSizes.icon,color: AppColors.primary,)),
+                              },child: Icon(Icons.edit,size: AppSizes.icon,color: color.primary,)),
                               SizedBox(width: AppSizes.smallGap,),
                               Icon(Icons.delete_outline_outlined,size: AppSizes.icon,color: Colors.red,),
                             ],
                           ),
                           SizedBox(height: AppSizes.itemGap,),
-                          TextTitleWidget(title: "Scholarship Facility ",color: AppColors.primary,),
+                          TextTitleWidget(title: "Scholarship Facility ",color: color.primary,),
                           SizedBox(height: AppSizes.smallGap),
 
                           TextBodyStyleWidget(
@@ -132,14 +134,14 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_card_manage);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

@@ -6,7 +6,8 @@ import 'package:storio_app/widget/universal/custom_card.dart';
 import 'package:storio_app/widget/universal/status_button_row.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
@@ -38,6 +39,7 @@ class _AddNewCardState extends State<AddNewCard> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -57,21 +59,21 @@ class _AddNewCardState extends State<AddNewCard> {
                       crossAxisAlignment: .start,
                       children: [
                         // Title
-                        TextBodyStyleWidget(title: "Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Card Title", controller: titleController),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // URL SLUG
-                        TextBodyStyleWidget(title: "Description", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Description", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Write a short description", controller: descriptionController,),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // AUTHOR
-                        TextBodyStyleWidget(title: "Display Mode", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Display Mode", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         StatusButtonRow(
                           items: displayMode,
@@ -89,7 +91,7 @@ class _AddNewCardState extends State<AddNewCard> {
                         },),
                         if(selectedStatus == 0)...[
                           SizedBox(height: AppSizes.itemGap,),
-                          TextBodyStyleWidget(title: "Select Icon", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                          TextBodyStyleWidget(title: "Select Icon", color: color.primary,size: AppSizes.sectionTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           GridView.builder(
                             padding: EdgeInsets.zero,
@@ -113,14 +115,14 @@ class _AddNewCardState extends State<AddNewCard> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: selectedIcon == icon
-                                        ? AppColors.primary
+                                        ? color.primary
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                                   ),
                                   child: Icon(
                                     icon,
                                     color: selectedIcon == icon
-                                        ? Colors.white
+                                        ? color.cardBackground
                                         : Colors.blueGrey,
                                     size: AppSizes.icon,
                                   ),
@@ -140,7 +142,7 @@ class _AddNewCardState extends State<AddNewCard> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text:"Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text:"Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit?"Edit Card":"Save Changes", onTap: (){},)),
                       ],

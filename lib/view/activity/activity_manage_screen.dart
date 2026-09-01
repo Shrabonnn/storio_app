@@ -6,8 +6,8 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/universal/image_card.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
@@ -35,6 +35,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -61,7 +62,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                                   hintText: "Search...",
                                   prefixIcon: const Icon(Icons.search),
                                   filled: true,
-                                  fillColor: Colors.white,
+                                  fillColor: color.cardBackground,
                                 ),
                               ),
                             ),
@@ -112,7 +113,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                             status: Row(
                               mainAxisAlignment: .end,
                               children: [
-                                CustomStatusBadge(title: "Published",size: AppSizes.cardTitle,backgroundColor: AppColors.primary,foregroundColor: Colors.white,),
+                                CustomStatusBadge(title: "Published",size: AppSizes.cardTitle,backgroundColor: color.primary,foregroundColor: color.cardBackground,),
                                 SizedBox(width: AppSizes.smallGap,),
                                 ViewButton(onTap: (){})
                               ],
@@ -121,7 +122,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                             title: TextBodyStyleWidget(
                               title: "A Sunny Day",
                               size: AppSizes.sectionTitle,
-                              color: AppColors.primary,
+                              color: color.primary,
                             ),
 
                             child: Column(
@@ -131,7 +132,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                                   children: [
                                     Icon(
                                       Icons.category,
-                                      color: AppColors.primary,
+                                      color: color.primary,
                                       size: AppSizes.icon,
                                     ),
 
@@ -155,7 +156,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                                   children: [
                                     Icon(
                                       Icons.person,
-                                      color: AppColors.primary,
+                                      color: color.primary,
                                       size: AppSizes.icon,
                                     ),
 
@@ -192,13 +193,13 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
           FloatingActionButton(
 
             heroTag: "addCategory",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.activity_manage_category);
             },
-            child: const Icon(
+            child:  Icon(
               Icons.grid_view_rounded,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
 
@@ -208,14 +209,14 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.activity_manage_details);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

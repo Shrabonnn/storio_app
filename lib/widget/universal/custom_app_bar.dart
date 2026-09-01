@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 
-import '../../utils/app_colors.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../textStyle/appbar_text_style.dart';
 import '../textStyle/text_title_style.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
@@ -21,6 +23,7 @@ class CustomSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return SliverAppBar(
       expandedHeight: subtitle != null ? 9.h : 6.h,
       pinned: true,
@@ -28,13 +31,13 @@ class CustomSliverAppBar extends StatelessWidget {
       collapsedHeight: 8.h,
       automaticallyImplyLeading: false,
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           gradient: LinearGradient(
             begin: AlignmentGeometry.topCenter,
             end: AlignmentGeometry.bottomCenter,
             colors: [
-              AppColors.cartbackground,
-              AppColors.primary,
+              color.primaryLightVersion,
+              color.primary,
             ],
           ),
         ),
@@ -45,9 +48,9 @@ class CustomSliverAppBar extends StatelessWidget {
               if (showBackButton) ...[
                 IconButton(
                   onPressed: onTap ?? () => Navigator.pop(context),
-                  icon: const Icon(
+                  icon:  Icon(
                     Icons.arrow_back_ios_new,
-                    color: Colors.white,
+                    color: color.cardBackground,
                   ),
                 ),
               ],
@@ -59,7 +62,7 @@ class CustomSliverAppBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextTitleWidget(
+                      AppbarTextStyle(
                         title: title,
                         size: AppSizes.appBarTitle,
                       ),
@@ -71,7 +74,7 @@ class CustomSliverAppBar extends StatelessWidget {
                         TextTitleWidget(
                           title: subtitle!,
                           size: AppSizes.appBarSubTitle,
-                          color: Colors.white70,
+                          color: color.cardBackground.withValues(alpha: 0.7),
                         ),
 
                       ],

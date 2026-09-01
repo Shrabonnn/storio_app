@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
@@ -56,6 +57,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -76,7 +78,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Profile Photo", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Profile Photo", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               width: 30.w,
@@ -124,12 +126,12 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Full Name ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Full Name ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "John Doe", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Designation", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Designation", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "user@gmail.com", controller: emailController,),
                         SizedBox(height: AppSizes.itemGap),
@@ -137,7 +139,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
 
 
                         // AUTHOR
-                        TextBodyStyleWidget(title: "Section", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Section", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: statusList,
@@ -163,14 +165,14 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                       crossAxisAlignment: .start,
                       children: [
                         // Title
-                        TextBodyStyleWidget(title: "Detailed Description", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Detailed Description", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Description details", controller: fullNameController,minLines: 2,maxLines: 5,),
                         SizedBox(height: AppSizes.itemGap),
 
 
 
-                        TextBodyStyleWidget(title: "Experience / Background", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Experience / Background", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(minLines: 2,maxLines: 5,hintText: "write about experience", controller: phoneController,),
                         SizedBox(height: AppSizes.itemGap),
@@ -178,13 +180,13 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                         Row(
                           mainAxisAlignment: .start,
                           children: [
-                            Checkbox(activeColor: AppColors.primary,value: isVisible, onChanged: (value){
+                            Checkbox(activeColor: color.primary,value: isVisible, onChanged: (value){
                               setState(() {
                                 isVisible = value ?? false;
                               });
                             }),
                             SizedBox(width: AppSizes.smallGap,),
-                            Flexible(child: TextBodyStyleWidget(title: "Make this member visible to the public ",color: AppColors.primary,size: AppSizes.cardTitle,))
+                            Flexible(child: TextBodyStyleWidget(title: "Make this member visible to the public ",color: color.primary,size: AppSizes.cardTitle,))
                           ],
                         )
 
@@ -197,7 +199,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Update Member":"Create Member", onTap: (){},)),
                       ],

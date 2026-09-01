@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/utils/app_colors.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/institute_profile/Institute_overview_screen.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_app_bar.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/universal/custom_drop_down.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -50,7 +52,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                 hintText: "Search Conversation",
                                 prefixIcon: const Icon(Icons.search),
                                 filled: true,
-                                fillColor: Colors.white,
+                                fillColor: color.cardBackground,
                               ),
                             ),
                           ),
@@ -79,7 +81,7 @@ class _ContactScreenState extends State<ContactScreen> {
                             children: [
                               TextTitleWidget(
                                 title: "Inbox",
-                                color: AppColors.primary,
+                                color: color.primary,
                               ),
                               CustomButton(
                                 text: "2 messages",
@@ -118,7 +120,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                   AppSizes.smallPadding,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: color.cardBackground,
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.cardRadius,
                                   ),
@@ -142,14 +144,14 @@ class _ContactScreenState extends State<ContactScreen> {
                                     CircleAvatar(
                                       radius: 22,
                                       backgroundColor: isNew
-                                          ? AppColors.primary
+                                          ? color.primary
                                           : Colors.grey.shade400,
                                       child: Text(
                                         name.isNotEmpty
                                             ? name[0].toUpperCase()
                                             : "?",
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: color.cardBackground,
                                           fontSize: AppSizes.cardTitle,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -169,7 +171,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              color: AppColors.primary,
+                                              color: color.primary,
                                               fontSize: AppSizes.cardTitle,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -230,7 +232,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                           ),
                                           decoration: BoxDecoration(
                                             color: isNew
-                                                ? AppColors.primary
+                                                ? color.primary
                                                 : Colors.grey.shade300,
                                             borderRadius:
                                             BorderRadius.circular(6),
@@ -239,8 +241,8 @@ class _ContactScreenState extends State<ContactScreen> {
                                             status,
                                             style: TextStyle(
                                               color: isNew
-                                                  ? Colors.white
-                                                  : AppColors.primary,
+                                                  ? color.cardBackground
+                                                  : color.primary,
                                               fontSize: 11,
                                               fontWeight: FontWeight.w600,
                                             ),

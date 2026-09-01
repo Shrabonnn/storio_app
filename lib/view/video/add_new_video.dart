@@ -5,8 +5,9 @@ import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_drop_down.dart';
 import 'package:storio_app/widget/universal/status_button_row.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -81,6 +82,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
   }
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
 
       body: CustomScrollView(
@@ -100,7 +102,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                       children: [
 
                         // Title
-                        TextBodyStyleWidget(title: "Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Enter video title", controller: titleController),
                         SizedBox(height: AppSizes.itemGap,),
@@ -112,7 +114,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                             Flexible(
                               child: Column(
                                 children: [
-                                  TextBodyStyleWidget(title: "Content Type", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                                  TextBodyStyleWidget(title: "Content Type", color: color.primary,size: AppSizes.sectionTitle,),
                                   SizedBox(height: AppSizes.appbarGap,),
                                   StatusButtonRow(items: contentType, selectedIndex: selectedContentType,
                                     onSelected:(index){
@@ -133,7 +135,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                             Column(
                               children: [
 
-                                TextBodyStyleWidget(title: "Platform", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                                TextBodyStyleWidget(title: "Platform", color: color.primary,size: AppSizes.sectionTitle,),
                                 SizedBox(height: AppSizes.appbarGap,),
                                 CustomDropdown(items: platformType,initialValue: selectedPlatformType,width: 38.w,)
 
@@ -145,7 +147,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
 
 
                         // Video sources
-                        TextBodyStyleWidget(title: "Video Source", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Video Source", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         StatusButtonRow(items: videoSource, selectedIndex: selectedVideoSource,
                           onSelected:(index){
@@ -186,7 +188,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                         SizedBox(height: AppSizes.itemGap,),
 
 
-                        TextBodyStyleWidget(title: "Description", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Description", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Enter video description", controller: descriptionController,minLines: 4,maxLines: 6,),
 
@@ -199,7 +201,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                           children: [
                             Icon(Icons.remove_red_eye_outlined,size: AppSizes.iconLarge,color: Colors.grey,),
                             SizedBox(width: AppSizes.appbarGap,),
-                            TextBodyStyleWidget(title: "Visibility & Status", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Visibility & Status", color: color.primary,size: AppSizes.sectionTitle,),
 
                           ],
                         ),
@@ -230,7 +232,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                           child: Column(
                             crossAxisAlignment: .start,
                             children: [
-                              TextTitleWidget(title: "Featured Content",color: AppColors.primary,maxLines: 1,),
+                              TextTitleWidget(title: "Featured Content",color: color.primary,maxLines: 1,),
                               TextBodyStyleWidget(title: "Display this video in the landing page carousel.",maxLines: 1,)
                             ],
                           ),
@@ -243,7 +245,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextTitleWidget(title: "Cover Image",color: AppColors.primary,),
+                        TextTitleWidget(title: "Cover Image",color: color.primary,),
                         SizedBox(height: AppSizes.appbarGap,),
                         GestureDetector(
                           onTap: (){
@@ -282,7 +284,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextTitleWidget(title: "Live Preview",color: AppColors.primary,),
+                        TextTitleWidget(title: "Live Preview",color: color.primary,),
                         SizedBox(height: AppSizes.appbarGap,),
                         CustomCard2(child: Padding(
                           padding:  EdgeInsets.all(AppSizes.contentPadding),
@@ -308,7 +310,7 @@ class _AddNewVideoState extends State<AddNewVideo> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Edit Post":"Save Video", onTap: (){},)),
                       ],

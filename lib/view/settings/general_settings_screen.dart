@@ -6,8 +6,9 @@ import 'package:storio_app/widget/universal/image_circle_widget.dart';
 import '../../model/activity/activity_details_seo_settings_model.dart';
 import '../../model/form_field/form_feild_data.dart';
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/institute_profile/Institute_overview_screen.dart';
 import '../../widget/institute_profile/infrastructure_drop_down.dart';
@@ -96,6 +97,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -116,7 +118,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                         Flexible(
                           child: CustomCard2(child: Row(
                             children: [
-                              Icon(isEditMode ? Icons.lock_open : Icons.lock_outline ,color: AppColors.primary,),
+                              Icon(isEditMode ? Icons.lock_open : Icons.lock_outline ,color: color.primary,),
 
                               SizedBox(width: AppSizes.appbarGap,),
                               Flexible(child: TextBodyStyleWidget(
@@ -140,10 +142,10 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                             height: 3.5.h,
                             width: 8.5.w,
                             decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.cartBackgroundLight),
+                                border: Border.all(color: color.lightVersionOfPrimaryLightVersion),
                                 borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
-                                color: AppColors.primary
-                            ),child: Icon(Icons.edit,color: AppColors.background,size: AppSizes.icon,),),
+                                color: color.primary
+                            ),child: Icon(Icons.edit,color: color.screenBackground,size: AppSizes.icon,),),
                         )
                       ],
                     )),
@@ -154,23 +156,23 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       crossAxisAlignment: .start,
                       children: [
 
-                        TextBodyStyleWidget(title: "Site Identity", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Site Identity", color: color.primary,size: AppSizes.sectionTitle,),
                         Divider(),
 
                         // Title
-                        TextBodyStyleWidget(title: "Site Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Site Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Head Internation School",enable: isEditMode, controller: siteTitleController),
                         SizedBox(height: AppSizes.itemGap,),
 
                         // Tagline
-                        TextBodyStyleWidget(title: "Site Tagline", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Site Tagline", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(enable: isEditMode,hintText: "e.g. English Medium", controller: siteTagLineController),
                         SizedBox(height: AppSizes.itemGap,),
 
                         // Title
-                        TextBodyStyleWidget(title: "Default Language", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Default Language", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: defaultLanguageList,
@@ -239,14 +241,14 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextBodyStyleWidget(title: "Logo & Favicon", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Logo & Favicon", color: color.primary,size: AppSizes.sectionTitle,),
                         Divider(),
                         Row(
                           mainAxisAlignment: .spaceEvenly,
                           children: [
                             Column(
                               children: [
-                                TextBodyStyleWidget(title: "Site Logo (Public Site)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Site Logo (Public Site)", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap,),
                                 ImageCircleWidget(imgPath: "assets/images/person.png"),
                                 SizedBox(height: AppSizes.smallGap,),
@@ -258,7 +260,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                             SizedBox(width: AppSizes.sectionGap,),
                             Column(
                               children: [
-                                TextBodyStyleWidget(title: "Favicon", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Favicon", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap,),
                                 ImageCircleWidget(imgPath: "assets/images/person.png"),
                                 SizedBox(height: AppSizes.smallGap,),
@@ -272,9 +274,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                         SizedBox(height: AppSizes.itemGap,),
 
                         // Dashboard Logo option
-                        TextBodyStyleWidget(title: "Dashboard Logo Options", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Dashboard Logo Options", color: color.primary,size: AppSizes.sectionTitle,),
                         Divider(),
-                        TextBodyStyleWidget(title: "Navbar Logo Background Color", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Navbar Logo Background Color", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: logoOptionList,
@@ -329,18 +331,18 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       crossAxisAlignment: .start,
                       children: [
 
-                        TextBodyStyleWidget(title: "SEO & Social Media", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "SEO & Social Media", color: color.primary,size: AppSizes.sectionTitle,),
                         Divider(),
 
                         // Title
-                        TextBodyStyleWidget(title: "SEO Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "SEO Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(enable: isEditMode,hintText: "e.g. contact@gmail.com", controller: seoTitleController),
                         SizedBox(height: AppSizes.itemGap,),
 
 
                         // Title
-                        TextBodyStyleWidget(title: "SEO Description", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "SEO Description", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(enable: isEditMode,hintText: "", controller: seoDescriptionController,minLines: 3,maxLines: 4,),
 
@@ -367,7 +369,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                         ),
                         Divider(),
 
-                        TextBodyStyleWidget(title: "Social Share Image (Open Graph)",size: AppSizes.sectionTitle,color: AppColors.primary,),
+                        TextBodyStyleWidget(title: "Social Share Image (Open Graph)",size: AppSizes.sectionTitle,color: color.primary,),
                         SizedBox(height: AppSizes.itemGap,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -415,23 +417,23 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       crossAxisAlignment: .start,
                       children: [
 
-                        TextBodyStyleWidget(title: "Contact Information", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Contact Information", color: color.primary,size: AppSizes.sectionTitle,),
                         Divider(),
 
                         // Title
-                        TextBodyStyleWidget(title: "Contact Email", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Contact Email", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(enable: isEditMode,hintText: "e.g. contact@gmail.com", controller: contactEmailController),
                         SizedBox(height: AppSizes.itemGap,),
 
                         // Tagline
-                        TextBodyStyleWidget(title: "Phone Number", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Phone Number", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(enable: isEditMode,hintText: "01XXXXXXXXX", controller: phoneNumberController),
                         SizedBox(height: AppSizes.itemGap,),
 
                         // Title
-                        TextBodyStyleWidget(title: "Mailing Address", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Mailing Address", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(enable: isEditMode,hintText: "Main Road, Plot-19, Block-A,Section-11, Mirpur,Dhaka-1216", controller: mailingAddressController,minLines: 3,maxLines: 4,),
 
@@ -450,11 +452,11 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Social Media Links", color: AppColors.primary,size: AppSizes.sectionTitle),
+                            TextBodyStyleWidget(title: "Social Media Links", color: color.primary,size: AppSizes.sectionTitle),
                             
                             GestureDetector(onTap: (){
 
-                            },child: Icon(Icons.add,color: AppColors.primary,size: AppSizes.iconLarge,fontWeight: FontWeight.bold,))
+                            },child: Icon(Icons.add,color: color.primary,size: AppSizes.iconLarge,fontWeight: FontWeight.bold,))
                           ],
                         ),
                         Divider(),
@@ -489,7 +491,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
 
                         children: [
-                          TextBodyStyleWidget(title: "Site Status", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                          TextBodyStyleWidget(title: "Site Status", color: color.primary,size: AppSizes.sectionTitle,),
 
                           Divider(),
 
@@ -510,7 +512,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                                 });
                               }
                                   : null,
-                              title: TextBodyStyleWidget(title: "Live",color: AppColors.primary,),
+                              title: TextBodyStyleWidget(title: "Live",color: color.primary,),
                               subtitle: TextBodyStyleWidget(title: "Your site is visible to everyone.",fontbold: false,),
                               activeColor: Colors.blue,
                             ),
@@ -533,7 +535,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                                 });
                               }
                                   : null,
-                              title: TextBodyStyleWidget(title: "Maintenance",color: AppColors.primary,),
+                              title: TextBodyStyleWidget(title: "Maintenance",color: color.primary,),
                               subtitle:TextBodyStyleWidget(title: "Visitors will see a maintenance page.",fontbold: false,),
                               activeColor: Colors.blue,
                             ),
@@ -556,7 +558,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                                 });
                               }
                                   : null,
-                              title:TextBodyStyleWidget(title: "Coming Soon",color: AppColors.primary,),
+                              title:TextBodyStyleWidget(title: "Coming Soon",color: color.primary,),
                               subtitle: TextBodyStyleWidget(title: "Visitors will see a \"coming soon\" teaser page.",fontbold: false,),
                               activeColor: Colors.blue,
                             ),
@@ -574,7 +576,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:"Save", onTap: (){},)),
                       ],

@@ -3,8 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -35,6 +35,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -73,7 +74,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
                         TextBodyStyleWidget(
                           title: "Question: Admission process starts ?",
                           maxLines: 2,
-                          color: AppColors.primary,
+                          color: color.primary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -83,7 +84,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
                         TextBodyStyleWidget(
                           title: "Answer: Checking the FAQ API",
                           maxLines: 3,
-                          color: AppColors.primary,
+                          color: color.primary,
                           size: AppSizes.cardTitle,
                         ),
 
@@ -104,7 +105,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
                                     children: [
                                       TextBodyStyleWidget(
                                         title: "Created On",
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                         size: AppSizes.cardTitle,
                                       ),
 
@@ -120,7 +121,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
 
                                   TextBodyStyleWidget(
                                     title: "May 2, 2026",
-                                    color: AppColors.primary,
+                                    color: color.primary,
                                     size: AppSizes.cardTitle,
                                   ),
                                 ],

@@ -3,8 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
@@ -41,6 +41,7 @@ class ContactMessageDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     final bool isNew = status.toLowerCase() == "new";
 
     return Scaffold(
@@ -67,7 +68,7 @@ class ContactMessageDetails extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               color: isNew
-                                  ? AppColors.primary
+                                  ? color.primary
                                   : Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -75,8 +76,8 @@ class ContactMessageDetails extends StatelessWidget {
                               status,
                               style: TextStyle(
                                 color: isNew
-                                    ? Colors.white
-                                    : AppColors.primary,
+                                    ? color.cardBackground
+                                    : color.primary,
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -123,13 +124,13 @@ class ContactMessageDetails extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 22,
-                            backgroundColor: AppColors.primary,
+                            backgroundColor: color.primary,
                             child: Text(
                               name.isNotEmpty
                                   ? name[0].toUpperCase()
                                   : "?",
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style:  TextStyle(
+                                color: color.cardBackground,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
@@ -142,7 +143,7 @@ class ContactMessageDetails extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                TextTitleWidget(title: name,color: AppColors.primary,),
+                                TextTitleWidget(title: name,color: color.primary,),
 
                                 SizedBox(height: 2),
 
@@ -197,10 +198,10 @@ class ContactMessageDetails extends StatelessWidget {
                       // Date
                       Row(
                         children: [
-                          const Icon(
+                           Icon(
                             Icons.access_time,
                             size: 15,
-                            color: AppColors.primary,
+                            color: color.primary,
                           ),
                           const SizedBox(width: 4),
                           Text(
@@ -221,7 +222,7 @@ class ContactMessageDetails extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextTitleWidget(title: subject,color: AppColors.primary,),
+                            TextTitleWidget(title: subject,color: color.primary,),
 
                             SizedBox(height: AppSizes.itemGap),
 
@@ -232,7 +233,7 @@ class ContactMessageDetails extends StatelessWidget {
                                   width: 4,
                                   height: 20,
                                   decoration: BoxDecoration(
-                                    color: AppColors.secondary,
+                                    color: color.secondary,
                                     borderRadius: BorderRadius.circular(2),
                                   ),
                                 ),
@@ -257,7 +258,7 @@ class ContactMessageDetails extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.inventory_2_outlined,
-                              color: AppColors.primary,
+                              color: color.primary,
                               size: 22,
                             ),
 
@@ -266,9 +267,9 @@ class ContactMessageDetails extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                TextBodyStyleWidget(title: "Submitted On",color: AppColors.primary,),
+                                TextBodyStyleWidget(title: "Submitted On",color: color.primary,),
 
-                                TextBodyStyleWidget(title: dateTime,color: AppColors.primary,)
+                                TextBodyStyleWidget(title: dateTime,color: color.primary,)
                               ],
                             ),
                           ],
@@ -295,10 +296,10 @@ class ContactMessageDetails extends StatelessWidget {
                               text: "Archived",
                               onTap: onArchive ?? () {},
                               height: 4.5.h,
-                              backgroundColor: Colors.white,
-                              foregroundColor: AppColors.primary,
+                              backgroundColor: color.cardBackground,
+                              foregroundColor: color.primary,
                               borderSide: BorderSide(
-                                color: AppColors.primary,
+                                color: color.primary,
                               ),
                             ),
                           ),
@@ -310,7 +311,7 @@ class ContactMessageDetails extends StatelessWidget {
                               text: "Delete",
                               onTap: onDelete ?? () {},
                               height: 4.5.h,
-                              backgroundColor: Colors.white,
+                              backgroundColor: color.cardBackground,
                               foregroundColor: Colors.red,
                               borderSide: const BorderSide(
                                 color: Colors.red,

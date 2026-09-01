@@ -1,8 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../custom_button/custom_buttom.dart';
 
 class FilePickerWidget extends StatefulWidget {
@@ -28,12 +29,14 @@ class _FilePickerWidgetState extends State<FilePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     if (selectedFile == null) {
+
       return CustomButton(
         text: "Browse files",
         onTap: pickFile,
-        backgroundColor: AppColors.cartBackgroundLight,
-        foregroundColor: AppColors.primary,
+        backgroundColor: color.lightVersionOfPrimaryLightVersion,
+        foregroundColor: color.primary,
         size: AppSizes.cardTitle,
       );
     }
@@ -45,14 +48,14 @@ class _FilePickerWidgetState extends State<FilePickerWidget> {
             height: 45,
             padding:  EdgeInsets.symmetric(horizontal: AppSizes.cardPadding),
             decoration: BoxDecoration(
-              color: AppColors.cartBackgroundLight,
+              color: color.lightVersionOfPrimaryLightVersion,
               borderRadius: BorderRadius.circular(AppSizes.textFieldRadius),
             ),
             child: Row(
               children: [
                 Icon(
                   Icons.insert_drive_file_outlined,
-                  color: AppColors.primary,
+                  color: color.primary,
                 ),
 
                  SizedBox(width: AppSizes.appbarGap),
@@ -76,8 +79,8 @@ class _FilePickerWidgetState extends State<FilePickerWidget> {
           child: CustomButton(
             text: "Browse",
             onTap: pickFile,
-            backgroundColor: AppColors.cartBackgroundLight,
-            foregroundColor: AppColors.primary,
+            backgroundColor: color.lightVersionOfPrimaryLightVersion,
+            foregroundColor: color.primary,
             size: AppSizes.cardTitle,
           ),
         ),

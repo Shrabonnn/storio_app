@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_body_style.dart';
 
 class InfoRowWidget extends StatelessWidget {
@@ -18,12 +19,13 @@ class InfoRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Row(
       children: [
         Icon(
           icon,
           size: AppSizes.icon,
-          color: AppColors.primary,
+          color: color.primary,
         ),
         SizedBox(width: AppSizes.appbarGap),
         Expanded(
@@ -33,7 +35,7 @@ class InfoRowWidget extends StatelessWidget {
                 title: "$title: ",
                 fontbold: false,
                 size: AppSizes.cardTitle,
-                color: AppColors.primary,
+                color: color.primary,
 
               ),
               Expanded(
@@ -41,7 +43,7 @@ class InfoRowWidget extends StatelessWidget {
                   title: value,
                   fontbold: false,
                   size: AppSizes.cardTitle,
-                  color: AppColors.primary,
+                  color: color.primary,
 
                 ),
               ),

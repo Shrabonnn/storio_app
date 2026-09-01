@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -21,6 +22,7 @@ class RoleManagementScreen extends StatefulWidget {
 class _RoleManagementScreenState extends State<RoleManagementScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -51,19 +53,19 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Icon(Icons.security_outlined,size: AppSizes.icon,color: AppColors.primary,),
+                                        Icon(Icons.security_outlined,size: AppSizes.icon,color: color.primary,),
                                         SizedBox(width: AppSizes.smallGap,),
                                         TextTitleWidget(
                                           title: "John Chena",
                                           size: AppSizes.sectionTitle,
-                                          color: AppColors.primary,
+                                          color: color.primary,
                                         ),
                                         Spacer(),
                                         Row(
                                           children: [
                                             GestureDetector(
                                               onTap: (){},
-                                              child:Icon(Icons.edit,size: AppSizes.icon,color: AppColors.primary,)
+                                              child:Icon(Icons.edit,size: AppSizes.icon,color: color.primary,)
                                             ),
                                             SizedBox(width: AppSizes.itemGap,),
                                             GestureDetector(
@@ -87,10 +89,10 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   Flexible(
-                                    child: TextTitleWidget(title: "Permissions: ",color: AppColors.primary,maxLines: 2,
+                                    child: TextTitleWidget(title: "Permissions: ",color: color.primary,maxLines: 2,
                                     ),
                                   ),
-                                  TextTitleWidget(title: "14/160",color: AppColors.primary,)
+                                  TextTitleWidget(title: "14/160",color: color.primary,)
                                 ],
                               ),
                               SizedBox(height: AppSizes.appbarGap,),
@@ -98,10 +100,10 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   Flexible(
-                                    child: TextTitleWidget(title: "Users assigned: ",color: AppColors.primary,maxLines: 2,
+                                    child: TextTitleWidget(title: "Users assigned: ",color: color.primary,maxLines: 2,
                                     ),
                                   ),
-                                  TextTitleWidget(title: "1",color: AppColors.primary,)
+                                  TextTitleWidget(title: "1",color: color.primary,)
                                 ],
                               ),
 
@@ -126,14 +128,14 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_role);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

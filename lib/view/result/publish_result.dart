@@ -6,7 +6,8 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_text_field.dart';
@@ -51,6 +52,7 @@ class _PublishResultState extends State<PublishResult> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -91,27 +93,27 @@ class _PublishResultState extends State<PublishResult> {
                   CustomCard(child: Column(
                     crossAxisAlignment: .start,
                     children: [
-                      TextTitleWidget(title: "Publish New Result",color: AppColors.primary,),
+                      TextTitleWidget(title: "Publish New Result",color: color.primary,),
                       TextBodyStyleWidget(title: "School Level",),
                       Divider(),
                       SizedBox(height: AppSizes.smallGap,),
 
-                      TextBodyStyleWidget(title: "Exam Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Exam Name", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "e.g. Annual Exam", controller: examNameController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "Class Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Class Name", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "e.g. Class Ten", controller: classNameController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "Academic Year", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Academic Year", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "2026", controller: academicaYearController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "Total Examinees", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Total Examinees", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "100", controller: totalExaminessController),
                       SizedBox(height: AppSizes.itemGap),
@@ -122,7 +124,7 @@ class _PublishResultState extends State<PublishResult> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "Passed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Passed", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "70", controller: passController),
                                 SizedBox(height: AppSizes.itemGap),
@@ -134,7 +136,7 @@ class _PublishResultState extends State<PublishResult> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "Failed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Failed", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "30", controller: failController),
                                 SizedBox(height: AppSizes.itemGap),
@@ -147,9 +149,9 @@ class _PublishResultState extends State<PublishResult> {
 
                       Row(
                         children: [
-                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: AppColors.primary,),
+                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: color.primary,),
                           SizedBox(width: AppSizes.appbarGap,),
-                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: color.primary,size: AppSizes.cardTitle,),
                         ],
                       ),
                       SizedBox(height: AppSizes.appbarGap),
@@ -166,23 +168,23 @@ class _PublishResultState extends State<PublishResult> {
                   CustomCard(child: Column(
                     crossAxisAlignment: .start,
                     children: [
-                      TextTitleWidget(title: "Publish New Result",color: AppColors.primary,),
+                      TextTitleWidget(title: "Publish New Result",color: color.primary,),
                       TextBodyStyleWidget(title: "Public Level",),
                       Divider(),
                       SizedBox(height: AppSizes.smallGap,),
 
-                      TextBodyStyleWidget(title: "Exam Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Exam Name", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "e.g. S.S.C H.S.C", controller: examNameController),
                       SizedBox(height: AppSizes.itemGap),
 
 
-                      TextBodyStyleWidget(title: "Academic Year", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Academic Year", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "2026", controller: academicaYearController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "Total Examinees", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Total Examinees", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "100", controller: totalExaminessController),
                       SizedBox(height: AppSizes.itemGap),
@@ -193,7 +195,7 @@ class _PublishResultState extends State<PublishResult> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "Passed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Passed", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "70", controller: passController),
                                 SizedBox(height: AppSizes.itemGap),
@@ -205,7 +207,7 @@ class _PublishResultState extends State<PublishResult> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "Failed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Failed", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "30", controller: failController),
                                 SizedBox(height: AppSizes.itemGap),
@@ -215,12 +217,12 @@ class _PublishResultState extends State<PublishResult> {
                         ],
                       ),
 
-                      TextBodyStyleWidget(title: "GPA A+ Recipients", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "GPA A+ Recipients", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "0", controller: totalExaminessController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "GPA A Recipients", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "GPA A Recipients", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "0", controller: totalExaminessController),
                       SizedBox(height: AppSizes.itemGap),
@@ -228,9 +230,9 @@ class _PublishResultState extends State<PublishResult> {
 
                       Row(
                         children: [
-                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: AppColors.primary,),
+                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: color.primary,),
                           SizedBox(width: AppSizes.appbarGap,),
-                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: color.primary,size: AppSizes.cardTitle,),
                         ],
                       ),
                       SizedBox(height: AppSizes.appbarGap),
@@ -248,27 +250,27 @@ class _PublishResultState extends State<PublishResult> {
                   CustomCard(child: Column(
                     crossAxisAlignment: .start,
                     children: [
-                      TextTitleWidget(title: "Publish New Result",color: AppColors.primary,),
+                      TextTitleWidget(title: "Publish New Result",color: color.primary,),
                       TextBodyStyleWidget(title: "A Level",),
                       Divider(),
                       SizedBox(height: AppSizes.smallGap,),
 
-                      TextBodyStyleWidget(title: "Exam Name", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Exam Name", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "e.g. Admission Test 2024", controller: examNameController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "Program/Class", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Program/Class", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "e.g. Class Ten", controller: classNameController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "Academic Year", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Academic Year", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "2026", controller: academicaYearController),
                       SizedBox(height: AppSizes.itemGap),
 
-                      TextBodyStyleWidget(title: "Total Examinees", color: AppColors.primary,size: AppSizes.cardTitle,),
+                      TextBodyStyleWidget(title: "Total Examinees", color: color.primary,size: AppSizes.cardTitle,),
                       SizedBox(height: AppSizes.appbarGap),
                       CustomTextFieldWidget(hintText: "100", controller: totalExaminessController),
                       SizedBox(height: AppSizes.itemGap),
@@ -279,7 +281,7 @@ class _PublishResultState extends State<PublishResult> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "Passed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Passed", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "70", controller: passController),
                                 SizedBox(height: AppSizes.itemGap),
@@ -291,7 +293,7 @@ class _PublishResultState extends State<PublishResult> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "Failed", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Failed", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "30", controller: failController),
                                 SizedBox(height: AppSizes.itemGap),
@@ -304,9 +306,9 @@ class _PublishResultState extends State<PublishResult> {
 
                       Row(
                         children: [
-                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: AppColors.primary,),
+                          Icon(Icons.file_copy_outlined,size: AppSizes.icon,color: color.primary,),
                           SizedBox(width: AppSizes.appbarGap,),
-                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                          TextBodyStyleWidget(title: "Result Sheet (PDF)", color: color.primary,size: AppSizes.cardTitle,),
                         ],
                       ),
                       SizedBox(height: AppSizes.appbarGap),
@@ -324,7 +326,7 @@ class _PublishResultState extends State<PublishResult> {
                 Row(
                   mainAxisAlignment: .spaceBetween,
                   children: [
-                    CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                    CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                     SizedBox(width: AppSizes.appbarGap,),
                     Flexible(child: CustomButton(text: "Publish Result", onTap: (){},)),
                   ],

@@ -5,7 +5,8 @@ import 'package:storio_app/widget/universal/info_row_widget.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -36,6 +37,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -88,13 +90,13 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                   height: 60,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: AppColors.primary,
+                                    color: color.primary,
                                     border: Border.all(
-                                      color: AppColors.cartBackgroundLight,
+                                      color: color.lightVersionOfPrimaryLightVersion,
                                       width: 1,
                                     ),
                                   ),
-                                  child: Center(child: TextTitleWidget(title: name.isNotEmpty ? name[0].toUpperCase()+name[1].toUpperCase() : "?",color: Colors.white,size: 19.sp,)),
+                                  child: Center(child: TextTitleWidget(title: name.isNotEmpty ? name[0].toUpperCase()+name[1].toUpperCase() : "?",color: color.cardBackground,size: 19.sp,)),
                                 ),
 
                                 SizedBox(width: AppSizes.smallGap),
@@ -106,7 +108,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                       TextTitleWidget(
                                         title: name,
                                         size: AppSizes.sectionTitle,
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                       ),
 
                                       SizedBox(height: AppSizes.appbarGap),
@@ -114,14 +116,14 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                       TextBodyStyleWidget(
                                         title: "@alfasunny94",
                                         size: AppSizes.cardTitle,
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                       ),
 
                                       SizedBox(height: AppSizes.appbarGap),
                                       TextBodyStyleWidget(
                                         title: "SOFTWARE TESTING",
                                         size: AppSizes.cardTitle,
-                                        color: AppColors.primary,
+                                        color: color.primary,
                                       ),
                                       SizedBox(height: AppSizes.appbarGap),
 
@@ -210,14 +212,14 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_user);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

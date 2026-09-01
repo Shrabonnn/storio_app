@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/theme/theme_ext.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
   final IconData icon;
@@ -20,13 +21,14 @@ class CustomFloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return FloatingActionButton(
       heroTag: heroTag,
-      backgroundColor: backgroundColor ?? AppColors.primary,
+      backgroundColor: backgroundColor ?? color.primary,
       onPressed: onTap,
       child: Icon(
         icon,
-        color: iconColor ?? Colors.white,
+        color: iconColor ?? color.cardBackground,
       ),
     );
   }

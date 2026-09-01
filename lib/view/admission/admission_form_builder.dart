@@ -3,8 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 import 'package:storio_app/widget/universal/custom_drop_down.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -66,6 +66,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -82,7 +83,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                     CustomCard(child: Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        TextBodyStyleWidget(title: "Form Fields (${formField})", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Form Fields (${formField})", color: color.primary,size: AppSizes.sectionTitle,),
                         CustomButton(width: 30.w,text: "Add New Field", onTap: (){
                           setState(() {
                             formField ++;
@@ -109,19 +110,19 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                         crossAxisAlignment: .start,
                         children: [
 
-                          TextBodyStyleWidget(title: "Field Label", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                          TextBodyStyleWidget(title: "Field Label", color: color.primary,size: AppSizes.sectionTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "", controller: labelController),
                           SizedBox(height: AppSizes.itemGap),
 
 
                           // URL SLUG
-                          TextBodyStyleWidget(title: "Field ID (Internal Name)", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                          TextBodyStyleWidget(title: "Field ID (Internal Name)", color: color.primary,size: AppSizes.sectionTitle,),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(hintText: "", controller: idController,),
                           SizedBox(height: AppSizes.itemGap),
 
-                          TextBodyStyleWidget(title: "Type", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                          TextBodyStyleWidget(title: "Type", color: color.primary,size: AppSizes.sectionTitle,),
                           SizedBox(width: AppSizes.smallGap),
                           CustomDropdown(height: 5.h,width: 100.w,items: formType,initialValue: selectedForm,),
 
@@ -129,10 +130,10 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                           Row(
                             mainAxisAlignment: .end,
                             children: [
-                              TextBodyStyleWidget(title: "Required",color: AppColors.primary,),
+                              TextBodyStyleWidget(title: "Required",color: color.primary,),
                               Checkbox(
                                   value: isReuired,
-                                  activeColor: AppColors.primary,
+                                  activeColor: color.primary,
                                   onChanged: (value){
                                     setState(() {
                                       isReuired = value ?? false;
@@ -146,14 +147,14 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                           Row(
                             mainAxisAlignment: .spaceBetween,
                             children: [
-                              TextBodyStyleWidget(title: "Required",color: AppColors.primary,),
+                              TextBodyStyleWidget(title: "Required",color: color.primary,),
                               GestureDetector(
                                   onTap: (){
                                     setState(() {
                                       logic = logic == "Disable"?"Enable":"Disable";
                                     });
                                   },
-                                  child: TextBodyStyleWidget(title: logic,color: AppColors.primary,)),
+                                  child: TextBodyStyleWidget(title: logic,color: color.primary,)),
 
 
 
@@ -200,7 +201,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:"Save Post", onTap: (){},)),
                       ],

@@ -1,16 +1,19 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
 import '../routes/routes_name.dart';
 import '../utils/app_colors.dart';
-import '../utils/sizes.dart';
+import '../utils/app_sizes.dart';
+import '../utils/theme/theme_ext.dart';
 import '../widget/dashboard/action_grid.dart';
 import '../widget/dashboard/action_tile.dart';
 import '../widget/dashboard/stat_card.dart';
+import '../widget/textStyle/appbar_text_style.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -22,6 +25,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return SafeArea(
       top: false,
       child: SingleChildScrollView(
@@ -34,23 +38,24 @@ class _DashboardState extends State<Dashboard> {
                 Container(
                   height: 21.h,
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration:  BoxDecoration(
                     borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(20),
+                      bottom: Radius.circular(AppSizes.containerRadius),
                     ),
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [AppColors.cartbackground, AppColors.primary],
+                      colors: [color.primaryLightVersion, color.primary],
                     ),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 4.w,
-                          vertical: 4.5.h,
+                        padding: EdgeInsets.only(
+                          left: AppSizes.cardPadding,
+                          right: AppSizes.cardPadding,
+                          top: AppSizes.cardPadding*4
                         ),
                         child: Column(
                           children: [
@@ -61,15 +66,15 @@ class _DashboardState extends State<Dashboard> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      width: 10.w,
-                                      height: 10.w,
+                                      width: 12.w,
+                                      height: 12.w,
                                       child: Image.asset(
                                         "assets/images/Storio_main_logo.png",
                                         fit: BoxFit.contain,
                                       ),
                                     ),
-                                    SizedBox(width: 2.w),
-                                    TextTitleWidget(title: 'Storio',size: AppSizes.appBarTitle,)
+                                    SizedBox(width: AppSizes.smallGap,),
+                                    AppbarTextStyle(title: 'Storio',size: AppSizes.appBarTitle,)
                                   ],
                                 ),
                                 Row(
@@ -79,36 +84,17 @@ class _DashboardState extends State<Dashboard> {
                                       onPressed: () {},
                                       icon: Icon(
                                         Icons.search_sharp,
-                                        color: Colors.white,
-                                        size: AppSizes.icon,
+                                        color: color.cardBackground,
+                                        size: AppSizes.iconLarge,
                                       ),
                                     ),
                                     Icon(
                                       Icons.circle_rounded,
-                                      size: AppSizes.iconSmall,
+                                      size: AppSizes.iconLarge,
                                       color: Colors.red,
                                     ),
-                                    TextButton(
-                                      onPressed: () {},
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 1.5.w,
-                                          vertical: .5.h,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            6,
-                                          ),
-                                          color: Colors.white,
-                                        ),
-                                        child: Text(
-                                          "Visit Site",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    SizedBox(width: AppSizes.itemGap,),
+                                    CustomButton(width: 20.w,height: 3.5.h,text: "Visit Site", onTap: (){}),
                                   ],
                                 ),
                               ],
@@ -120,14 +106,15 @@ class _DashboardState extends State<Dashboard> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    TextTitleWidget(title: 'Hello, MAIYASHA👋',),
-                                    TextBodyStyleWidget(title: "Welcome back to Storio",color: Colors.white,),
+                                    AppbarTextStyle(title: 'Hello, MAIYASHA👋',),
+                                    SizedBox(height: AppSizes.appbarGap,),
+                                    TextBodyStyleWidget(title: "Welcome back to Storio",color: color.cardBackground,),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     CircleAvatar(
-                                      radius: 20,
+                                      radius: 23,
                                       backgroundImage: AssetImage(
                                         "assets/images/person.png",
                                       ),
@@ -138,7 +125,7 @@ class _DashboardState extends State<Dashboard> {
                                       },
                                       icon: Icon(
                                         Icons.arrow_forward_ios,
-                                        color: Colors.white,
+                                        color: color.cardBackground,
                                         size: AppSizes.icon,
                                       ),
                                     ),
@@ -184,7 +171,7 @@ class _DashboardState extends State<Dashboard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextTitleWidget(title: "Overview",color: AppColors.primary,),
+                  TextTitleWidget(title: "Overview",color: color.primary,),
 
                 ],
               ),
@@ -232,7 +219,7 @@ class _DashboardState extends State<Dashboard> {
                               value.toInt().toString(),
                               style: TextStyle(
                                 fontSize: 14.sp,
-                                color: Colors.black54,
+                                color: color.textSecondary,
                               ),
                             );
                           },
@@ -258,7 +245,7 @@ class _DashboardState extends State<Dashboard> {
                                 months[value.toInt()],
                                 style: TextStyle(
                                   fontSize: 14.sp,
-                                  color: Colors.black54,
+                                  color: color.textSecondary,
                                 ),
                               ),
                             );
@@ -269,7 +256,7 @@ class _DashboardState extends State<Dashboard> {
                     lineBarsData: [
                       LineChartBarData(
                         isCurved: true,
-                        color: AppColors.primary,
+                        color: color.primary,
                         barWidth: 2.5,
 
                         spots: const [
@@ -286,8 +273,8 @@ class _DashboardState extends State<Dashboard> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              AppColors.secondary,
-                              AppColors.cartBackgroundLight,
+                              color.secondary,
+                              color.lightVersionOfPrimaryLightVersion,
                             ],
                           ),
                         ),
@@ -296,9 +283,9 @@ class _DashboardState extends State<Dashboard> {
                           getDotPainter: (spot, percent, bar, index) {
                             return FlDotCirclePainter(
                               radius: 4,
-                              color: AppColors.primary,
+                              color: color.primary,
                               strokeWidth: 2,
-                              strokeColor: Colors.white,
+                              strokeColor: color.cardBackground,
                             );
                           },
                         ),
@@ -318,18 +305,18 @@ class _DashboardState extends State<Dashboard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextTitleWidget(title: "Actions",color: AppColors.primary,),
+                      TextTitleWidget(title: "Actions",color: color.primary,),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, RoutesName.action_details);
                         },
                         child: Row(
                           children: [
-                            TextBodyStyleWidget(title: "View More",color: AppColors.primary,),
+                            TextBodyStyleWidget(title: "View More",color: color.primary,),
                             Icon(
                               Icons.chevron_right,
                               size: AppSizes.icon,
-                              color: AppColors.primary,
+                              color: color.primary,
                             ),
                           ],
                         ),
@@ -350,19 +337,19 @@ class _DashboardState extends State<Dashboard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextTitleWidget(title: "Notices",color: AppColors.primary,),
+                      TextTitleWidget(title: "Notices",color: color.primary,),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, RoutesName.notice);
                         },
                         child: Row(
                           children: [
-                            TextBodyStyleWidget(title: "View All",color: AppColors.primary,),
+                            TextBodyStyleWidget(title: "View All",color: color.primary,),
 
                             Icon(
                               Icons.chevron_right,
                               size: AppSizes.icon,
-                              color: AppColors.primary,
+                              color: color.primary,
                             ),
                           ],
                         ),
@@ -378,16 +365,16 @@ class _DashboardState extends State<Dashboard> {
                     itemCount: 2,
                     separatorBuilder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 2.w),
+                        padding: EdgeInsets.symmetric(horizontal:AppSizes.smallPadding),
                         child: Divider(),
                       );
                     },
                     itemBuilder: (context, index) {
                       return Container(
-                        height: 7.h,
+                        height: 6.h,
                         padding: EdgeInsets.all(2.w),
                         decoration: BoxDecoration(
-                          //color: AppColors.cartBackgroundLight,
+                          //color: color.cartBackgroundLight,
                           borderRadius: BorderRadius.circular(3.w),
                         ),
                         child: Row(
@@ -397,38 +384,25 @@ class _DashboardState extends State<Dashboard> {
                                 Padding(
                                   padding:  EdgeInsets.only(right: 2.w),
                                   child: Icon(
+                                    color: AppColors.primary,
                                     Icons.south_east,
-                                    size: 2.5.h,
+                                    size: AppSizes.icon,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
                             ),
+                            SizedBox(width: AppSizes.smallGap,),
                             Expanded(
                               child: Row(
                                 children: [
                                   Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                   crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          "Admission will be open ",
-                                          style: TextStyle(
-                                            overflow: TextOverflow.ellipsis,
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.bold,
-
-                                          ),
-                                        ),
+                                        child: TextTitleWidget(title: "Admission will be open ")
                                       ),
-                                      Text(
-                                        "26th July, 2026",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black54,
-                                        ),
-                                      ),
+                                      TextBodyStyleWidget(title: "26th July, 2026")
                                     ],
                                   ),
                                 ],
@@ -450,19 +424,19 @@ class _DashboardState extends State<Dashboard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextTitleWidget(title: "Upcoming Events",color: AppColors.primary,),
+                      TextTitleWidget(title: "Upcoming Events",color: color.primary,),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, RoutesName.event);
                         },
                         child: Row(
                           children: [
-                            TextBodyStyleWidget(title: "View All",color: AppColors.primary,),
+                            TextBodyStyleWidget(title: "View All",color: color.primary,),
 
                             Icon(
                               Icons.chevron_right,
                               size: AppSizes.icon,
-                              color: AppColors.primary,
+                              color: color.primary,
                             ),
                           ],
                         ),
@@ -484,7 +458,7 @@ class _DashboardState extends State<Dashboard> {
                     },
                     itemBuilder: (context, index) {
                       return Container(
-                        height: 8.h,
+                        height: 6.h,
                         padding: EdgeInsets.symmetric(horizontal: 2.w),
                         decoration: BoxDecoration(
 
@@ -495,11 +469,11 @@ class _DashboardState extends State<Dashboard> {
                             // Date Card
                             Container(
                               width: 16.w,
-                              margin: EdgeInsets.symmetric(vertical: 4),
-                              padding: EdgeInsets.symmetric(vertical: 4),
+                              margin: EdgeInsets.symmetric(vertical: AppSizes.smallPadding),
+                              padding: EdgeInsets.symmetric(vertical: AppSizes.smallPadding),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3.w),
-                                color: AppColors.cartBackgroundLight,
+                                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+                                color: color.lightVersionOfPrimaryLightVersion,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.08),
@@ -513,10 +487,10 @@ class _DashboardState extends State<Dashboard> {
                               child: Column(
                                 children: [
                                   Flexible(
-                                    child: TextBodyStyleWidget(title: "AUG",color: AppColors.primary,),
+                                    child: TextBodyStyleWidget(title: "AUG",color: color.primary,),
                                   ),
                                   Flexible(
-                                    child: TextTitleWidget(title: "10",color: AppColors.primary,),
+                                    child: TextTitleWidget(title: "10",color: color.primary,),
                                   ),
                                 ],
                               ),
@@ -529,7 +503,7 @@ class _DashboardState extends State<Dashboard> {
                                 crossAxisAlignment:
                                 CrossAxisAlignment.start,
                                 children: [
-                                  TextTitleWidget(title: "Exam Starts",color: AppColors.primary,),
+                                  TextTitleWidget(title: "Exam Starts",color: color.textPrimary,),
                                   SizedBox(height: AppSizes.appbarGap,),
                                   TextBodyStyleWidget(title: "10 August, 2026",),
                                 ],
@@ -539,10 +513,10 @@ class _DashboardState extends State<Dashboard> {
                             Container(
                               padding: EdgeInsets.all(AppSizes.contentPadding),
                               decoration: BoxDecoration(
-                                color: AppColors.cartBackgroundLight,
+                                color: color.lightVersionOfPrimaryLightVersion,
                                 borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                               ),
-                              child: TextBodyStyleWidget(title: "10: 00 AM",color: AppColors.primary,),
+                              child: TextBodyStyleWidget(title: "10: 00 AM",color: color.primary,),
                             ),
                           ],
                         ),
@@ -562,6 +536,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   ActionGrid _buildActionGrid(BuildContext context) {
+
     return ActionGrid(
       items: [
         ActionTile(

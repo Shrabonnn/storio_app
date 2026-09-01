@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/model/institure/key_metrics_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/institute_profile/Institute_overview_screen.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
@@ -11,6 +11,7 @@ import 'package:storio_app/widget/universal/custom_app_bar.dart';
 import '../model/form_field/form_feild_data.dart';
 import '../model/institure/infrastructure_Item_model.dart';
 import '../utils/app_colors.dart';
+import '../utils/theme/theme_ext.dart';
 import '../widget/institute_profile/custom_text_dialog.dart';
 import '../widget/institute_profile/information_row.dart';
 import '../widget/institute_profile/infrastructure_drop_down.dart';
@@ -57,6 +58,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -78,7 +80,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                           TextTitleWidget(
                             title: "Visual Identity",
                             size:AppSizes.sectionTitle,
-                            color: AppColors.primary,
+                            color: color.primary,
                           ),
                           CustomButton(
                             height: 4.h,
@@ -106,7 +108,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                             },
                             backgroundColor: isEditing
                                 ? Colors.grey
-                                : AppColors.primary,
+                                : color.primary,
                           ),
                         ],
                       ),
@@ -141,7 +143,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                       TextTitleWidget(
                         title: "General Information",
                         size:AppSizes.sectionTitle,
-                        color: AppColors.primary,
+                        color: color.primary,
                       ),
                       const Divider(thickness: .6),
 
@@ -263,7 +265,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                         Container(
 
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: color.cardBackground,
                             borderRadius: BorderRadius.circular(AppSizes.cardRadius),
                             boxShadow: [
                               BoxShadow(
@@ -301,7 +303,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                                 title: keyMertics.isEmpty
                                     ? "1550"
                                     : keyMertics.last.value,
-                                color: AppColors.primary,
+                                color: color.primary,
                                 size:AppSizes.cardTitle,
                               ),
                             ],
@@ -377,7 +379,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                                         SizedBox(height: AppSizes.appbarGap,),
                                         TextBodyStyleWidget(
                                           title:
-                                              "${infrastructures.last.value}",size:AppSizes.cardTitle,color: AppColors.primary,
+                                              "${infrastructures.last.value}",size:AppSizes.cardTitle,color: color.primary,
                                         ),
                                       ],
                                     ),

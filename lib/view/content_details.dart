@@ -3,7 +3,8 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_colors.dart';
 
-import '../utils/sizes.dart';
+import '../utils/app_sizes.dart';
+import '../utils/theme/theme_ext.dart';
 import '../widget/universal/custom_app_bar.dart';
 import '../widget/universal/custom_card.dart';
 
@@ -55,21 +56,22 @@ class _ContentDetailsState extends State<ContentDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
       floatingActionButton: FloatingActionButton.extended(
-        foregroundColor: Colors.white,
-        backgroundColor: AppColors.primary,
+        foregroundColor: color.cardBackground,
+        backgroundColor: color.primary,
         onPressed: _isSaving ? null : _handleSave,
         icon: _isSaving
             ? SizedBox(
           width: AppSizes.iconSmall,
           height: AppSizes.iconSmall,
-          child: const CircularProgressIndicator(
+          child:  CircularProgressIndicator(
             strokeWidth: 2,
-            color: Colors.white,
+            color: color.cardBackground,
           ),
         )
             : Icon(Icons.save_outlined, size: AppSizes.icon),

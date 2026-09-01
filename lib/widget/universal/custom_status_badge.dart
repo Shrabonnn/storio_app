@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_title_style.dart';
 
 class CustomStatusBadge extends StatelessWidget {
@@ -14,14 +15,15 @@ class CustomStatusBadge extends StatelessWidget {
   final double ? size;
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 3.w,
           vertical: 0.5.h,),
         decoration: BoxDecoration(
-          color: backgroundColor ?? AppColors.primary.withOpacity(0.1),
+          color: backgroundColor ?? color.primary.withOpacity(0.1),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: TextTitleWidget(title: title,color: foregroundColor ?? AppColors.primary,size: size ?? AppSizes.cardSubTitle,)
+        child: TextTitleWidget(title: title,color: foregroundColor ?? color.primary,size: size ?? AppSizes.cardSubTitle,)
     );
   }
 }

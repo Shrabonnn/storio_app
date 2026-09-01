@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -25,6 +25,7 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -41,7 +42,7 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                         children: [
                           TextBodyStyleWidget(
                             title: "Create New Categories",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.sectionGap),
@@ -49,7 +50,7 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                           // Title
                           TextBodyStyleWidget(
                             title: "Name",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -63,7 +64,7 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                           // Description
                           TextBodyStyleWidget(
                             title: "Description",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -90,7 +91,7 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                         children: [
                           TextBodyStyleWidget(
                             title: "Existing Category ( 1 )",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.itemGap),
@@ -111,7 +112,7 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                                             children: [
                                               TextTitleWidget(
                                                 title: "Night",
-                                                color: AppColors.primary,
+                                                color: color.primary,
                                                 maxLines: 1,
                                               ),
                                               SizedBox(height: AppSizes.appbarGap),

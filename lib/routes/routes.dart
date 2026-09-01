@@ -70,6 +70,7 @@ import 'package:storio_app/view/result/publish_result.dart';
 import 'package:storio_app/view/settings/general_settings_screen.dart';
 import 'package:storio_app/view/settings/security_screen.dart';
 import 'package:storio_app/view/settings/settings_screen.dart';
+import 'package:storio_app/view/settings/theme_screen.dart';
 import 'package:storio_app/view/testimonial/add_new_testimonial.dart';
 import 'package:storio_app/view/testimonial/edit_testimonial.dart';
 import 'package:storio_app/view/testimonial/testimonial_screen.dart';
@@ -282,6 +283,8 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> GeneralSettingsScreen());
       case RoutesName.security:
         return MaterialPageRoute(builder: (context)=> SecurityScreen());
+      case RoutesName.theme:
+        return MaterialPageRoute(builder: (context)=> ThemeScreen());
 
 
 

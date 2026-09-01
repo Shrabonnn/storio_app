@@ -7,8 +7,8 @@ import 'package:storio_app/widget/universal/custom_card2.dart';
 import 'package:storio_app/widget/universal/info_item_card.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_drop_down.dart';
 import '../../widget/universal/search_text_field.dart';
@@ -40,6 +40,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -94,20 +95,20 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       ],
                       headerStyle: HeaderStyle(
                         titleTextStyle: TextStyle(
-                          color: AppColors.primary,
+                          color: color.primary,
                           fontSize: AppSizes.sectionTitle,
                           fontWeight: FontWeight.w600,
                         ),
                         formatButtonDecoration: BoxDecoration(
                           border: Border.all(
-                            color: AppColors.primary,
+                            color: color.primary,
                           ),
                           borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                         ),
                       ),
                       daysOfWeekStyle: DaysOfWeekStyle(
                         weekdayStyle: TextStyle(
-                          color: AppColors.primary,
+                          color: color.primary,
                           fontWeight: FontWeight.w500,
                         ),
 
@@ -123,10 +124,10 @@ class _CalenderScreenState extends State<CalenderScreen> {
                           color: Colors.grey,
                         ),
                         selectedTextStyle: TextStyle(
-                          color: Colors.white,
+                          color: color.cardBackground,
                         ),
                         todayTextStyle: TextStyle(
-                          color: Colors.white,
+                          color: color.cardBackground,
                         ),
 
                       ),
@@ -139,18 +140,18 @@ class _CalenderScreenState extends State<CalenderScreen> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextTitleWidget( title: "Calendar Statistics",color: AppColors.primary,),
+                        TextTitleWidget( title: "Calendar Statistics",color: color.primary,),
                         SizedBox(height: AppSizes.smallGap,),
                         Row(
                           children: [
                             Flexible(child:
-                            calenderStatisticWidget(title: "Working Days",value: "21",)),
+                            calenderStatisticWidget(context:context,title: "Working Days",value: "21",)),
                             SizedBox(width: AppSizes.appbarGap,),
                             Flexible(child:
-                            calenderStatisticWidget(title: "Holidays",value: "2",)),
+                            calenderStatisticWidget(context:context,title: "Holidays",value: "2",)),
                             SizedBox(width: AppSizes.appbarGap,),
                             Flexible(child:
-                            calenderStatisticWidget(title: "Major Exams",value: "0",)),
+                            calenderStatisticWidget(context:context,title: "Major Exams",value: "0",)),
                           ],
                         )
                       ],
@@ -186,14 +187,14 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
 
             heroTag: "setting",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.calender_setting);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.settings,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
           SizedBox(height: AppSizes.itemGap,),
@@ -201,14 +202,14 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_event_calender);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],
@@ -219,21 +220,23 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
 class calenderStatisticWidget extends StatelessWidget {
   const calenderStatisticWidget({
-    super.key, required this.title, required this.value,
+
+    super.key, required this.title, required this.value,required BuildContext context,
   });
   final String title;
   final String value;
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return CustomCard2(child: Padding(
       padding:  EdgeInsets.all(AppSizes.smallPadding),
       child: Column(
         crossAxisAlignment: .center,
         children: [
-          TextBodyStyleWidget(title: title,color: AppColors.primary,),
+          TextBodyStyleWidget(title: title,color: color.primary,),
           SizedBox(height: AppSizes.appbarGap,),
-          TextBodyStyleWidget(title: value,color: AppColors.primary,),
+          TextBodyStyleWidget(title: value,color: color.primary,),
         ],
       ),
     ));

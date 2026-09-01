@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
+
+import '../../utils/theme/theme_ext.dart';
 
 class TextBodyStyleWidget extends StatelessWidget {
   final String title;
@@ -19,12 +21,13 @@ class TextBodyStyleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Appcolor = context.Appcolor;
     return Text(
       title,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: color ?? Colors.black54,
+        color: color ?? Appcolor.textSecondary,
         fontSize: size?.sp ?? AppSizes.cardSubTitle,
         fontWeight: fontbold ? FontWeight.w600 :FontWeight.normal  ,
       ),

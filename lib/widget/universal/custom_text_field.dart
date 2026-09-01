@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart' ;
 
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -37,10 +39,11 @@ class CustomTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Container(
       width: 100.w,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color.cardBackground,
         borderRadius: BorderRadius.circular(AppSizes.cardRadius),
         boxShadow: [
           BoxShadow(

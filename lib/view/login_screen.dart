@@ -4,6 +4,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/utils/app_colors.dart';
 
+import '../utils/theme/theme_ext.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -28,8 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: color.cardBackground,
 
       body: Stack(
         children: [
@@ -42,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               clipper: _TopWaveOuterClipper(),
               child: Container(
                 height: 11.5.h,
-                color: AppColors.secondary.withValues(alpha: 0.28),
+                color: color.secondary.withValues(alpha: 0.28),
               ),
             ),
           ),
@@ -54,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
               clipper: _TopWaveInnerClipper(),
               child: Container(
                 height: 10.h,
-                color: AppColors.secondary.withValues(alpha: 0.45),
+                color: color.secondary.withValues(alpha: 0.45),
               ),
             ),
           ),
@@ -68,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               clipper: _BottomWaveOuterClipper(),
               child: Container(
                 height: 7.5.h,
-                color: AppColors.secondary.withValues(alpha: 0.25),
+                color: color.secondary.withValues(alpha: 0.25),
               ),
             ),
           ),
@@ -80,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
               clipper: _BottomWaveInnerClipper(),
               child: Container(
                 height: 5.5.h,
-                color: AppColors.primary.withValues(alpha: 0.18),
+                color: color.primary.withValues(alpha: 0.18),
               ),
             ),
           ),
@@ -89,18 +92,18 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Storio",style: GoogleFonts.libreBaskerville(
-                  color: AppColors.primary,
+                  color: color.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 24.sp
               ),),
               Text("Please Enter Your Details To Login",style: TextStyle(
-                  color: AppColors.primary,
+                  color: color.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 14.sp
 
               ),),
               SizedBox(height: 1.5.h,),
-              Image.asset("assets/images/login.png",height: 32.h,width: 100.w,fit: BoxFit.fitHeight,color: Colors.white.withValues(alpha:0.7),colorBlendMode: BlendMode.modulate,),
+              Image.asset("assets/images/login.png",height: 32.h,width: 100.w,fit: BoxFit.fitHeight,color: color.cardBackground.withValues(alpha:0.7),colorBlendMode: BlendMode.modulate,),
               SizedBox(height: 1.5.h,),
 
               _AuthTabSwitcher(
@@ -115,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text("Email Address :",style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primary
+                        color: color.primary
                     ),),
                     TextFormField(
                       controller: _emailController,
@@ -133,14 +136,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       decoration: InputDecoration(
                         hintText: "example@gmail.com",
-                        prefixIcon: Icon(Icons.email_outlined,color: AppColors.primary,),
+                        prefixIcon: Icon(Icons.email_outlined,color: color.primary,),
 
                       ),),
 
                     SizedBox(height: 1.5.h,),
                     Text("Password :",style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primary
+                        color: color.primary
                     ),),
                     TextFormField(
                       controller: _passwordController,
@@ -155,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       decoration: InputDecoration(
                           hintText: "*******",
-                          prefixIcon: Icon(Icons.password,color: AppColors.primary,)
+                          prefixIcon: Icon(Icons.password,color: color.primary,)
                       ),
                     ),
                     Row(
@@ -195,17 +198,19 @@ class _AuthTabSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _tab("Login", isLogin, () => onChanged(true)),
+        _tab(context,"Login", isLogin, () => onChanged(true)),
         SizedBox(width: 10.w),
-        _tab("Sign Up", !isLogin, () => onChanged(false)),
+        _tab(context,"Sign Up", !isLogin, () => onChanged(false)),
       ],
     );
   }
 
-  Widget _tab(String label, bool selected, VoidCallback onTap) {
+  Widget _tab(BuildContext context,String label, bool selected, VoidCallback onTap) {
+    final color = context.Appcolor;
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
@@ -219,7 +224,7 @@ class _AuthTabSwitcher extends StatelessWidget {
               fontSize: 15.sp
               ,
 
-              color: selected ? AppColors.primary : Colors.grey,
+              color: selected ? color.primary : Colors.grey,
             ),
           ),
           const SizedBox(height: 4),
@@ -227,7 +232,7 @@ class _AuthTabSwitcher extends StatelessWidget {
             duration: const Duration(milliseconds: 200),
             height: 2,
             width: 44,
-            color: selected ? AppColors.primary : Colors.transparent,
+            color: selected ? color.primary : Colors.transparent,
           ),
         ],
       ),

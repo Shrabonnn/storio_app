@@ -5,8 +5,8 @@ import 'package:storio_app/widget/universal/custom_drop_down.dart';
 import '../../model/activity/activity_details_seo_settings_model.dart';
 import '../../model/form_field/form_feild_data.dart';
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/institute_profile/Institute_overview_screen.dart';
 import '../../widget/institute_profile/infrastructure_drop_down.dart';
@@ -81,6 +81,7 @@ class _AddBlogState extends State<AddBlog> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -101,21 +102,21 @@ class _AddBlogState extends State<AddBlog> {
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Title*", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Title*", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Post Title", controller: jonTitleController),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // URL SLUG
-                        TextBodyStyleWidget(title: "URL Slug*", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "URL Slug*", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "blog -2025", controller: designationController,),
                         SizedBox(height: AppSizes.itemGap),
 
 
                         // AUTHOR
-                        TextBodyStyleWidget(title: "Author*", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Author*", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. John Doe", controller: designationController,),
 
@@ -132,7 +133,7 @@ class _AddBlogState extends State<AddBlog> {
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Featured Image", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Featured Image", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               height: 4.h,
@@ -176,7 +177,7 @@ class _AddBlogState extends State<AddBlog> {
 
                           TextBodyStyleWidget(
                             title: "Content",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -263,7 +264,7 @@ class _AddBlogState extends State<AddBlog> {
                       children: [
 
                         // Tag
-                        TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: statusList,
@@ -288,7 +289,7 @@ class _AddBlogState extends State<AddBlog> {
                                 child: Column(
                                   crossAxisAlignment: .start,
                                   children: [
-                                    TextBodyStyleWidget(title: "Publish Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "Publish Date", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "mm/dd/yy", controller: companyNameController,isDatePicker: true,),
 
@@ -307,7 +308,7 @@ class _AddBlogState extends State<AddBlog> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    TextBodyStyleWidget(title: "Publish Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "Publish Date", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "mm/dd/yy", controller: companyNameController,isDatePicker: true,),
 
@@ -318,7 +319,7 @@ class _AddBlogState extends State<AddBlog> {
                               Flexible(
                                 child: Column(
                                   children: [
-                                    TextBodyStyleWidget(title: "Time", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                    TextBodyStyleWidget(title: "Time", color: color.primary,size: AppSizes.cardTitle,),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "2:30 PM", controller: companyNameController,isDatePicker: true,),
 
@@ -343,7 +344,7 @@ class _AddBlogState extends State<AddBlog> {
                       children: [
 
                         // Tag
-                        TextBodyStyleWidget(title: "Excerpt", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Excerpt", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "A short summary of the post...", controller: companyNameController,minLines:3,maxLines: 6,),
 
@@ -359,7 +360,7 @@ class _AddBlogState extends State<AddBlog> {
                       children: [
 
                         // Tag
-                        TextBodyStyleWidget(title: "Add Tags", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Add Tags", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "add tags...", controller: companyNameController),
 
@@ -410,7 +411,7 @@ class _AddBlogState extends State<AddBlog> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Edit Post":"Save Post", onTap: (){},)),
                       ],

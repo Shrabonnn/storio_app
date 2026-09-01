@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/utils/theme/theme_ext.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -28,14 +29,15 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return SizedBox(
       width: width ?? double.infinity,
       height: height ?? 4.8.h,
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? AppColors.primary,
-          foregroundColor: foregroundColor ?? Colors.white,
+          backgroundColor: backgroundColor ?? color.primary,
+          foregroundColor: foregroundColor ?? color.cardBackground,
           elevation: 0,
           padding:  EdgeInsets.symmetric(horizontal: AppSizes.smallPadding),
           minimumSize: Size.zero,

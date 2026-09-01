@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_title_style.dart';
 import 'custom_card2.dart';
 
@@ -17,6 +18,7 @@ class InfoItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Flexible(
       child: CustomCard2(
           child: Padding(
@@ -35,7 +37,7 @@ class InfoItemCard extends StatelessWidget {
                     ],
 
 
-                    Flexible(child: TextTitleWidget(maxLines: 1,title: name,color: AppColors.primary,)),
+                    Flexible(child: TextTitleWidget(maxLines: 1,title: name,color: color.primary,)),
                   ],
                 ),
 

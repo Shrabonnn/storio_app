@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -26,6 +27,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -42,11 +44,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextBodyStyleWidget(title: "Authentication & Recovery", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Authentication & Recovery", color: color.primary,size: AppSizes.sectionTitle,),
                         Divider(),
 
                         // Title
-                        TextBodyStyleWidget(title: "Password Change", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Password Change", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         TextBodyStyleWidget(title: "Update your primary login password regularly to keep your account safe.",size: AppSizes.cardTitle,fontbold: false,maxLines: 2,),
                         SizedBox(height: AppSizes.smallGap,),
@@ -60,7 +62,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextBodyStyleWidget(title: "Two-Factor Authentication (2FA)", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Two-Factor Authentication (2FA)", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         TextBodyStyleWidget(title: "Add an extra layer of security to your account by requiring a code from your mobile device.",size: AppSizes.cardTitle,fontbold: false,maxLines: 2,),
                         SizedBox(height: AppSizes.smallGap,),
@@ -76,15 +78,15 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     CustomCard(child: Column(
                       crossAxisAlignment: .start,
                       children: [
-                        TextBodyStyleWidget(title: "Device Management", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Device Management", color: color.primary,size: AppSizes.sectionTitle,),
                         Divider(),
 
                         // Title
-                        TextBodyStyleWidget(title: "Active Login Sessions", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Active Login Sessions", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         TextBodyStyleWidget(title: "Devices currently logged into your account.",size: AppSizes.cardTitle,fontbold: false,maxLines: 2,),
                         SizedBox(height: AppSizes.smallGap,),
-                        CustomButton(icon: Icons.logout,text: "Log out All Others", backgroundColor: AppColors.cartBackgroundLight,foregroundColor:Colors.red,onTap: (){}),
+                        CustomButton(icon: Icons.logout,text: "Log out All Others", backgroundColor: color.lightVersionOfPrimaryLightVersion,foregroundColor:Colors.red,onTap: (){}),
 
                         SizedBox(height: AppSizes.smallGap,),
                         Divider(),
@@ -112,14 +114,14 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                           width: 12.w,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: Colors.white,
+                                            color: color.cardBackground,
                                             border: Border.all(
                                               color: Colors.grey.shade200,
                                             ),
                                           ),
                                           child: Icon(
                                             Icons.desktop_windows_outlined,
-                                            color: AppColors.primary,
+                                            color: color.primary,
                                             size: AppSizes.iconLarge,
                                           ),
                                         ),
@@ -132,7 +134,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                             children: [
                                               TextBodyStyleWidget(
                                                 title: "Windows Desktop - Edge",
-                                                color: AppColors.primary,
+                                                color: color.primary,
                                                 size: AppSizes.cardTitle,
                                               ),
 

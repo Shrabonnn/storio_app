@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -51,6 +51,7 @@ class _AddGalleryImagesState extends State<AddGalleryImages> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -78,7 +79,7 @@ class _AddGalleryImagesState extends State<AddGalleryImages> {
                            Row(
                              mainAxisAlignment: .spaceBetween,
                              children: [
-                               TextBodyStyleWidget(title: "Gallery Images", color: AppColors.primary,size: AppSizes.cardTitle,),
+                               TextBodyStyleWidget(title: "Gallery Images", color: color.primary,size: AppSizes.cardTitle,),
                                SizedBox(width: AppSizes.appbarGap),
                                CustomButton(
                                  height: 4.h,
@@ -116,39 +117,39 @@ class _AddGalleryImagesState extends State<AddGalleryImages> {
 
 
                        // Title
-                       TextBodyStyleWidget(title: "Filename", color: AppColors.primary,size: AppSizes.cardTitle,),
+                       TextBodyStyleWidget(title: "Filename", color: color.primary,size: AppSizes.cardTitle,),
                        SizedBox(height: AppSizes.appbarGap),
                        CustomTextFieldWidget(hintText: "e.g., sunset-beach.jpg", controller: filenameController),
                        SizedBox(height: AppSizes.itemGap),
 
 
                        // Activities
-                       TextBodyStyleWidget(title: "Alt Text (for SEO) *", color: AppColors.primary,size: AppSizes.cardTitle,),
+                       TextBodyStyleWidget(title: "Alt Text (for SEO) *", color: color.primary,size: AppSizes.cardTitle,),
                        SizedBox(height: AppSizes.appbarGap),
                        CustomTextFieldWidget(hintText: "A short description of the image for accessibility", controller: filenameController,),
                        SizedBox(height: AppSizes.itemGap),
 
 
                        // Title
-                       TextBodyStyleWidget(title: "Image Title (for SEO) *", color: AppColors.primary,size: AppSizes.cardTitle,),
+                       TextBodyStyleWidget(title: "Image Title (for SEO) *", color: color.primary,size: AppSizes.cardTitle,),
                        SizedBox(height: AppSizes.appbarGap),
                        CustomTextFieldWidget(hintText: "Optional title for the image", controller: filenameController),
                        SizedBox(height: AppSizes.itemGap),
 
 
                        // Activities
-                       TextBodyStyleWidget(title: "Caption", color: AppColors.primary,size: AppSizes.cardTitle,),
+                       TextBodyStyleWidget(title: "Caption", color: color.primary,size: AppSizes.cardTitle,),
                        SizedBox(height: AppSizes.appbarGap),
                        CustomTextFieldWidget(hintText: "Optional caption to display with the image ...", controller: filenameController,),
                        SizedBox(height: AppSizes.itemGap),
 
                        // Title
-                       TextBodyStyleWidget(title: "Tags (comma separated)", color: AppColors.primary,size: AppSizes.cardTitle,),
+                       TextBodyStyleWidget(title: "Tags (comma separated)", color: color.primary,size: AppSizes.cardTitle,),
                        SizedBox(height: AppSizes.appbarGap),
                        CustomTextFieldWidget(hintText: "e.g., nature, travel, featured", controller: filenameController),
                        SizedBox(height: AppSizes.itemGap),
 
-                       TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.cardTitle,),
+                       TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.cardTitle,),
                        SizedBox(height: AppSizes.appbarGap),
                        CustomDropdown(
                          items: statusList,

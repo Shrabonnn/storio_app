@@ -5,7 +5,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/textStyle/text_title_style.dart';
@@ -31,6 +32,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
    bool isVisible = false;
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -49,15 +51,15 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                             children: [
                               TextBodyStyleWidget(
                                 title: widget.isEdit?"Edit Section: {Name section} " : "Create New Section",
-                                color: AppColors.primary,
+                                color: color.primary,
                                 size: AppSizes.sectionTitle,
                               ),
                               Row(
                                 children: [
-                                  Checkbox(value: isVisible, activeColor: AppColors.primary,onChanged: (value){
+                                  Checkbox(value: isVisible, activeColor: color.primary,onChanged: (value){
                                     isVisible = value ?? false;
                                   }),
-                                  TextBodyStyleWidget(title: "Is Visible",color: AppColors.primary,)
+                                  TextBodyStyleWidget(title: "Is Visible",color: color.primary,)
                                 ],
                               )
                             ],
@@ -67,7 +69,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                           // Title
                           TextBodyStyleWidget(
                             title: "Section  Name ",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -81,7 +83,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                           // Description
                           TextBodyStyleWidget(
                             title: "Description",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -104,7 +106,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                         if(widget.isEdit)...[
                           CustomButton(text: "cancel",width: 30.w ,onTap: () {
                             Navigator.pop(context);
-                          },backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                          },backgroundColor: color.cardBackground,foregroundColor: color.primary,),
 
                           SizedBox(width: AppSizes.appbarGap,),
                         ],
@@ -120,7 +122,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                         children: [
                           TextBodyStyleWidget(
                             title: "Existing Sections ( 1 )",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.itemGap),
@@ -141,7 +143,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                                             children: [
                                               TextTitleWidget(
                                                 title: "Hello Bangladesh ",
-                                                color: AppColors.primary,
+                                                color: color.primary,
                                                 maxLines: 1,
                                               ),
                                               SizedBox(height: AppSizes.appbarGap),
@@ -162,7 +164,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                                                       'isEdit' : true,
                                                     });
                                                   }
-                                                  ,child: Icon(Icons.edit,size: AppSizes.iconLarge, color: AppColors.primary)),
+                                                  ,child: Icon(Icons.edit,size: AppSizes.iconLarge, color: color.primary)),
                                             ],
                                             SizedBox(width: AppSizes.itemGap,),
                                             Icon(Icons.delete_outline_outlined,size: AppSizes.iconLarge, color: Colors.red),

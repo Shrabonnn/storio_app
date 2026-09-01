@@ -90,10 +90,10 @@ class _StorioSplashScreenState extends State<StorioSplashScreen>
   }
   Future<void> checkLogin() async {
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
-      );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+    );
 
   }
 
@@ -310,4 +310,3 @@ class _LoadingDots extends StatelessWidget {
     );
   }
 }
-

@@ -5,6 +5,7 @@ import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
 import '../routes/routes_name.dart';
 import '../utils/app_colors.dart';
+import '../utils/theme/theme_ext.dart';
 import '../widget/dashboard/action_grid.dart';
 import '../widget/dashboard/action_tile.dart';
 import '../widget/universal/custom_app_bar.dart';
@@ -20,6 +21,7 @@ class ActionDetails extends StatefulWidget {
 class _ActionDetailsState extends State<ActionDetails> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body:  CustomScrollView(
         slivers: [
@@ -35,7 +37,7 @@ class _ActionDetailsState extends State<ActionDetails> {
                     CustomCard(child:  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextTitleWidget(title: "Content",color: AppColors.primary,size: 17,),
+                        TextTitleWidget(title: "Content",color: color.primary,size: 17,),
                         SizedBox(height: 1.h,),
                         // 8 Actions
                         _buildContentActionGrid(context),
@@ -47,7 +49,7 @@ class _ActionDetailsState extends State<ActionDetails> {
 
 
                         //Oraganization
-                        TextTitleWidget(title: "Organization",color: AppColors.primary,size: 17,),
+                        TextTitleWidget(title: "Organization",color: color.primary,size: 17,),
 
                         SizedBox(height: 1.h,),
 
@@ -61,7 +63,7 @@ class _ActionDetailsState extends State<ActionDetails> {
 
 
                         //User Manage
-                        TextTitleWidget(title: "User Manage",color: AppColors.primary,size: 17,),
+                        TextTitleWidget(title: "User Manage",color: color.primary,size: 17,),
 
                         SizedBox(height: 1.h,),
                         // 8 Actions

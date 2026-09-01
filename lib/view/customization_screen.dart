@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_colors.dart';
-import 'package:storio_app/utils/sizes.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
 import '../routes/routes_name.dart';
+import '../utils/theme/theme_ext.dart';
 import '../widget/dashboard/action_grid.dart';
 import '../widget/dashboard/action_tile.dart';
 import '../widget/universal/custom_app_bar.dart';
@@ -21,6 +22,7 @@ class CustomizationScreen extends StatefulWidget {
 class _CustomizationScreenState extends State<CustomizationScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -35,7 +37,7 @@ class _CustomizationScreenState extends State<CustomizationScreen> {
                     // Overlapping Card
                     CustomCard(child: Column(
                       children: [
-                        TextTitleWidget(title: 'Customize Your Pages',color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextTitleWidget(title: 'Customize Your Pages',color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.itemGap,),
                         // 8 Actions
                         _buildActionGrid(context),
@@ -50,7 +52,7 @@ class _CustomizationScreenState extends State<CustomizationScreen> {
                       height: 8.h,
                       padding: EdgeInsets.all(AppSizes.cardPadding),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: color.cardBackground,
                           borderRadius: BorderRadius.circular(AppSizes.cardRadius)
                       ),
                       child: Row(
@@ -58,10 +60,10 @@ class _CustomizationScreenState extends State<CustomizationScreen> {
                         children: [
                           CircleAvatar(
                             radius: 3.h,
-                            backgroundColor: AppColors.primary,
+                            backgroundColor: color.primary,
                             child: Icon(
                               Icons.computer,
-                              color: Colors.white,
+                              color: color.cardBackground,
                               size: 3.5.h,
                             ),
                           ),

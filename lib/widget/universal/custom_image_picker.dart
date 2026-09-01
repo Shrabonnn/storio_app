@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../custom_button/custom_buttom.dart';
 import '../textStyle/text_body_style.dart';
 import '../textStyle/text_title_style.dart';
@@ -59,6 +60,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return InkWell(
       borderRadius: BorderRadius.circular(AppSizes.cardRadius),
       onTap: _pickImage,
@@ -70,7 +72,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           horizontal: AppSizes.screenPadding,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: color.cardBackground,
           borderRadius: BorderRadius.circular(AppSizes.cardRadius),
           border: Border.all(
             color: Colors.grey.shade300,
@@ -85,13 +87,14 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
   }
 
   Widget _buildEmptyPicker() {
+    final color = context.Appcolor;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
           Icons.cloud_upload_outlined,
           size: 70,
-          color: AppColors.primary,
+          color: color.primary,
         ),
 
         SizedBox(height: AppSizes.sectionGap),

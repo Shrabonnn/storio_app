@@ -3,8 +3,9 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_body_style.dart';
 
 class CustomDropdown extends StatefulWidget {
@@ -48,22 +49,24 @@ class _CustomDropdownState extends State<CustomDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Container(
       height: widget.height ?? 4.5.h,
       width: widget.width ?? 25.w,
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: color.primary,
         borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
       ),
       child: DropdownButtonHideUnderline(
+
         child: DropdownButton2<String>(
           isExpanded: true,
           valueListenable: valueListenable,
 
-          iconStyleData: const IconStyleData(
+          iconStyleData:  IconStyleData(
             icon: Icon(
               Icons.keyboard_arrow_down,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
 
@@ -80,7 +83,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             scrollPadding: EdgeInsets.zero,
             decoration: BoxDecoration(
-              color: AppColors.primary,
+              color: color.primary,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(AppSizes.buttonRadius),
                 bottomRight: Radius.circular(AppSizes.buttonRadius),
@@ -98,7 +101,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 alignment: Alignment.centerLeft,
                 child: TextBodyStyleWidget(
                   title: item,
-                  color: Colors.white,
+                  color: color.cardBackground,
                   size: AppSizes.cardTitle,
                 ),
               );
@@ -117,7 +120,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 alignment: Alignment.centerLeft,
                 child: TextBodyStyleWidget(
                   title: item,
-                  color: isSelected ? Colors.orange : Colors.white,
+                  color: isSelected ? Colors.orange : color.cardBackground,
                   size: AppSizes.cardSubTitle,
                 ),
               ),

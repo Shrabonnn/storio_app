@@ -9,7 +9,8 @@ import 'package:storio_app/widget/universal/custom_card.dart';
 import 'package:storio_app/widget/universal/custom_card2.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
 
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/universal/custom_app_bar.dart';
 
 class EducationBoardNotices extends StatefulWidget {
@@ -40,6 +41,7 @@ class _EducationBoardNoticesState extends State<EducationBoardNotices> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -60,7 +62,7 @@ class _EducationBoardNoticesState extends State<EducationBoardNotices> {
                         children: [
                           TextTitleWidget(
                             title: "Select Education Board (Single)",
-                            color: AppColors.primary,
+                            color: color.primary,
                           ),
 
                           SizedBox(height: AppSizes.smallGap),
@@ -139,7 +141,7 @@ class _EducationBoardNoticesState extends State<EducationBoardNotices> {
                                     ),
                                   ),
                                   SizedBox(width: AppSizes.itemGap,),
-                                  CustomStatusBadge(title: "View",backgroundColor: AppColors.primary,foregroundColor: Colors.white,)
+                                  CustomStatusBadge(title: "View",backgroundColor: color.primary,foregroundColor: color.cardBackground,)
                                 ],
                               ),
                             )),
@@ -159,11 +161,11 @@ class _EducationBoardNoticesState extends State<EducationBoardNotices> {
                                 children: [
                                   Container(
                                       decoration: BoxDecoration(
-                                        color: AppColors.cartBackgroundLight,
+                                        color: color.lightVersionOfPrimaryLightVersion,
                                         borderRadius: BorderRadius.circular(AppSizes.buttonRadius)
                                       ),child: Padding(
                                         padding:  EdgeInsets.all(AppSizes.buttonRadius),
-                                        child: Icon(Icons.link,size: AppSizes.appBarIcon,color: AppColors.primary,),
+                                        child: Icon(Icons.link,size: AppSizes.appBarIcon,color: color.primary,),
                                       ))
                                 ],
                               ),
@@ -174,7 +176,7 @@ class _EducationBoardNoticesState extends State<EducationBoardNotices> {
                                   children: [
                                     TextTitleWidget(
                                       title: "Important Links",
-                                      color: AppColors.primary,
+                                      color: color.primary,
                                     ),
                                     SizedBox(height: AppSizes.appbarGap),
                                     TextBodyStyleWidget(
@@ -219,11 +221,11 @@ class _EducationBoardNoticesState extends State<EducationBoardNotices> {
                                       children: [
                                         Container(
                                             decoration: BoxDecoration(
-                                                color: Colors.white70,
+                                                color: color.cardBackground.withValues(alpha: 0.7),
                                                 borderRadius: BorderRadius.circular(AppSizes.buttonRadius)
                                             ),child: Padding(
                                           padding:  EdgeInsets.all(AppSizes.buttonRadius),
-                                          child: Icon(Icons.language_outlined,size: AppSizes.appBarIcon,color: AppColors.secondary,),
+                                          child: Icon(Icons.language_outlined,size: AppSizes.appBarIcon,color: color.secondary,),
                                         )),
                                         SizedBox(width: AppSizes.smallGap,),
 
@@ -247,7 +249,7 @@ class _EducationBoardNoticesState extends State<EducationBoardNotices> {
                                           'isEdit':true,
                                         });
                                       }
-                                      ,child: Icon(Icons.edit,size: AppSizes.icon,color: AppColors.primary,)),
+                                      ,child: Icon(Icons.edit,size: AppSizes.icon,color: color.primary,)),
                                   SizedBox(width: AppSizes.itemGap,),
                                   GestureDetector(
                                       onTap: (){}

@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -58,6 +58,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
   }
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -78,13 +79,13 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Enter event title", controller: titleController),
                         SizedBox(height: AppSizes.itemGap,),
 
 
-                        TextBodyStyleWidget(title: "Description", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Description", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Enter event description", controller: descriptionController,minLines: 4,maxLines: 6,),
 
@@ -104,7 +105,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "Start Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "Start Date", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "mm/dd/yy", controller: startDateController,isDatePicker: true,),
 
@@ -115,7 +116,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                           Flexible(
                             child: Column(
                               children: [
-                                TextBodyStyleWidget(title: "End Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                TextBodyStyleWidget(title: "End Date", color: color.primary,size: AppSizes.cardTitle,),
                                 SizedBox(height: AppSizes.appbarGap),
                                 CustomTextFieldWidget(hintText: "2:30 PM", controller: endDateController,isDatePicker: true,),
 
@@ -137,7 +138,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                             Flexible(
                               child: Column(
                                 children: [
-                                  TextBodyStyleWidget(title: "Category", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                  TextBodyStyleWidget(title: "Category", color: color.primary,size: AppSizes.cardTitle,),
                                   SizedBox(height: AppSizes.appbarGap),
 
                                   CustomDropdown(
@@ -161,7 +162,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                             Flexible(
                               child: Column(
                                 children: [
-                                  TextBodyStyleWidget(title: "Level", color: AppColors.primary,size: AppSizes.cardTitle,),
+                                  TextBodyStyleWidget(title: "Level", color: color.primary,size: AppSizes.cardTitle,),
                                   SizedBox(height: AppSizes.appbarGap),
 
                                   CustomDropdown(
@@ -199,7 +200,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:"Save Post", onTap: (){},)),
                       ],

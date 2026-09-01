@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/quill/editor_icon.dart';
 import '../../../widget/quill/editor_option.dart';
@@ -63,6 +64,7 @@ class _NewSectionLeadershipMessageState extends State<NewSectionLeadershipMessag
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -83,7 +85,7 @@ class _NewSectionLeadershipMessageState extends State<NewSectionLeadershipMessag
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Profile Photo", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Profile Photo", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               width: 30.w,
@@ -131,17 +133,17 @@ class _NewSectionLeadershipMessageState extends State<NewSectionLeadershipMessag
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Full Name ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Full Name ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "John Doe", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Role / Title", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Role / Title", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "", controller: emailController,),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Institute / Company ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Institute / Company ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "01XXXXXXXXX", controller: phoneController,),
                         SizedBox(height: AppSizes.itemGap),
@@ -236,7 +238,7 @@ class _NewSectionLeadershipMessageState extends State<NewSectionLeadershipMessag
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Digital Signature", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Digital Signature", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               width: 30.w,
@@ -273,7 +275,7 @@ class _NewSectionLeadershipMessageState extends State<NewSectionLeadershipMessag
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Update Message":"Save Message", onTap: (){},)),
                       ],

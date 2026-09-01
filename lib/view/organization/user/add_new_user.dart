@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
@@ -49,6 +50,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -69,49 +71,49 @@ class _AddNewUserState extends State<AddNewUser> {
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Full Name ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Full Name ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "John ", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
                         // last name
-                        TextBodyStyleWidget(title: "Last Name ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Last Name ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Doe", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
 
-                        TextBodyStyleWidget(title: "Username ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Username ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Username", controller: emailController,),
                         SizedBox(height: AppSizes.itemGap),
 
                         // Title
-                        TextBodyStyleWidget(title: "Email", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Email", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "user@gmail.com", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
                         // last name
-                        TextBodyStyleWidget(title: "Phone Number", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Phone Number", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "01XXXXXXXXX", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
 
-                        TextBodyStyleWidget(title: "Address", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Address", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Dhanmondi 32", controller: emailController,),
                         SizedBox(height: AppSizes.itemGap),
 
                         // Title
-                        TextBodyStyleWidget(title: "Password  ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Password  ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "Secure password ", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
                         // last name
-                        TextBodyStyleWidget(title: "Confirm Password ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Confirm Password ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "ecure password ", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
@@ -121,7 +123,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
 
                         // AUTHOR
-                        TextBodyStyleWidget(title: "Role", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Role", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: roleList,
@@ -139,7 +141,7 @@ class _AddNewUserState extends State<AddNewUser> {
                         ),
                         SizedBox(height: AppSizes.itemGap,),
 
-                        TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: statusList,
@@ -168,7 +170,7 @@ class _AddNewUserState extends State<AddNewUser> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.smallGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Update User":"Create User", onTap: (){},)),
                       ],

@@ -4,8 +4,8 @@ import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
@@ -38,6 +38,7 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -88,15 +89,15 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                                 height: 4.5.h,
                                 size: AppSizes.cardSubTitle,
                                 borderSide: BorderSide(
-                                  color: AppColors.primary,
+                                  color: color.primary,
                                   width: 1,
                                 ),
                                 backgroundColor: selectedStatus == index
-                                    ? Colors.white
-                                    : AppColors.primary,
+                                    ? color.cardBackground
+                                    : color.primary,
                                 foregroundColor: selectedStatus == index
-                                    ? AppColors.primary
-                                    : Colors.white,
+                                    ? color.primary
+                                    : color.cardBackground,
                                 onTap: () {
                                   setState(() {
                                     selectedStatus = index;
@@ -128,14 +129,14 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                                 vertical: 5,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.primary,
+                                color: color.primary,
                                 borderRadius: BorderRadius.circular(
                                   AppSizes.buttonRadius,
                                 ),
                               ),
                               child: TextBodyStyleWidget(
                                 title: "Published",
-                                color: Colors.white,
+                                color: color.cardBackground,
                               ),
                             ),
 
@@ -145,13 +146,13 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                                   children: [
                                     Icon(
                                       Icons.photo_album_outlined,
-                                      color: AppColors.primary,
+                                      color: color.primary,
                                       size: AppSizes.icon,
                                     ),
 
                                     SizedBox(width: AppSizes.appbarGap),
 
-                                    TextTitleWidget(title: "Uncategorized",color: AppColors.primary,),
+                                    TextTitleWidget(title: "Uncategorized",color: color.primary,),
 
                                   ],
                                 ),
@@ -162,7 +163,7 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                                   children: [
                                     Icon(
                                       Icons.image,
-                                      color: AppColors.primary,
+                                      color: color.primary,
                                       size: AppSizes.icon,
                                     ),
 
@@ -178,7 +179,7 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                                   children: [
                                     Icon(
                                       Icons.image_aspect_ratio,
-                                      color: AppColors.primary,
+                                      color: color.primary,
                                       size: AppSizes.icon,
                                     ),
 
@@ -206,7 +207,7 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
                                       );
                                     },)),
                                     SizedBox(width: AppSizes.appbarGap,),
-                                    CustomButton(text: "Delete", onTap: (){},width: 30.w,backgroundColor: Colors.red,foregroundColor: Colors.white,),
+                                    CustomButton(text: "Delete", onTap: (){},width: 30.w,backgroundColor: Colors.red,foregroundColor: color.cardBackground,),
 
 
                                   ],
@@ -229,24 +230,24 @@ class _GalleryManageScreenState extends State<GalleryManageScreen> {
         children: [
           FloatingActionButton(
             heroTag: "addCategory",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.manage_album);
             },
-            child: const Icon(Icons.grid_view_rounded, color: Colors.white),
+            child:  Icon(Icons.grid_view_rounded, color: color.cardBackground),
           ),
 
           SizedBox(height: AppSizes.itemGap),
 
           FloatingActionButton(
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.gallery_add_image,arguments: {
                 'isEdit': false,
               },);
             },
-            child: const Icon(Icons.add, color: Colors.white),
+            child:  Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),

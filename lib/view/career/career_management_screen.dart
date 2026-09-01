@@ -5,7 +5,8 @@ import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/search_text_field.dart';
 import '../../widget/universal/status_button_row.dart';
@@ -35,6 +36,7 @@ class _CareerManagementScreenState extends State<CareerManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body:  CustomScrollView(
         slivers: [
@@ -114,26 +116,32 @@ class _CareerManagementScreenState extends State<CareerManagementScreen> {
                              TableRow(
                                children: [
                                  _tableCell(
+                                   context:context,
                                    "JOB TITLE & COMPANY",
                                    isHeader: true,
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "TYPE & LOCATION",
                                    isHeader: true,
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "CANDIDATES",
                                    isHeader: true,
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "DEADLINE",
                                    isHeader: true,
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "STATUS",
                                    isHeader: true,
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "ACTIONS",
                                    isHeader: true,
                                  ),
@@ -144,21 +152,27 @@ class _CareerManagementScreenState extends State<CareerManagementScreen> {
                              TableRow(
                                children: [
                                  _tableCell(
+                                   context:context,
                                    "Sr. Software Engineer\nBrainicon Technology",
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "Full-Time\nDhaka",
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "1 Openings",
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "4/30/2026",
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "Active",
                                  ),
                                  _tableCell(
+                                   context:context,
                                    "",
                                    icons: [
                                      Icons.edit_outlined,
@@ -200,13 +214,13 @@ class _CareerManagementScreenState extends State<CareerManagementScreen> {
 
           FloatingActionButton(
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_new_job_circular,arguments: {
                 'isEdit': false,
               },);
             },
-            child: const Icon(Icons.add, color: Colors.white),
+            child:  Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),
@@ -218,12 +232,14 @@ class _CareerManagementScreenState extends State<CareerManagementScreen> {
 
 Widget _tableCell(
     String text, {
+      required BuildContext context,
       bool isHeader = false,
       List<IconData>? icons,
       List<VoidCallback>? onTaps,
 
 
     }) {
+  final color = context.Appcolor;
   return Container(
     padding: EdgeInsets.symmetric(
       horizontal: AppSizes.cardPadding,
@@ -268,7 +284,7 @@ Widget _tableCell(
             ? FontWeight.w600
             : FontWeight.w500,
         color: isHeader
-            ? AppColors.primary
+            ? color.primary
             : Colors.grey.shade700,
       ),
     ),

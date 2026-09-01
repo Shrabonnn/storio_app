@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/custom_button/custom_buttom.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
@@ -61,6 +62,9 @@ class _AddNewStaffState extends State<AddNewStaff> {
 
   @override
   Widget build(BuildContext context) {
+
+    final color = context.Appcolor;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -81,7 +85,7 @@ class _AddNewStaffState extends State<AddNewStaff> {
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Profile Photo", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Profile Photo", color: color.primary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               width: 30.w,
@@ -129,23 +133,23 @@ class _AddNewStaffState extends State<AddNewStaff> {
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Full Name ", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Full Name ", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "John Doe", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Email", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Email", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "user@gmail.com", controller: emailController,),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Phone", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Phone", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "01XXXXXXXXX", controller: phoneController,),
                         SizedBox(height: AppSizes.itemGap),
 
 
-                        TextBodyStyleWidget(title: "Positon", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Positon", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "role", controller: phoneController,),
                         SizedBox(height: AppSizes.itemGap),
@@ -155,7 +159,7 @@ class _AddNewStaffState extends State<AddNewStaff> {
 
 
                         // AUTHOR
-                        TextBodyStyleWidget(title: "Status", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Status", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: statusList,
@@ -175,7 +179,7 @@ class _AddNewStaffState extends State<AddNewStaff> {
 
 
 
-                        TextBodyStyleWidget(title: "Department", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Department", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
                           items: departmentList,
@@ -201,17 +205,17 @@ class _AddNewStaffState extends State<AddNewStaff> {
                       crossAxisAlignment: .start,
                       children: [
                         // Title
-                        TextBodyStyleWidget(title: "Qualification", color: AppColors.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Qualification", color: color.primary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "MSC in Marketing", controller: fullNameController),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Join Date", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Join Date", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "08/08/2026", controller: emailController,isDatePicker: true,),
                         SizedBox(height: AppSizes.itemGap),
 
-                        TextBodyStyleWidget(title: "Bio / Description", color: AppColors.primary,size: AppSizes.cardTitle,),
+                        TextBodyStyleWidget(title: "Bio / Description", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(minLines: 4,maxLines: 5,hintText: "write a short description", controller: phoneController,),
                         SizedBox(height: AppSizes.itemGap),
@@ -225,7 +229,7 @@ class _AddNewStaffState extends State<AddNewStaff> {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: Colors.white,foregroundColor: AppColors.primary,),
+                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
                         SizedBox(width: AppSizes.appbarGap,),
                         Flexible(child: CustomButton(text:widget.isEdit? "Update Post":"Save Post", onTap: (){},)),
                       ],

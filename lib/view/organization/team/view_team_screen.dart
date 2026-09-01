@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import '../../../utils/theme/theme_ext.dart';
 import '../../../widget/textStyle/text_body_style.dart';
 import '../../../widget/universal/custom_app_bar.dart';
 import '../../../widget/universal/custom_card2.dart';
@@ -7,7 +8,7 @@ import '../../../widget/universal/custom_status_badge.dart';
 import '../../../widget/universal/image_card.dart';
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_colors.dart';
-import '../../../utils/sizes.dart';
+import '../../../utils/app_sizes.dart';
 import '../../../widget/universal/info_row_widget.dart';
 
 class ViewTeamScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class ViewTeamScreen extends StatefulWidget {
 class _ViewTeamScreenState extends State<ViewTeamScreen> {
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -59,7 +61,7 @@ class _ViewTeamScreenState extends State<ViewTeamScreen> {
                                         Navigator.pushNamed(context, RoutesName.add_new_team_member,arguments: {
                                           'isEdit' : true,
                                         });
-                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: AppColors.primary,)),
+                                      },child: Icon(Icons.edit,size: AppSizes.iconLarge,color: color.primary,)),
                                   SizedBox(width: AppSizes.itemGap,),
                                   Icon(Icons.delete_outline_outlined,size: AppSizes.iconLarge,color: Colors.red,)
                                 ],
@@ -77,11 +79,11 @@ class _ViewTeamScreenState extends State<ViewTeamScreen> {
                                 Row(
                                   crossAxisAlignment: .start,
                                   children: [
-                                    Icon(Icons.file_copy_outlined,color: AppColors.primary,size: AppSizes.icon,),
+                                    Icon(Icons.file_copy_outlined,color: color.primary,size: AppSizes.icon,),
 
                                     SizedBox(width: AppSizes.appbarGap,),
                                     Flexible(
-                                      child: TextBodyStyleWidget(title: "Detailed Description: Experienced business leader with a strong background in technology, strategic planning, and organizational growth. Passionate about building innovative products, leading high-performing teams, and creating long-term business value. ",color: AppColors.primary,fontbold: false,maxLines: 25,
+                                      child: TextBodyStyleWidget(title: "Detailed Description: Experienced business leader with a strong background in technology, strategic planning, and organizational growth. Passionate about building innovative products, leading high-performing teams, and creating long-term business value. ",color: color.primary,fontbold: false,maxLines: 25,
                                       ),
                                     ),
                                   ],
@@ -90,10 +92,10 @@ class _ViewTeamScreenState extends State<ViewTeamScreen> {
                                 Row(
                                   crossAxisAlignment: .start,
                                   children: [
-                                    Icon(Icons.workspace_premium,color: AppColors.primary,size: AppSizes.icon,),
+                                    Icon(Icons.workspace_premium,color: color.primary,size: AppSizes.icon,),
                                     SizedBox(width: AppSizes.appbarGap,),
                                     Flexible(
-                                      child: TextBodyStyleWidget(title: "Experience / Background: 12+ years of professional experience7+ years in leadership and management 5+ years as a senior executive Expertise in business strategy, product development, and team leadershi pSuccessfully led multiple large-scale projects and business initiatives",color: AppColors.primary,fontbold: false,maxLines: 25,
+                                      child: TextBodyStyleWidget(title: "Experience / Background: 12+ years of professional experience7+ years in leadership and management 5+ years as a senior executive Expertise in business strategy, product development, and team leadershi pSuccessfully led multiple large-scale projects and business initiatives",color: color.primary,fontbold: false,maxLines: 25,
                                       ),
                                     ),
                                   ],

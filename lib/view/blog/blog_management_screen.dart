@@ -3,8 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 
 import '../../routes/routes_name.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/textStyle/text_title_style.dart';
@@ -49,6 +49,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -140,7 +141,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
 
                         TextTitleWidget(
                           title: "Study Tour 2026",
-                          color: AppColors.primary,
+                          color: color.primary,
                         ),
 
                         SizedBox(height: AppSizes.appbarGap),
@@ -205,13 +206,13 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
           FloatingActionButton(
 
             heroTag: "addCategory",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.manage_blog_category);
             },
-            child: const Icon(
+            child:  Icon(
               Icons.grid_view_rounded,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
 
@@ -221,14 +222,14 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
 
 
             heroTag: "add",
-            backgroundColor: AppColors.primary,
+            backgroundColor: color.primary,
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.add_blog);
 
             },
-            child: const Icon(
+            child:  Icon(
               Icons.add,
-              color: Colors.white,
+              color: color.cardBackground,
             ),
           ),
         ],

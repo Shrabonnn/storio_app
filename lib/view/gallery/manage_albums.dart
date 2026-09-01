@@ -5,8 +5,8 @@ import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 import 'package:storio_app/widget/universal/custom_card2.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../utils/app_sizes.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_drop_down.dart';
@@ -37,6 +37,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.Appcolor;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -53,7 +54,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                         children: [
                           TextBodyStyleWidget(
                             title: "Create New Album",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.sectionGap),
@@ -61,7 +62,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                           // Title
                           TextBodyStyleWidget(
                             title: "Name",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -74,7 +75,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                           // Activities
                           TextBodyStyleWidget(
                             title: "URL Slug",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -87,7 +88,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                           // Title
                           TextBodyStyleWidget(
                             title: "Description",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -100,7 +101,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
 
                           TextBodyStyleWidget(
                             title: "Parent Album (Optional)",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.cardTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
@@ -131,7 +132,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                         children: [
                           TextBodyStyleWidget(
                             title: "Existing Albums ( 1 )",
-                            color: AppColors.primary,
+                            color: color.primary,
                             size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.itemGap),
@@ -151,7 +152,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Study Tour Bandarban (2)",
-                                          color: AppColors.primary,
+                                          color: color.primary,
                                         ),
                                         SizedBox(height: AppSizes.appbarGap),
                                         TextBodyStyleWidget(
@@ -163,7 +164,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                                       children: [
                                         Icon(
                                           Icons.edit,
-                                          color: AppColors.primary,
+                                          color: color.primary,
                                         ),
                                         SizedBox(width: AppSizes.smallGap),
                                         Icon(Icons.delete, color: Colors.red),

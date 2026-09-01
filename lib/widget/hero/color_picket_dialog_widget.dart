@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:storio_app/utils/app_colors.dart';
 
-import '../../utils/sizes.dart';
+import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
 
 class ColorPicketDialog extends StatelessWidget{
 
@@ -10,12 +11,11 @@ class ColorPicketDialog extends StatelessWidget{
   final Color selectedColor;
   final ValueChanged<Color> onColorSelected;
 
-  const ColorPicketDialog({super.key,
+
+   ColorPicketDialog({super.key,
     required this.title,
     this.colors = const[
-      AppColors.primary,
-      AppColors.secondary,
-      Colors.white,
+
       Colors.red,
       Colors.blue,
       Colors.green,
@@ -54,6 +54,7 @@ class ColorPicketDialog extends StatelessWidget{
     ], required this.selectedColor, required this.onColorSelected});
   @override
   Widget build(BuildContext context) {
+    final Appcolor = context.Appcolor;
     return AlertDialog(
       title: Text(title),
       content: Wrap(
@@ -61,6 +62,7 @@ class ColorPicketDialog extends StatelessWidget{
         runSpacing: 12,
 
         children: colors.map((color) {
+
           return InkWell(
             onTap: () {
               onColorSelected(color);
@@ -81,7 +83,7 @@ class ColorPicketDialog extends StatelessWidget{
 
                 border: Border.all(
                   color: selectedColor == color
-                      ? Colors.white
+                      ? Appcolor.cardBackground
                       : Colors.transparent,
                   width: 3,
                 ),
