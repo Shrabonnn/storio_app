@@ -41,6 +41,7 @@ class RoutesName {
   static const notice = "notice";
   static const view_notice = "view_notice";
   static const add_new_notice = "add_new_notice";
+  static const edit_notice = "edit_notice";
   static const calender = "calender";
   static const calender_setting = "calender_setting";
   static const add_new_event_calender = "add_new_event_calender";

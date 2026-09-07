@@ -3,8 +3,6 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/custom_drop_down.dart';
 import 'package:storio_app/widget/universal/image_circle_widget.dart';
 
-import '../../model/activity/activity_details_seo_settings_model.dart';
-import '../../model/form_field/form_feild_data.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/theme/theme_ext.dart';
 import '../../utils/app_sizes.dart';

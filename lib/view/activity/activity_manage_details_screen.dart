@@ -5,8 +5,9 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/widget/institute_profile/Institute_overview_screen.dart';
 
-import '../../model/activity/activity_details_seo_settings_model.dart';
-import '../../model/form_field/form_feild_data.dart';
+import '../../data/model/activity/activity_details_seo_settings_model.dart';
+
+import '../../data/model/form_field/form_feild_data.dart';
 import '../../utils/theme/theme_ext.dart';
 import '../../utils/app_sizes.dart';
 import '../../widget/custom_button/custom_buttom.dart';

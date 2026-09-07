@@ -75,11 +75,11 @@ class DarkColor extends AppColor {
     primary: Color(0xFF9CA3B8),
     secondary: Color(0xFF78A6E4).withValues(alpha: 0.5),
 
-    screenBackground: Colors.black45.withValues(alpha: 0.3),
-    primaryLightVersion: Color(0xFF4A5AC7),
+    screenBackground: Color(0xFF171C2E).withValues(alpha: .3),
+    primaryLightVersion: Color(0xFF8B96E8).withValues(alpha: 0.4),
 
     cardBackground: Color(0xFF171C2E),
-    lightVersionOfPrimaryLightVersion: Color(0xFF9CA3B8).withValues(alpha: 0.15),
+    lightVersionOfPrimaryLightVersion: Color(0xFF9CA3B8).withValues(alpha: 0.4),
 
     textPrimary: Color(0xFF9CA3D8),
     textSecondary: Color(0xFF9CA3B8),

@@ -9,7 +9,8 @@ import '../widget/universal/custom_app_bar.dart';
 import '../widget/universal/custom_card.dart';
 
 class ContentDetails extends StatefulWidget {
-  const ContentDetails({super.key});
+  const ContentDetails({super.key, required this.initialContent});
+  final String initialContent;
 
   @override
   State<ContentDetails> createState() => _ContentDetailsState();
@@ -19,10 +20,18 @@ class _ContentDetailsState extends State<ContentDetails> {
   late QuillController _contentController;
   bool _isSaving = false;
 
+
   @override
   void initState() {
     super.initState();
     _contentController = QuillController.basic();
+
+    if (widget.initialContent.trim().isNotEmpty) {
+      _contentController.document.insert(
+        0,
+        widget.initialContent,
+      );
+    }
   }
 
   @override
@@ -32,26 +41,18 @@ class _ContentDetailsState extends State<ContentDetails> {
   }
 
   Future<void> _handleSave() async {
-    setState(() => _isSaving = true);
+    final content = _contentController.document.toPlainText().trim();
 
-
-    final content = _contentController.document.toPlainText();
-    debugPrint("Saving content: $content");
-
-    await Future.delayed(const Duration(milliseconds: 800));
-
-    if (!mounted) return;
-    setState(() => _isSaving = false);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Content saved successfully",
-          style: TextStyle(fontSize: AppSizes.cardTitle),
+    if (content.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please write some content first"),
         ),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+      );
+      return;
+    }
+
+    Navigator.pop(context, content);
   }
 
   @override

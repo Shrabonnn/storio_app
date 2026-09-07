@@ -108,15 +108,25 @@ class _DashboardState extends State<Dashboard> {
                                   children: [
                                     AppbarTextStyle(title: 'Hello, MAIYASHA👋',),
                                     SizedBox(height: AppSizes.appbarGap,),
-                                    TextBodyStyleWidget(title: "Welcome back to Storio",color: color.cardBackground,),
+                                    TextBodyStyleWidget(title: "Welcome back to Storio",color: color.textAppbar,),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    CircleAvatar(
-                                      radius: 23,
-                                      backgroundImage: AssetImage(
-                                        "assets/images/person.png",
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: color.secondary,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 23,
+                                        backgroundColor: color.primaryLightVersion,
+                                        backgroundImage: AssetImage(
+                                          "assets/images/person.png",
+                                        ),
                                       ),
                                     ),
                                     IconButton(

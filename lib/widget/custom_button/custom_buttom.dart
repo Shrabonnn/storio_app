@@ -7,7 +7,7 @@ import '../../utils/app_sizes.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final VoidCallback onTap;
+  final VoidCallback?onTap;
   final double? width;
   final double? size;
   final double? height;

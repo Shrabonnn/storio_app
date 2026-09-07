@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
+import 'package:storio_app/widget/universal/more_menu.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/theme/theme_ext.dart';
@@ -93,7 +95,42 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextTitleWidget(title: "Tony Stark",color: color.primary,),
+                            Row(
+                              mainAxisAlignment: .spaceBetween,
+                              children: [
+                                TextTitleWidget(title: "Tony Stark",color: color.primary,),
+                                MoreMenu(
+
+                                  items: const [
+                                    MoreMenuAction.view,
+                                    MoreMenuAction.delete,
+                                  ],
+                                  onSelected: (action) {
+                                    switch (action) {
+                                      case MoreMenuAction.edit:
+                                        break;
+
+                                      case MoreMenuAction.view:
+                                        Navigator.pushNamed(context, RoutesName.view_admission);
+                                        break;
+
+                                      case MoreMenuAction.delete:
+                                      // delete
+                                        break;
+                                      case MoreMenuAction.archive:
+                                       // archive
+                                      break;
+                                      case MoreMenuAction.changePassword:
+                                      // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                      case MoreMenuAction.suspend:
+                                      // TODO: Handle this case.
+                                        throw UnimplementedError();
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
 
                              SizedBox(height: AppSizes.itemGap),
 
@@ -105,25 +142,7 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
 
                             SizedBox(height: AppSizes.itemGap),
 
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomButton(
-                                    text: "View",
-                                    onTap: () {
-                                      Navigator.pushNamed(context, RoutesName.view_admission);
-                                    },
-                                  ),
-                                ),
-                                SizedBox(width: AppSizes.appbarGap),
-                                Expanded(
-                                  child: CustomButton(
-                                    text: "Delete",
-                                    onTap: () {},
-                                  ),
-                                ),
-                              ],
-                            ),
+
                           ],
                         ),
                       ),

@@ -40,6 +40,7 @@ import 'package:storio_app/view/login_screen.dart';
 import 'package:storio_app/view/media/media_manage_details_screen.dart';
 import 'package:storio_app/view/media/media_manage_screen.dart';
 import 'package:storio_app/view/notice/add_new_notice.dart';
+import 'package:storio_app/view/notice/edit_notice.dart';
 import 'package:storio_app/view/notice/notice_management_screen.dart';
 import 'package:storio_app/view/notice/view_notice_screen.dart';
 import 'package:storio_app/view/organization/card/add_new_card.dart';
@@ -77,6 +78,8 @@ import 'package:storio_app/view/testimonial/testimonial_screen.dart';
 import 'package:storio_app/view/video/add_new_video.dart';
 import 'package:storio_app/view/video/video_management_screen.dart';
 
+import '../data/model/Content/notice/notice_model.dart';
+
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings setting){
     switch(setting.name){
@@ -101,7 +104,7 @@ class Routes {
       case RoutesName.media_manage:
         return MaterialPageRoute(builder: (context)=> MediaManageScreen());
       case RoutesName.media_manage_details:
-        return MaterialPageRoute(builder: (context)=> MediaManageDetailsScreen());
+        return MaterialPageRoute(builder: (context)=> MediaManageDetailsScreen(),settings: setting,);
       case RoutesName.activity_manage:
         return MaterialPageRoute(builder: (context)=> ActivityManageScreen());
       case RoutesName.activity_manage_category:
@@ -113,7 +116,10 @@ class Routes {
       case RoutesName.contact_message_details:
         return MaterialPageRoute(builder: (context)=> ContactMessageDetails(name: "Maiyasha", email: "maiyasha@gmail.com", phone: "01714532456", dateTime: "10:00 AM . August 2026", subject: "Re admission", message: "Please Admit your child", status: "new"));
       case RoutesName.content_details:
-        return MaterialPageRoute(builder: (context)=> ContentDetails());
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ContentDetails(
+          initialContent: args?['content'] ?? "",
+        ));
       case RoutesName.gallery_manage:
         return MaterialPageRoute(builder: (context)=> GalleryManageScreen());
       case RoutesName.gallery_add_image:
@@ -183,9 +189,11 @@ class Routes {
       case RoutesName.view_notice:
         return MaterialPageRoute(builder: (context)=> ViewNoticeScreen());
       case RoutesName.add_new_notice:
+        return MaterialPageRoute(builder: (context)=> AddNewNotice());
+      case RoutesName.edit_notice:
         final args = setting.arguments as Map<String, dynamic>?;
-        return MaterialPageRoute(builder: (context)=> AddNewNotice(
-          isEdit: args?['isEdit'] ?? false,
+        return MaterialPageRoute(builder: (context)=> EditNotice(
+          notice: args?['notice'] as NoticeModel,
         ));
       case RoutesName.calender:
         return MaterialPageRoute(builder: (context)=> CalenderScreen());

@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 import 'package:storio_app/widget/universal/status_button_row.dart';
 
-import '../../model/result/exam_statistic.dart';
+
+import '../../data/model/result/exam_statistic.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/theme/theme_ext.dart';
 import '../../utils/app_sizes.dart';

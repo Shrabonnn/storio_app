@@ -162,6 +162,9 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                               case MoreMenuAction.changePassword:
                                                 //Navigator.pushNamed(context, RoutesName.view_notice);
                                                 break;
+                                              case MoreMenuAction.archive:
+                                              // archive
+                                                throw UnimplementedError();
                                               case MoreMenuAction.suspend:
                                                 //Navigator.pushNamed(context, RoutesName.view_notice);
                                                 break;

@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_card2.dart';
 
-import '../../model/result/exam_statistic.dart';
+
+import '../../data/model/result/exam_statistic.dart';
 import '../../utils/theme/theme_ext.dart';
 import '../../utils/app_sizes.dart';
 import '../../utils/theme/theme_ext.dart';

@@ -108,6 +108,9 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                                       case MoreMenuAction.edit:
                                         // TODO: Handle this case.
                                         throw UnimplementedError();
+                                      case MoreMenuAction.archive:
+                                      // archive
+                                        throw UnimplementedError();
                                       case MoreMenuAction.view:
                                         // TODO: Handle this case.
                                         throw UnimplementedError();

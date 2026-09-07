@@ -78,11 +78,12 @@ class SettingListWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextTitleWidget(title: "${title}",size: AppSizes.sectionTitle,color: color.primary,),
+                SizedBox(height: AppSizes.appbarGap,),
                 TextBodyStyleWidget(title: "${subtitle}",size: AppSizes.cardTitle,maxLines: 1,),
               ],
             ),
           ),
-        IconButton(onPressed: onTap, icon: Icon(Icons.arrow_forward_ios,size: AppSizes.icon,))
+        IconButton(onPressed: onTap, icon: Icon(Icons.arrow_forward_ios,size: AppSizes.icon,color: color.primary,))
         ],
       ),
     );

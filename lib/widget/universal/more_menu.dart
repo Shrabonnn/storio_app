@@ -8,6 +8,7 @@ enum MoreMenuAction {
   edit,
   view,
   delete,
+  archive,
   changePassword,
   suspend
 }
@@ -27,7 +28,7 @@ class MoreMenu extends StatelessWidget {
     final color = context.Appcolor;
     return PopupMenuButton<MoreMenuAction>(
       color: color.primary,
-      icon: const Icon(Icons.more_vert),
+      icon:  Icon(Icons.more_vert,color: color.primary,),
       onSelected: onSelected,
       itemBuilder: (context) {
         return items.map((item) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_sizes.dart';
 
-import '../../model/form_field/form_feild_data.dart';
+import '../../data/model/form_field/form_feild_data.dart';
 import '../../utils/theme/theme_ext.dart';
 import '../../utils/theme/theme_ext.dart';
 import '../textStyle/text_body_style.dart';

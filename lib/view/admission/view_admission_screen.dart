@@ -61,7 +61,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                   child: Icon(
                                     Icons.check_circle_outline,
                                     size: AppSizes.iconLarge,
-                                    color: Colors.green,
+                                    color: color.primary,
                                   ),
                                 ),
 
@@ -77,7 +77,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                   child: Icon(
                                     Icons.cancel_outlined,
                                     size:AppSizes.iconLarge,
-                                    color: Colors.red,
+                                    color: color.primary,
                                   ),
                                 ),
 
@@ -91,7 +91,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                   child: Icon(
                                     Icons.visibility_outlined,
                                     size: AppSizes.iconLarge,
-                                    color: Colors.blue,
+                                    color: color.primary,
                                   ),
                                 ),
 
@@ -105,7 +105,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                   child: Icon(
                                     Icons.access_time,
                                     size: AppSizes.iconLarge,
-                                    color: Colors.orange,
+                                    color: color.primary,
                                   ),
                                 ),
 
@@ -119,7 +119,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                   child: Icon(
                                     Icons.download_outlined,
                                     size: AppSizes.iconLarge,
-                                    color: Colors.blue.shade800,
+                                    color: color.primary,
                                   ),
                                 ),
                               ],

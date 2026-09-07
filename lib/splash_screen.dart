@@ -1,7 +1,10 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/view/login_screen.dart';
+
+import 'core/storage/storage_service.dart';
 
 class StorioColors {
   static const Color primary = Color(0xFF1A437A);
@@ -90,11 +93,16 @@ class _StorioSplashScreenState extends State<StorioSplashScreen>
   }
   Future<void> checkLogin() async {
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const LoginScreen()),
-    );
+     String? token = await TokenStorage.getToken();
 
+     if (token == null) {
+       Navigator.pushNamed(context, RoutesName.login);
+       return;
+     }
+     Navigator.pushNamed(context, RoutesName.login);
+
+    //Admin12345@
+//alfasunny94@gmail.com
   }
 
   @override

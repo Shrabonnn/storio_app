@@ -10,6 +10,9 @@ import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/utils/app_sizes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:storio_app/utils/theme/app_theme.dart';
+import 'package:storio_app/viewModel/Authenticaion/auth_view_model.dart';
+import 'package:storio_app/viewModel/Content/notice_view_model.dart';
+import 'package:storio_app/viewModel/Media/media_view_model.dart';
 import 'package:storio_app/viewModel/hero_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
 
@@ -26,8 +29,11 @@ class MyApp extends StatelessWidget {
     return Sizer(builder: (context, orientation, screenType) {
       return MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (_) => AuthViewModel()),
           ChangeNotifierProvider(create: (_) => HeroProvider()),
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => NoticeViewModel()),
+          ChangeNotifierProvider(create: (_) => MediaViewModel()),
         ],
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, _) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/model/institure/key_metrics_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
@@ -8,8 +7,9 @@ import 'package:storio_app/widget/institute_profile/Institute_overview_screen.da
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_app_bar.dart';
 
-import '../model/form_field/form_feild_data.dart';
-import '../model/institure/infrastructure_Item_model.dart';
+import '../data/model/form_field/form_feild_data.dart';
+import '../data/model/institure/infrastructure_Item_model.dart';
+import '../data/model/institure/key_metrics_model.dart';
 import '../utils/app_colors.dart';
 import '../utils/theme/theme_ext.dart';
 import '../widget/institute_profile/custom_text_dialog.dart';

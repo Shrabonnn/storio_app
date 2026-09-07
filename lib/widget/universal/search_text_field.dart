@@ -29,7 +29,7 @@ class SearchTextField extends StatelessWidget {
             color: color.textSecondary,
             fontSize: 14,
           ),
-          prefixIcon: const Icon(Icons.search),
+          prefixIcon:  Icon(Icons.search,color: color.textSecondary,),
           filled: true,
           fillColor: color.cardBackground,
 
