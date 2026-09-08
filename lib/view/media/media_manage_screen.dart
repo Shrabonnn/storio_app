@@ -48,7 +48,7 @@ class _MediaManageScreenState extends State<MediaManageScreen> {
       },
     );
 
-    // ফিরে আসার পর লিস্ট রিফ্রেশ (নতুন upload/update/delete থাকলে সাথে সাথে দেখাবে)
+
     if (!mounted) return;
     context.read<MediaViewModel>().getMediaList(
       search: searchController.text.trim(),

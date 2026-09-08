@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/data/model/Content/notice/notice_model.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
 import '../../routes/routes_name.dart';
@@ -12,17 +13,29 @@ import '../../widget/textStyle/text_title_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card2.dart';
 import '../../widget/universal/custom_status_badge.dart';
+import '../../widget/universal/date_time_formate.dart';
 import '../../widget/universal/image_card.dart';
 import '../../widget/universal/info_item_card.dart';
 
 class ViewNoticeScreen extends StatefulWidget {
-  const ViewNoticeScreen({super.key});
+  const ViewNoticeScreen({super.key, required this.notice});
+  final NoticeModel notice;
 
   @override
   State<ViewNoticeScreen> createState() => _ViewNoticeScreenState();
 }
 
 class _ViewNoticeScreenState extends State<ViewNoticeScreen> {
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = context.Appcolor;
@@ -30,7 +43,7 @@ class _ViewNoticeScreenState extends State<ViewNoticeScreen> {
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Holiday",
+            title:widget.notice.title ?? "",
             showBackButton: true,
           ),
           SliverPadding(
@@ -54,11 +67,11 @@ class _ViewNoticeScreenState extends State<ViewNoticeScreen> {
                                 children: [
                                   Icon(Icons.calendar_month_outlined,color: color.primary,size: AppSizes.icon,),
                                   SizedBox(width: AppSizes.appbarGap,),
-                                  Flexible(child: TextBodyStyleWidget(title: "Last Updated: Jun 8, 2026",maxLines: 1,size: AppSizes.cardTitle)),
+                                  Flexible(child: TextBodyStyleWidget(title: "Last Updated: ${formatDate(widget.notice.updateDate!)} · ${formatTime(widget.notice.updateDate!)}",maxLines: 2,size: AppSizes.cardTitle)),
                                 ],
                               ),
                             ),
-                            CustomStatusBadge(title: "Published",size: AppSizes.cardTitle,),
+                            CustomStatusBadge(title: widget.notice.status ?? "",size: AppSizes.cardTitle,),
                           ],
                         ),
                         SizedBox(height: AppSizes.itemGap),
@@ -68,8 +81,9 @@ class _ViewNoticeScreenState extends State<ViewNoticeScreen> {
                           child: Column(
                             crossAxisAlignment: .start,
                             children: [
-                              TextBodyStyleWidget(title: "Dear All,\nOur school will be close every from 11th Feb to 12th Feb 2026"
-                                ,color: color.primary
+                              TextBodyStyleWidget(title: widget.notice.content ?? ""
+                                ,color: color.primary,
+                                fontbold: false
                                 ,size: AppSizes.cardTitle,maxLines: 20,),
 
 

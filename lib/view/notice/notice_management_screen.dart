@@ -111,7 +111,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               return;
                             }
 
-                            // dropdown নিজে বন্ধ হওয়া পর্যন্ত অপেক্ষা করো, তারপর dialog দেখাও
+
                             Future.delayed(const Duration(milliseconds: 200), () async {
                               if (!mounted) return;
 
@@ -459,8 +459,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
     List<int> noticeIds;
 
     if (action == "Restore" || action == "Delete All") {
-      // এই দুই action সবসময় binned notices-এর উপর কাজ করে,
-      // বর্তমান ট্যাব যাই হোক না কেন — তাই আলাদাভাবে binned list আনতে হবে
+
       final binnedNotices = await provider.fetchBinnedNoticeIds();
 
       if (binnedNotices.isEmpty) {
@@ -472,7 +471,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
       noticeIds = binnedNotices;
     } else {
-      // Publish/Archive/Draft/Bin — এগুলো বর্তমানে UI-তে যা দেখানো হচ্ছে তার উপরই কাজ করে
+
       noticeIds = provider.noticeList
           .map((notice) => notice.id)
           .whereType<int>()

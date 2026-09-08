@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../data/model/Content/blog/blog_model.dart';
 import '../../data/model/form_field/form_feild_data.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/app_sizes.dart';
@@ -21,15 +22,18 @@ import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
 import '../../widget/universal/custom_drop_down.dart';
 import '../../widget/universal/custom_text_field.dart';
+import '../../widget/universal/date_time_formate.dart';
 
-class AddBlog extends StatefulWidget {
-  const AddBlog({super.key});
+class EditBlog extends StatefulWidget {
+  const EditBlog({super.key, required this.blog});
+
+  final BlogModel blog;
 
   @override
-  State<AddBlog> createState() => _AddBlogState();
+  State<EditBlog> createState() => _EditBlogState();
 }
 
-class _AddBlogState extends State<AddBlog> {
+class _EditBlogState extends State<EditBlog> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController slugController = TextEditingController();
   final TextEditingController authorController = TextEditingController();
@@ -48,7 +52,6 @@ class _AddBlogState extends State<AddBlog> {
   String? selectedImageUrl;
   int? selectedAttachmentId;
 
-  // draft / published / scheduled
   String? selectedStatusValue;
 
   int? selectedCategoryId;
@@ -59,30 +62,43 @@ class _AddBlogState extends State<AddBlog> {
   void initState() {
     super.initState();
 
-    // Title লেখার সাথে সাথে slug auto-generate হবে,
-    // যতক্ষণ ইউজার নিজে slug field এ হাত না দেয়
+    // list থেকে যা পাওয়া গেছে সেটা দিয়ে আগে prefill করি (fast UI)
+    _prefillFromModel(widget.blog);
+
+    // slug field খালি হলে title থেকে auto-generate হবে, existing
+    // slug থাকলে সেটা overwrite হবে না
     titleController.addListener(_onTitleChanged);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
 
-      context.read<BlogViewModel>().getStatusChoices();
-      context.read<BlogViewModel>().getCategoryApi();
+      final viewModel = context.read<BlogViewModel>();
+
+      viewModel.getStatusChoices();
+      viewModel.getCategoryApi();
+
+      // detail endpoint থেকে full data (seo_title, seo_description,
+      // categories_data ইত্যাদি) এনে আবার prefill করি, কারণ list
+      // endpoint এ এগুলো null/empty আসতে পারে।
+      if (widget.blog.id != null) {
+        await viewModel.getBlogDetail(widget.blog.id!);
+
+        if (!mounted) return;
+
+        if (viewModel.blogDetail != null) {
+          _prefillFromModel(viewModel.blogDetail!);
+        }
+      }
     });
   }
 
   void _onTitleChanged() {
     if (slugController.text.trim().isEmpty) {
-      // slug field খালি থাকলেই শুধু auto-fill করবো, ইউজার নিজে
-      // কিছু লিখে দিলে সেটা overwrite করবো না
       final generated = _slugify(titleController.text);
       slugController.text = generated;
     }
   }
 
-  // Simple slugify — English/Latin ক্যারেক্টার, সংখ্যা রাখে, বাকি সব
-  // বাদ দিয়ে dash দিয়ে জোড়া লাগায়। বাংলা/ইউনিকোড টাইটেল হলে ফাঁকা
-  // ফলাফল আসতে পারে — সেক্ষেত্রে ইউজারকে ম্যানুয়ালি slug দিতে হবে।
   String _slugify(String text) {
     var slug = text.trim().toLowerCase();
     slug = slug.replaceAll(RegExp(r'[^a-z0-9\s-]'), '');
@@ -105,6 +121,39 @@ class _AddBlogState extends State<AddBlog> {
     seoTitleController.dispose();
     seoDescController.dispose();
     super.dispose();
+  }
+
+  // ============================================================
+  // Prefill Fields From Model
+  // ============================================================
+
+  void _prefillFromModel(BlogModel blog) {
+    titleController.text = blog.title ?? '';
+    slugController.text = blog.slug ?? '';
+    authorController.text = blog.author ?? '';
+    excerptController.text = blog.excerpt ?? '';
+    tagsController.text = (blog.tags ?? []).join(', ');
+    seoTitleController.text = blog.seoTitle ?? '';
+    seoDescController.text = blog.seoDescription ?? '';
+
+    blogContent = blog.content ?? '';
+    isFeatured = blog.isFeatured ?? false;
+    selectedStatusValue = blog.status;
+
+    selectedAttachmentId = blog.featuredImage;
+    selectedImageUrl = blog.featuredImageData?.file;
+
+    selectedCategoryId =
+    (blog.categories != null && blog.categories!.isNotEmpty)
+        ? blog.categories!.first
+        : selectedCategoryId;
+
+    if (blog.publishDate != null) {
+      publishDateController.text = formatDate(blog.publishDate);
+      publishTimeController.text = formatTime(blog.publishDate);
+    }
+
+    if (mounted) setState(() {});
   }
 
   // ============================================================
@@ -135,6 +184,10 @@ class _AddBlogState extends State<AddBlog> {
     final result = await Navigator.pushNamed(
       context,
       RoutesName.media_manage_details,
+      arguments: {
+        "currentId": selectedAttachmentId,
+        "currentFileUrl": selectedImageUrl,
+      },
     );
 
     if (!mounted) return;
@@ -143,11 +196,7 @@ class _AddBlogState extends State<AddBlog> {
       setState(() {
         selectedAttachmentId = result['id'] as int?;
         selectedImageUrl = result['file'] as String?;
-        if (selectedImageUrl == null && result['localPath'] != null) {
-          selectedImage = File(result['localPath']); // local preview
-        } else {
-          selectedImage = null;
-        }
+        selectedImage = null;
       });
     }
   }
@@ -164,9 +213,6 @@ class _AddBlogState extends State<AddBlog> {
         .toList();
   }
 
-  // HTML ট্যাগ বাদ দিয়ে আসল টেক্সট বের করে, যাতে "<p>hi</p>" কে
-  // যথাযথভাবে ছোট content হিসেবে ধরা যায় (backend ৩০+ character
-  // চায়, raw html length দিয়ে চেক করলে ভুল হবে)
   String _plainTextFromHtml(String html) {
     return html.replaceAll(RegExp(r'<[^>]*>'), '').trim();
   }
@@ -196,57 +242,60 @@ class _AddBlogState extends State<AddBlog> {
     }
   }
 
-  void _showMessage(String message) {
-    SnackBarMessage.showSnackBar(context, message);
-  }
+
 
   // ============================================================
-  // Save Blog
+  // Update Blog
   // ============================================================
 
-  Future<void> _handleSaveBlog() async {
+  Future<void> _handleUpdateBlog() async {
     if (titleController.text.trim().isEmpty) {
-      _showMessage("Please enter blog title");
+      SnackBarMessage.showSnackBar(context,"Please enter blog title");
       return;
     }
 
     if (slugController.text.trim().isEmpty) {
-      _showMessage(
+      SnackBarMessage.showSnackBar(context,
         "Please enter a URL slug (auto-generate failed, likely due to non-English title)",
       );
       return;
     }
 
     if (authorController.text.trim().isEmpty) {
-      _showMessage("Please enter author name");
+      SnackBarMessage.showSnackBar(context,"Please enter author name");
       return;
     }
 
     if (blogContent.trim().isEmpty) {
-      _showMessage("Please write blog content");
+      SnackBarMessage.showSnackBar(context,"Please write blog content");
       return;
     }
 
     if (_plainTextFromHtml(blogContent).length < 10) {
-      _showMessage("Content must be at least 10 characters long");
+      SnackBarMessage.showSnackBar(context,"Content must be at least 10 characters long");
       return;
     }
 
-    if (selectedStatusValue == null) {
-      _showMessage("Please select status");
+    if (selectedStatusValue == null || selectedStatusValue!.isEmpty) {
+      SnackBarMessage.showSnackBar(context,"Please select status");
+      return;
+    }
+
+    if (widget.blog.id == null) {
+      SnackBarMessage.showSnackBar(context,"Blog ID not found");
       return;
     }
 
     if (selectedStatusValue == "published" &&
         publishDateController.text.trim().isEmpty) {
-      _showMessage("Please select a publish date");
+      SnackBarMessage.showSnackBar(context,"Please select a publish date");
       return;
     }
 
     if (selectedStatusValue == "scheduled" &&
         (publishDateController.text.trim().isEmpty ||
             publishTimeController.text.trim().isEmpty)) {
-      _showMessage("Please select publish date and time for scheduling");
+      SnackBarMessage.showSnackBar(context,"Please select publish date and time for scheduling");
       return;
     }
 
@@ -256,9 +305,6 @@ class _AddBlogState extends State<AddBlog> {
       isSaving = true;
     });
 
-    // শুধু যেগুলা user সত্যিকার fill করেছে সেগুলাই payload এ পাঠাই।
-    // null explicitly পাঠালে backend serializer/model এ কখনো কখনো
-    // crash (500) করে, তাই optional field null হলে key-ই বাদ দেই।
     final Map<String, dynamic> data = {
       "title": titleController.text.trim(),
       "slug": slugController.text.trim(),
@@ -291,7 +337,7 @@ class _AddBlogState extends State<AddBlog> {
       }
     }
 
-    final success = await viewModel.createBlog(data);
+    final success = await viewModel.updateBlog(widget.blog.id!, data);
 
     if (!mounted) return;
 
@@ -300,10 +346,10 @@ class _AddBlogState extends State<AddBlog> {
     });
 
     if (success) {
-      _showMessage("Blog post created successfully");
+      SnackBarMessage.showSnackBar(context,"Blog post updated successfully");
       Navigator.pop(context, true);
     } else {
-      _showMessage(viewModel.errorMessage ?? "Failed to create blog post");
+      SnackBarMessage.showSnackBar(context,viewModel.errorMessage ?? "Failed to update blog post");
     }
   }
 
@@ -319,7 +365,7 @@ class _AddBlogState extends State<AddBlog> {
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBar(
-            title: "Create New Blog Post",
+            title: "Edit Blog Post",
             showBackButton: true,
           ),
           SliverPadding(
@@ -393,50 +439,22 @@ class _AddBlogState extends State<AddBlog> {
                             CustomButton(
                               height: 4.h,
                               width: 30.w,
-                              text: "Select Image",
+                              text: "Change Image",
                               onTap: _openMediaManage,
                             ),
                           ],
                         ),
                         SizedBox(height: AppSizes.itemGap),
-                        if (selectedImage != null)
-                          Container(
-                            width: 100.w,
-                            height: 20.h,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                              BorderRadius.circular(AppSizes.cardRadius),
-                            ),
-                            child: Image.file(
-                              selectedImage!,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        else if (selectedImageUrl != null)
-                          Container(
-                            width: 100.w,
-                            height: 20.h,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                              BorderRadius.circular(AppSizes.cardRadius),
-                            ),
-                            child: Image.network(
-                              selectedImageUrl!,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(Icons.broken_image);
-                              },
-                            ),
-                          )
-                        else
-                          TextBodyStyleWidget(
-                            title:
-                            "Recommended size: 1200x600px for banners, 600x600px for cards.",
-                            size: AppSizes.cardTitle,
-                            maxLines: 2,
+                        Container(
+                          width: 100.w,
+                          height: 20.h,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                            BorderRadius.circular(AppSizes.cardRadius),
                           ),
+                          child: _buildFeaturedImage(),
+                        ),
                       ],
                     ),
                   ),
@@ -538,7 +556,6 @@ class _AddBlogState extends State<AddBlog> {
                           );
                         }
 
-                        // Binned বাদ
                         final statusChoices = provider.statusChoices
                             .where((item) => item.value != "binned")
                             .toList();
@@ -574,13 +591,11 @@ class _AddBlogState extends State<AddBlog> {
                                 setState(() {
                                   selectedStatusValue = selectedChoice.value;
 
-                                  // draft এ date/time কিছুই লাগে না, clear করে দাও
                                   if (selectedChoice.value == "draft") {
                                     publishDateController.clear();
                                     publishTimeController.clear();
                                   }
 
-                                  // published এ শুধু date লাগে, time দরকার নেই
                                   if (selectedChoice.value == "published") {
                                     publishTimeController.clear();
                                   }
@@ -823,7 +838,6 @@ class _AddBlogState extends State<AddBlog> {
                       },
                       isExpanded: isSeoExpanded,
                       expandableChild: InfrastructureDropDown(
-                        showSaveButton: false,
                         fields: [
                           FormFieldData(
                             title: "Meta Title",
@@ -862,8 +876,8 @@ class _AddBlogState extends State<AddBlog> {
                       SizedBox(width: AppSizes.appbarGap),
                       Flexible(
                         child: CustomButton(
-                          text: isSaving ? "Saving..." : "Save Post",
-                          onTap: isSaving ? () {} : _handleSaveBlog,
+                          text: isSaving ? "Updating..." : "Update Post",
+                          onTap: isSaving ? () {} : _handleUpdateBlog,
                         ),
                       ),
                     ],
@@ -877,5 +891,23 @@ class _AddBlogState extends State<AddBlog> {
         ],
       ),
     );
+  }
+
+  Widget _buildFeaturedImage() {
+    if (selectedImage != null) {
+      return Image.file(selectedImage!, fit: BoxFit.cover);
+    }
+
+    if (selectedImageUrl != null && selectedImageUrl!.isNotEmpty) {
+      return Image.network(
+        selectedImageUrl!,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset('assets/images/institute.png', fit: BoxFit.cover);
+        },
+      );
+    }
+
+    return Image.asset('assets/images/institute.png', fit: BoxFit.cover);
   }
 }

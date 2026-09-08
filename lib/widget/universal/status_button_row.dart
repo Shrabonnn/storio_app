@@ -34,7 +34,7 @@ class StatusButtonRow extends StatelessWidget {
               ),
               child: StatusButton(
                 text: items[index],
-                height: 4.5.h,
+                height: 4.25.h,
                 size: AppSizes.cardSubTitle,
                 borderSide: BorderSide(
                   color: color.primary,

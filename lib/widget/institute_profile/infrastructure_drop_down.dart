@@ -10,21 +10,25 @@ import '../textStyle/text_title_style.dart';
 
 class InfrastructureDropDown extends StatelessWidget {
   final List<FormFieldData> fields;
-  final VoidCallback onSave;
+
+  final VoidCallback ?onSave;
 
 
   final IconData?selectedIcon;
   final ValueChanged<IconData>? onIconSelected;
   final bool showIconPicker;
+  final bool showSaveButton;
 
 
 
   const InfrastructureDropDown({
     super.key,
-    required this.onSave,
+     this.onSave,
     this.selectedIcon = Icons.people_alt_outlined,
     this.onIconSelected,
-    this.showIconPicker = false, required this.fields,
+    this.showIconPicker = false,
+    required this.fields,  this.showSaveButton =true,
+
 
 
   });
@@ -79,7 +83,7 @@ class InfrastructureDropDown extends StatelessWidget {
               return InkWell(
                 onTap: () => onIconSelected?.call(icon),
                 child: Container(
-                  padding:  EdgeInsets.all(AppSizes.cardPadding),
+                  padding:  EdgeInsets.only(top:AppSizes.cardPadding),
                   decoration: BoxDecoration(
                     color: selected
                         ? color.primary.withValues(alpha: .1)
@@ -106,14 +110,12 @@ class InfrastructureDropDown extends StatelessWidget {
 
         ],
 
-        SizedBox(height: AppSizes.itemGap),
 
-        ElevatedButton(
-          onPressed: onSave,
-          child: const Text("Add"),
-        ),
-        SizedBox(height: AppSizes.itemGap),
-      ],
+        if (showSaveButton) ...[
+          SizedBox( height: AppSizes.itemGap, ),
+          ElevatedButton( onPressed: onSave, child: const Text("Add"), ), ],
+
+        ]
     );
   }
 }

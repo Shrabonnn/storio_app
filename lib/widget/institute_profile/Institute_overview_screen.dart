@@ -88,7 +88,7 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
                   children: [
                     if (widget.isExpanded && widget.expandableChild != null) ...[
                       widget.expandableChild!,
-                      SizedBox(height: AppSizes.sectionGap),
+                      //SizedBox(height: AppSizes.sectionGap),
                     ],
                     if (widget.child != null) widget.child!,
                   ],

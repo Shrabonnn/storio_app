@@ -48,6 +48,8 @@ dependencies:
   table_calendar: ^3.2.1
   shared_preferences: ^2.5.5
   shimmer: ^4.0.0
+  vsc_quill_delta_to_html: ^1.0.5
+  flutter_quill_delta_from_html: ^1.5.3
 
 dev_dependencies:
   flutter_test:

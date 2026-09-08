@@ -35,14 +35,11 @@ class AddNewNotice extends StatefulWidget {
 }
 
 class _AddNewNoticeState extends State<AddNewNotice> {
-  final TextEditingController titleController =
-  TextEditingController();
+  final TextEditingController titleController = TextEditingController();
 
-  final TextEditingController publishDateController =
-  TextEditingController();
+  final TextEditingController publishDateController = TextEditingController();
 
-  final TextEditingController publishTimeController =
-  TextEditingController();
+  final TextEditingController publishTimeController = TextEditingController();
 
   bool isShowPdf = false;
   bool isSaving = false;

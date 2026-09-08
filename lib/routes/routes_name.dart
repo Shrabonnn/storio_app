@@ -28,12 +28,20 @@ class RoutesName {
   static const edit_testimonial = "edit_testimonial";
   static const faq = "faq";
   static const edit_faq = "edit_faq";
+
+  //career
   static const career = "career";
   static const add_new_job_circular = "add_new_job_circular";
+  static const edit_job_circular = "edit_job_circular";
+
+  // blog
   static const blog = "blog";
   static const view_blog = "view_blog";
   static const add_blog = "add_blog";
+  static const edit_blog = "edit_blog";
   static const manage_blog_category = "manage_blog_category";
+
+
   static const event = "event";
   static const view_event = "view_event";
   static const add_new_event = "add_new_event";

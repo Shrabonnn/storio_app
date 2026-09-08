@@ -31,15 +31,15 @@ class StatusButton extends StatelessWidget {
 
     return Material(
       color: backgroundColor ?? color.primary,
-      borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+      borderRadius: BorderRadius.circular(AppSizes.textFieldRadius),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+        borderRadius: BorderRadius.circular(AppSizes.textFieldRadius),
         child: Container(
           height: height ?? 4.5.h,
           padding: EdgeInsets.symmetric(horizontal: AppSizes.smallPadding + 4),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+            borderRadius: BorderRadius.circular(AppSizes.textFieldRadius),
             border: Border.fromBorderSide(
               borderSide ?? BorderSide.none,
             ),

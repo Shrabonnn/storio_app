@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:storio_app/data/model/Content/blog/blog_model.dart';
+import 'package:storio_app/data/model/Content/career/career_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
 import 'package:storio_app/view/FAQ/edit_faq.dart';
@@ -13,6 +15,7 @@ import 'package:storio_app/view/admission/admission_general_setting.dart';
 import 'package:storio_app/view/admission/view_admission_screen.dart';
 import 'package:storio_app/view/blog/add_new_blog.dart';
 import 'package:storio_app/view/blog/blog_management_screen.dart';
+import 'package:storio_app/view/blog/edit_blog.dart';
 import 'package:storio_app/view/blog/manage_blog_category.dart';
 import 'package:storio_app/view/blog/view_blog_screen.dart';
 import 'package:storio_app/view/bottom_navbar.dart';
@@ -21,6 +24,7 @@ import 'package:storio_app/view/calender/calender_screen.dart';
 import 'package:storio_app/view/calender/calender_setting.dart';
 import 'package:storio_app/view/career/add_new_job_circular.dart';
 import 'package:storio_app/view/career/career_management_screen.dart';
+import 'package:storio_app/view/career/edit_career.dart';
 import 'package:storio_app/view/contact/contact_message_details.dart';
 import 'package:storio_app/view/contact/contact_screen.dart';
 import 'package:storio_app/view/content_details.dart';
@@ -152,24 +156,41 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> FaqManagementScreen());
       case RoutesName.edit_faq:
         return MaterialPageRoute(builder: (context)=> EditFaq());
+
+
+      // Career
       case RoutesName.career:
         return MaterialPageRoute(builder: (context)=> CareerManagementScreen());
       case RoutesName.add_new_job_circular:
-        final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewJobCircular(
-          isEdit: args?['isEdit'] ?? false,
         ));
+      case RoutesName.edit_job_circular:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditJobCircular(
+          job: args?['job'] as CareerModel,
+        ));
+
+
+       // Bolg
       case RoutesName.blog:
         return MaterialPageRoute(builder: (context)=> BlogManagementScreen());
       case RoutesName.manage_blog_category:
         return MaterialPageRoute(builder: (context)=> ManageBlogCategory());
       case RoutesName.view_blog:
-        return MaterialPageRoute(builder: (context)=> ViewBlogScreen());
-      case RoutesName.add_blog:
         final args = setting.arguments as Map<String, dynamic>?;
-        return MaterialPageRoute(builder: (context)=> AddBlog(
-          isEdit: args?['isEdit'] ?? false,
+        return MaterialPageRoute(builder: (context)=> ViewBlogScreen(
+          blog: args?['blog'] as BlogModel,
         ));
+      case RoutesName.add_blog:
+        return MaterialPageRoute(builder: (context)=> AddBlog());
+      case RoutesName.edit_blog:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditBlog(
+          blog: args?['blog'] as BlogModel,
+        ));
+
+
+       // Event
       case RoutesName.event:
         return MaterialPageRoute(builder: (context)=> EventManagementScreen());
       case RoutesName.manage_event_category:
@@ -181,13 +202,19 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> AddNewEvent(
           isEdit: args?['isEdit'] ?? false,
         ));
+
+
+        //Notice
       case RoutesName.notice:
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> NoticeManagementScreen(
           showBackButton: args?['showBackButton'] ?? false,
         ));
       case RoutesName.view_notice:
-        return MaterialPageRoute(builder: (context)=> ViewNoticeScreen());
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ViewNoticeScreen(
+          notice: args?['notice'] as NoticeModel,
+        ));
       case RoutesName.add_new_notice:
         return MaterialPageRoute(builder: (context)=> AddNewNotice());
       case RoutesName.edit_notice:
