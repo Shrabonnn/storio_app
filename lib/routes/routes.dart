@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:storio_app/data/model/Content/blog/blog_model.dart';
 import 'package:storio_app/data/model/Content/career/career_model.dart';
+import 'package:storio_app/data/model/Content/event/event_model.dart';
+import 'package:storio_app/data/model/Content/faq/faq_model.dart';
+import 'package:storio_app/data/model/Content/gallery/gallery_model.dart';
+import 'package:storio_app/data/model/Content/promotion/promotion_model.dart';
+import 'package:storio_app/data/model/Content/testimonial/testimonial_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
+import 'package:storio_app/view/FAQ/add_new_faq.dart';
 import 'package:storio_app/view/FAQ/edit_faq.dart';
 import 'package:storio_app/view/FAQ/faq_management_screen.dart';
 import 'package:storio_app/view/action_details.dart';
 import 'package:storio_app/view/activity/activity_category_screen.dart';
 import 'package:storio_app/view/activity/activity_manage_details_screen.dart';
 import 'package:storio_app/view/activity/activity_manage_screen.dart';
+import 'package:storio_app/view/activity/edit_activity_manage.dart';
 import 'package:storio_app/view/admission/admission_form_builder.dart';
 import 'package:storio_app/view/admission/admission_management_screen.dart';
 import 'package:storio_app/view/admission/admission_general_setting.dart';
@@ -31,10 +38,12 @@ import 'package:storio_app/view/content_details.dart';
 import 'package:storio_app/view/customization_screen.dart';
 import 'package:storio_app/view/dashboard.dart';
 import 'package:storio_app/view/event/add_new_event.dart';
+import 'package:storio_app/view/event/edit_event.dart';
 import 'package:storio_app/view/event/event_management_screen.dart';
 import 'package:storio_app/view/event/manage_event_category.dart';
 import 'package:storio_app/view/event/view_event_screen.dart';
 import 'package:storio_app/view/gallery/add_gallery_images.dart';
+import 'package:storio_app/view/gallery/edit_gallery_images.dart';
 import 'package:storio_app/view/gallery/gallery_management_screen.dart';
 import 'package:storio_app/view/gallery/manage_albums.dart';
 import 'package:storio_app/view/hero/add_new_hero_slide.dart';
@@ -69,6 +78,7 @@ import 'package:storio_app/view/organization/user/user_management_screen.dart';
 import 'package:storio_app/view/organization/user/view_user_details.dart';
 import 'package:storio_app/view/profile_screen.dart';
 import 'package:storio_app/view/promotion/add_promotion.dart';
+import 'package:storio_app/view/promotion/edit_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
 import 'package:storio_app/view/result/exam_result_screen.dart';
 import 'package:storio_app/view/result/publish_result.dart';
@@ -77,12 +87,12 @@ import 'package:storio_app/view/settings/security_screen.dart';
 import 'package:storio_app/view/settings/settings_screen.dart';
 import 'package:storio_app/view/settings/theme_screen.dart';
 import 'package:storio_app/view/testimonial/add_new_testimonial.dart';
-import 'package:storio_app/view/testimonial/edit_testimonial.dart';
 import 'package:storio_app/view/testimonial/testimonial_screen.dart';
 import 'package:storio_app/view/video/add_new_video.dart';
 import 'package:storio_app/view/video/video_management_screen.dart';
 
 import '../data/model/Content/notice/notice_model.dart';
+import '../view/testimonial/edit_testimonial.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings setting){
@@ -109,12 +119,22 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> MediaManageScreen());
       case RoutesName.media_manage_details:
         return MaterialPageRoute(builder: (context)=> MediaManageDetailsScreen(),settings: setting,);
+
+       // Activity
       case RoutesName.activity_manage:
         return MaterialPageRoute(builder: (context)=> ActivityManageScreen());
       case RoutesName.activity_manage_category:
         return MaterialPageRoute(builder: (context)=> ActivityCategoryScreen());
       case RoutesName.activity_manage_details:
         return MaterialPageRoute(builder: (context)=> ActivityManageDetailsScreen());
+      case RoutesName.edit_activity_manage_details:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditActivityManageDetailsScreen(
+          activity: args?['activity'] ?? "",
+        ));
+
+
+
       case RoutesName.contact:
         return MaterialPageRoute(builder: (context)=> ContactScreen());
       case RoutesName.contact_message_details:
@@ -124,38 +144,68 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> ContentDetails(
           initialContent: args?['content'] ?? "",
         ));
+
+
+     // Gallery
       case RoutesName.gallery_manage:
-        return MaterialPageRoute(builder: (context)=> GalleryManageScreen());
-      case RoutesName.gallery_add_image:
-
         final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> GalleryManageScreen(
 
-        return MaterialPageRoute(builder: (context)=> AddGalleryImages(
-          isEdit: args?['isEdit'] ?? false,
+        ));
+      case RoutesName.gallery_add_image:
+        return MaterialPageRoute(builder: (context)=> AddGalleryImages());
+      case RoutesName.edit_gallery_image:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditGalleryImages(
+          image: args?['image'] as GalleryModel,
         ));
       case RoutesName.manage_album:
         return MaterialPageRoute(builder: (context)=> ManageAlbums());
+
+
+
+        // Promotion
       case RoutesName.promotion:
         return MaterialPageRoute(builder: (context)=> PromotionManagementScreen());
       case RoutesName.add_promotion:
-        final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddPromotion(
-          isEdit: args?['isEdit'] ?? false,
+
         ));
+      case RoutesName.edit_promotion:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context) => EditPromotion(
+            promotion: args?["promotion"] as PromotionModel,
+          ),
+        );
+
+
+
       case RoutesName.exam_result:
         return MaterialPageRoute(builder: (context)=> ExamResultScreen());
       case RoutesName.publish_result:
         return MaterialPageRoute(builder: (context)=> PublishResult());
+
+      //Testimonial
       case RoutesName.testimonial:
         return MaterialPageRoute(builder: (context)=> TestimonialScreen());
       case RoutesName.add_new_testimonial:
         return MaterialPageRoute(builder: (context)=> AddNewTestimonial());
       case RoutesName.edit_testimonial:
-        return MaterialPageRoute(builder: (context)=> EditTestimonial());
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditTestimonial(
+          testimonial: args?['testimonial'] as TestimonialModel,
+        ));
+
+      //FAQ
       case RoutesName.faq:
         return MaterialPageRoute(builder: (context)=> FaqManagementScreen());
       case RoutesName.edit_faq:
-        return MaterialPageRoute(builder: (context)=> EditFaq());
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditFaq(
+          faq: args?['faq'] as FaqModel,
+        ));
+      case RoutesName.add_new_faq:
+        return MaterialPageRoute(builder: (context)=> CreateNewFaq());
 
 
       // Career
@@ -196,13 +246,18 @@ class Routes {
       case RoutesName.manage_event_category:
         return MaterialPageRoute(builder: (context)=> ManageEventCategory());
       case RoutesName.view_event:
-        return MaterialPageRoute(builder: (context)=> ViewEventScreen());
-      case RoutesName.add_new_event:
         final args = setting.arguments as Map<String, dynamic>?;
-        return MaterialPageRoute(builder: (context)=> AddNewEvent(
-          isEdit: args?['isEdit'] ?? false,
+        return MaterialPageRoute(builder: (context)=> ViewEventScreen(
+          event: args?['event'] as EventModel,
         ));
-
+      case RoutesName.add_new_event:
+        return MaterialPageRoute(builder: (context)=> AddNewEvent(
+        ));
+      case RoutesName.edit_event:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditEvent(
+          event: args?['event'] as EventModel,
+        ));
 
         //Notice
       case RoutesName.notice:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/utils/snackbar_message.dart';
 import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
@@ -314,9 +315,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                             if (success2) {
                                               _refreshNoticeList();
                                             } else {
-                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text(provider2.errorMessage ?? "Failed to delete")),
-                                              );
+                                             SnackBarMessage.showSnackBar(context, provider2.errorMessage ?? "Failed to delete");
                                             }
                                             break;
                                           case MoreMenuAction.view:
@@ -328,6 +327,9 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                             throw UnimplementedError();
 
                                           case MoreMenuAction.suspend:
+                                            throw UnimplementedError();
+                                          case MoreMenuAction.publish:
+                                            // TODO: Handle this case.
                                             throw UnimplementedError();
                                         }
                                       },

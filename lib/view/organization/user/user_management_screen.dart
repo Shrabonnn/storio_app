@@ -172,6 +172,9 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                               case MoreMenuAction.delete:
                                               // delete
                                                 break;
+                                              case MoreMenuAction.publish:
+                                                // TODO: Handle this case.
+                                                throw UnimplementedError();
                                             }
                                           },
                                         ),

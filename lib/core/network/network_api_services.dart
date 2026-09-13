@@ -10,12 +10,19 @@ import '../storage/storage_service.dart';
 import '../../res/api_url/app_url.dart';
 
 class NetworkApiServices {
-
   // ============================================================
   // POST
   // ============================================================
 
-  Future<dynamic> postApi(String url, dynamic data, {bool requiresAuth = true,}) async {
+  // Content-type == what i send  (post e)
+  // Accept == Which type of response i want (get)
+
+  Future<dynamic> postApi(
+      String url,
+      dynamic data, {
+        bool requiresAuth = true,
+        bool isRetry = false,
+      }) async {
     try {
       String? token;
 
@@ -42,14 +49,24 @@ class NetworkApiServices {
       debugPrint("POST URL: $url");
       debugPrint("POST STATUS: ${response.statusCode}");
 
-      return ApiHelper.handleResponse(response);
+      if (response.statusCode == 401 && requiresAuth && !isRetry) {
+        final refreshed = await _refreshAccessToken();
+        if (refreshed) {
+          return postApi(
+            url,
+            data,
+            requiresAuth: requiresAuth,
+            isRetry: true,
+          );
+        }
+      }
 
+      return ApiHelper.handleResponse(
+          response); // based on response success or error message shows apihelper
     } on SocketException {
       throw ApiException("No internet connection.");
-
     } on FormatException {
       throw ApiException("Invalid response format from server.");
-
     } catch (e) {
       debugPrint("POST ERROR: $e");
 
@@ -61,12 +78,16 @@ class NetworkApiServices {
     }
   }
 
-
   // ============================================================
   // GET
   // ============================================================
 
-  Future<dynamic> getApi(String url, {Map<String, dynamic>? queryParams, bool requiresAuth = true,}) async {
+  Future<dynamic> getApi(
+      String url, {
+        Map<String, dynamic>? queryParams,
+        bool requiresAuth = true,
+        bool isRetry = false,
+      }) async {
     try {
       String? token;
 
@@ -95,14 +116,23 @@ class NetworkApiServices {
       debugPrint("GET URL: $uri");
       debugPrint("GET STATUS: ${response.statusCode}");
 
-      return ApiHelper.handleResponse(response);
+      if (response.statusCode == 401 && requiresAuth && !isRetry) {
+        final refreshed = await _refreshAccessToken();
+        if (refreshed) {
+          return getApi(
+            url,
+            queryParams: queryParams,
+            requiresAuth: requiresAuth,
+            isRetry: true,
+          );
+        }
+      }
 
+      return ApiHelper.handleResponse(response);
     } on SocketException {
       throw ApiException("No internet connection.");
-
     } on FormatException {
       throw ApiException("Invalid response format from server.");
-
     } catch (e) {
       debugPrint("GET ERROR: $e");
 
@@ -114,12 +144,16 @@ class NetworkApiServices {
     }
   }
 
-
   // ============================================================
   // PUT
   // ============================================================
 
-  Future<dynamic> putApi(String url, dynamic data, {bool requiresAuth = true,}) async {
+  Future<dynamic> putApi(
+      String url,
+      dynamic data, {
+        bool requiresAuth = true,
+        bool isRetry = false,
+      }) async {
     try {
       String? token;
 
@@ -146,14 +180,23 @@ class NetworkApiServices {
       debugPrint("PUT URL: $url");
       debugPrint("PUT STATUS: ${response.statusCode}");
 
-      return ApiHelper.handleResponse(response);
+      if (response.statusCode == 401 && requiresAuth && !isRetry) {
+        final refreshed = await _refreshAccessToken();
+        if (refreshed) {
+          return putApi(
+            url,
+            data,
+            requiresAuth: requiresAuth,
+            isRetry: true,
+          );
+        }
+      }
 
+      return ApiHelper.handleResponse(response);
     } on SocketException {
       throw ApiException("No internet connection.");
-
     } on FormatException {
       throw ApiException("Invalid response format from server.");
-
     } catch (e) {
       debugPrint("PUT ERROR: $e");
 
@@ -165,12 +208,16 @@ class NetworkApiServices {
     }
   }
 
-
   // ============================================================
   // PATCH
   // ============================================================
 
-  Future<dynamic> patchApi(String url, dynamic data, {bool requiresAuth = true,}) async {
+  Future<dynamic> patchApi(
+      String url,
+      dynamic data, {
+        bool requiresAuth = true,
+        bool isRetry = false,
+      }) async {
     try {
       String? token;
 
@@ -197,14 +244,23 @@ class NetworkApiServices {
       debugPrint("PATCH URL: $url");
       debugPrint("PATCH STATUS: ${response.statusCode}");
 
-      return ApiHelper.handleResponse(response);
+      if (response.statusCode == 401 && requiresAuth && !isRetry) {
+        final refreshed = await _refreshAccessToken();
+        if (refreshed) {
+          return patchApi(
+            url,
+            data,
+            requiresAuth: requiresAuth,
+            isRetry: true,
+          );
+        }
+      }
 
+      return ApiHelper.handleResponse(response);
     } on SocketException {
       throw ApiException("No internet connection.");
-
     } on FormatException {
       throw ApiException("Invalid response format from server.");
-
     } catch (e) {
       debugPrint("PATCH ERROR: $e");
 
@@ -216,12 +272,15 @@ class NetworkApiServices {
     }
   }
 
-
   // ============================================================
   // DELETE
   // ============================================================
 
-  Future<dynamic> deleteApi(String url, {bool requiresAuth = true,}) async {
+  Future<dynamic> deleteApi(
+      String url, {
+        bool requiresAuth = true,
+        bool isRetry = false,
+      }) async {
     try {
       String? token;
 
@@ -246,14 +305,22 @@ class NetworkApiServices {
       debugPrint("DELETE URL: $url");
       debugPrint("DELETE STATUS: ${response.statusCode}");
 
-      return ApiHelper.handleResponse(response);
+      if (response.statusCode == 401 && requiresAuth && !isRetry) {
+        final refreshed = await _refreshAccessToken();
+        if (refreshed) {
+          return deleteApi(
+            url,
+            requiresAuth: requiresAuth,
+            isRetry: true,
+          );
+        }
+      }
 
+      return ApiHelper.handleResponse(response);
     } on SocketException {
       throw ApiException("No internet connection.");
-
     } on FormatException {
       throw ApiException("Invalid response format from server.");
-
     } catch (e) {
       debugPrint("DELETE ERROR: $e");
 
@@ -265,12 +332,17 @@ class NetworkApiServices {
     }
   }
 
-
   // ============================================================
   // MULTIPART POST
   // ============================================================
 
-  Future<dynamic> multipartApi(String url, Map<String, String> fields, Map<String, File> files, {bool requiresAuth = true,}) async {
+  Future<dynamic> multipartApi(
+      String url,
+      Map<String, String> fields,
+      Map<String, File> files, {
+        bool requiresAuth = true,
+        bool isRetry = false,
+      }) async {
     try {
       String? token;
 
@@ -295,8 +367,6 @@ class NetworkApiServices {
       // Add normal fields
       request.fields.addAll(fields);
 
-
-      // Add files
       // Add files
       for (final entry in files.entries) {
         final f = entry.value;
@@ -337,14 +407,24 @@ class NetworkApiServices {
         "MULTIPART STATUS: ${response.statusCode}",
       );
 
-      return ApiHelper.handleResponse(response);
+      if (response.statusCode == 401 && requiresAuth && !isRetry) {
+        final refreshed = await _refreshAccessToken();
+        if (refreshed) {
+          return multipartApi(
+            url,
+            fields,
+            files,
+            requiresAuth: requiresAuth,
+            isRetry: true,
+          );
+        }
+      }
 
+      return ApiHelper.handleResponse(response);
     } on SocketException {
       throw ApiException("No internet connection.");
-
     } on FormatException {
       throw ApiException("Invalid response format from server.");
-
     } catch (e) {
       debugPrint("MULTIPART ERROR: $e");
 
@@ -353,6 +433,67 @@ class NetworkApiServices {
       }
 
       throw ApiException("Unexpected error occurred.");
+    }
+  }
+
+  // ============================================================
+  // REFRESH ACCESS TOKEN
+  // ============================================================
+  //
+  // access token expire (401) হলে refresh token দিয়ে নতুন access
+  // token আনার চেষ্টা করে। সফল হলে নতুন token(গুলো) সেভ করে true
+  // রিটার্ন করে, ব্যর্থ হলে (refresh token ও মেয়াদোত্তীর্ণ/অকার্যকর)
+  // সব token মুছে false রিটার্ন করে — সেক্ষেত্রে ইউজারকে আবার
+  // login করতে হবে।
+
+  Future<bool> _refreshAccessToken() async {
+    try {
+      final refreshToken = await TokenStorage.getRefreshToken();
+
+      if (refreshToken == null || refreshToken.isEmpty) {
+        return false;
+      }
+
+      final response = await http.post(
+        Uri.parse(AppUrl.refreshTokenApi),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "X-Tenant-Host": AppUrl.tenantHost,
+        },
+        body: jsonEncode({"refresh": refreshToken}),
+      );
+
+      debugPrint("REFRESH TOKEN STATUS: ${response.statusCode}");
+
+      if (response.statusCode != 200) {
+        // refresh token ও মেয়াদোত্তীর্ণ / invalid — force logout দরকার
+        await TokenStorage.clearTokens();
+        return false;
+      }
+
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+
+      final newAccess = data['access'] as String?;
+
+      if (newAccess == null || newAccess.isEmpty) {
+        await TokenStorage.clearTokens();
+        return false;
+      }
+
+      await TokenStorage.saveToken(newAccess);
+
+      // SimpleJWT এ ROTATE_REFRESH_TOKENS enabled থাকলে নতুন refresh
+      // token ও দিতে পারে — থাকলে সেভ করে নেই
+      final newRefresh = data['refresh'] as String?;
+      if (newRefresh != null && newRefresh.isNotEmpty) {
+        await TokenStorage.saveRefreshToken(newRefresh);
+      }
+
+      return true;
+    } catch (e) {
+      debugPrint("REFRESH TOKEN ERROR: $e");
+      return false;
     }
   }
 }

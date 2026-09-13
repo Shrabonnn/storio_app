@@ -310,6 +310,9 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
 
                                         case MoreMenuAction.suspend:
                                           throw UnimplementedError();
+                                        case MoreMenuAction.publish:
+                                          // TODO: Handle this case.
+                                          throw UnimplementedError();
                                       }
                                     },
                                   ),

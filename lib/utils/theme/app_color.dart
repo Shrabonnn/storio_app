@@ -10,7 +10,7 @@ class AppColor extends ThemeExtension<AppColor> {
     required this.lightVersionOfPrimaryLightVersion,
     required this.textPrimary,
     required this.textSecondary,
-    required this.textAppbar,
+    required this.textAppbar, required this.active,
   });
 
   final Color primary;
@@ -22,6 +22,7 @@ class AppColor extends ThemeExtension<AppColor> {
   final Color textPrimary;
   final Color textSecondary;
   final Color textAppbar;
+  final Color active;
 
   @override
   ThemeExtension<AppColor> copyWith() => this;
@@ -48,6 +49,7 @@ class DefaultColor extends AppColor {
         textPrimary: Color(0xFF1A437A),
         textSecondary: Colors.black54,
         textAppbar: Color(0xFFFFFFFF),
+        active: Colors.green.shade200,
 
       );
 }
@@ -66,6 +68,7 @@ class EmeraldColor extends AppColor {
     textPrimary: Color(0xFF0E6B4F),
     textSecondary: Colors.black54,
     textAppbar: Color(0xFFFFFFFF),
+    active: Color(0xFF10B981),
 
   );
 }
@@ -84,6 +87,7 @@ class DarkColor extends AppColor {
     textPrimary: Color(0xFF9CA3D8),
     textSecondary: Color(0xFF9CA3B8),
     textAppbar: Color(0xFFE8E9F5),
+    active: Color(0xFFD4AF37),
 
   );
 }

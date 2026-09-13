@@ -10,7 +10,8 @@ class ImageCard extends StatelessWidget {
   final Widget image;
 
   final Widget? status;
-
+  final Widget? activeStatus;
+  final bool? isActiveStatus;
   final Widget? title;
 
   final Widget? child;
@@ -20,7 +21,7 @@ class ImageCard extends StatelessWidget {
     required this.image,
     this.status,
     this.title,
-    this.child,
+    this.child, this.activeStatus, this.isActiveStatus = false,
   });
 
   @override
@@ -48,7 +49,6 @@ class ImageCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          // IMAGE
           ClipRRect(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(
@@ -57,6 +57,26 @@ class ImageCard extends StatelessWidget {
             ),
             child: image,
           ),
+          // IMAGE
+          /*Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(
+                    AppSizes.cardRadius,
+                  ),
+                ),
+                child: image,
+              ),
+
+              if (isActiveStatus != null)
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: activeStatus!,
+                ),
+            ],
+          ),*/
 
           // CARD CONTENT
 

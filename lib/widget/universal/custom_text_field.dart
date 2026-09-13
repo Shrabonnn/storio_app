@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,6 +14,7 @@ class CustomTextFieldWidget extends StatelessWidget {
 
   final bool isDatePicker;
   final bool isTimePicker;
+  final bool isInputOnlyNumber;
 
   final VoidCallback? onChange;
   final bool enable;
@@ -26,12 +28,11 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.isDatePicker = false,
     this.isTimePicker = false,
     this.onChange,
-    this.enable = true,
+    this.enable = true,  this.isInputOnlyNumber =false,
   });
 
-  // ============================================================
+
   // Date Picker
-  // ============================================================
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -46,9 +47,8 @@ class CustomTextFieldWidget extends StatelessWidget {
     }
   }
 
-  // ============================================================
+
   // Time Picker
-  // ============================================================
 
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? pickedTime = await showTimePicker(
@@ -61,9 +61,6 @@ class CustomTextFieldWidget extends StatelessWidget {
     }
   }
 
-  // ============================================================
-  // Build
-  // ============================================================
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +88,8 @@ class CustomTextFieldWidget extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: [
             TextFormField(
+              keyboardType: isInputOnlyNumber ? TextInputType.number :TextInputType.text,
+              inputFormatters: isInputOnlyNumber ? [FilteringTextInputFormatter.digitsOnly] : null,
               enabled: enable,
               controller: controller,
               readOnly: isPicker,

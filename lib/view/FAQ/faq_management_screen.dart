@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:storio_app/routes/routes_name.dart';
+import 'package:storio_app/utils/theme/app_color.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 
-import '../../utils/theme/theme_ext.dart';
+import '../../data/model/Content/faq/faq_model.dart';
 import '../../utils/app_sizes.dart';
-import '../../widget/custom_button/custom_buttom.dart';
+import '../../utils/snackbar_message.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../viewModel/Content/faq_view_model.dart';
 import '../../widget/textStyle/text_body_style.dart';
-import '../../widget/textStyle/text_title_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
 import '../../widget/universal/custom_status_badge.dart';
@@ -15,168 +18,322 @@ import '../../widget/universal/custom_status_badge.dart';
 class FaqManagementScreen extends StatefulWidget {
   const FaqManagementScreen({super.key});
 
-
-
-
   @override
   State<FaqManagementScreen> createState() => _FaqManagementScreenState();
 }
 
 class _FaqManagementScreenState extends State<FaqManagementScreen> {
-
   final TextEditingController searchController = TextEditingController();
 
+  String _searchQuery = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _refreshFaqList();
+    });
+  }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     searchController.dispose();
+    super.dispose();
   }
+
+  Future<void> _refreshFaqList() async {
+    await context.read<FaqViewModel>().getFaqApi();
+  }
+
+  // API তে FAQ list এর জন্য কোনো search query param documented নেই,
+  // তাই client-side এ question/answer এর ভিতর filter করি
+  List<FaqModel> _filteredFaqs(List<FaqModel> all) {
+    if (_searchQuery.trim().isEmpty) return all;
+
+    final query = _searchQuery.trim().toLowerCase();
+    return all.where((faq) {
+      final question = (faq.question ?? "").toLowerCase();
+      final answer = (faq.answer ?? "").toLowerCase();
+      return question.contains(query) || answer.contains(query);
+    }).toList();
+  }
+
+  String _formatDate(DateTime? date) {
+    if (date == null) return "-";
+    return DateFormat('dd MMM yyyy').format(date);
+  }
+
+  Future<void> _confirmDelete(FaqModel faq) async {
+    if (faq.id == null) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text("Delete FAQ"),
+        content: const Text("Are you sure you want to delete this FAQ?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: const Text(
+              "Delete",
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+    if (!mounted) return;
+
+    final viewModel = context.read<FaqViewModel>();
+    final success = await viewModel.deleteFaq(faq.id!);
+
+    if (!mounted) return;
+
+    SnackBarMessage.showSnackBar(
+      context,
+      success
+          ? "FAQ deleted successfully"
+          : (viewModel.errorMessage ?? "Failed to delete FAQ"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = context.Appcolor;
+
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          CustomSliverAppBar(
-            title: "FAQ",showBackButton: true,
-          ),
-          SliverPadding(
-            padding: EdgeInsetsGeometry.all(AppSizes.screenPadding),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                Column(
-                  children: [
-
-                    Row(
-                      children: [
-                        Expanded(child: SearchTextField(onChanged:(value){},hinText: "Search FAQ...",controller: searchController,)),
-                      ],
-                    ),
-
-                  ],
-                )
-              ]),
+      body: RefreshIndicator(
+        onRefresh: _refreshFaqList,
+        child: CustomScrollView(
+          slivers: [
+            CustomSliverAppBar(
+              title: "FAQ",
+              showBackButton: true,
             ),
-          ),
-          SliverPadding(padding: EdgeInsets.symmetric(horizontal:AppSizes.screenPadding),
-            sliver: SliverList.builder(
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.only(bottom: AppSizes.sectionGap),
-                  child: CustomCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
 
-                        // Question
-                        TextBodyStyleWidget(
-                          title: "Question: Admission process starts ?",
-                          maxLines: 2,
-                          color: color.primary,
-                          size: AppSizes.sectionTitle,
+            SliverPadding(
+              padding: EdgeInsets.all(AppSizes.screenPadding),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate([
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SearchTextField(
+                              onChanged: (value) {
+                                setState(() {
+                                  _searchQuery = value;
+                                });
+                              },
+                              hinText: "Search FAQ...",
+                              controller: searchController,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ]),
+              ),
+            ),
+
+            Consumer<FaqViewModel>(
+              builder: (context, viewModel, child) {
+                if (viewModel.loading) {
+                  return const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 40),
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                  );
+                }
+
+                if (viewModel.errorMessage != null &&
+                    viewModel.faqList.isEmpty) {
+                  return SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 40),
+                      child: Center(
+                        child: TextBodyStyleWidget(
+                          title: viewModel.errorMessage!,
+                          color: Colors.red,
                         ),
+                      ),
+                    ),
+                  );
+                }
 
-                        SizedBox(height: AppSizes.smallGap),
+                final faqs = _filteredFaqs(viewModel.faqList);
 
-                        // Answer
-                        TextBodyStyleWidget(
-                          title: "Answer: Checking the FAQ API",
-                          maxLines: 3,
+                if (faqs.isEmpty) {
+                  return SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 40),
+                      child: Center(
+                        child: TextBodyStyleWidget(
+                          title: "No FAQ found",
                           color: color.primary,
-                          size: AppSizes.cardTitle,
                         ),
+                      ),
+                    ),
+                  );
+                }
 
-                        SizedBox(height: AppSizes.itemGap),
+                return SliverPadding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.screenPadding,
+                  ),
+                  sliver: SliverList.builder(
+                    itemCount: faqs.length,
+                    itemBuilder: (context, index) {
+                      final faq = faqs[index];
 
-                        // Status + Created date
-                        Row(
-                          children: [
+                      return Container(
+                        margin: EdgeInsets.only(bottom: AppSizes.sectionGap),
+                        child: CustomCard(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Question
+                              TextBodyStyleWidget(
+                                title: "Q: ${faq.question ?? ''}",
+                                maxLines: 3,
+                                color: color.textPrimary,
+                                size: AppSizes.sectionTitle,
+                              ),
 
+                              SizedBox(height: AppSizes.itemGap),
 
-                            // Created date
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              // Answer
+                              TextBodyStyleWidget(
+                                title: "Ans: ${faq.answer ?? ''}",
+                                maxLines: 6,
+                                size: AppSizes.cardTitle,
+
+                              ),
+
+                              SizedBox(height: AppSizes.itemGap),
+                              const Divider(),
+
+                              // Status + Created date + Actions
+                              Row(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: .spaceBetween,
-                                    children: [
-                                      TextBodyStyleWidget(
-                                        title: "Created On",
-                                        color: color.primary,
-                                        size: AppSizes.cardTitle,
-                                      ),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            CustomStatusBadge(
+                                              title: (faq.isVisible ?? true)
+                                                  ? "Visible"
+                                                  : "Hidden",
+                                              size: AppSizes.cardTitle,
+                                              backgroundColor: (faq.isVisible ?? true) ? color.active : color.lightVersionOfPrimaryLightVersion,
+                                              foregroundColor: (faq.isVisible ?? true) ? Colors.black : color.primary,
 
-                                      CustomStatusBadge(
-                                        title: "Visible",
-                                        backgroundColor: Colors.green.shade100,
-                                        size: AppSizes.cardTitle,
+                                            ),
+                                            SizedBox(
+                                              height: AppSizes.smallGap,
+                                            ),
+                                            TextBodyStyleWidget(
+                                              title:
+                                              "Created On: ${_formatDate(faq.createDate ?? faq.createdAt)}",
+                                              color: color.primary,
+                                              fontbold: false,
+                                              size: AppSizes.cardTitle,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () async {
+                                                final result =
+                                                await Navigator.pushNamed(
+                                                  context,
+                                                  RoutesName.edit_faq,
+                                                  arguments: {"faq": faq},
+                                                );
 
-                                      ),
-                                    ],
-                                  ),
+                                                if (!mounted) return;
 
-
-                                  TextBodyStyleWidget(
-                                    title: "May 2, 2026",
-                                    color: color.primary,
-                                    size: AppSizes.cardTitle,
+                                                if (result == true) {
+                                                  _refreshFaqList();
+                                                }
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: color.primary,
+                                                size: AppSizes.icon,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: AppSizes.itemGap,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () =>
+                                                  _confirmDelete(faq),
+                                              child: Icon(
+                                                Icons
+                                                    .delete_outline_outlined,
+                                                color: Colors.red,
+                                                size: AppSizes.icon,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-
-
-
-                          ],
+                            ],
+                          ),
                         ),
-
-
-
-                        Divider(),
-
-
-                        // Actions
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-
-                            Flexible(
-                              child: CustomButton(
-                                text: "Edit",
-                                onTap: () {
-                                  Navigator.pushNamed(context, RoutesName.edit_faq);
-                                },
-
-                              ),
-                            ),
-
-                            SizedBox(width: AppSizes.smallGap),
-
-                            Flexible(
-                              child: CustomButton(
-                                text: "Delete",
-                                onTap: () {},
-
-                                backgroundColor: Colors.red,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 );
               },
+            ),
 
-              itemCount: 2,
-            ),),
+            SliverPadding(
+              padding: EdgeInsets.only(bottom: AppSizes.sectionGap),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            heroTag: "add",
+            backgroundColor: color.primary,
+            onPressed: () async {
+              final result =
+              await Navigator.pushNamed(context, RoutesName.add_new_faq);
 
+              if (!mounted) return;
 
-
-          SliverPadding(padding: EdgeInsets.only(bottom:AppSizes.sectionGap))
+              if (result == true) {
+                _refreshFaqList();
+              }
+            },
+            child: Icon(Icons.add, color: color.cardBackground),
+          ),
         ],
       ),
     );

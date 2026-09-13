@@ -62,11 +62,10 @@ class _EditBlogState extends State<EditBlog> {
   void initState() {
     super.initState();
 
-    // list থেকে যা পাওয়া গেছে সেটা দিয়ে আগে prefill করি (fast UI)
+
     _prefillFromModel(widget.blog);
 
-    // slug field খালি হলে title থেকে auto-generate হবে, existing
-    // slug থাকলে সেটা overwrite হবে না
+
     titleController.addListener(_onTitleChanged);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -77,9 +76,6 @@ class _EditBlogState extends State<EditBlog> {
       viewModel.getStatusChoices();
       viewModel.getCategoryApi();
 
-      // detail endpoint থেকে full data (seo_title, seo_description,
-      // categories_data ইত্যাদি) এনে আবার prefill করি, কারণ list
-      // endpoint এ এগুলো null/empty আসতে পারে।
       if (widget.blog.id != null) {
         await viewModel.getBlogDetail(widget.blog.id!);
 

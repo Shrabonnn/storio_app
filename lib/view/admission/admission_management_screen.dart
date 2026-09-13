@@ -126,6 +126,9 @@ class _AdmissionManagementScreenState extends State<AdmissionManagementScreen> {
                                       case MoreMenuAction.suspend:
                                       // TODO: Handle this case.
                                         throw UnimplementedError();
+                                      case MoreMenuAction.publish:
+                                        // TODO: Handle this case.
+                                        throw UnimplementedError();
                                     }
                                   },
                                 ),

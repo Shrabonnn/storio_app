@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/data/model/Content/promotion/promotion_model.dart';
+import 'package:storio_app/utils/snackbar_message.dart';
+import 'package:storio_app/viewModel/Content/promotion_view_model.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
+
+import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
-import 'package:storio_app/widget/universal/custom_card.dart';
+import 'package:storio_app/widget/universal/image_card.dart';
 import 'package:storio_app/widget/universal/custom_drop_down.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
-import 'package:storio_app/widget/universal/image_card.dart';
+import 'package:storio_app/widget/universal/more_menu.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/theme/theme_ext.dart';
 import '../../utils/app_sizes.dart';
-import '../../utils/theme/theme_ext.dart';
 import '../../widget/dashboard/stat_card.dart';
+import '../../widget/universal/confirm_action.dart';
 import '../../widget/universal/custom_app_bar.dart';
+import '../../widget/universal/date_time_formate.dart';
 
 class PromotionManagementScreen extends StatefulWidget {
   const PromotionManagementScreen({super.key});
@@ -27,209 +34,550 @@ class PromotionManagementScreen extends StatefulWidget {
 class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
   final TextEditingController searchController = TextEditingController();
 
-  List<String> statusItem = ["All", "Published", "Draft", "Archived"];
+  final List<String> statusItem = ["All", "Published", "Draft", "Archived"];
+
+  String selectedStatus = "All";
+  String selectedType = "All";
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadPromotions();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  // ============================================================
+  // Load Promotions
+  // ============================================================
+
+  void _loadPromotions() {
+    final provider = context.read<PromotionViewModel>();
+
+    provider.getManagementPromotion(
+      search: searchController.text.trim().isEmpty
+          ? null
+          : searchController.text.trim(),
+      status: selectedStatus == "All" ? null : selectedStatus.toLowerCase(),
+      type: selectedType == "All" ? null : selectedType.toLowerCase(),
+    );
+  }
+
+
+  // Publish Promotion
+
+
+  Future<void> _publishPromotion(PromotionModel promotion) async {
+    if (promotion.id == null) return;
+
+    final confirmed = await confirmAction(
+      context,
+      title: "Publish Promotion",
+      message: "Are you sure you want to publish this promotion?",
+    );
+
+    if (!mounted || !confirmed) return;
+
+    final viewModel = context.read<PromotionViewModel>();
+
+    final result = await viewModel.publishPromotionApi(promotion.id!);
+
+    if (!mounted) return;
+
+    SnackBarMessage.showSnackBar(
+      context,
+      result != null
+          ? "Promotion published successfully"
+          : (viewModel.errorMessage ?? "Failed to publish promotion"),
+    );
+  }
+
+
+  // Archive Promotion
+
+
+  Future<void> _archivePromotion(PromotionModel promotion) async {
+    if (promotion.id == null) return;
+
+    final confirmed = await confirmAction(
+      context,
+      title: "Archive Promotion",
+      message: "Are you sure you want to archive this promotion?",
+    );
+
+    if (!mounted || !confirmed) return;
+
+    final viewModel = context.read<PromotionViewModel>();
+
+    final result = await viewModel.archivePromotionApi(promotion.id!);
+
+    if (!mounted) return;
+
+    SnackBarMessage.showSnackBar(
+      context,
+      result != null
+          ? "Promotion archived successfully"
+          : (viewModel.errorMessage ?? "Failed to archive promotion"),
+    );
+  }
+
+
+  // Permanently Delete Promotion
+
+
+  Future<void> _confirmDelete(PromotionModel promotion) async {
+    if (promotion.id == null) return;
+
+    final confirmed = await confirmAction(
+      context,
+      title: "Delete Promotion",
+      message: "Are you sure you want to permanently delete this promotion?",
+    );
+
+    if (!mounted || !confirmed) return;
+
+    final viewModel = context.read<PromotionViewModel>();
+
+    final success = await viewModel.permanentlyDeletePromotionApi(
+      promotion.id!,
+    );
+
+    if (!mounted) return;
+
+    SnackBarMessage.showSnackBar(
+      context,
+      success
+          ? "Promotion deleted permanently"
+          : (viewModel.errorMessage ?? "Failed to delete promotion"),
+    );
+
+    if (success) {
+      _loadPromotions();
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final color = context.Appcolor;
+
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          CustomSliverAppBar(
-            title: "Promotion Management",
-            showBackButton: true,
-          ),
-          SliverPadding(
-            padding: EdgeInsetsGeometry.all(AppSizes.screenPadding),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                Column(
-                  children: [
-                    CustomCard(
-                      child: Column(
-                        children: [
-                          // Search & Dropdown
-                          Row(
-                            children: [
-                              Expanded(
-                                child: SearchTextField(onChanged:(value){},
-                                  hinText: "Search promotions...",
-                                  controller: searchController,
-                                ),
-                              ),
-                              SizedBox(width: AppSizes.appbarGap),
-                              CustomDropdown(
-                                items: statusItem,
-                                initialValue: statusItem[0],
-                                width: 32.w,
-                                height: 4.5.h,
-                                onChanged: (value) {
-                                  print("Selected: $value");
-                                },
-                              ),
-                            ],
-                          ),
+      body: Consumer<PromotionViewModel>(
+        builder: (context, provider, child) {
+          return CustomScrollView(
+            slivers: [
 
-                          SizedBox(height: AppSizes.sectionGap),
+              // App Bar
 
-                          // Stat Card
-                          Row(
-                            children: [
-                              Expanded(
-                                child: StatCard(label: "Live Now", value: "0"),
-                              ),
-                              SizedBox(width: AppSizes.smallGap),
-                              Expanded(
-                                child: StatCard(label: "Draft", value: "8"),
-                              ),
-                              SizedBox(width: AppSizes.smallGap),
-                              Expanded(
-                                child: StatCard(
-                                  label: "Total Views",
-                                  value: "10",
-                                ),
-                              ),
-                              SizedBox(width: AppSizes.smallGap),
-                              Expanded(
-                                child: StatCard(
-                                  label: "Total Clicks",
-                                  value: "3",
-                                ),
-                              ),
-                            ],
+              CustomSliverAppBar(
+                title: "Promotion Management",
+                showBackButton: true,
+              ),
+
+              SliverPadding(
+                padding: EdgeInsets.all(AppSizes.screenPadding),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+
+                    // Search & Filters
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SearchTextField(
+                            controller: searchController,
+                            hinText: "Search promotions...",
+                            onChanged: (value) {
+                              _loadPromotions();
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+
+                        SizedBox(width: AppSizes.smallGap),
+
+                        Row(
+                          children: [
+                            CustomButton(height: 4.5.h,width:12.w,text: "Bin", onTap: (){}),
+                            SizedBox(width: AppSizes.smallGap,),
+                            CustomDropdown(
+                              items: statusItem,
+                              initialValue: selectedStatus,
+                              width: 27.w,
+                              height: 4.5.h,
+                              onChanged: (value) {
+                                if (value == null) return;
+
+                                setState(() {
+                                  selectedStatus = value;
+                                });
+
+                                _loadPromotions();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
 
+                    SizedBox(height: AppSizes.sectionGap),
 
 
-                  ],
+                    // Stats
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: StatCard(
+                            label: "Live Now",
+                            value: provider.promotionList
+                                .where((e) => e.isLive == true)
+                                .length
+                                .toString(),
+                          ),
+                        ),
+
+                        SizedBox(width: AppSizes.smallGap),
+
+                        Expanded(
+                          child: StatCard(
+                            label: "Draft",
+                            value: provider.promotionList
+                                .where((e) => e.status == "draft")
+                                .length
+                                .toString(),
+                          ),
+                        ),
+
+                        SizedBox(width: AppSizes.smallGap),
+
+                        Expanded(
+                          child: StatCard(
+                            label: "Total Views",
+                            value: provider.promotionList
+                                .fold<int>(
+                                  0,
+                                  (sum, item) => sum + (item.viewCount ?? 0),
+                                )
+                                .toString(),
+                          ),
+                        ),
+
+                        SizedBox(width: AppSizes.smallGap),
+
+                        Expanded(
+                          child: StatCard(
+                            label: "Total Clicks",
+                            value: provider.promotionList
+                                .fold<int>(
+                                  0,
+                                  (sum, item) => sum + (item.clickCount ?? 0),
+                                )
+                                .toString(),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: AppSizes.sectionGap),
+
+
+                    // Loading
+
+                    if (provider.loading)
+                      const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(30),
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+
+                    // ==================================================
+                    // Error
+                    // ==================================================
+                    if (!provider.loading && provider.errorMessage != null)
+                      Center(
+                        child: TextBodyStyleWidget(
+                          title: provider.errorMessage!,
+                        ),
+                      ),
+
+                    // ==================================================
+                    // Empty
+                    // ==================================================
+                    if (!provider.loading &&
+                        provider.errorMessage == null &&
+                        provider.promotionList.isEmpty)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(30),
+                          child: TextBodyStyleWidget(
+                            title: "No promotions found",
+                          ),
+                        ),
+                      ),
+                  ]),
                 ),
-              ]),
-            ),
-          ),
-          SliverPadding(padding: EdgeInsets.symmetric(horizontal:AppSizes.screenPadding),
-            sliver: SliverList.builder(
-              itemBuilder: (context, index) {
-                return ImageCard(
-                  image: Image.asset(
-                    "assets/images/institute.png",
-                    width: double.infinity,
-                    height: 18.h,
-                    fit: BoxFit.cover,
+              ),
+
+              // ==========================================================
+              // Promotion List
+              // ==========================================================
+              if (!provider.loading && provider.promotionList.isNotEmpty)
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.screenPadding,
                   ),
+                  sliver: SliverList.builder(
+                    itemCount: provider.promotionList.length,
+                    itemBuilder: (context, index) {
+                      final PromotionModel promotion =
+                          provider.promotionList[index];
 
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: .spaceBetween,
-                        children: [
-                          CustomStatusBadge(title: "Published",size: AppSizes.cardTitle,),
+                      return ImageCard(
+                        image: _buildPromotionImage(promotion),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // ============================================
+                            // Status + Menu
+                            // ============================================
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomStatusBadge(
+                                  title: promotion.status ?? "",
+                                  size: AppSizes.cardTitle,
+                                ),
 
+                                Row(
+                                  children: [
+                                    MoreMenu(
+                                      items: [
+                                        MoreMenuAction.edit,
+                                        MoreMenuAction.publish,
+                                        MoreMenuAction.archive,
+                                        MoreMenuAction.delete,
+                                      ],
 
+                                      onSelected: (action) async {
+                                        switch (action) {
+                                          // =================================
+                                          // Edit
+                                          // =================================
 
-                          // More
-                          InkWell(
-                            onTap: (){},
-                              child: Icon(Icons.more_vert))
-                        ],
-                      ),
+                                          case MoreMenuAction.edit:
+                                            final result =
+                                                await Navigator.pushNamed(
+                                                  context,
+                                                  RoutesName.edit_promotion,
+                                                  arguments: {
+                                                    'promotion' :promotion
+                                                  },
+                                                );
 
-                      SizedBox(height: AppSizes.smallGap),
+                                            if (!mounted) return;
 
+                                            if (result == true) {
+                                              _loadPromotions();
+                                            }
+                                            break;
 
-                      TextTitleWidget(
-                        title: "Admission Going On",
-                        color: color.primary,
-                        maxLines: 1,
-                      ),
+                                          // =================================
+                                          // Publish
+                                          // =================================
 
-                      SizedBox(height: AppSizes.appbarGap),
-                      TextBodyStyleWidget(title: "Testing this API"),
+                                          case MoreMenuAction.publish:
+                                            await _publishPromotion(promotion);
+                                            break;
 
-                      SizedBox(height: AppSizes.appbarGap),
+                                          // =================================
+                                          // Archive
+                                          // =================================
 
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.calendar_month_outlined,
-                            size: AppSizes.iconSmall,
-                            color: Colors.grey.shade600,
-                          ),
+                                          case MoreMenuAction.archive:
+                                            await _archivePromotion(promotion);
+                                            break;
 
-                          SizedBox(width: AppSizes.appbarGap),
+                                          // =================================
+                                          // Delete
+                                          // =================================
 
-                          Flexible(
-                            child: TextBodyStyleWidget(
-                              title:
-                              "Apr 9, 2026, 06:00 AM → Jul 2, 2026, 06:00 AM",
+                                          case MoreMenuAction.delete:
+                                            await _confirmDelete(promotion);
+                                            break;
+
+                                          // =================================
+                                          // Unused Actions
+                                          // =================================
+
+                                          case MoreMenuAction.view:
+                                          case MoreMenuAction.changePassword:
+                                          case MoreMenuAction.suspend:
+                                            break;
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
 
-                      SizedBox(height: AppSizes.appbarGap),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.visibility_outlined,
-                            size: AppSizes.iconSmall,
-                            color: Colors.grey.shade600,
-                          ),
+                            SizedBox(height: AppSizes.smallGap),
 
-                          SizedBox(width: AppSizes.appbarGap),
+                            // ============================================
+                            // Title
+                            // ============================================
+                            TextTitleWidget(
+                              title: promotion.title ?? "-",
+                              color: color.primary,
+                              maxLines: 1,
+                            ),
 
-                          TextBodyStyleWidget(title: "0"),
+                            SizedBox(height: AppSizes.smallGap),
 
-                          SizedBox(width: AppSizes.smallGap),
+                            // ============================================
+                            // Subtitle
+                            // ============================================
+                            if (promotion.subtitle != null &&
+                                promotion.subtitle!.isNotEmpty)
+                              TextBodyStyleWidget(
+                                title: promotion.subtitle!,
+                                maxLines: 2,
+                              ),
 
-                          Icon(
-                            Icons.touch_app_outlined,
-                            size: AppSizes.iconSmall,
-                            color: Colors.grey.shade600,
-                          ),
+                            SizedBox(height: AppSizes.smallGap),
 
-                          SizedBox(width: AppSizes.appbarGap),
+                            // ============================================
+                            // Date
+                            // ============================================
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_month_outlined,
+                                  size: AppSizes.iconSmall,
+                                  color: Colors.grey.shade600,
+                                ),
 
-                          TextBodyStyleWidget(title: "0"),
-                        ],
-                      ),
-                      SizedBox(height: AppSizes.smallGap),
+                                SizedBox(width: AppSizes.appbarGap),
 
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RoutesName.add_promotion,arguments: {
-                            'isEdit':true
-                          });
-                        },
-                        child: Text("Edit Promotion"),
-                      ),
-                    ],
+                                Flexible(
+                                  child: TextBodyStyleWidget(
+                                    title:
+                                        "${formatDate(promotion.startDate)} → "
+                                        "${formatDate(promotion.endDate)}",
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: AppSizes.smallGap),
+
+                            // ============================================
+                            // Views + Clicks
+                            // ============================================
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.visibility_outlined,
+                                  size: AppSizes.iconSmall,
+                                  color: Colors.grey.shade600,
+                                ),
+
+                                SizedBox(width: AppSizes.appbarGap),
+
+                                TextBodyStyleWidget(
+                                  title: "${promotion.viewCount ?? 0}",
+                                ),
+
+                                SizedBox(width: AppSizes.smallGap),
+
+                                Icon(
+                                  Icons.touch_app_outlined,
+                                  size: AppSizes.iconSmall,
+                                  color: Colors.grey.shade600,
+                                ),
+
+                                SizedBox(width: AppSizes.appbarGap),
+
+                                TextBodyStyleWidget(
+                                  title: "${promotion.clickCount ?? 0}",
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
 
-              itemCount: 2,
-            ),),
-          SliverPadding(padding: EdgeInsets.only(bottom:AppSizes.sectionGap))
+              SliverPadding(
+                padding: EdgeInsets.only(bottom: AppSizes.sectionGap),
+              ),
+            ],
+          );
+        },
+      ),
 
-        ],
+      // ================================================================
+      // Add Promotion
+      // ================================================================
+      floatingActionButton: FloatingActionButton(
+        heroTag: "add",
+        backgroundColor: color.primary,
+        onPressed: () async {
+          final result = await Navigator.pushNamed(
+            context,
+            RoutesName.add_promotion,
+          );
+
+          if (!mounted) return;
+
+          if (result == true) {
+            _loadPromotions();
+          }
+        },
+        child: Icon(Icons.add, color: color.cardBackground),
       ),
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            heroTag: "add",
-            backgroundColor: color.primary,
-            onPressed: () {
-              Navigator.pushNamed(context, RoutesName.add_promotion);
-            },
-            child:  Icon(Icons.add, color: color.cardBackground),
-          ),
-        ],
-      ),
+    );
+  }
+
+  // ============================================================
+  // Promotion Image
+  // ============================================================
+
+  Widget _buildPromotionImage(PromotionModel promotion) {
+    final imageUrl = promotion.imageDetail?.file;
+
+    if (imageUrl != null && imageUrl.isNotEmpty) {
+      return Image.network(
+        imageUrl,
+        width: double.infinity,
+        height: 18.h,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset(
+            "assets/images/institute.png",
+            width: double.infinity,
+            height: 18.h,
+            fit: BoxFit.cover,
+          );
+        },
+      );
+    }
+
+    return Image.asset(
+      "assets/images/institute.png",
+      width: double.infinity,
+      height: 18.h,
+      fit: BoxFit.cover,
     );
   }
 }

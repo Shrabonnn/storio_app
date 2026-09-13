@@ -10,24 +10,41 @@ class RoutesName {
   static const profile = "profile";
   static const media_manage = "media_manage";
   static const media_manage_details = "media_manage_details";
+
+  //activity
   static const activity_manage = "activity_manage";
   static const activity_manage_category = "activity_manage_category";
   static const activity_manage_details = "activity_manage_details";
+  static const edit_activity_manage_details = "edit_activity_manage_details";
+
+
   static const contact = "contact";
   static const contact_message_details = "contact_message_details";
   static const content_details = "content_details";
+
+  //Gallery
   static const gallery_manage = "gallery_manage";
   static const gallery_add_image = "gallery_add_image";
+  static const edit_gallery_image = "edit_gallery_image";
   static const manage_album = "manage_album";
+
+
+  // Promotion
   static const promotion = "promotion";
   static const add_promotion = "add_promotion";
+  static const edit_promotion = "edit_promotion";
+
+
   static const exam_result = "exam_result";
   static const publish_result = "publish_result";
   static const testimonial = "testimonial";
   static const add_new_testimonial = "add_new_testimonial";
   static const edit_testimonial = "edit_testimonial";
+
+  //FAQ
   static const faq = "faq";
   static const edit_faq = "edit_faq";
+  static const add_new_faq = "add_new_faq";
 
   //career
   static const career = "career";
@@ -42,14 +59,20 @@ class RoutesName {
   static const manage_blog_category = "manage_blog_category";
 
 
+  //Event
   static const event = "event";
   static const view_event = "view_event";
   static const add_new_event = "add_new_event";
+  static const edit_event = "edit_event";
   static const manage_event_category = "manage_event_category";
+
+  //notice
   static const notice = "notice";
   static const view_notice = "view_notice";
   static const add_new_notice = "add_new_notice";
   static const edit_notice = "edit_notice";
+
+
   static const calender = "calender";
   static const calender_setting = "calender_setting";
   static const add_new_event_calender = "add_new_event_calender";

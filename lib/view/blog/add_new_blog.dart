@@ -574,13 +574,13 @@ class _AddBlogState extends State<AddBlog> {
                                 setState(() {
                                   selectedStatusValue = selectedChoice.value;
 
-                                  // draft এ date/time কিছুই লাগে না, clear করে দাও
+
                                   if (selectedChoice.value == "draft") {
                                     publishDateController.clear();
                                     publishTimeController.clear();
                                   }
 
-                                  // published এ শুধু date লাগে, time দরকার নেই
+
                                   if (selectedChoice.value == "published") {
                                     publishTimeController.clear();
                                   }
@@ -589,7 +589,7 @@ class _AddBlogState extends State<AddBlog> {
                             ),
                             SizedBox(height: AppSizes.itemGap),
 
-                            // published -> শুধু Publish Date
+                            // published ->  Publish Date
                             if (selectedStatusValue == "published")
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -608,7 +608,7 @@ class _AddBlogState extends State<AddBlog> {
                                 ],
                               )
 
-                            // scheduled -> Publish Date + Time দুইটাই
+                            // scheduled -> Publish Date + Time
                             else if (selectedStatusValue == "scheduled")
                               Row(
                                 children: [

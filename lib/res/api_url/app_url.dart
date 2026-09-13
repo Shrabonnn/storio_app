@@ -43,11 +43,85 @@ class AppUrl {
   static String blogCategoryDetail(int id) => "${getManagementBlogCategories}$id/";
 
 
+  //Promotions ====================
+
+  // Public
+  static const String getPromotions = "$baseUrl/api/promotions/";
+
+  static String promotionClick(int id) => "$baseUrl/api/promotions/$id/click/";
+
+  // Management
+  static const String getManagementPromotions = "$baseUrl/api/management/promotions/";
+
+  static  String updateManagementPromotions(int id) => "$baseUrl/api/management/promotions/$id/";
+
+  static const String movedToBin = "$baseUrl/api/management/promotions/bin/";
+
+
+  static const String createPromotion = "$baseUrl/api/management/promotions/create/";
+
+  static String publishPromotion(int id) => "$baseUrl/api/management/promotions/$id/publish/";
+
+  static String archivePromotion(int id) => "$baseUrl/api/management/promotions/$id/archive/";
+
+  static String draftPromotion(int id) => "$baseUrl/api/management/promotions/$id/draft/";
+
+  static String restorePromotion(int id) => "$baseUrl/api/management/promotions/$id/restore/";
+
+  static String permanentlyDeletePromotion(int id) => "$baseUrl/api/management/promotions/$id/permanent-delete/";
+
+  static const String bulkPromotion = "$baseUrl/api/management/promotions/bulk/";
 
 
 
+  //Testimonial
+  // Public
+  static const String testimonialsApi = '$baseUrl/api/testimonials/';
 
+  // Management
+  static const String managementTestimonialsApi = '$baseUrl/api/management/testimonials/';
+
+  // Create
+  static const String createTestimonialApi = '$baseUrl/api/management/testimonials/create/';
+
+  // Bulk
+  static const String bulkTestimonialOperationsApi = '$baseUrl/api/management/testimonials/bulk-operations/';
+
+  // Reorder
+  static const String reorderTestimonialsApi = '$baseUrl/api/management/testimonials/reorder/';
+
+
+
+  // ============================================================
+  // Activity
+  // ============================================================
+
+  // Public
+  static const String getActivities = "$baseUrl/api/activities/";
+  static String getActivityDetail(String slug) => "${getActivities}$slug/";
+  static const String getPublicActivityCategories = "$baseUrl/api/activities/categories/";
+
+  // Management
+  static const String getManagementActivities = "$baseUrl/api/management/activities/";
+  static const String createActivity = "${getManagementActivities}create/";
+  static const String getActivityStatusChoices = "${getManagementActivities}status-choices/";
+  static const String activityBulkOperations = "${getManagementActivities}bulk-operations/";
+
+  static String activityDetail(int id) => "${getManagementActivities}$id/";
+  static String activitySchedule(int id) => "${getManagementActivities}$id/schedule/";
+  static String activityBin(int id) => "${getManagementActivities}$id/bin/";
+  static String activityRestore(int id) => "${getManagementActivities}$id/restore/";
+
+  // Category Management
+  static const String getManagementActivityCategories = "${getManagementActivities}categories/";
+  static const String createActivityCategory = "${getManagementActivityCategories}create/";
+  static String activityCategoryDetail(int id) => "${getManagementActivityCategories}$id/";
+
+
+
+  // ============================================================
   // Career / Jobs
+  // ============================================================
 
 
   // Public
@@ -63,7 +137,57 @@ class AppUrl {
 
   static String jobDetail(int id) => "${getManagementJobs}$id/";
 
+   // ===================================
+  // FAQ
+  static const String getFaqs = "$baseUrl/api/faq/";
 
+  static const String getManagementFaqs = "$baseUrl/api/management/faq/";
+  static const String createFaq = "${getManagementFaqs}create/";
+
+  static String faqDetail(int id) => "${getManagementFaqs}$id/";
+
+
+
+
+  // ============================================================
+  // Gallery
+  // ============================================================
+
+  // Public
+  static const String getGallery = "$baseUrl/api/gallery/";
+  static const String getPublicAlbums = "$baseUrl/api/gallery/albums/";
+
+  // Management
+  static const String getManagementGallery = "$baseUrl/api/management/gallery/";
+  static const String createGalleryImage = "${getManagementGallery}create/";
+  static const String galleryBulkOperations = "${getManagementGallery}bulk-operations/";
+
+  static String galleryImageDetail(int id) => "${getManagementGallery}$id/";
+
+  // Album Management
+  static const String getManagementAlbums = "${getManagementGallery}albums/";
+  static const String createAlbum = "${getManagementAlbums}create/";
+  static String albumDetail(int id) => "${getManagementAlbums}$id/";
+
+
+
+
+  // ============================================================
+  // Event
+  // ============================================================
+
+  // Event List
+  static const String getEvent = "$baseUrl/api/events/";
+  static  String eventDatils(int id) => "${getEvent}$id/";
+
+  // Event Categories
+  static const String getEventCategories  = "$baseUrl/api/event-categories/";
+  static  String eventCategoriesDetails(int id)  => "${getEventCategories}$id/";
+
+
+
+
+   // ================================
   // Media
   static const String _mediaBase = "$baseUrl/api/management/media/";
   static const String mediaFileUploadConfig = "${_mediaBase}file-upload-config/";

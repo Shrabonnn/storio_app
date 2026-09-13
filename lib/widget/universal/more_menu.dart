@@ -10,7 +10,8 @@ enum MoreMenuAction {
   delete,
   archive,
   changePassword,
-  suspend
+  suspend,
+  publish
 }
 class MoreMenu extends StatelessWidget {
   final List<MoreMenuAction> items;
@@ -27,6 +28,7 @@ class MoreMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = context.Appcolor;
     return PopupMenuButton<MoreMenuAction>(
+      padding: EdgeInsets.zero,
       color: color.primary,
       icon:  Icon(Icons.more_vert,color: color.primary,),
       onSelected: onSelected,

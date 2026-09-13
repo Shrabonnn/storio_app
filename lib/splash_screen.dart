@@ -84,8 +84,7 @@ class _StorioSplashScreenState extends State<StorioSplashScreen>
       duration: const Duration(milliseconds: 1200),
     )..repeat();
 
-    // Optional: call onFinished after a few loops of the story bars,
-    // simulating "app finished loading".
+
     Future.delayed(const Duration(milliseconds: 2600), () async{
       await checkLogin();
 
@@ -93,10 +92,13 @@ class _StorioSplashScreenState extends State<StorioSplashScreen>
   }
   Future<void> checkLogin() async {
 
-     String? token = await TokenStorage.getToken();
+    final token = await TokenStorage.getToken();
 
-     if (token == null) {
-       Navigator.pushNamed(context, RoutesName.login);
+    if (!mounted) return;
+
+     if (token == null || token.isEmpty) {
+
+       Navigator.pushReplacementNamed(context, RoutesName.login);
        return;
      }
      Navigator.pushNamed(context, RoutesName.login);

@@ -11,9 +11,15 @@ import 'package:storio_app/utils/app_sizes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:storio_app/utils/theme/app_theme.dart';
 import 'package:storio_app/viewModel/Authenticaion/auth_view_model.dart';
+import 'package:storio_app/viewModel/Content/activity_view_model.dart';
 import 'package:storio_app/viewModel/Content/blog_view_model.dart';
 import 'package:storio_app/viewModel/Content/career_view_model.dart';
+import 'package:storio_app/viewModel/Content/event_view_model.dart';
+import 'package:storio_app/viewModel/Content/faq_view_model.dart';
+import 'package:storio_app/viewModel/Content/gallery_view_model.dart';
 import 'package:storio_app/viewModel/Content/notice_view_model.dart';
+import 'package:storio_app/viewModel/Content/promotion_view_model.dart';
+import 'package:storio_app/viewModel/Content/testimonial_view_model.dart';
 import 'package:storio_app/viewModel/Media/media_view_model.dart';
 import 'package:storio_app/viewModel/hero_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
@@ -38,10 +44,17 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => MediaViewModel()),
           ChangeNotifierProvider(create: (_) => BlogViewModel()),
           ChangeNotifierProvider(create: (_) => CareerViewModel()),
+          ChangeNotifierProvider(create: (_) => ActivityViewModel()),
+          ChangeNotifierProvider(create: (_) => FaqViewModel()),
+          ChangeNotifierProvider(create: (_) => GalleryViewModel()),
+          ChangeNotifierProvider(create: (_) => EventViewModel()),
+          ChangeNotifierProvider(create: (_) => PromotionViewModel()),
+          ChangeNotifierProvider(create: (_) => TestimonialViewModel()),
         ],
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, _) {
             return MaterialApp(
+
               debugShowCheckedModeBanner: false,
 
               localizationsDelegates: const [
