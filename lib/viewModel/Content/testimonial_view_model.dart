@@ -84,8 +84,7 @@ class TestimonialViewModel extends ChangeNotifier {
       errorMessage = null;
       notifyListeners();
 
-      selectedTestimonial =
-      await _repository.getTestimonialById(id);
+      selectedTestimonial = await _repository.getTestimonialById(id);
     } on ApiException catch (e) {
       errorMessage = e.toString();
     } catch (e) {

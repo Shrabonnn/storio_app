@@ -17,6 +17,7 @@ import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
 import '../../widget/universal/custom_drop_down.dart';
 import '../../widget/universal/confirm_action.dart';
+import '../../widget/universal/image_circle_widget.dart';
 import '../../widget/universal/search_text_field.dart';
 import '../../widget/universal/status_button_row.dart';
 
@@ -110,7 +111,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                 Row(
                   children: [
                     // SEARCH
-                    Flexible(
+                    Expanded(
                       child: SearchTextField(
                         onChanged: (value) {
                           _refreshTestimonialList(search: value);
@@ -120,31 +121,9 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                       ),
                     ),
 
-                    SizedBox(width: AppSizes.appbarGap),
 
-                    // BULK ACTION
-                    CustomDropdown(
-                      items: bulkActionList,
-                      initialValue: selectedBulkAction,
-                      height: 4.5.h,
-                      width: 32.w,
-                      onChanged: (value) async {
-                        if (value == null || value == "Bulk Action") {
-                          setState(() {
-                            selectedBulkAction = value.toString();
-                          });
-                          return;
-                        }
 
-                        await _handleBulkAction(value.toString());
 
-                        if (!mounted) return;
-
-                        setState(() {
-                          selectedBulkAction = "Bulk Action";
-                        });
-                      },
-                    ),
                   ],
                 ),
 
@@ -153,16 +132,21 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                 // ==================================================
                 // STATUS FILTER
                 // ==================================================
-                StatusButtonRow(
-                  items: statusList,
-                  selectedIndex: selectedStatus,
-                  onSelected: (index) {
-                    setState(() {
-                      selectedStatus = index;
-                    });
+                Row(
+                  mainAxisAlignment: .center,
+                  children: [
+                    StatusButtonRow(
+                      items: statusList,
+                      selectedIndex: selectedStatus,
+                      onSelected: (index) {
+                        setState(() {
+                          selectedStatus = index;
+                        });
 
-                    _refreshTestimonialList();
-                  },
+                        _refreshTestimonialList();
+                      },
+                    ),
+                  ],
                 ),
 
                 SizedBox(height: AppSizes.sectionGap),
@@ -250,10 +234,8 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
 
                               children: [
-                                // -------------------------------
                                 // PHOTO
-                                // -------------------------------
-                                Container(
+                                /*Container(
                                   width: 80,
                                   height: 80,
 
@@ -276,6 +258,10 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                                               )
                                               as ImageProvider,
                                   ),
+                                ),*/
+                                ImageCircleWidget(
+                                  imgPath: testimonial.photoData?.fileUrl ?? "",
+                                  isNetwork: true,
                                 ),
 
                                 SizedBox(width: AppSizes.itemGap),
@@ -338,10 +324,9 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                                                 onTap: () {
                                                   Navigator.pushNamed(
                                                     context,
-                                                    RoutesName.view_blog,
+                                                    RoutesName.view_testimonial,
                                                     arguments: {
-                                                      'testimonial':
-                                                          testimonial,
+                                                      'testimonial': testimonial,
                                                     },
                                                   );
                                                 },
@@ -365,8 +350,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                                                     // ----------------
 
                                                     case MoreMenuAction.edit:
-                                                      final result =
-                                                          await Navigator.pushNamed(context,
+                                                      final result = await Navigator.pushNamed(context,
                                                             RoutesName.edit_testimonial,
                                                             arguments: {
                                                               'testimonial': testimonial,},
@@ -459,9 +443,9 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
 
                                           // STATUS
                                           CustomStatusBadge(
-                                            title: _getStatusLabel(
-                                              testimonial.status,
-                                            ),
+                                            title:
+                                              testimonial.status!.toUpperCase(),
+
                                           ),
                                         ],
                                       ),
@@ -539,25 +523,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
     );
   }
 
-  // ============================================================
-  // STATUS LABEL
-  // ============================================================
 
-  String _getStatusLabel(String? status) {
-    switch (status) {
-      case "active":
-        return "PUBLISHED";
-
-      case "inactive":
-        return "INACTIVE";
-
-      case "draft":
-        return "DRAFT";
-
-      default:
-        return status?.toUpperCase() ?? "";
-    }
-  }
 
   // ============================================================
   // STATUS API VALUE

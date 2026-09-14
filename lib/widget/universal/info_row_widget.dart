@@ -9,18 +9,20 @@ class InfoRowWidget extends StatelessWidget {
   final IconData icon;
   final String title;
   final String value;
+  final int ?maxline;
 
   const InfoRowWidget({
     super.key,
     required this.icon,
     required this.title,
-    required this.value,
+    required this.value,  this.maxline,
   });
 
   @override
   Widget build(BuildContext context) {
     final color = context.Appcolor;
     return Row(
+      crossAxisAlignment: .start,
       children: [
         Icon(
           icon,
@@ -30,9 +32,10 @@ class InfoRowWidget extends StatelessWidget {
         SizedBox(width: AppSizes.appbarGap),
         Expanded(
           child: Row(
+            crossAxisAlignment: .start,
             children: [
               TextBodyStyleWidget(
-                title: "$title: ",
+                title: "$title : ",
                 fontbold: false,
                 size: AppSizes.cardTitle,
                 color: color.primary,
@@ -44,6 +47,7 @@ class InfoRowWidget extends StatelessWidget {
                   fontbold: false,
                   size: AppSizes.cardTitle,
                   color: color.primary,
+                  maxLines: maxline ?? 1,
 
                 ),
               ),

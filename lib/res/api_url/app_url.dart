@@ -195,6 +195,51 @@ class AppUrl {
   static const String mediaList = _mediaBase;              // GET (list)
   static const String mediaCreate = "${_mediaBase}create/"; // POST (upload)
   static String mediaDetail(int id) => "$_mediaBase$id/";   // GET/PATCH/DELETE
+
+
+
+  // Organization
+
+  // Staff
+  static const String getStaff = "$baseUrl/api/staff/";
+  static const String getPublicDepartments = "$baseUrl/api/staff/departments/";
+
+  static const String getManagementStaff = "$baseUrl/api/management/staff/";
+
+  static const String createStaff = "${getManagementStaff}create/";
+
+  static const String getStaffStatusChoices = "${getManagementStaff}status-choices/";
+
+  static const String staffBulkOperations = "${getManagementStaff}bulk-operations/";
+
+  static const String staffReorder = "${getManagementStaff}reorder/";
+
+  static String staffDetail(int id) => "${getManagementStaff}$id/";
+
+  static const String getManagementDepartments = "$baseUrl/api/management/departments/";
+
+  static const String createDepartment = "${getManagementDepartments}create/";
+
+  static String departmentDetail(int id) => "${getManagementDepartments}$id/";
+
+
+  // Leadership Messages
+  static const String getLeadershipMessages = "$baseUrl/api/leadership-messages/";
+
+  static const String getManagementLeadershipMessages = "$baseUrl/api/management/leadership-messages/";
+
+  static const String createLeadershipMessage = "${getManagementLeadershipMessages}create/";
+
+  static const String getLeadershipMessageStatusChoices = "${getManagementLeadershipMessages}status-choices/";
+
+  static const String leadershipMessageBulkOperations = "${getManagementLeadershipMessages}bulk-operations/";
+
+  static const String leadershipMessageReorder = "${getManagementLeadershipMessages}reorder/";
+
+  static String leadershipMessageDetail(int id) => "${getManagementLeadershipMessages}$id/";
+
+
+
 }
 //Admin12345@
 //alfasunny94@gmail.com

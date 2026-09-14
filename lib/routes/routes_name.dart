@@ -37,9 +37,12 @@ class RoutesName {
 
   static const exam_result = "exam_result";
   static const publish_result = "publish_result";
+
+  //Testimonial
   static const testimonial = "testimonial";
   static const add_new_testimonial = "add_new_testimonial";
   static const edit_testimonial = "edit_testimonial";
+  static const view_testimonial = "view_testimonial";
 
   //FAQ
   static const faq = "faq";
@@ -90,10 +93,15 @@ class RoutesName {
   static const add_new_card_manage = "add_new_card_manage";
   static const important_links = "important_links";
   static const add_new_links = "add_new_links";
+
+  //staff
   static const staff_manage = "staff_manage";
   static const view_staff_manage = "view_staff_manage";
   static const add_new_staff_manage = "add_new_staff_manage";
+  static const edit_staff = "edit_staff";
   static const manage_staff_department = "manage_staff_department";
+
+
   static const team_manage = "team_manage";
   static const view_team_manage = "view_team_manage";
   static const add_new_team_member = "add_new_team_member";
@@ -103,9 +111,12 @@ class RoutesName {
   static const user = "user";
   static const add_new_user = "add_new_user";
   static const view_user_details = "view_user_details";
+
+  // Leadership Message
   static const leadership_message = "leadership_message";
   static const view_leadership_message = "view_leadership_message";
   static const new_section_leadership_message = "new_section_leadership_message";
+  static const edit_leadership_message = "edit_leadership_message";
 
   //Settings
   static const general_settings = "general_settings";
