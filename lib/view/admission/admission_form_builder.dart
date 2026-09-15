@@ -142,7 +142,9 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
 
                             ],
                           ),
-                          Divider(),
+                          Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1,),
                           SizedBox(height: AppSizes.smallGap,),
                           Row(
                             mainAxisAlignment: .spaceBetween,

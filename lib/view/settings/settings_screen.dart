@@ -35,11 +35,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         SettingListWidget(icon:Icons.settings,title: "General Settings",subtitle: "Manage Institute Information",onTap: (){
                           Navigator.pushNamed(context, RoutesName.general_settings);
                         },),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                         SettingListWidget(icon:Icons.lock,title: "Security",subtitle: "Manage passwords and acces",onTap: (){
                           Navigator.pushNamed(context, RoutesName.security);
                         },),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                         SettingListWidget(icon:Icons.palette,title: "Themes",subtitle: "Custom appearance",onTap: (){
                           Navigator.pushNamed(context, RoutesName.theme);
                         },),

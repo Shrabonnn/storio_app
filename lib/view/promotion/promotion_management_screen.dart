@@ -421,6 +421,12 @@ class _PromotionManagementScreenState extends State<PromotionManagementScreen> {
                                           case MoreMenuAction.changePassword:
                                           case MoreMenuAction.suspend:
                                             break;
+                                          case MoreMenuAction.hide:
+                                            // TODO: Handle this case.
+                                            throw UnimplementedError();
+                                          case MoreMenuAction.show:
+                                            // TODO: Handle this case.
+                                            throw UnimplementedError();
                                         }
                                       },
                                     ),

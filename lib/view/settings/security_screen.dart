@@ -45,7 +45,9 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       crossAxisAlignment: .start,
                       children: [
                         TextBodyStyleWidget(title: "Authentication & Recovery", color: color.primary,size: AppSizes.sectionTitle,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         // Title
                         TextBodyStyleWidget(title: "Password Change", color: color.primary,size: AppSizes.sectionTitle,),
@@ -79,7 +81,9 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       crossAxisAlignment: .start,
                       children: [
                         TextBodyStyleWidget(title: "Device Management", color: color.primary,size: AppSizes.sectionTitle,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         // Title
                         TextBodyStyleWidget(title: "Active Login Sessions", color: color.primary,size: AppSizes.sectionTitle,),
@@ -89,7 +93,9 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         CustomButton(icon: Icons.logout,text: "Log out All Others", backgroundColor: color.lightVersionOfPrimaryLightVersion,foregroundColor:Colors.red,onTap: (){}),
 
                         SizedBox(height: AppSizes.smallGap,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         SizedBox(height: AppSizes.smallGap,),
 

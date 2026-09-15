@@ -24,19 +24,16 @@ import '../../widget/universal/search_text_field.dart';
 import '../../widget/universal/status_button_row.dart';
 
 class NoticeManagementScreen extends StatefulWidget {
-  const NoticeManagementScreen({super.key,  this.showBackButton= false});
-  final bool showBackButton;
+  const NoticeManagementScreen({super.key, this.showBackButton = false});
 
+  final bool showBackButton;
 
   @override
   State<NoticeManagementScreen> createState() => _NoticeManagementScreenState();
 }
 
-
 class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
-
   final TextEditingController searchController = TextEditingController();
-
 
   int selectedStatus = 0;
 
@@ -52,7 +49,6 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
   ];
   String selectedDropDownList = "Bulk Action";
 
-
   Set<int> selectedNoticeIds = {};
   bool isSelectionMode = false;
 
@@ -60,13 +56,12 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async{
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final provider = context.read<NoticeViewModel>();
       await provider.getStatusChoices();
       await provider.getNoticeApi();
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,28 +71,39 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
         slivers: [
           CustomSliverAppBar(
             title: "Notice Board",
-            showBackButton:  widget.showBackButton,
-
+            showBackButton: widget.showBackButton,
           ),
           SliverPadding(
-            padding: EdgeInsetsGeometry.only(top:AppSizes.screenPadding,left: AppSizes.screenPadding,right: AppSizes.screenPadding),
+            padding: EdgeInsetsGeometry.only(
+              top: AppSizes.screenPadding,
+              left: AppSizes.screenPadding,
+              right: AppSizes.screenPadding,
+            ),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 Column(
                   children: [
                     Row(
                       children: [
-                        Flexible(child: SearchTextField(
-                            onChanged:(value){
+                        Flexible(
+                          child: SearchTextField(
+                            onChanged: (value) {
                               final provider = context.read<NoticeViewModel>();
                               final statusValue = selectedStatus == 0
                                   ? null
-                                  : provider.statusChoices[selectedStatus - 1].value;
+                                  : provider
+                                        .statusChoices[selectedStatus - 1]
+                                        .value;
 
-                              provider.getNoticeApi(status: statusValue, search: value);
+                              provider.getNoticeApi(
+                                status: statusValue,
+                                search: value,
+                              );
                             },
                             hinText: "Search...",
-                            controller: searchController)),
+                            controller: searchController,
+                          ),
+                        ),
                         SizedBox(width: AppSizes.appbarGap),
                         CustomDropdown(
                           items: dropDownStatusList,
@@ -112,26 +118,31 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               return;
                             }
 
+                            Future.delayed(
+                              const Duration(milliseconds: 200),
+                              () async {
+                                if (!mounted) return;
 
-                            Future.delayed(const Duration(milliseconds: 200), () async {
-                              if (!mounted) return;
+                                final provider = context
+                                    .read<NoticeViewModel>();
 
-                              final provider = context.read<NoticeViewModel>();
+                                if (provider.noticeList.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("No notices to update"),
+                                    ),
+                                  );
+                                  return;
+                                }
 
-                              if (provider.noticeList.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text("No notices to update")),
-                                );
-                                return;
-                              }
+                                await _handleBulkAction(value.toString());
 
-                              await _handleBulkAction(value.toString());
-
-                              if (!mounted) return;
-                              setState(() {
-                                selectedDropDownList = "Bulk Action";
-                              });
-                            });
+                                if (!mounted) return;
+                                setState(() {
+                                  selectedDropDownList = "Bulk Action";
+                                });
+                              },
+                            );
                           },
                         ),
                       ],
@@ -142,12 +153,9 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                         if (provider.statusLoading) {
                           return const Padding(
                             padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
+                            child: Center(child: CircularProgressIndicator()),
                           );
                         }
-
 
                         final displayList = [
                           "All",
@@ -162,7 +170,6 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               selectedStatus = index;
                             });
 
-
                             final statusValue = index == 0
                                 ? null
                                 : provider.statusChoices[index - 1].value;
@@ -175,11 +182,9 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                         );
                       },
                     ),
-                    SizedBox(height: AppSizes.sectionGap,),
+                    SizedBox(height: AppSizes.sectionGap),
                   ],
                 ),
-
-
               ]),
             ),
           ),
@@ -198,17 +203,13 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
               if (provider.errorMessage != null) {
                 return SliverToBoxAdapter(
-                  child: Center(
-                    child: Text(provider.errorMessage!),
-                  ),
+                  child: Center(child: Text(provider.errorMessage!)),
                 );
               }
 
               if (provider.noticeList.isEmpty) {
                 return const SliverToBoxAdapter(
-                  child: Center(
-                    child: Text("No notices found"),
-                  ),
+                  child: Center(child: Text("No notices found")),
                 );
               }
 
@@ -223,9 +224,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                     final notice = provider.noticeList[index];
 
                     return Container(
-                      margin: EdgeInsets.only(
-                        bottom: AppSizes.sectionGap,
-                      ),
+                      margin: EdgeInsets.only(bottom: AppSizes.sectionGap),
                       child: CustomCard(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,9 +244,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                         Navigator.pushNamed(
                                           context,
                                           RoutesName.view_notice,
-                                          arguments: {
-                                            'notice': notice,
-                                          },
+                                          arguments: {'notice': notice},
                                         );
                                       },
                                     ),
@@ -258,10 +255,15 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                         MoreMenuAction.archive,
                                         MoreMenuAction.delete,
                                       ],
-                                      onSelected: (action)async {
+                                      onSelected: (action) async {
                                         switch (action) {
                                           case MoreMenuAction.edit:
-                                            final result = await Navigator.pushNamed(context, RoutesName.edit_notice,arguments: {'notice':notice});
+                                            final result =
+                                                await Navigator.pushNamed(
+                                                  context,
+                                                  RoutesName.edit_notice,
+                                                  arguments: {'notice': notice},
+                                                );
 
                                             if (!mounted) return;
 
@@ -274,54 +276,67 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                             final confirmed = await confirmAction(
                                               context,
                                               title: "Archive Notice",
-                                              message: "Are you sure you want to archive this notice?",
+                                              message:
+                                                  "Are you sure you want to archive this notice?",
                                             );
 
                                             if (!mounted || !confirmed) return;
 
-                                            final provider = context.read<NoticeViewModel>();
-                                            final success = await provider.archiveNotice(notice.id!);
+                                            final provider = context
+                                                .read<NoticeViewModel>();
+                                            final success = await provider
+                                                .archiveNotice(notice.id!);
 
                                             if (!mounted) return;
 
                                             if (success) {
                                               _refreshNoticeList();
                                             } else {
-                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text(provider.errorMessage ?? "Failed to archive")),
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    provider.errorMessage ??
+                                                        "Failed to archive",
+                                                  ),
+                                                ),
                                               );
                                             }
                                             break;
-
-
 
                                           case MoreMenuAction.delete:
                                             final confirmed = await confirmAction(
                                               context,
                                               title: "Delete Notice",
-                                              message: "Are you sure you want to move this notice to bin?",
+                                              message:
+                                                  "Are you sure you want to move this notice to bin?",
                                             );
 
                                             if (!mounted || !confirmed) return;
 
-                                            final provider2 = context.read<NoticeViewModel>();
-                                            final success2 = await provider2.bulkAction(
-                                              action: "delete",
-                                              noticeIds: [notice.id!],
-                                            );
+                                            final provider2 = context
+                                                .read<NoticeViewModel>();
+                                            final success2 = await provider2
+                                                .bulkAction(
+                                                  action: "delete",
+                                                  noticeIds: [notice.id!],
+                                                );
 
                                             if (!mounted) return;
 
                                             if (success2) {
                                               _refreshNoticeList();
                                             } else {
-                                             SnackBarMessage.showSnackBar(context, provider2.errorMessage ?? "Failed to delete");
+                                              SnackBarMessage.showSnackBar(
+                                                context,
+                                                provider2.errorMessage ??
+                                                    "Failed to delete",
+                                              );
                                             }
                                             break;
                                           case MoreMenuAction.view:
                                             break;
-
-
 
                                           case MoreMenuAction.changePassword:
                                             throw UnimplementedError();
@@ -329,6 +344,12 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                           case MoreMenuAction.suspend:
                                             throw UnimplementedError();
                                           case MoreMenuAction.publish:
+                                            // TODO: Handle this case.
+                                            throw UnimplementedError();
+                                          case MoreMenuAction.hide:
+                                            // TODO: Handle this case.
+                                            throw UnimplementedError();
+                                          case MoreMenuAction.show:
                                             // TODO: Handle this case.
                                             throw UnimplementedError();
                                         }
@@ -339,9 +360,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               ],
                             ),
 
-                            SizedBox(
-                              height: AppSizes.smallGap,
-                            ),
+                            SizedBox(height: AppSizes.smallGap),
 
                             TextTitleWidget(
                               title: notice.title ?? "",
@@ -349,9 +368,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               maxLines: 1,
                             ),
 
-                            SizedBox(
-                              height: AppSizes.appbarGap,
-                            ),
+                            SizedBox(height: AppSizes.appbarGap),
 
                             TextBodyStyleWidget(
                               title: notice.content ?? "",
@@ -359,15 +376,14 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               size: AppSizes.cardTitle,
                             ),
 
-                            SizedBox(
-                              height: AppSizes.smallGap,
+                            SizedBox(height: AppSizes.smallGap),
+
+                            Divider(
+                              color: color.lightVersionOfPrimaryLightVersion,
+                              height: 1,
                             ),
 
-                            const Divider(),
-
-                            SizedBox(
-                              height: AppSizes.smallGap,
-                            ),
+                            SizedBox(height: AppSizes.smallGap),
 
                             Row(
                               children: [
@@ -377,16 +393,12 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                   size: AppSizes.icon,
                                 ),
 
-                                SizedBox(
-                                  width: AppSizes.appbarGap,
-                                ),
+                                SizedBox(width: AppSizes.appbarGap),
 
                                 Flexible(
                                   child: TextBodyStyleWidget(
                                     title:
-                                    "Last Updated: ${notice.updateDate != null
-                                        ? '${formatDate(notice.updateDate!)} · ${formatTime(notice.updateDate!)}'
-                                        : ''}",
+                                        "Last Updated: ${notice.updateDate != null ? '${formatDate(notice.updateDate!)} · ${formatTime(notice.updateDate!)}' : ''}",
                                     maxLines: 1,
                                     size: AppSizes.cardTitle,
                                   ),
@@ -401,21 +413,20 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                 ),
               );
             },
-          )
-
+          ),
         ],
       ),
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
           FloatingActionButton(
-
-
             heroTag: "add",
             backgroundColor: color.primary,
-            onPressed: ()async {
-              final result = await Navigator.pushNamed(context, RoutesName.add_new_notice,);
+            onPressed: () async {
+              final result = await Navigator.pushNamed(
+                context,
+                RoutesName.add_new_notice,
+              );
 
               if (!mounted) return;
 
@@ -428,22 +439,14 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                   search: searchController.text,
                 );
               }
-
-
             },
 
-            child:  Icon(
-              Icons.add,
-              color: color.cardBackground,
-            ),
+            child: Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),
     );
   }
-
-
-
 
   void _refreshNoticeList() {
     final provider = context.read<NoticeViewModel>();
@@ -461,19 +464,17 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
     List<int> noticeIds;
 
     if (action == "Restore" || action == "Delete All") {
-
       final binnedNotices = await provider.fetchBinnedNoticeIds();
 
       if (binnedNotices.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Bin is empty")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Bin is empty")));
         return;
       }
 
       noticeIds = binnedNotices;
     } else {
-
       noticeIds = provider.noticeList
           .map((notice) => notice.id)
           .whereType<int>()
@@ -490,33 +491,38 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
       case "Publish":
         apiAction = "publish";
         confirmTitle = "Publish Notices";
-        confirmMessage = "Do you want to publish all ${noticeIds.length} notice(s)?";
+        confirmMessage =
+            "Do you want to publish all ${noticeIds.length} notice(s)?";
         break;
       case "Archive":
         apiAction = "archive";
         confirmTitle = "Archive Notices";
-        confirmMessage = "Do you want to archive all ${noticeIds.length} notice(s)?";
+        confirmMessage =
+            "Do you want to archive all ${noticeIds.length} notice(s)?";
         break;
       case "Draft":
         apiAction = "draft";
         confirmTitle = "Move to Draft";
-        confirmMessage = "Do you want to move all ${noticeIds.length} notice(s) to draft?";
+        confirmMessage =
+            "Do you want to move all ${noticeIds.length} notice(s) to draft?";
         break;
       case "Bin":
         apiAction = "delete";
         confirmTitle = "Move to Bin";
-        confirmMessage = "Do you want to move all ${noticeIds.length} notice(s) to bin?";
+        confirmMessage =
+            "Do you want to move all ${noticeIds.length} notice(s) to bin?";
         break;
       case "Restore":
         apiAction = "restore";
         confirmTitle = "Restore Notices";
-        confirmMessage = "Do you want to restore all ${noticeIds.length} notice(s)?";
+        confirmMessage =
+            "Do you want to restore all ${noticeIds.length} notice(s)?";
         break;
       case "Delete All":
         apiAction = "permanent_delete";
         confirmTitle = "Delete Permanently";
         confirmMessage =
-        "Do you want to permanently delete all ${noticeIds.length} notice(s)? This cannot be undone.";
+            "Do you want to permanently delete all ${noticeIds.length} notice(s)? This cannot be undone.";
         break;
       default:
         return;

@@ -44,7 +44,9 @@ class _ActionDetailsState extends State<ActionDetails> {
 
 
                         SizedBox(height: 1.h,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                         SizedBox(height: 1.h,),
 
 
@@ -58,7 +60,9 @@ class _ActionDetailsState extends State<ActionDetails> {
 
 
                         SizedBox(height: 1.h,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                         SizedBox(height: 1.h,),
 
 

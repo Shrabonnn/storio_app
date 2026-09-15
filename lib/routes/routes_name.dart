@@ -35,8 +35,10 @@ class RoutesName {
   static const edit_promotion = "edit_promotion";
 
 
+  //Result
   static const exam_result = "exam_result";
   static const publish_result = "publish_result";
+  static const edit_result = "edit_result";
 
   //Testimonial
   static const testimonial = "testimonial";
@@ -102,10 +104,14 @@ class RoutesName {
   static const manage_staff_department = "manage_staff_department";
 
 
+  // Team manage
   static const team_manage = "team_manage";
   static const view_team_manage = "view_team_manage";
   static const add_new_team_member = "add_new_team_member";
+  static const edit_team_member = "edit_team_member";
   static const manage_team_section = "manage_team_section";
+
+
   static const role = "role";
   static const add_new_role = "add_new_role";
   static const user = "user";

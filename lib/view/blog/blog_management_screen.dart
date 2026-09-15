@@ -61,10 +61,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          CustomSliverAppBar(
-            title: "Blog Management",
-            showBackButton: true,
-          ),
+          CustomSliverAppBar(title: "Blog Management", showBackButton: true),
           SliverPadding(
             padding: EdgeInsetsGeometry.only(
               top: AppSizes.screenPadding,
@@ -84,9 +81,14 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                               final provider = context.read<BlogViewModel>();
                               final statusValue = selectedStatus == 0
                                   ? null
-                                  : provider.statusChoices[selectedStatus - 1].value;
+                                  : provider
+                                        .statusChoices[selectedStatus - 1]
+                                        .value;
 
-                              provider.getBlogApi(status: statusValue, search: value);
+                              provider.getBlogApi(
+                                status: statusValue,
+                                search: value,
+                              );
                             },
                             hinText: "Search",
                             controller: searchController,
@@ -106,25 +108,30 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                               return;
                             }
 
-                            Future.delayed(const Duration(milliseconds: 200), () async {
-                              if (!mounted) return;
+                            Future.delayed(
+                              const Duration(milliseconds: 200),
+                              () async {
+                                if (!mounted) return;
 
-                              final provider = context.read<BlogViewModel>();
+                                final provider = context.read<BlogViewModel>();
 
-                              if (provider.blogList.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text("No blog posts to update")),
-                                );
-                                return;
-                              }
+                                if (provider.blogList.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("No blog posts to update"),
+                                    ),
+                                  );
+                                  return;
+                                }
 
-                              await _handleBulkAction(value.toString());
+                                await _handleBulkAction(value.toString());
 
-                              if (!mounted) return;
-                              setState(() {
-                                selectedDropDownList = "Bulk Action";
-                              });
-                            });
+                                if (!mounted) return;
+                                setState(() {
+                                  selectedDropDownList = "Bulk Action";
+                                });
+                              },
+                            );
                           },
                         ),
                       ],
@@ -135,9 +142,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                         if (provider.statusLoading) {
                           return const Padding(
                             padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
+                            child: Center(child: CircularProgressIndicator()),
                           );
                         }
 
@@ -187,17 +192,13 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
 
               if (provider.errorMessage != null) {
                 return SliverToBoxAdapter(
-                  child: Center(
-                    child: Text(provider.errorMessage!),
-                  ),
+                  child: Center(child: Text(provider.errorMessage!)),
                 );
               }
 
               if (provider.blogList.isEmpty) {
                 return const SliverToBoxAdapter(
-                  child: Center(
-                    child: Text("No blog posts found"),
-                  ),
+                  child: Center(child: Text("No blog posts found")),
                 );
               }
 
@@ -214,23 +215,24 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                     return ImageCard(
                       image: blog.featuredImageData?.file != null
                           ? Image.network(
-                        blog.featuredImageData!.file!,
-                        width: double.infinity,
-                        height: 18.h,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Image.asset(
-                          "assets/images/institute.png",
-                          width: double.infinity,
-                          height: 18.h,
-                          fit: BoxFit.cover,
-                        ),
-                      )
+                              blog.featuredImageData!.file!,
+                              width: double.infinity,
+                              height: 18.h,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                    "assets/images/institute.png",
+                                    width: double.infinity,
+                                    height: 18.h,
+                                    fit: BoxFit.cover,
+                                  ),
+                            )
                           : Image.asset(
-                        "assets/images/institute.png",
-                        width: double.infinity,
-                        height: 18.h,
-                        fit: BoxFit.cover,
-                      ),
+                              "assets/images/institute.png",
+                              width: double.infinity,
+                              height: 18.h,
+                              fit: BoxFit.cover,
+                            ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -261,11 +263,12 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                                     onSelected: (action) async {
                                       switch (action) {
                                         case MoreMenuAction.edit:
-                                          final result = await Navigator.pushNamed(
-                                            context,
-                                            RoutesName.edit_blog,
-                                            arguments: {'blog': blog},
-                                          );
+                                          final result =
+                                              await Navigator.pushNamed(
+                                                context,
+                                                RoutesName.edit_blog,
+                                                arguments: {'blog': blog},
+                                              );
 
                                           if (!mounted) return;
 
@@ -274,30 +277,39 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                                           }
                                           break;
 
-                                      // Reused as "Move to Bin" for blog posts
+                                        // Reused as "Move to Bin" for blog posts
                                         case MoreMenuAction.archive:
-
                                           break;
 
                                         case MoreMenuAction.delete:
                                           final confirmed = await confirmAction(
                                             context,
                                             title: "Delete Blog Post",
-                                            message: "Are you sure you want to permanently delete this blog post?",
+                                            message:
+                                                "Are you sure you want to permanently delete this blog post?",
                                           );
 
                                           if (!mounted || !confirmed) return;
 
-                                          final provider2 = context.read<BlogViewModel>();
-                                          final success2 = await provider2.deleteBlog(blog.id!);
+                                          final provider2 = context
+                                              .read<BlogViewModel>();
+                                          final success2 = await provider2
+                                              .deleteBlog(blog.id!);
 
                                           if (!mounted) return;
 
                                           if (success2) {
                                             _refreshBlogList();
                                           } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text(provider2.errorMessage ?? "Failed to delete")),
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  provider2.errorMessage ??
+                                                      "Failed to delete",
+                                                ),
+                                              ),
                                             );
                                           }
                                           break;
@@ -311,6 +323,12 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                                         case MoreMenuAction.suspend:
                                           throw UnimplementedError();
                                         case MoreMenuAction.publish:
+                                          // TODO: Handle this case.
+                                          throw UnimplementedError();
+                                        case MoreMenuAction.hide:
+                                          // TODO: Handle this case.
+                                          throw UnimplementedError();
+                                        case MoreMenuAction.show:
                                           // TODO: Handle this case.
                                           throw UnimplementedError();
                                       }
@@ -327,29 +345,44 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                           ),
                           SizedBox(height: AppSizes.appbarGap),
                           TextBodyStyleWidget(
-                            title: blog.excerpt?.isNotEmpty == true ? blog.excerpt! : (blog.content ?? ""),
+                            title: blog.excerpt?.isNotEmpty == true
+                                ? blog.excerpt!
+                                : (blog.content ?? ""),
                             maxLines: 4,
                           ),
                           SizedBox(height: AppSizes.smallGap),
-                          const Divider(),
+                          Divider(
+                            color: color.lightVersionOfPrimaryLightVersion,
+                            height: 1,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.person, size: AppSizes.icon,color: color.primary,),
+                                  Icon(
+                                    Icons.person,
+                                    size: AppSizes.icon,
+                                    color: color.primary,
+                                  ),
                                   SizedBox(width: AppSizes.appbarGap),
                                   TextBodyStyleWidget(title: blog.author ?? ""),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Icon(Icons.calendar_month_outlined, size: AppSizes.icon,color: color.primary,),
+                                  Icon(
+                                    Icons.calendar_month_outlined,
+                                    size: AppSizes.icon,
+                                    color: color.primary,
+                                  ),
                                   SizedBox(width: AppSizes.appbarGap),
                                   TextBodyStyleWidget(
                                     title: blog.publishDate != null
                                         ? formatDate(blog.publishDate!)
-                                        : (blog.createDate != null ? formatDate(blog.createDate!) : ""),
+                                        : (blog.createDate != null
+                                              ? formatDate(blog.createDate!)
+                                              : ""),
                                   ),
                                 ],
                               ),
@@ -374,17 +407,17 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
             onPressed: () {
               Navigator.pushNamed(context, RoutesName.manage_blog_category);
             },
-            child: Icon(
-              Icons.grid_view_rounded,
-              color: color.cardBackground,
-            ),
+            child: Icon(Icons.grid_view_rounded, color: color.cardBackground),
           ),
           SizedBox(height: AppSizes.itemGap),
           FloatingActionButton(
             heroTag: "add",
             backgroundColor: color.primary,
             onPressed: () async {
-              final result = await Navigator.pushNamed(context, RoutesName.add_blog);
+              final result = await Navigator.pushNamed(
+                context,
+                RoutesName.add_blog,
+              );
 
               if (!mounted) return;
 
@@ -392,10 +425,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                 _refreshBlogList();
               }
             },
-            child: Icon(
-              Icons.add,
-              color: color.cardBackground,
-            ),
+            child: Icon(Icons.add, color: color.cardBackground),
           ),
         ],
       ),
@@ -405,7 +435,9 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
   void _refreshBlogList() {
     final provider = context.read<BlogViewModel>();
     provider.getBlogApi(
-      status: selectedStatus == 0 ? null : provider.statusChoices[selectedStatus - 1].value,
+      status: selectedStatus == 0
+          ? null
+          : provider.statusChoices[selectedStatus - 1].value,
       search: searchController.text,
     );
   }
@@ -428,17 +460,20 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
       case "Publish Selected":
         apiAction = "publish";
         confirmTitle = "Publish Blog Posts";
-        confirmMessage = "Do you want to publish all ${postIds.length} blog post(s)?";
+        confirmMessage =
+            "Do you want to publish all ${postIds.length} blog post(s)?";
         break;
       case "Move to Drafts":
         apiAction = "draft";
         confirmTitle = "Move to Draft";
-        confirmMessage = "Do you want to move all ${postIds.length} blog post(s) to draft?";
+        confirmMessage =
+            "Do you want to move all ${postIds.length} blog post(s) to draft?";
         break;
       case "Move to Bin":
         apiAction = "delete";
         confirmTitle = "Move to Bin";
-        confirmMessage = "Do you want to move all ${postIds.length} blog post(s) to bin?";
+        confirmMessage =
+            "Do you want to move all ${postIds.length} blog post(s) to bin?";
         break;
       default:
         return;
@@ -452,7 +487,10 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
 
     if (!mounted || !confirmed) return;
 
-    final success = await provider.bulkAction(action: apiAction, postIds: postIds);
+    final success = await provider.bulkAction(
+      action: apiAction,
+      postIds: postIds,
+    );
 
     if (!mounted) return;
 

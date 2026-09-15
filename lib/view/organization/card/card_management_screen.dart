@@ -110,7 +110,9 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                           ),
 
                           SizedBox(height: AppSizes.appbarGap),
-                          Divider(),
+                          Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                           SizedBox(height: AppSizes.appbarGap),
                           Row(
                             mainAxisAlignment: .end,

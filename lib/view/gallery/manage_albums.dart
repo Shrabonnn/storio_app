@@ -472,7 +472,9 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                                       provider.albumList.length,
                                       separatorBuilder:
                                           (context, index) =>
-                                      const Divider(),
+                                       Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                                       itemBuilder:
                                           (context, index) {
                                         final album =

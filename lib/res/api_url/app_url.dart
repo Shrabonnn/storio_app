@@ -185,6 +185,10 @@ class AppUrl {
   static  String eventCategoriesDetails(int id)  => "${getEventCategories}$id/";
 
 
+  // Exam Results
+  static const String getExamResults = "$baseUrl/api/management/exam-results/";
+  static String examResultDetail(int id) => "$baseUrl/api/management/exam-results/$id/";
+  static const String getPublicExamResults = "$baseUrl/api/v2/template/exam-results/";
 
 
    // ================================
@@ -238,6 +242,21 @@ class AppUrl {
 
   static String leadershipMessageDetail(int id) => "${getManagementLeadershipMessages}$id/";
 
+
+  // Team Member
+  static const String publicTeamSections = "$baseUrl/api/team/sections/";
+  static const String publicTeamMembers = "$baseUrl/api/team/members/";
+
+  static const String managementTeamSections = "$baseUrl/api/management/team/sections/";
+  static const String createTeamSection = "$baseUrl/api/management/team/sections/create/";
+  static String teamSectionDetail(int id) => "$baseUrl/api/management/team/sections/$id/";
+
+  static const String managementTeamMembers = "$baseUrl/api/management/team/members/";
+  static const String createTeamMember = "$baseUrl/api/management/team/members/create/";
+  static String teamMemberDetail(int id) => "$baseUrl/api/management/team/members/$id/";
+  static const String bulkTeamMemberOperations = "$baseUrl/api/management/team/members/bulk-operations/";
+
+  static const String imageShapeChoices = "$baseUrl/api/management/team/image-shape-choices/";
 
 
 }

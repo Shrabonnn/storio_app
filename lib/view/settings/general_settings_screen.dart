@@ -155,7 +155,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       children: [
 
                         TextBodyStyleWidget(title: "Site Identity", color: color.primary,size: AppSizes.sectionTitle,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         // Title
                         TextBodyStyleWidget(title: "Site Title", color: color.primary,size: AppSizes.sectionTitle,),
@@ -240,7 +242,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       crossAxisAlignment: .start,
                       children: [
                         TextBodyStyleWidget(title: "Logo & Favicon", color: color.primary,size: AppSizes.sectionTitle,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                         Row(
                           mainAxisAlignment: .spaceEvenly,
                           children: [
@@ -273,7 +277,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
 
                         // Dashboard Logo option
                         TextBodyStyleWidget(title: "Dashboard Logo Options", color: color.primary,size: AppSizes.sectionTitle,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                         TextBodyStyleWidget(title: "Navbar Logo Background Color", color: color.primary,size: AppSizes.cardTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomDropdown(
@@ -330,7 +336,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       children: [
 
                         TextBodyStyleWidget(title: "SEO & Social Media", color: color.primary,size: AppSizes.sectionTitle,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         // Title
                         TextBodyStyleWidget(title: "SEO Title", color: color.primary,size: AppSizes.sectionTitle,),
@@ -365,7 +373,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                             ),
                           ],
                         ),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         TextBodyStyleWidget(title: "Social Share Image (Open Graph)",size: AppSizes.sectionTitle,color: color.primary,),
                         SizedBox(height: AppSizes.itemGap,),
@@ -416,7 +426,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                       children: [
 
                         TextBodyStyleWidget(title: "Contact Information", color: color.primary,size: AppSizes.sectionTitle,),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         // Title
                         TextBodyStyleWidget(title: "Contact Email", color: color.primary,size: AppSizes.sectionTitle,),
@@ -457,7 +469,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                             },child: Icon(Icons.add,color: color.primary,size: AppSizes.iconLarge,fontWeight: FontWeight.bold,))
                           ],
                         ),
-                        Divider(),
+                        Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                         CustomDropdown(
                           items: socialMediaList,
@@ -491,7 +505,9 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                         children: [
                           TextBodyStyleWidget(title: "Site Status", color: color.primary,size: AppSizes.sectionTitle,),
 
-                          Divider(),
+                          Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
                           Material(
                             color: Colors.transparent,

@@ -770,7 +770,9 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
 
 
 
-            const Divider(),
+             Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
 
             Column(

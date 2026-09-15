@@ -192,7 +192,9 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
                     SizedBox(height: AppSizes.sectionGap),
                     Consumer<ActivityViewModel>(
                       builder: (context, provider, child) {
+
                         return CustomCard(
+
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -227,7 +229,9 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
                                     shrinkWrap: true,
                                     physics: const NeverScrollableScrollPhysics(),
                                     itemCount: provider.categoryList.length,
-                                    separatorBuilder: (context, index) => const Divider(),
+                                    separatorBuilder: (context, index) =>  Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                                     itemBuilder: (context, index) {
                                       final category = provider.categoryList[index];
 

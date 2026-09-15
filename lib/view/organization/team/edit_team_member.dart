@@ -17,14 +17,16 @@ import '../../../widget/universal/custom_card.dart';
 import '../../../widget/universal/custom_drop_down.dart';
 import '../../../widget/universal/custom_text_field.dart';
 
-class AddNewTeamMember extends StatefulWidget {
-  const AddNewTeamMember({super.key});
+class EditTeamMember extends StatefulWidget {
+  const EditTeamMember({super.key, required this.member});
+
+  final TeamMemberModel member;
 
   @override
-  State<AddNewTeamMember> createState() => _AddNewTeamMemberState();
+  State<EditTeamMember> createState() => _EditTeamMemberState();
 }
 
-class _AddNewTeamMemberState extends State<AddNewTeamMember> {
+class _EditTeamMemberState extends State<EditTeamMember> {
   // Text Controllers
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController positionController = TextEditingController();
@@ -42,18 +44,34 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
   String selectedImageShape = "square";
   bool isVisible = true;
 
-  final List<String> imageShapeOptions = ["square", "circle", ];
+  final List<String> imageShapeOptions = ["square", "circle"];
 
   @override
   void initState() {
     super.initState();
+
+    // Populate data from TeamMemberModel
+    fullNameController.text = widget.member.fullname ?? '';
+    positionController.text = widget.member.designation ?? '';
+    roleController.text = widget.member.role ?? '';
+    experienceController.text = widget.member.experience ?? '';
+
+    selectedSectionId = widget.member.section;
+    selectedAttachmentId = widget.member.image;
+    selectedImageShape = widget.member.imageShape ?? "square";
+    isVisible = widget.member.isVisible ?? true;
+
+    // Load existing image URL if available
+    if (widget.member.imageData != null) {
+      selectedImageUrl = widget.member.imageData?.fileUrl;
+    }
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final provider = context.read<TeamViewModel>();
       await provider.fetchManagementSections();
 
       if (mounted) {
-        if (provider.managementSections.isNotEmpty) {
+        if (selectedSectionId == null && provider.managementSections.isNotEmpty) {
           setState(() {
             selectedSectionId = provider.managementSections.first.id;
           });
@@ -75,6 +93,10 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
     final result = await Navigator.pushNamed(
       context,
       RoutesName.media_manage_details,
+      arguments: {
+        "currentId": selectedAttachmentId,
+        "currentFileUrl": selectedImageUrl,
+      },
     );
 
     if (!mounted) return;
@@ -96,7 +118,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
     SnackBarMessage.showSnackBar(context, message);
   }
 
-  Future<void> _handleSaveMember() async {
+  Future<void> _handleUpdateMember() async {
     if (fullNameController.text.trim().isEmpty) {
       _showMessage("Please enter full name");
       return;
@@ -112,24 +134,28 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
       return;
     }
 
+    if (widget.member.id == null) {
+      _showMessage("Team member ID not found");
+      return;
+    }
+
     setState(() {
       isSaving = true;
     });
 
-    // imageShape বা image_shape পাঠাতে হবে
-    final TeamMemberModel newMember = TeamMemberModel(
-      fullname: fullNameController.text.trim(),
-      designation: positionController.text.trim(),
-      role: roleController.text.trim(),
-      experience: experienceController.text.trim(),
-      section: selectedSectionId,
-      image: selectedAttachmentId,
-      imageShape: selectedImageShape,
-      isVisible: isVisible,
-    );
+    final Map<String, dynamic> payload = {
+      "fullname": fullNameController.text.trim(),
+      "designation": positionController.text.trim(),
+      "role": roleController.text.trim(),
+      "experience": experienceController.text.trim(),
+      "section": selectedSectionId,
+      "image": selectedAttachmentId,
+      "image_shape": selectedImageShape,
+      "is_visible": isVisible,
+    };
 
     final viewModel = context.read<TeamViewModel>();
-    final success = await viewModel.createTeamMember(newMember);
+    final success = await viewModel.updateTeamMember(widget.member.id!, payload);
 
     if (!mounted) return;
 
@@ -138,10 +164,10 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
     });
 
     if (success) {
-      _showMessage("Team member created successfully!");
+      _showMessage("Team member updated successfully!");
       Navigator.pop(context, true);
     } else {
-      _showMessage(viewModel.errorMessage ?? "Failed to create team member");
+      _showMessage(viewModel.errorMessage ?? "Failed to update team member");
     }
   }
 
@@ -153,7 +179,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
       body: CustomScrollView(
         slivers: [
           const CustomSliverAppBar(
-            title: "Add New Member",
+            title: "Edit Member",
             showBackButton: true,
           ),
           SliverPadding(
@@ -162,7 +188,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
               delegate: SliverChildListDelegate([
                 Column(
                   children: [
-                    // Profile Photo & Shape Selection
+                    // Card 1: Profile Photo & Shape Selection
                     CustomCard(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,22 +217,20 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                               height: 20.h,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
-                                borderRadius:
-                                BorderRadius.circular(AppSizes.cardRadius),
+                                borderRadius: BorderRadius.circular(AppSizes.cardRadius),
                               ),
                               child: Image.file(
                                 selectedImage!,
                                 fit: BoxFit.cover,
                               ),
                             )
-                          else if (selectedImageUrl != null)
+                          else if (selectedImageUrl != null && selectedImageUrl!.isNotEmpty)
                             Container(
                               width: 100.w,
                               height: 20.h,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
-                                borderRadius:
-                                BorderRadius.circular(AppSizes.cardRadius),
+                                borderRadius: BorderRadius.circular(AppSizes.cardRadius),
                               ),
                               child: Image.network(
                                 selectedImageUrl!,
@@ -218,8 +242,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                             )
                           else
                             TextBodyStyleWidget(
-                              title:
-                              "Recommended size: 600x600px square photo.",
+                              title: "Recommended size: 600x600px square photo.",
                               size: AppSizes.cardTitle,
                               maxLines: 2,
                             ),
@@ -250,7 +273,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
 
                     SizedBox(height: AppSizes.sectionGap),
 
-                    // Basic Information Form
+                    // Card 2: Basic Information Form
                     CustomCard(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,7 +355,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
 
                     SizedBox(height: AppSizes.sectionGap),
 
-                    // Additional Details
+                    // Card 3: Additional Details
                     CustomCard(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -380,8 +403,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                               SizedBox(width: AppSizes.smallGap),
                               Flexible(
                                 child: TextBodyStyleWidget(
-                                  title:
-                                  "Make this member visible to the public",
+                                  title: "Make this member visible to the public",
                                   color: color.primary,
                                   size: AppSizes.cardTitle,
                                 ),
@@ -407,9 +429,9 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                         ),
                         SizedBox(width: AppSizes.appbarGap),
                         Flexible(
-                          child:CustomButton(
-                            text: isSaving ? "Saving..." : "Create Member",
-                            onTap: isSaving ? null : _handleSaveMember,
+                          child: CustomButton(
+                            text: isSaving ? "Updating...":"Update Member",
+                            onTap: isSaving ? null :_handleUpdateMember,
                           )
                         ),
                       ],

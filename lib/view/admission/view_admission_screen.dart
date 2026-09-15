@@ -125,7 +125,9 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                               ],
                             ),
 
-                            Divider(),
+                            Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                             _infoRow(context,"Admission No", "ADM-2026-0001"),
                             _infoRow(context,"Email", "alfasunny95@gmail.com"),
                             _infoRow(context,"Phone", "01793960082"),

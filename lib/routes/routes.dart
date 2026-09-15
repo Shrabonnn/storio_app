@@ -5,9 +5,11 @@ import 'package:storio_app/data/model/Content/event/event_model.dart';
 import 'package:storio_app/data/model/Content/faq/faq_model.dart';
 import 'package:storio_app/data/model/Content/gallery/gallery_model.dart';
 import 'package:storio_app/data/model/Content/promotion/promotion_model.dart';
+import 'package:storio_app/data/model/Content/result/exam_result_model.dart';
 import 'package:storio_app/data/model/Content/testimonial/testimonial_model.dart';
 import 'package:storio_app/data/model/organization/leader_message/leadership_message_model.dart';
 import 'package:storio_app/data/model/organization/staff/staff_model.dart';
+import 'package:storio_app/data/model/organization/team/team_member_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
 import 'package:storio_app/view/FAQ/add_new_faq.dart';
@@ -72,6 +74,7 @@ import 'package:storio_app/view/organization/staff/manage_staff_department.dart'
 import 'package:storio_app/view/organization/staff/staff_management_screen.dart';
 import 'package:storio_app/view/organization/staff/view_staff_screen.dart';
 import 'package:storio_app/view/organization/team/add_new_team_member.dart';
+import 'package:storio_app/view/organization/team/edit_team_member.dart';
 import 'package:storio_app/view/organization/team/manage_team_section.dart';
 import 'package:storio_app/view/organization/team/team_management_screen.dart';
 import 'package:storio_app/view/organization/team/view_team_screen.dart';
@@ -80,6 +83,7 @@ import 'package:storio_app/view/profile_screen.dart';
 import 'package:storio_app/view/promotion/add_promotion.dart';
 import 'package:storio_app/view/promotion/edit_promotion.dart';
 import 'package:storio_app/view/promotion/promotion_management_screen.dart';
+import 'package:storio_app/view/result/edit_result.dart';
 import 'package:storio_app/view/result/exam_result_screen.dart';
 import 'package:storio_app/view/result/publish_result.dart';
 import 'package:storio_app/view/settings/general_settings_screen.dart';
@@ -186,10 +190,18 @@ class Routes {
 
 
 
+        // Result
       case RoutesName.exam_result:
         return MaterialPageRoute(builder: (context)=> ExamResultScreen());
       case RoutesName.publish_result:
         return MaterialPageRoute(builder: (context)=> PublishResult());
+      case RoutesName.edit_result:
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> EditResult(
+          examResult: args?['examResult'] as ExamResultModel,
+        ));
+
+
 
       //Testimonial
       case RoutesName.testimonial:
@@ -356,19 +368,27 @@ class Routes {
 
 
 
+      // Team Manage
       case RoutesName.team_manage:
         return MaterialPageRoute(builder: (context)=> TeamManagementScreen());
       case RoutesName.view_team_manage:
-        return MaterialPageRoute(builder: (context)=> ViewTeamScreen());
+         final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ViewTeamScreen(
+             member: args?['member'] as TeamMemberModel));
+
       case RoutesName.add_new_team_member:
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewTeamMember(
-          isEdit: args?['isEdit'] ?? false,));
-      case RoutesName.manage_team_section:
+         ));
+      case RoutesName.edit_team_member:
         final args = setting.arguments as Map<String, dynamic>?;
-        return MaterialPageRoute(builder: (context)=> ManageTeamSection(
-          isEdit: args?['isEdit'] ?? false,));
-      case RoutesName.role:
+        return MaterialPageRoute(builder: (context)=> EditTeamMember(
+            member: args?['member'] as TeamMemberModel));
+      case RoutesName.manage_team_section:
+        return MaterialPageRoute(builder: (context)=> ManageTeamSection());
+
+
+        case RoutesName.role:
         return MaterialPageRoute(builder: (context)=> RoleManagementScreen());
       case RoutesName.add_new_role:
         return MaterialPageRoute(builder: (context)=> AddNewRole());

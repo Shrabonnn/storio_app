@@ -15,6 +15,7 @@ import 'package:storio_app/viewModel/Content/activity_view_model.dart';
 import 'package:storio_app/viewModel/Content/blog_view_model.dart';
 import 'package:storio_app/viewModel/Content/career_view_model.dart';
 import 'package:storio_app/viewModel/Content/event_view_model.dart';
+import 'package:storio_app/viewModel/Content/exam_result_view_model.dart';
 import 'package:storio_app/viewModel/Content/faq_view_model.dart';
 import 'package:storio_app/viewModel/Content/gallery_view_model.dart';
 import 'package:storio_app/viewModel/Content/notice_view_model.dart';
@@ -24,6 +25,7 @@ import 'package:storio_app/viewModel/Media/media_view_model.dart';
 import 'package:storio_app/viewModel/hero_view_model.dart';
 import 'package:storio_app/viewModel/organization/leadership_message_view_model.dart';
 import 'package:storio_app/viewModel/organization/staff_view_model.dart';
+import 'package:storio_app/viewModel/organization/team_member_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
 
 void main() async{
@@ -53,9 +55,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => EventViewModel()),
           ChangeNotifierProvider(create: (_) => PromotionViewModel()),
           ChangeNotifierProvider(create: (_) => TestimonialViewModel()),
+          ChangeNotifierProvider(create: (_) => ExamResultViewModel()),
 
           ChangeNotifierProvider(create: (_) => StaffViewModel()),
           ChangeNotifierProvider(create: (_) => LeadershipMessageViewModel()),
+          ChangeNotifierProvider(create: (_) => TeamViewModel()),
         ],
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, _) {

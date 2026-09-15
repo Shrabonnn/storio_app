@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/universal/custom_card2.dart';
+import 'package:storio_app/widget/universal/custom_status_badge.dart';
 
 
 import '../../data/model/result/exam_statistic.dart';
@@ -21,8 +22,10 @@ class ExamInfoCard extends StatelessWidget {
   final IconData icon;
 
   final List<ExamStatistic> statistics;
+  final VoidCallback editTap;
+  final VoidCallback deleteTap;
 
-  final VoidCallback? onViewDetails;
+
 
   const ExamInfoCard({
     super.key,
@@ -32,8 +35,8 @@ class ExamInfoCard extends StatelessWidget {
     required this.status,
     required this.publishedDate,
     required this.statistics,
-    this.icon = Icons.assignment_outlined,
-    this.onViewDetails,
+    this.icon = Icons.assignment_outlined, required this.editTap, required this.deleteTap,
+
   });
 
   @override
@@ -59,12 +62,12 @@ class ExamInfoCard extends StatelessWidget {
                   width: 12.5.w,
                   height: 6.h,
                   decoration: BoxDecoration(
-                    color: Colors.green.shade100,
+                    color: color.active.withValues(alpha: .7),
                     borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                   ),
                   child: Icon(
                     icon,
-                    color: Colors.green.shade700,
+                    color: Colors.black87,
                     size: AppSizes.icon,
                   ),
                 ),
@@ -86,29 +89,20 @@ class ExamInfoCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: AppSizes.cardTitle,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black87,
+                                color: color.textPrimary,
                               ),
                             ),
                           ),
 
                           // Status publish
                           Flexible(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade100,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: TextBodyStyleWidget(title: status,color: Colors.green.shade700,)
-                            ),
+                            child: CustomStatusBadge(title: status.toUpperCase(),size: AppSizes.cardTitle,backgroundColor: color.active.withValues(alpha: 12),foregroundColor: Colors.black87,),
                           ),
 
                         ],
                       ),
 
+                      SizedBox(height: AppSizes.appbarGap,),
 
 
                       Row(
@@ -116,23 +110,12 @@ class ExamInfoCard extends StatelessWidget {
                         children: [
 
                           // School Exam
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 3,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.amber.shade600,
-                              borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
-                            ),
-                            child: TextBodyStyleWidget(title: examType,color: Colors.black87,)
-
-                          ),
+                          CustomStatusBadge(title: examType.toUpperCase(),size: AppSizes.cardTitle,),
 
 
                           //class 10 2026
                           Flexible(
-                            child: TextBodyStyleWidget(title: year,)
+                            child: TextBodyStyleWidget(title: year,size: AppSizes.cardTitle,)
                           ),
                         ],
                       ),
@@ -146,8 +129,9 @@ class ExamInfoCard extends StatelessWidget {
 
             SizedBox(height: AppSizes.smallGap),
 
+
             Divider(
-              color: Colors.grey.shade200,
+              color: color.lightVersionOfPrimaryLightVersion,
               height: 1,
             ),
 
@@ -174,26 +158,12 @@ class ExamInfoCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
 
-                            Text(
-                              item.title,
-                              style: TextStyle(
-                                fontSize: AppSizes.cardSubTitle,
-                                color: Colors.grey.shade600,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            TextBodyStyleWidget(title: item.title,),
 
                             const SizedBox(height: 4),
 
-                            Text(
-                              item.value,
-                              style: TextStyle(
-                                fontSize: AppSizes.cardTitle,
-                                fontWeight: FontWeight.w600,
-                                color: item.valueColor ??
-                                    Colors.black87,
-                              ),
-                            ),
+                            TextBodyStyleWidget(title: item.value,color: item.valueColor ?? color.textSecondary,size: AppSizes.sectionTitle,),
+
                           ],
                         ),
                       );
@@ -204,7 +174,7 @@ class ExamInfoCard extends StatelessWidget {
             ),
 
             Divider(
-              color: Colors.grey.shade200,
+              color: color.lightVersionOfPrimaryLightVersion,
               height: 1,
             ),
 
@@ -214,29 +184,26 @@ class ExamInfoCard extends StatelessWidget {
             SizedBox(height: AppSizes.smallGap),
 
             Row(
+              mainAxisAlignment: .spaceBetween,
               children: [
 
-                Expanded(
-                  child: Text(
-                    "Published on $publishedDate",
-                    style: TextStyle(
-                      fontSize: AppSizes.cardSubTitle,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                ),
+                TextBodyStyleWidget(title: "Published on $publishedDate",fontbold: false,),
 
-                SizedBox(
-                  width: 112,
-                  child: CustomButton(
-                    text: "View Details",
-                    height: 4.h,
-                    size: AppSizes.cardSubTitle,
-                    backgroundColor: color.primary,
-                    foregroundColor: color.cardBackground,
-                    onTap: onViewDetails ?? (){},
-                  ),
-                ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: editTap,
+                      child: Icon(Icons.edit,size: AppSizes.icon,color: color.primary,),
+                    ),
+                    SizedBox(width: AppSizes.sectionGap,),
+
+                    GestureDetector(
+                      onTap: deleteTap,
+                      child: Icon(Icons.delete_outline_outlined,size: AppSizes.icon,color: Colors.red,),
+                    ),
+                  ],
+                )
+
               ],
             ),
           ],

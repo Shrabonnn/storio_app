@@ -222,7 +222,9 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
                               ),
 
                               SizedBox(height: AppSizes.itemGap),
-                              const Divider(),
+                               Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1,),
 
                               // Status + Created date + Actions
                               Row(

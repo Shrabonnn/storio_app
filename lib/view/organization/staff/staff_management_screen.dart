@@ -370,6 +370,27 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                 ),
               );
             },
+          ),
+
+          //space
+
+          SliverPadding(
+            padding: EdgeInsets.only(
+              top: AppSizes.screenPadding,
+              left: AppSizes.screenPadding,
+              right: AppSizes.screenPadding,
+            ),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 15.h),
+
+                  ],
+                ),
+              ]),
+            ),
           )
         ],
       ),

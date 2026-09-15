@@ -74,7 +74,9 @@ class SkeletonCard extends StatelessWidget {
 
             SizedBox(height: AppSizes.smallGap),
 
-            const Divider(),
+            const Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
 
             SizedBox(height: AppSizes.smallGap),
 

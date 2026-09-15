@@ -376,7 +376,9 @@ class _DashboardState extends State<Dashboard> {
                     separatorBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal:AppSizes.smallPadding),
-                        child: Divider(),
+                        child: Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                       );
                     },
                     itemBuilder: (context, index) {
@@ -463,7 +465,9 @@ class _DashboardState extends State<Dashboard> {
                     separatorBuilder: (context, index) {
                       return Padding(
                         padding:  EdgeInsets.symmetric(horizontal: 2.w),
-                        child: Divider(),
+                        child: Divider(
+       color: color.lightVersionOfPrimaryLightVersion,
+       height: 1, ),
                       );
                     },
                     itemBuilder: (context, index) {
