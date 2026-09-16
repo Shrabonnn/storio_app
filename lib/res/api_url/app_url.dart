@@ -259,6 +259,35 @@ class AppUrl {
   static const String imageShapeChoices = "$baseUrl/api/management/team/image-shape-choices/";
 
 
+
+  // Social Links
+  static const String getSocialLinks = "$baseUrl/api/management/social-links/";
+  static const String getSocialLinkPlatformChoices = "${getSocialLinks}platform-choices/";
+  static String socialLinkDetail(int id) => "${getSocialLinks}$id/";
+
+
+
+// Important Links
+  static const String getImportantLinks = "$baseUrl/api/important-links/";
+  static String importantLinkDetail(int id) => "$baseUrl/api/important-links/$id/";
+
+  // Board Settings
+  static const String importantLinksBoardSettings = "$baseUrl/api/important-links/board-settings/current/";
+
+  // Fetch Education Board Notices
+  static String fetchBoardNotices(String boards) => "$baseUrl/api/important-links/board-settings/fetch-notices/?boards=$boards";
+
+
+
+  // Cards Management
+  static const String cardsApi = '$baseUrl/api/institution-profile/cards/';
+
+  static String cardDetailApi(int id) => '$cardsApi$id/';
+
+
+  static const String cardReorderApi = '$cardsApi/reorder/';
+
+
 }
 //Admin12345@
 //alfasunny94@gmail.com

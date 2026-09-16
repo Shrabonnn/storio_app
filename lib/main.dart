@@ -23,7 +23,10 @@ import 'package:storio_app/viewModel/Content/promotion_view_model.dart';
 import 'package:storio_app/viewModel/Content/testimonial_view_model.dart';
 import 'package:storio_app/viewModel/Media/media_view_model.dart';
 import 'package:storio_app/viewModel/hero_view_model.dart';
+import 'package:storio_app/viewModel/organization/card_view_model.dart';
+import 'package:storio_app/viewModel/organization/important_view_model.dart';
 import 'package:storio_app/viewModel/organization/leadership_message_view_model.dart';
+import 'package:storio_app/viewModel/organization/social_link_view_model.dart';
 import 'package:storio_app/viewModel/organization/staff_view_model.dart';
 import 'package:storio_app/viewModel/organization/team_member_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
@@ -60,6 +63,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => StaffViewModel()),
           ChangeNotifierProvider(create: (_) => LeadershipMessageViewModel()),
           ChangeNotifierProvider(create: (_) => TeamViewModel()),
+          ChangeNotifierProvider(create: (_) => SocialLinkViewModel()),
+          ChangeNotifierProvider(create: (_) => ImportantLinkViewModel()),
+          ChangeNotifierProvider(create: (_) => CardViewModel()),
         ],
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, _) {

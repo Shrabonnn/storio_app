@@ -7,7 +7,9 @@ import 'package:storio_app/data/model/Content/gallery/gallery_model.dart';
 import 'package:storio_app/data/model/Content/promotion/promotion_model.dart';
 import 'package:storio_app/data/model/Content/result/exam_result_model.dart';
 import 'package:storio_app/data/model/Content/testimonial/testimonial_model.dart';
+import 'package:storio_app/data/model/organization/card/card_model.dart';
 import 'package:storio_app/data/model/organization/leader_message/leadership_message_model.dart';
+import 'package:storio_app/data/model/organization/links/important_link_model.dart';
 import 'package:storio_app/data/model/organization/staff/staff_model.dart';
 import 'package:storio_app/data/model/organization/team/team_member_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
@@ -331,19 +333,27 @@ class Routes {
 
 
       // organization
+
+      // Card
       case RoutesName.card_manage:
         return MaterialPageRoute(builder: (context)=> CardManagementScreen());
       case RoutesName.add_new_card_manage:
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewCard(
           isEdit: args?['isEdit'] ?? false,
+          card: args?['card'] as CardModel?,
         ));
+
+
+      // Important Links
       case RoutesName.important_links:
         return MaterialPageRoute(builder: (context)=> EducationBoardNotices());
       case RoutesName.add_new_links:
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewLink(
-          isEdit: args?['isEdit'] ?? false,));
+          isEdit: args?['isEdit'] ?? false,
+          link: args?['link'] as ImportantLinkModel,
+        ));
 
       // Staff
       case RoutesName.staff_manage:
