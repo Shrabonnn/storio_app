@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
+import 'package:storio_app/widget/skeleton/status_row_skeleton.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/theme/theme_ext.dart';
@@ -13,10 +14,12 @@ import '../../widget/textStyle/text_title_style.dart';
 import '../../widget/universal/confirm_action.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_drop_down.dart';
+import '../../widget/skeleton/custom_skeleton_card.dart';
 import '../../widget/universal/custom_status_badge.dart';
 import '../../widget/universal/date_time_formate.dart';
 import '../../widget/universal/image_card.dart';
 import '../../widget/universal/more_menu.dart';
+import '../../widget/skeleton/custom_skeleton_card2.dart';
 import '../../widget/universal/status_button_row.dart';
 
 class BlogManagementScreen extends StatefulWidget {
@@ -45,7 +48,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final provider = context.read<BlogViewModel>();
       await provider.getStatusChoices();
-      await provider.getBlogApi();
+      await provider.getBlogApi(isFilterOrSearch: false);
     });
   }
 
@@ -88,6 +91,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                               provider.getBlogApi(
                                 status: statusValue,
                                 search: value,
+                                isFilterOrSearch: true,
                               );
                             },
                             hinText: "Search",
@@ -140,10 +144,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                     Consumer<BlogViewModel>(
                       builder: (context, provider, child) {
                         if (provider.statusLoading) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Center(child: CircularProgressIndicator()),
-                          );
+                          return StatusRowSkeleton();
                         }
 
                         final displayList = [
@@ -166,6 +167,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                             provider.getBlogApi(
                               status: statusValue,
                               search: searchController.text,
+                              isFilterOrSearch: true,
                             );
                           },
                         );
@@ -180,12 +182,11 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
           Consumer<BlogViewModel>(
             builder: (context, provider, child) {
               if (provider.loading) {
-                return const SliverToBoxAdapter(
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: CircularProgressIndicator(),
-                    ),
+                return SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSizes.screenPadding),
+                  sliver: SliverList.builder(
+                    itemCount: 4,
+                    itemBuilder: (context, index) => const CustomSkeletonCard(),
                   ),
                 );
               }

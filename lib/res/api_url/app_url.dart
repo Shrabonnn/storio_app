@@ -288,6 +288,18 @@ class AppUrl {
   static const String cardReorderApi = '$cardsApi/reorder/';
 
 
+  // Role 
+  static const String getRoles = "$baseUrl/api/roles/";
+  static const String createRole = "$baseUrl/api/roles/create/";
+  static String roleDetail(int id) => "$baseUrl/api/roles/$id/";
+  static String updateRole(int id) => "$baseUrl/api/roles/$id/";
+  static String deleteRole(int id) => "$baseUrl/api/roles/$id/";
+
+  // Permission & Sidebar Endpoints
+  static const String getPermissions = "$baseUrl/api/permissions/";
+  static const String getSidebar = "$baseUrl/api/sidebar/";
+
+
 }
 //Admin12345@
 //alfasunny94@gmail.com

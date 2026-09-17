@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/snackbar_message.dart';
 import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
+import 'package:storio_app/widget/skeleton/status_row_skeleton.dart';
 
 import '../../routes/routes_name.dart';
 import '../../utils/theme/theme_ext.dart';
@@ -153,7 +154,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                         if (provider.statusLoading) {
                           return const Padding(
                             padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Center(child: CircularProgressIndicator()),
+                            child: StatusRowSkeleton(),
                           );
                         }
 

@@ -19,6 +19,7 @@ import '../../../widget/universal/custom_card.dart';
 import '../../../widget/universal/custom_status_badge.dart';
 import '../../../widget/universal/more_menu.dart';
 import '../../../widget/universal/search_text_field.dart';
+import '../../../widget/skeleton/custom_skeleton_card2.dart';
 import '../../../widget/universal/status_button_row.dart';
 
 class TeamManagementScreen extends StatefulWidget {
@@ -128,9 +129,17 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
                 ),
               ),
 
-              if (viewModel.isLoading)
+              /*if (viewModel.isLoading)
                 const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()),
+                )*/
+              if (viewModel.isLoading)
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSizes.screenPadding),
+                  sliver: SliverList.builder(
+                    itemCount: 4,
+                    itemBuilder: (context, index) => const CustomSkeletonCard2(),
+                  ),
                 )
               else if (viewModel.managementMembers.isEmpty)
                 const SliverFillRemaining(

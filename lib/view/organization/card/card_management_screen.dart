@@ -156,7 +156,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                             // TOP ROW (IMAGE/ICON + TITLE + ACTIONS)
                             // ==========================================
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 // Card Image or Icon
                                 _buildCardImageOrIcon(context, card),
@@ -174,77 +174,105 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                                           title: card.title ?? "",
                                           size: AppSizes.sectionTitle,
                                           color: color.primary,
+
                                         ),
                                       ),
 
                                       // Popup menu actions
-                                      MoreMenu(
-                                        items: const [
-                                          MoreMenuAction.edit,
-                                          MoreMenuAction.delete,
+                                      Column(
+                                        crossAxisAlignment: .end,
+                                        children: [
+                                          MoreMenu(
+                                            items: const [
+                                              MoreMenuAction.edit,
+                                              MoreMenuAction.delete,
+                                            ],
+                                            onSelected: (action) async {
+                                              switch (action) {
+                                              // Edit action
+                                                case MoreMenuAction.edit:
+                                                  final result =
+                                                  await Navigator.pushNamed(
+                                                    context,
+                                                    RoutesName.add_new_card_manage,
+                                                    arguments: {
+                                                      'isEdit': true,
+                                                      'card': card,
+                                                    },
+                                                  );
+
+                                                  if (!mounted) return;
+
+                                                  if (result == true) {
+                                                    _refreshCardList();
+                                                  }
+                                                  break;
+
+                                              // Delete action
+                                                case MoreMenuAction.delete:
+                                                  final confirmed =
+                                                  await confirmAction(
+                                                    context,
+                                                    title: "Delete Card",
+                                                    message:
+                                                    "Are you sure you want to permanently delete this card?",
+                                                  );
+
+                                                  if (!mounted || !confirmed) return;
+                                                  if (card.id == null) return;
+
+                                                  final cardProvider =
+                                                  context.read<CardViewModel>();
+
+                                                  final success =
+                                                  await cardProvider
+                                                      .deleteCardApi(card.id!);
+
+                                                  if (!mounted) return;
+
+                                                  if (success) {
+                                                    SnackBarMessage.showSnackBar(
+                                                      context,
+                                                      "Card deleted successfully",
+                                                    );
+                                                    _refreshCardList();
+                                                  } else {
+                                                    SnackBarMessage.showSnackBar(
+                                                      context,
+                                                      cardProvider.errorMessage ??
+                                                          "Failed to delete card",
+                                                    );
+                                                  }
+                                                  break;
+
+                                                default:
+                                                  break;
+                                              }
+                                            },
+                                          ),
+
+
+                                          SizedBox(height: AppSizes.smallGap,),
+                                          // ==========================================
+                                          // BOTTOM STATUS BADGE
+                                          // ==========================================
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              if (card.image != null)
+                                                CustomStatusBadge(
+                                                  title: "IMAGE MODE",
+                                                  size: AppSizes.cardTitle,
+                                                )
+                                              else if (card.icon != null &&
+                                                  card.icon!.isNotEmpty)
+                                                CustomStatusBadge(
+                                                  title: "ICON MODE",
+                                                  size: AppSizes.cardTitle,
+                                                ),
+                                            ],
+                                          ),
                                         ],
-                                        onSelected: (action) async {
-                                          switch (action) {
-                                          // Edit action
-                                            case MoreMenuAction.edit:
-                                              final result =
-                                              await Navigator.pushNamed(
-                                                context,
-                                                RoutesName.add_new_card_manage,
-                                                arguments: {
-                                                  'isEdit': true,
-                                                  'card': card,
-                                                },
-                                              );
-
-                                              if (!mounted) return;
-
-                                              if (result == true) {
-                                                _refreshCardList();
-                                              }
-                                              break;
-
-                                          // Delete action
-                                            case MoreMenuAction.delete:
-                                              final confirmed =
-                                              await confirmAction(
-                                                context,
-                                                title: "Delete Card",
-                                                message:
-                                                "Are you sure you want to permanently delete this card?",
-                                              );
-
-                                              if (!mounted || !confirmed) return;
-                                              if (card.id == null) return;
-
-                                              final cardProvider =
-                                              context.read<CardViewModel>();
-
-                                              final success =
-                                              await cardProvider
-                                                  .deleteCardApi(card.id!);
-
-                                              if (!mounted) return;
-
-                                              if (success) {
-                                                SnackBarMessage.showSnackBar(
-                                                  context,
-                                                  "Card deleted successfully",
-                                                );
-                                                _refreshCardList();
-                                              } else {
-                                                SnackBarMessage.showSnackBar(
-                                                  context,
-                                                  cardProvider.errorMessage ??
-                                                      "Failed to delete card",
-                                                );
-                                              }
-                                              break;
-
-                                            default:
-                                              break;
-                                          }
-                                        },
                                       ),
                                     ],
                                   ),
@@ -264,34 +292,10 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                               size: AppSizes.cardTitle,
                             ),
 
-                            SizedBox(height: AppSizes.appbarGap),
 
-                            Divider(
-                              color: color.lightVersionOfPrimaryLightVersion,
-                              height: 1,
-                            ),
 
-                            SizedBox(height: AppSizes.smallGap),
 
-                            // ==========================================
-                            // BOTTOM STATUS BADGE
-                            // ==========================================
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                if (card.image != null)
-                                  CustomStatusBadge(
-                                    title: "IMAGE MODE",
-                                    size: AppSizes.cardTitle,
-                                  )
-                                else if (card.icon != null &&
-                                    card.icon!.isNotEmpty)
-                                  CustomStatusBadge(
-                                    title: "ICON MODE",
-                                    size: AppSizes.cardTitle,
-                                  ),
-                              ],
-                            ),
+
                           ],
                         ),
                       ),
@@ -366,8 +370,8 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
     // 2. Show Icon if available
     if (card.icon != null && card.icon!.trim().isNotEmpty) {
       return Container(
-        width: 80,
-        height: 80,
+        width: 60,
+        height: 60,
         decoration: BoxDecoration(
           color: color.lightVersionOfPrimaryLightVersion,
           borderRadius: BorderRadius.circular(AppSizes.cardRadius),
@@ -384,8 +388,8 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
 
     // 3. Placeholder fallback
     return Container(
-      width: 80,
-      height: 80,
+      width: 60,
+      height: 60,
       decoration: BoxDecoration(
         color: color.lightVersionOfPrimaryLightVersion,
         borderRadius: BorderRadius.circular(AppSizes.cardRadius),

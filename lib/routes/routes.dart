@@ -12,6 +12,7 @@ import 'package:storio_app/data/model/organization/leader_message/leadership_mes
 import 'package:storio_app/data/model/organization/links/important_link_model.dart';
 import 'package:storio_app/data/model/organization/staff/staff_model.dart';
 import 'package:storio_app/data/model/organization/team/team_member_model.dart';
+import 'package:storio_app/data/model/user_manage/role/role_permission_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
 import 'package:storio_app/view/FAQ/add_new_faq.dart';
@@ -352,7 +353,7 @@ class Routes {
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewLink(
           isEdit: args?['isEdit'] ?? false,
-          link: args?['link'] as ImportantLinkModel,
+          link: args?['link'] as ImportantLinkModel?,
         ));
 
       // Staff
@@ -401,7 +402,11 @@ class Routes {
         case RoutesName.role:
         return MaterialPageRoute(builder: (context)=> RoleManagementScreen());
       case RoutesName.add_new_role:
-        return MaterialPageRoute(builder: (context)=> AddNewRole());
+        final args = setting.arguments as Map<String ,dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewRole(
+          isEdit: args?['isEdit'] ?? false,
+          role: args?['role'] as RoleModel?,
+        ));
 
       case RoutesName.user:
         return MaterialPageRoute(builder: (context)=> UserManagementScreen());

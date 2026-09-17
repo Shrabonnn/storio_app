@@ -19,16 +19,33 @@ class BlogViewModel extends ChangeNotifier {
   bool categoryLoading = false;
   String? categoryErrorMessage;
 
-   Future<void> getBlogApi({String? status, String? search, int? category}) async {
-    loading = true;
+   Future<void> getBlogApi({
+     String? status,
+     String? search,
+     int? category,
+     bool isFilterOrSearch = false
+   }) async {
+    //loading = true;
     errorMessage = null;
-    notifyListeners();
+    //notifyListeners();
 
+    // 1. Search kora hole ba memory te kono data na thakle shimmer animation show
+    if(isFilterOrSearch || blogList.isEmpty){
+      if(isFilterOrSearch){
+        blogList.clear();  // old data clear kore shimmer make sure kore
+      }
+      loading = true;
+      notifyListeners();
+    }
+
+    // 2. Ar jodi cash Data thake tahole and filter na kora hoy tobe loading
+    // ghurbe na false thakbe ar background e new data load hobe.
     try {
       blogList = await _repository.getBlogList(
         status: status,
         search: search,
         category: category,
+
       );
     } on ApiException catch (e) {
       errorMessage = e.message;
@@ -251,6 +268,12 @@ Future<bool> bulkAction({required String action, required List<int> postIds}) as
       loading = false;
       notifyListeners();
     }
+  }
+
+  void clearData() {
+    blogList.clear();
+    errorMessage = null;
+    notifyListeners();
   }
 
 }

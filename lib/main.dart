@@ -30,6 +30,7 @@ import 'package:storio_app/viewModel/organization/social_link_view_model.dart';
 import 'package:storio_app/viewModel/organization/staff_view_model.dart';
 import 'package:storio_app/viewModel/organization/team_member_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
+import 'package:storio_app/viewModel/user_manage/role_view_model.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,6 +67,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => SocialLinkViewModel()),
           ChangeNotifierProvider(create: (_) => ImportantLinkViewModel()),
           ChangeNotifierProvider(create: (_) => CardViewModel()),
+
+
+          ChangeNotifierProvider(create: (_) => RoleViewModel()),
         ],
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, _) {
