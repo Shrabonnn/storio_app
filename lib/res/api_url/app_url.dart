@@ -300,7 +300,15 @@ class AppUrl {
   static const String cardReorderApi = '$cardsApi/reorder/';
 
 
+  // ============================================================
+  // User Manage
+  // ============================================================
+
+
+  // ============================================================
   // Role 
+  // ============================================================
+
   static const String getRoles = "$baseUrl/api/roles/";
   static const String createRole = "$baseUrl/api/roles/create/";
   static String roleDetail(int id) => "$baseUrl/api/roles/$id/";
@@ -311,6 +319,22 @@ class AppUrl {
   static const String getPermissions = "$baseUrl/api/permissions/";
   static const String getSidebar = "$baseUrl/api/sidebar/";
 
+
+  // ============================================================
+  // User Management & Profile
+  // ============================================================
+
+  static const String userList = "$baseUrl/api/auth/users/";
+  static const String createUser = "$baseUrl/api/auth/users/create/";
+  static String userDetail(int id) => "$baseUrl/api/auth/users/$id/";
+  static String updateUser(int id) => "$baseUrl/api/auth/users/$id/";
+  static String deleteUser(int id) => "$baseUrl/api/auth/users/$id/";
+  static const String assignRole = "$baseUrl/api/auth/users/assign-role/";
+  static String resetUserPassword(int id) => "$baseUrl/api/auth/users/$id/reset-password/";
+  static const String bulkUserAction = "$baseUrl/api/auth/users/bulk/";
+  static const String roleList = "$baseUrl/api/auth/roles/";
+  static String userProfile(String slug) => "$baseUrl/api/auth/profile/$slug/";
+  static String changePassword(String slug) => "$baseUrl/api/auth/profile/$slug/change-password/";
 
 }
 //Admin12345@

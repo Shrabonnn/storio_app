@@ -14,6 +14,7 @@ import 'package:storio_app/data/model/organization/links/important_link_model.da
 import 'package:storio_app/data/model/organization/staff/staff_model.dart';
 import 'package:storio_app/data/model/organization/team/team_member_model.dart';
 import 'package:storio_app/data/model/user_manage/role/role_permission_model.dart';
+import 'package:storio_app/data/model/user_manage/user/user_model.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
 import 'package:storio_app/view/FAQ/add_new_faq.dart';
@@ -415,15 +416,20 @@ class Routes {
           role: args?['role'] as RoleModel?,
         ));
 
+        //User
       case RoutesName.user:
         return MaterialPageRoute(builder: (context)=> UserManagementScreen());
       case RoutesName.add_new_user:
         final args = setting.arguments as Map<String ,dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewUser(
           isEdit: args?['isEdit'] ?? false,
+          user: args?['user'] as ManageUserModel?,
         ));
       case RoutesName.view_user_details:
-        return MaterialPageRoute(builder: (context)=> ViewUserDetails());
+        final args = setting.arguments as Map<String ,dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ViewUserDetails(
+          user: args?['user'] as ManageUserModel,
+        ));
 
 
         // Leadership Message

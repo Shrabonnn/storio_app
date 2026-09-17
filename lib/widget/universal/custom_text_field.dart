@@ -19,6 +19,9 @@ class CustomTextFieldWidget extends StatelessWidget {
   final VoidCallback? onChange;
   final bool enable;
 
+  // Optional password field support
+  final bool obscureText;
+
   const CustomTextFieldWidget({
     super.key,
     required this.controller,
@@ -28,11 +31,16 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.isDatePicker = false,
     this.isTimePicker = false,
     this.onChange,
-    this.enable = true,  this.isInputOnlyNumber =false,
+    this.enable = true,
+    this.isInputOnlyNumber = false,
+
+    // Default false, so existing usages won't change
+    this.obscureText = false,
   });
 
-
-  // Date Picker
+  // ============================================================
+  // DATE PICKER
+  // ============================================================
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -47,8 +55,9 @@ class CustomTextFieldWidget extends StatelessWidget {
     }
   }
 
-
-  // Time Picker
+  // ============================================================
+  // TIME PICKER
+  // ============================================================
 
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? pickedTime = await showTimePicker(
@@ -61,6 +70,9 @@ class CustomTextFieldWidget extends StatelessWidget {
     }
   }
 
+  // ============================================================
+  // BUILD
+  // ============================================================
 
   @override
   Widget build(BuildContext context) {
@@ -88,14 +100,24 @@ class CustomTextFieldWidget extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: [
             TextFormField(
-              keyboardType: isInputOnlyNumber ? TextInputType.number :TextInputType.text,
-              inputFormatters: isInputOnlyNumber ? [FilteringTextInputFormatter.digitsOnly] : null,
+              keyboardType: isInputOnlyNumber
+                  ? TextInputType.number
+                  : TextInputType.text,
+
+              inputFormatters: isInputOnlyNumber
+                  ? [FilteringTextInputFormatter.digitsOnly]
+                  : null,
+
               enabled: enable,
               controller: controller,
+
+              // Password support
+              obscureText: obscureText,
+
               readOnly: isPicker,
 
               minLines: minLines ?? 1,
-              maxLines: maxLines ?? 2,
+              maxLines: obscureText ? 1 : (maxLines ?? 2),
 
               onTap: isDatePicker
                   ? () => _selectDate(context)
@@ -110,9 +132,8 @@ class CustomTextFieldWidget extends StatelessWidget {
 
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: TextStyle(
-                  color: color.textSecondary,
-                ),
+
+                hintStyle: TextStyle(color: color.textSecondary),
 
                 isCollapsed: true,
 
@@ -125,24 +146,22 @@ class CustomTextFieldWidget extends StatelessWidget {
               ),
             ),
 
-            // Date Icon
+            // ========================================================
+            // DATE ICON
+            // ========================================================
             if (isDatePicker)
               GestureDetector(
                 onTap: () => _selectDate(context),
-                child: const Icon(
-                  Icons.calendar_month_outlined,
-                  size: 20,
-                ),
+                child: const Icon(Icons.calendar_month_outlined, size: 20),
               ),
 
-            // Time Icon
+            // ========================================================
+            // TIME ICON
+            // ========================================================
             if (isTimePicker)
               GestureDetector(
                 onTap: () => _selectTime(context),
-                child: const Icon(
-                  Icons.access_time,
-                  size: 20,
-                ),
+                child: const Icon(Icons.access_time, size: 20),
               ),
           ],
         ),

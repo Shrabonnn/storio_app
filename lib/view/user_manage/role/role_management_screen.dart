@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:storio_app/widget/skeleton/contact_message_skeleton.dart';
 import '../../../routes/routes_name.dart';
 import '../../../utils/app_sizes.dart';
 import '../../../utils/snackbar_message.dart';
@@ -8,6 +9,7 @@ import '../../../viewModel/user_manage/role_view_model.dart';
 import '../../../widget/textStyle/text_title_style.dart';
 import '../../../widget/universal/confirm_action.dart';
 import '../../../widget/universal/custom_app_bar.dart';
+import '../../../widget/universal/custom_card.dart';
 import '../../../widget/universal/custom_card2.dart';
 
 class RoleManagementScreen extends StatefulWidget {
@@ -58,12 +60,11 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
             builder: (context, provider, child) {
               // Loading State
               if (provider.isLoading && provider.rolesList.isEmpty) {
-                return const SliverToBoxAdapter(
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(40),
-                      child: CircularProgressIndicator(),
-                    ),
+                return SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSizes.screenPadding),
+                  sliver: SliverList.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) => const ContactMessageSkeleton(),
                   ),
                 );
               }
@@ -109,7 +110,7 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
 
                     return Container(
                       margin: EdgeInsets.only(bottom: AppSizes.sectionGap),
-                      child: CustomCard2(
+                      child: CustomCard(
                         child: Padding(
                           padding: EdgeInsets.all(AppSizes.cardPadding),
                           child: Column(

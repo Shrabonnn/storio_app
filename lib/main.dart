@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:storio_app/data/model/user_manage/user/user_model.dart';
 import 'package:storio_app/routes/routes.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/splash_screen.dart';
@@ -32,6 +33,7 @@ import 'package:storio_app/viewModel/organization/staff_view_model.dart';
 import 'package:storio_app/viewModel/organization/team_member_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
 import 'package:storio_app/viewModel/user_manage/role_view_model.dart';
+import 'package:storio_app/viewModel/user_manage/user_view_model.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,6 +74,7 @@ class MyApp extends StatelessWidget {
 
 
           ChangeNotifierProvider(create: (_) => RoleViewModel()),
+          ChangeNotifierProvider(create: (_) => UserViewModel()),
         ],
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, _) {

@@ -42,10 +42,19 @@ class StaffViewModel extends ChangeNotifier {
     String? search,
     int? department,
     String? status,
+  bool isFilterOrSearch = false,
   }) async {
-    loading = true;
+
+    //loading = true;
     errorMessage = null;
-    notifyListeners();
+
+    if(isFilterOrSearch || staffList.isEmpty){
+      if(isFilterOrSearch){
+        staffList.clear();  // old data clear kore shimmer make sure kore
+      }
+      loading = true;
+      notifyListeners();
+    }
 
     try {
       staffList = await _repository.getStaffList(

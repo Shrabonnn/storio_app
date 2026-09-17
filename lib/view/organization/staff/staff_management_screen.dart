@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/viewModel/organization/staff_view_model.dart';
 import 'package:storio_app/widget/custom_button/view_button.dart';
+import 'package:storio_app/widget/skeleton/custom_skeleton_card2.dart';
+import 'package:storio_app/widget/skeleton/status_row_skeleton.dart';
 import 'package:storio_app/widget/universal/date_time_formate.dart';
 import 'package:storio_app/widget/universal/image_circle_widget.dart';
 import 'package:storio_app/widget/universal/status_button_row.dart';
@@ -55,6 +57,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
           ? null
           : provider.statusChoices[selectedStatus - 1].value,
       search: searchController.text,
+        isFilterOrSearch: false
     );
   }
 
@@ -94,6 +97,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                               provider.getStaffApi(
                                 status: statusValue,
                                 search: value,
+                                  isFilterOrSearch: true
                               );
                             },
                             hinText: "Search staff...",
@@ -106,12 +110,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                     Consumer<StaffViewModel>(
                       builder: (context, provider, child) {
                         if (provider.statusLoading) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
+                          return StatusRowSkeleton();
                         }
 
                         final displayList = [
@@ -134,6 +133,7 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
                             provider.getStaffApi(
                               status: statusValue,
                               search: searchController.text,
+                              isFilterOrSearch: true
                             );
                           },
                         );
@@ -148,12 +148,11 @@ class _StaffManagementScreenState extends State<StaffManagementScreen> {
           Consumer<StaffViewModel>(
             builder: (context, provider, child) {
               if (provider.loading) {
-                return const SliverToBoxAdapter(
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: CircularProgressIndicator(),
-                    ),
+                return SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSizes.screenPadding),
+                  sliver: SliverList.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) => const CustomSkeletonCard2(),
                   ),
                 );
               }

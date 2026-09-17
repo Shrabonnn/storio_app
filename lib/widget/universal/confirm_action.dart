@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
@@ -12,7 +13,7 @@ Future<bool> confirmAction(
 
     builder: (context) => AlertDialog(
       backgroundColor:color.cardBackground,
-      title: TextTitleWidget(title: title),
+      title: TextTitleWidget(title: title,size: AppSizes.cardTitle,),
       content: TextBodyStyleWidget(title: message,maxLines: 3,),
       actions: [
         TextButton(
