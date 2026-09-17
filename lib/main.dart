@@ -14,6 +14,7 @@ import 'package:storio_app/viewModel/Authenticaion/auth_view_model.dart';
 import 'package:storio_app/viewModel/Content/activity_view_model.dart';
 import 'package:storio_app/viewModel/Content/blog_view_model.dart';
 import 'package:storio_app/viewModel/Content/career_view_model.dart';
+import 'package:storio_app/viewModel/Content/contact_view_model.dart';
 import 'package:storio_app/viewModel/Content/event_view_model.dart';
 import 'package:storio_app/viewModel/Content/exam_result_view_model.dart';
 import 'package:storio_app/viewModel/Content/faq_view_model.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
 
           ChangeNotifierProvider(create: (_) => BlogViewModel()),
           ChangeNotifierProvider(create: (_) => CareerViewModel()),
+          ChangeNotifierProvider(create: (_) => ContactViewModel()),
           ChangeNotifierProvider(create: (_) => ActivityViewModel()),
           ChangeNotifierProvider(create: (_) => FaqViewModel()),
           ChangeNotifierProvider(create: (_) => GalleryViewModel()),

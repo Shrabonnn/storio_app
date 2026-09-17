@@ -120,6 +120,18 @@ class AppUrl {
 
 
   // ============================================================
+  // Contact Messages
+  // ============================================================
+
+
+  static const String getContactMessages = "$baseUrl/api/contact/";
+  static String contactMessageDetail(int id) => "$baseUrl/api/contact/$id/";
+  static String markContactAsRead(int id) => "$baseUrl/api/contact/$id/mark_as_read/";
+  static String markContactAsReplied(int id) => "$baseUrl/api/contact/$id/mark_as_replied/";
+  static String markContactAsArchived(int id) => "$baseUrl/api/contact/$id/mark_as_archived/";
+
+
+  // ============================================================
   // Career / Jobs
   // ============================================================
 

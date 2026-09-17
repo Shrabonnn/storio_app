@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storio_app/data/model/Content/blog/blog_model.dart';
 import 'package:storio_app/data/model/Content/career/career_model.dart';
+import 'package:storio_app/data/model/Content/contact/contact_model.dart';
 import 'package:storio_app/data/model/Content/event/event_model.dart';
 import 'package:storio_app/data/model/Content/faq/faq_model.dart';
 import 'package:storio_app/data/model/Content/gallery/gallery_model.dart';
@@ -148,11 +149,17 @@ class Routes {
 
 
 
+        // Contact
       case RoutesName.contact:
         return MaterialPageRoute(builder: (context)=> ContactScreen());
       case RoutesName.contact_message_details:
-        return MaterialPageRoute(builder: (context)=> ContactMessageDetails(name: "Maiyasha", email: "maiyasha@gmail.com", phone: "01714532456", dateTime: "10:00 AM . August 2026", subject: "Re admission", message: "Please Admit your child", status: "new"));
-      case RoutesName.content_details:
+        final args = setting.arguments as Map<String,dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ContactMessageDetails(
+          message: args?['message'] as ContactMessageModel,
+        ));
+
+
+        case RoutesName.content_details:
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> ContentDetails(
           initialContent: args?['content'] ?? "",
