@@ -8,6 +8,7 @@ import 'package:storio_app/data/model/Content/gallery/gallery_model.dart';
 import 'package:storio_app/data/model/Content/promotion/promotion_model.dart';
 import 'package:storio_app/data/model/Content/result/exam_result_model.dart';
 import 'package:storio_app/data/model/Content/testimonial/testimonial_model.dart';
+import 'package:storio_app/data/model/Content/video_reel/reel_model.dart';
 import 'package:storio_app/data/model/organization/card/card_model.dart';
 import 'package:storio_app/data/model/organization/leader_message/leadership_message_model.dart';
 import 'package:storio_app/data/model/organization/links/important_link_model.dart';
@@ -102,6 +103,7 @@ import 'package:storio_app/view/video/add_new_video.dart';
 import 'package:storio_app/view/video/video_management_screen.dart';
 
 import '../data/model/Content/notice/notice_model.dart';
+import '../data/model/hero/hero_slide_model.dart';
 import '../view/testimonial/edit_testimonial.dart';
 import '../view/user_manage/role/add_new_role.dart';
 import '../view/user_manage/role/role_management_screen.dart';
@@ -319,17 +321,31 @@ class Routes {
         return MaterialPageRoute(builder: (context)=> AddNewEventCalender());
       case RoutesName.calender_setting:
         return MaterialPageRoute(builder: (context)=> CalenderSetting());
+
+
+      // Video
       case RoutesName.video:
         return MaterialPageRoute(builder: (context)=> VideoManagementScreen());
       case RoutesName.add_new_video:
         final args = setting.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(builder: (context)=> AddNewVideo(
           isEdit: args?['isEdit'] ?? false,
+          reel: args?['reel'] as ReelModel?,
+
         ));
+
+
+        //Hero
       case RoutesName.hero:
         return MaterialPageRoute(builder: (context)=> HeroSectionManagerScreen());
       case RoutesName.add_new_hero_slide:
-        return MaterialPageRoute(builder: (context)=> AddNewHeroSlide());
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> AddNewHeroSlide(
+          heroSlide: args?['heroSlide'] as HeroSlideModel?,
+        ));
+
+
+
       case RoutesName.admission:
         return MaterialPageRoute(builder: (context)=> AdmissionManagementScreen());
       case RoutesName.admission_form_builder:

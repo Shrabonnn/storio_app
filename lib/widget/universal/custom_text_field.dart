@@ -16,7 +16,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final bool isTimePicker;
   final bool isInputOnlyNumber;
 
-  final VoidCallback? onChange;
+  final ValueChanged<String>? onChange;
   final bool enable;
 
   // Optional password field support
@@ -100,6 +100,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: [
             TextFormField(
+              onChanged: onChange,
               keyboardType: isInputOnlyNumber
                   ? TextInputType.number
                   : TextInputType.text,

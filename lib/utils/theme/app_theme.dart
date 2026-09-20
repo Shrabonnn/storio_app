@@ -70,6 +70,18 @@ class AppTheme {
           ),
         ),
       ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states){
+          if(states.contains(WidgetState.selected)){
+            return color.primary;
+          }
+          return Colors.transparent;
+        }),
+        side: BorderSide(
+          color: color.primary,
+          width: 2.0,
+        ),
+      )
 
 
 

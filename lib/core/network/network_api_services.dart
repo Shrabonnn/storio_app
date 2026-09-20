@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:mime/mime.dart';
 import 'package:storio_app/core/network/api_exception.dart';
 import 'package:storio_app/core/network/api_helper.dart';
 
@@ -336,7 +338,7 @@ class NetworkApiServices {
   // MULTIPART POST
   // ============================================================
 
-  Future<dynamic> multipartApi(
+  /*Future<dynamic> multipartApi(
       String url,
       Map<String, String> fields,
       Map<String, File> files, {
@@ -434,17 +436,101 @@ class NetworkApiServices {
 
       throw ApiException("Unexpected error occurred.");
     }
+  }*/
+
+  Future<dynamic> multipartApi(
+      String url,
+      Map<String, String> fields,
+      Map<String, File> files, {
+        bool requiresAuth = true,
+        bool isRetry = false,
+      }) async {
+    try {
+      String? token;
+
+      if (requiresAuth) {
+        token = await TokenStorage.getToken();
+      }
+
+      final request = http.MultipartRequest(
+        "POST",
+        Uri.parse(url),
+      );
+
+      request.headers.addAll({
+        "Accept": "application/json",
+        "X-Tenant-Host": AppUrl.tenantHost,
+      });
+
+      if (requiresAuth && token != null && token.isNotEmpty) {
+        request.headers["Authorization"] = "Bearer $token";
+      }
+
+      // Add normal fields
+      request.fields.addAll(fields);
+
+      // Add files dynamically
+      for (final entry in files.entries) {
+        final f = entry.value;
+
+       final mimeTypeString = lookupMimeType(f.path) ?? 'application/octet-stream';
+        final mediaType = MediaType.parse(mimeTypeString);
+
+        debugPrint("FILE PATH: ${f.path}");
+        debugPrint("CONTENT TYPE: $mimeTypeString");
+
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            entry.key,
+            f.path,
+            filename: f.path.split('/').last,
+            contentType: mediaType,
+          ),
+        );
+      }
+
+      final streamedResponse = await request.send();
+
+      final response = await http.Response.fromStream(
+        streamedResponse,
+      );
+
+      debugPrint("MULTIPART URL: $url");
+      debugPrint("MULTIPART STATUS: ${response.statusCode}");
+
+      if (response.statusCode == 401 && requiresAuth && !isRetry) {
+        final refreshed = await _refreshAccessToken();
+        if (refreshed) {
+          return multipartApi(
+            url,
+            fields,
+            files,
+            requiresAuth: requiresAuth,
+            isRetry: true,
+          );
+        }
+      }
+
+      return ApiHelper.handleResponse(response);
+    } on SocketException {
+      throw ApiException("No internet connection.");
+    } on FormatException {
+      throw ApiException("Invalid response format from server.");
+    } catch (e) {
+      debugPrint("MULTIPART ERROR: $e");
+
+      if (e is ApiException) {
+        rethrow;
+      }
+
+      throw ApiException("Unexpected error occurred.");
+    }
   }
 
   // ============================================================
   // REFRESH ACCESS TOKEN
   // ============================================================
-  //
-  // access token expire (401) হলে refresh token দিয়ে নতুন access
-  // token আনার চেষ্টা করে। সফল হলে নতুন token(গুলো) সেভ করে true
-  // রিটার্ন করে, ব্যর্থ হলে (refresh token ও মেয়াদোত্তীর্ণ/অকার্যকর)
-  // সব token মুছে false রিটার্ন করে — সেক্ষেত্রে ইউজারকে আবার
-  // login করতে হবে।
+
 
   Future<bool> _refreshAccessToken() async {
     try {

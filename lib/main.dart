@@ -20,8 +20,10 @@ import 'package:storio_app/viewModel/Content/event_view_model.dart';
 import 'package:storio_app/viewModel/Content/exam_result_view_model.dart';
 import 'package:storio_app/viewModel/Content/faq_view_model.dart';
 import 'package:storio_app/viewModel/Content/gallery_view_model.dart';
+import 'package:storio_app/viewModel/Content/hero_view_model.dart';
 import 'package:storio_app/viewModel/Content/notice_view_model.dart';
 import 'package:storio_app/viewModel/Content/promotion_view_model.dart';
+import 'package:storio_app/viewModel/Content/reel_view_model.dart';
 import 'package:storio_app/viewModel/Content/testimonial_view_model.dart';
 import 'package:storio_app/viewModel/Media/media_view_model.dart';
 import 'package:storio_app/viewModel/hero_view_model.dart';
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => PromotionViewModel()),
           ChangeNotifierProvider(create: (_) => TestimonialViewModel()),
           ChangeNotifierProvider(create: (_) => ExamResultViewModel()),
+          ChangeNotifierProvider(create: (_) => ReelViewModel()),
+          ChangeNotifierProvider(create: (_) => HeroSlideViewModel()),
 
           ChangeNotifierProvider(create: (_) => StaffViewModel()),
           ChangeNotifierProvider(create: (_) => LeadershipMessageViewModel()),

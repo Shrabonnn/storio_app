@@ -235,6 +235,10 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
     }
   }
 
+  bool _isImageFile(String path) {
+    final ext = path.split('.').last.toLowerCase();
+    return ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'].contains(ext);
+  }
 
 
   @override
@@ -546,9 +550,13 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
   Widget _buildUploadPreview() {
     return Consumer<MediaViewModel>(
       builder: (context, viewModel, child) {
-        if (viewModel.selectedLocalFile == null) {
+        final file = viewModel.selectedLocalFile;
+
+        if (file == null) {
           return const SizedBox.shrink();
         }
+
+        final isImage = _isImageFile(file.path);
 
         return Padding(
           padding: EdgeInsets.only(top: AppSizes.itemGap),
@@ -556,12 +564,39 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
             width: 100.w,
             height: 18.h,
             decoration: BoxDecoration(
+              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(AppSizes.cardRadius),
             ),
             clipBehavior: Clip.antiAlias,
-            child: Image.file(
-              viewModel.selectedLocalFile!,
+            child: isImage
+                ? Image.file(
+              file,
               fit: BoxFit.cover,
+            )
+                : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.video_file,
+                  size: 48,
+                  color: Colors.blue,
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    file.path.split('/').last,
+                    style: TextStyle(
+                      fontSize: AppSizes.cardSubTitle,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
           ),
         );

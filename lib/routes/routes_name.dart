@@ -81,8 +81,12 @@ class RoutesName {
   static const calender = "calender";
   static const calender_setting = "calender_setting";
   static const add_new_event_calender = "add_new_event_calender";
+
+  //video
   static const video = "video";
   static const add_new_video = "add_new_video";
+
+
   static const hero = "hero";
   static const add_new_hero_slide = "add_new_hero_slide";
   static const admission = "admission";

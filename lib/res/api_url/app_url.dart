@@ -203,8 +203,50 @@ class AppUrl {
   static const String getPublicExamResults = "$baseUrl/api/v2/template/exam-results/";
 
 
-   // ================================
+  // ============================================================
+  //  Reels & Video Management
+  // ============================================================
+
+  // Public
+  static String get getPublicReels => "$baseUrl/api/reels/";
+
+  // Management
+  static String get getManagementReels => "$baseUrl/api/management/reels/create/";
+  static String get createReel => "$baseUrl/api/management/reels/create/";
+
+  static String reelDetail(int id) => "$baseUrl/api/management/reels/$id/";
+  static String reelStatus(int id) => "$baseUrl/api/management/reels/$id/status/";
+  static String reelMetrics(int id) => "$baseUrl/api/management/reels/$id/metrics/";
+
+  static String get uploadReelThumbnail =>
+      "$baseUrl/api/management/reels/upload-thumbnail/";
+
+
+  // ============================================================
+  // HERO SLIDE - PUBLIC
+  // ============================================================
+
+  /// GET - active hero slides for public display
+  static const String heroSlidesPublicApi = "$baseUrl/api/hero-slides/";
+
+  static const String heroSlidesManagementApi = "$baseUrl/api/management/hero-slides/";
+
+  static const String heroSlideCreateApi = "$baseUrl/api/management/hero-slides/create/";
+
+  static String heroSlideDetailApi(int id) => "$baseUrl/api/management/hero-slides/$id/";
+
+  static const String heroSlideReorderApi = "$baseUrl/api/management/hero-slides/reorder/";
+
+  static const String heroSlideBulkOperationsApi = "$baseUrl/api/management/hero-slides/bulk-operations/";
+
+
+
+
+
+
+  // ================================
   // Media
+  // ================================
   static const String _mediaBase = "$baseUrl/api/management/media/";
   static const String mediaFileUploadConfig = "${_mediaBase}file-upload-config/";
   static const String mediaFileTypes = "${_mediaBase}file-types/";
