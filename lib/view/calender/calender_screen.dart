@@ -98,7 +98,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                           color: color.primary,
                           fontSize: AppSizes.sectionTitle,
                           fontWeight: FontWeight.w600,
+
                         ),
+
                         formatButtonDecoration: BoxDecoration(
                           border: Border.all(
                             color: color.primary,
@@ -115,7 +117,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       ),
                       calendarStyle: CalendarStyle(
                         defaultTextStyle: TextStyle(
-                          color: Colors.black,
+                          color: color.textPrimary,
                         ),
                         weekendTextStyle: TextStyle(
                           color: Colors.red,
@@ -146,12 +148,10 @@ class _CalenderScreenState extends State<CalenderScreen> {
                           children: [
                             Flexible(child:
                             calenderStatisticWidget(context:context,title: "Working Days",value: "21",)),
-                            SizedBox(width: AppSizes.appbarGap,),
-                            Flexible(child:
-                            calenderStatisticWidget(context:context,title: "Holidays",value: "2",)),
-                            SizedBox(width: AppSizes.appbarGap,),
-                            Flexible(child:
-                            calenderStatisticWidget(context:context,title: "Major Exams",value: "0",)),
+                            SizedBox(width: AppSizes.smallGap,),
+                            Flexible(child: calenderStatisticWidget(context:context,title: "Holidays",value: "2",)),
+                            SizedBox(width: AppSizes.smallGap,),
+                            Flexible(child: calenderStatisticWidget(context:context,title: "Major Exams",value: "0",)),
                           ],
                         )
                       ],

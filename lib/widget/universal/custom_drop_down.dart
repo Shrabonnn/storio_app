@@ -120,7 +120,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 alignment: Alignment.centerLeft,
                 child: TextBodyStyleWidget(
                   title: item,
-                  color: isSelected ? Colors.orange : color.cardBackground,
+                  color: isSelected ? Colors.purple[400] : color.cardBackground,
                   size: AppSizes.cardSubTitle,
                 ),
               ),
