@@ -51,6 +51,9 @@ dependencies:
   vsc_quill_delta_to_html: ^1.0.5
   flutter_quill_delta_from_html: ^1.5.3
   mime: ^1.0.4
+  path_provider: ^2.1.0
+  share_plus: ^7.2.0
+  file_saver: ^0.2.13
 
 
 dev_dependencies:

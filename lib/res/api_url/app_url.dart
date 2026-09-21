@@ -43,6 +43,29 @@ class AppUrl {
   static String blogCategoryDetail(int id) => "${getManagementBlogCategories}$id/";
 
 
+
+  // Admission
+  static String get admissionFormConfig => "$baseUrl/api/admission/form-config/current/";
+  static String get admissionFormConfigBase => "$baseUrl/api/admission/form-config/";
+  static String admissionFormConfigUpdate(int id) => "$baseUrl/api/admission/form-config/$id/";
+
+  static String get admissionApplications => "$baseUrl/api/admission/applications/";
+  static String admissionApplicationUpdateStatus(int id) => "$baseUrl/api/admission/applications/$id/update_status/";
+  static String get admissionApplicationsExportCsv => "$baseUrl/api/admission/applications/export_csv/";
+
+
+
+
+
+  //  Academic Calendar
+  static String get calendarEvents => "$baseUrl/api/calendar/events/";
+  static String calendarEventDetail(int id) => "$baseUrl/api/calendar/events/$id/";
+  static String get calendarSettings => "$baseUrl/api/calendar/settings/";
+  static String get calendarSettingsUpdate => "$baseUrl/api/calendar/settings/update/";
+
+
+
+
   //Promotions ====================
 
   // Public

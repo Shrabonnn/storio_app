@@ -154,7 +154,7 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
                     child: Center(
                       child: TextBodyStyleWidget(
                         title: provider.errorMessage!,
-                        color: Colors.red,
+                        color: Colors.redAccent,
                       ),
                     ),
                   ),
@@ -210,7 +210,7 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
                           ExamStatistic(
                             title: "Fail",
                             value: "${result.failed ?? 0}",
-                            valueColor: Colors.red,
+                            valueColor: Colors.redAccent,
                           ),
                           if (isPublicExam) ...[
                             ExamStatistic(

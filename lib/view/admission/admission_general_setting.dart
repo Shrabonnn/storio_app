@@ -82,7 +82,7 @@ class _AdmissionGeneralSettingState extends State<AdmissionGeneralSetting> {
                               children: [
                                Row(
                                  children: [
-                                   Icon(Icons.format_align_center_outlined,color: isFormStatus ?Colors.green:Colors.red, size: AppSizes.iconLarge,),
+                                   Icon(Icons.format_align_center_outlined,color: isFormStatus ?Colors.green:Colors.redAccent, size: AppSizes.iconLarge,),
                                    SizedBox(width: AppSizes.smallGap,),
                                    Column(
                                      crossAxisAlignment: .start,

@@ -200,7 +200,7 @@ class _ContactScreenState extends State<ContactScreen> {
                                     child: Center(
                                       child: TextBodyStyleWidget(
                                         title: provider.errorMessage!,
-                                        color: Colors.red,
+                                        color: Colors.redAccent,
                                       ),
                                     ),
                                   )

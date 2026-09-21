@@ -159,7 +159,7 @@ class _HeroSectionManagerScreenState extends State<HeroSectionManagerScreen> {
                                 vertical: 1.2.h,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: Colors.redAccent,
                                 borderRadius: BorderRadius.circular(
                                   AppSizes.buttonRadius,
                                 ),
@@ -700,7 +700,7 @@ Widget _superContentRow({
                 child: Icon(
                   Icons.delete_outline_outlined,
                   size: AppSizes.iconLarge,
-                  color: Colors.red,
+                  color: Colors.redAccent,
                 ),
               ),
             ],

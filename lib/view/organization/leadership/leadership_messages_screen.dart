@@ -102,7 +102,7 @@ class _LeadershipMessagesScreenState extends State<LeadershipMessagesScreen> {
                       child: Center(
                         child: TextBodyStyleWidget(
                           title: provider.errorMessage!,
-                          color: Colors.red,
+                          color: Colors.redAccent,
                         ),
                       ),
                     ),

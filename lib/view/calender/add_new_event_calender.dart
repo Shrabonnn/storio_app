@@ -1,15 +1,14 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utils/theme/theme_ext.dart';
 import '../../utils/app_sizes.dart';
+import '../../utils/theme/theme_ext.dart';
+import '../../viewModel/Content/calender_view_model.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/textStyle/text_body_style.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
-import '../../widget/universal/custom_card2.dart';
 import '../../widget/universal/custom_drop_down.dart';
 import '../../widget/universal/custom_text_field.dart';
 
@@ -21,12 +20,13 @@ class AddNewEventCalender extends StatefulWidget {
 }
 
 class _AddNewEventCalenderState extends State<AddNewEventCalender> {
-
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController startDateController = TextEditingController();
   final TextEditingController endDateController = TextEditingController();
 
+  DateTime? _selectedStartDate;
+  DateTime? _selectedEndDate;
 
   final List<String> levelList = [
     "School-Wide",
@@ -49,174 +49,327 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     titleController.dispose();
     descriptionController.dispose();
     startDateController.dispose();
     endDateController.dispose();
+    super.dispose();
   }
+
+  // ============================================================
+  // CATEGORY & LEVEL SLUG MAPPERS
+  // ============================================================
+  String _getCategorySlug(String category) {
+    switch (category) {
+      case "Holiday & Breaks":
+        return "holiday";
+      case "Examinations":
+        return "examination";
+      case "Festivals & Sports":
+        return "festival";
+      case "Admin Deadlines":
+        return "admin";
+      case "Academic Events":
+      default:
+        return "academic";
+    }
+  }
+
+  String _getLevelSlug(String level) {
+    switch (level) {
+      case "Primary":
+        return "primary";
+      case "Secondary":
+        return "secondary";
+      case "College":
+        return "college";
+      case "School-Wide":
+      default:
+        return "school-wide";
+    }
+  }
+
+  // ============================================================
+  // DATE PICKER DIALOGS
+  // ============================================================
+  Future<void> _pickStartDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedStartDate ?? DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null) {
+      setState(() {
+        _selectedStartDate = picked;
+        startDateController.text =
+        "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+      });
+    }
+  }
+
+  Future<void> _pickEndDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedEndDate ?? _selectedStartDate ?? DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null) {
+      setState(() {
+        _selectedEndDate = picked;
+        endDateController.text =
+        "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+      });
+    }
+  }
+
+  // ============================================================
+  // SUBMIT FORM ACTION
+  // ============================================================
+  Future<void> _submitEvent(CalendarViewModel viewModel) async {
+    // Form Validation
+    if (titleController.text.trim().isEmpty) {
+      _showSnackBar("Please enter an event title");
+      return;
+    }
+    if (_selectedStartDate == null) {
+      _showSnackBar("Please select a start date");
+      return;
+    }
+
+    final payload = {
+      "title": titleController.text.trim(),
+      "description": descriptionController.text.trim(),
+      "start_date": _selectedStartDate?.toIso8601String(),
+      "end_date": (_selectedEndDate ?? _selectedStartDate)?.toIso8601String(),
+      "category": _getCategorySlug(selectedCategory),
+      "level": _getLevelSlug(selectedLevel),
+      "is_all_day": true,
+    };
+
+    final success = await viewModel.createEvent(payload);
+
+    if (mounted) {
+      if (success) {
+        _showSnackBar("Event added successfully!");
+        Navigator.pop(context, true); // Pop with true to trigger refresh
+      } else {
+        _showSnackBar(viewModel.errorMessage ?? "Failed to create event");
+      }
+    }
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = context.Appcolor;
+
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          CustomSliverAppBar(
-            title:"Add New Event",
-            showBackButton: true,
-          ),
-          SliverPadding(
-            padding: EdgeInsetsGeometry.all(AppSizes.screenPadding),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                Column(
-                  children: [
-                    CustomCard(child: Column(
-                      crossAxisAlignment: .start,
+      body: Consumer<CalendarViewModel>(
+        builder: (context, viewModel, child) {
+          return CustomScrollView(
+            slivers: [
+              const CustomSliverAppBar(
+                title: "Add New Event",
+                showBackButton: true,
+              ),
+              SliverPadding(
+                padding: EdgeInsets.all(AppSizes.screenPadding),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    Column(
                       children: [
-
-
-
-                        // Title
-                        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.sectionTitle,),
-                        SizedBox(height: AppSizes.appbarGap),
-                        CustomTextFieldWidget(hintText: "e.g. Enter event title", controller: titleController),
-                        SizedBox(height: AppSizes.itemGap,),
-
-
-                        TextBodyStyleWidget(title: "Description", color: color.primary,size: AppSizes.sectionTitle,),
-                        SizedBox(height: AppSizes.appbarGap),
-                        CustomTextFieldWidget(hintText: "e.g. Enter event description", controller: descriptionController,minLines: 4,maxLines: 6,),
-
-                      ],
-
-
-                    )),
-                    SizedBox(height: AppSizes.sectionGap,),
-
-
-
-                    // Time
-                    CustomCard(
-                      child: Row(
-
-                        children: [
-                          Flexible(
-                            child: Column(
-                              children: [
-                                TextBodyStyleWidget(title: "Start Date", color: color.primary,size: AppSizes.cardTitle,),
-                                SizedBox(height: AppSizes.appbarGap),
-                                CustomTextFieldWidget(hintText: "mm/dd/yy", controller: startDateController,isDatePicker: true,),
-
-                              ],
-                            ),
+                        // Title & Description Card
+                        CustomCard(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextBodyStyleWidget(
+                                title: "Title",
+                                color: color.primary,
+                                size: AppSizes.sectionTitle,
+                              ),
+                              SizedBox(height: AppSizes.appbarGap),
+                              CustomTextFieldWidget(
+                                hintText: "e.g. Enter event title",
+                                controller: titleController,
+                              ),
+                              SizedBox(height: AppSizes.itemGap),
+                              TextBodyStyleWidget(
+                                title: "Description",
+                                color: color.primary,
+                                size: AppSizes.sectionTitle,
+                              ),
+                              SizedBox(height: AppSizes.appbarGap),
+                              CustomTextFieldWidget(
+                                hintText: "e.g. Enter event description",
+                                controller: descriptionController,
+                                minLines: 4,
+                                maxLines: 6,
+                              ),
+                            ],
                           ),
-                          SizedBox(width: AppSizes.smallGap,),
-                          Flexible(
-                            child: Column(
-                              children: [
-                                TextBodyStyleWidget(title: "End Date", color: color.primary,size: AppSizes.cardTitle,),
-                                SizedBox(height: AppSizes.appbarGap),
-                                CustomTextFieldWidget(hintText: "2:30 PM", controller: endDateController,isDatePicker: true,),
+                        ),
 
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: AppSizes.sectionGap,),
-                    // Status
-                    CustomCard(child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
+                        SizedBox(height: AppSizes.sectionGap),
 
-                        // Tag
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Column(
+                        // Start Date & End Date Card
+                        CustomCard(
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  children: [
+                                    TextBodyStyleWidget(
+                                      title: "Start Date",
+                                      color: color.primary,
+                                      size: AppSizes.cardTitle,
+                                    ),
+                                    SizedBox(height: AppSizes.appbarGap),
+                                    GestureDetector(
+                                      onTap: _pickStartDate,
+                                      child: AbsorbPointer(
+                                        child: CustomTextFieldWidget(
+                                          hintText: "YYYY-MM-DD",
+                                          controller: startDateController,
+                                          isDatePicker: true,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: AppSizes.smallGap),
+                              Flexible(
+                                child: Column(
+                                  children: [
+                                    TextBodyStyleWidget(
+                                      title: "End Date",
+                                      color: color.primary,
+                                      size: AppSizes.cardTitle,
+                                    ),
+                                    SizedBox(height: AppSizes.appbarGap),
+                                    GestureDetector(
+                                      onTap: _pickEndDate,
+                                      child: AbsorbPointer(
+                                        child: CustomTextFieldWidget(
+                                          hintText: "YYYY-MM-DD",
+                                          controller: endDateController,
+                                          isDatePicker: true,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: AppSizes.sectionGap),
+
+                        // Category & Level Selection Card
+                        CustomCard(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
-                                  TextBodyStyleWidget(title: "Category", color: color.primary,size: AppSizes.cardTitle,),
-                                  SizedBox(height: AppSizes.appbarGap),
-
-                                  CustomDropdown(
-                                    items: categoryList,
-                                    initialValue: selectedCategory,
-                                    width: 100.w,
-
-                                    onChanged: (value) {
-                                      print("Selected: $value");
-                                      setState(() {
-                                        selectedCategory = value.toString();
-                                      });
-
-
-                                    },
+                                  Flexible(
+                                    child: Column(
+                                      children: [
+                                        TextBodyStyleWidget(
+                                          title: "Category",
+                                          color: color.primary,
+                                          size: AppSizes.cardTitle,
+                                        ),
+                                        SizedBox(height: AppSizes.appbarGap),
+                                        CustomDropdown(
+                                          items: categoryList,
+                                          initialValue: selectedCategory,
+                                          width: 100.w,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              selectedCategory =
+                                                  value.toString();
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: AppSizes.appbarGap),
+                                  Flexible(
+                                    child: Column(
+                                      children: [
+                                        TextBodyStyleWidget(
+                                          title: "Level",
+                                          color: color.primary,
+                                          size: AppSizes.cardTitle,
+                                        ),
+                                        SizedBox(height: AppSizes.appbarGap),
+                                        CustomDropdown(
+                                          items: levelList,
+                                          initialValue: selectedLevel,
+                                          width: 100.w,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              selectedLevel = value.toString();
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: AppSizes.sectionGap),
+
+                        // Actions (Cancel & Save)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomButton(
+                              text: "Cancel",
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              width: 30.w,
+                              backgroundColor: color.cardBackground,
+                              foregroundColor: color.primary,
                             ),
-                            SizedBox(width: AppSizes.appbarGap,),
+                            SizedBox(width: AppSizes.appbarGap),
                             Flexible(
-                              child: Column(
-                                children: [
-                                  TextBodyStyleWidget(title: "Level", color: color.primary,size: AppSizes.cardTitle,),
-                                  SizedBox(height: AppSizes.appbarGap),
-
-                                  CustomDropdown(
-                                    items: levelList,
-                                    initialValue: selectedLevel,
-                                    width: 100.w,
-
-                                    onChanged: (value) {
-                                      print("Selected: $value");
-                                      setState(() {
-                                        selectedLevel = value.toString();
-                                      });
-
-
-                                    },
-                                  ),
-                                ],
+                              child: viewModel.isSubmitting
+                                  ? const Center(
+                                  child: CircularProgressIndicator())
+                                  : CustomButton(
+                                text: "Save Event",
+                                onTap: () => _submitEvent(viewModel),
                               ),
                             ),
                           ],
                         ),
 
-
-
+                        SizedBox(height: AppSizes.sectionGap),
                       ],
-
-
-                    )),
-
-                    SizedBox(height: AppSizes.sectionGap,),
-
-
-
-
-                    Row(
-                      mainAxisAlignment: .spaceBetween,
-                      children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
-                        SizedBox(width: AppSizes.appbarGap,),
-                        Flexible(child: CustomButton(text:"Save Post", onTap: (){},)),
-                      ],
-                    ),
-                    SizedBox(height: AppSizes.sectionGap),
-
-
-
-                  ],
-                )
-
-              ]),
-            ),
-          ),
-
-        ],
+                    )
+                  ]),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

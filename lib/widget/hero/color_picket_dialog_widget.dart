@@ -16,7 +16,7 @@ class ColorPicketDialog extends StatelessWidget{
     required this.title,
     this.colors = const[
 
-      Colors.red,
+      Colors.redAccent,
       Colors.blue,
       Colors.green,
       Colors.orange,

@@ -215,7 +215,7 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                   child: TextBodyStyleWidget(
                                     title: provider.categoryErrorMessage!,
-                                    color: Colors.red,
+                                    color: Colors.redAccent,
                                   ),
                                 )
                               else if (provider.categoryList.isEmpty)
@@ -273,7 +273,7 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
                                                     : () => _handleDeleteCategory(category.id!, category.name ?? ''),
                                                 icon:  Icon(
                                                   Icons.delete_outline_outlined,
-                                                  color: Colors.red,
+                                                  color: Colors.redAccent,
                                                   size: AppSizes.iconLarge,
                                                 ),
                                               ),

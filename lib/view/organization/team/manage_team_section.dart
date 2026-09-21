@@ -142,7 +142,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
               onPressed: () => Navigator.pop(context, true),
               child: const Text(
                 "Delete",
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.redAccent),
               ),
             ),
           ],
@@ -385,7 +385,7 @@ class _ManageTeamSectionState extends State<ManageTeamSection> {
                                                 icon: Icon(
                                                   Icons.delete_outline_outlined,
                                                   size: AppSizes.iconLarge,
-                                                  color: Colors.red,
+                                                  color: Colors.redAccent,
                                                 ),
                                               ),
                                             ],

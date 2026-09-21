@@ -362,7 +362,7 @@ class _ViewEventScreenState extends State<ViewEventScreen> {
                                 icon: Icon(
                                   Icons.delete_outline,
                                   size: AppSizes.appBarIcon,
-                                  color: Colors.red,
+                                  color: Colors.redAccent,
                                 ),
                               ),
                             ],

@@ -109,7 +109,7 @@ class _MediaManageScreenState extends State<MediaManageScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 32),
                         child: TextBodyStyleWidget(
                           title: "Failed to load media: ${viewModel.libraryError}",
-                          color: Colors.red,
+                          color: Colors.redAccent,
                         ),
                       );
                     }

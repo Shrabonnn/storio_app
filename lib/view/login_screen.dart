@@ -251,7 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
           SnackBarMessage.showSnackBar(
             context,
             errorMessage,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.redAccent,
           );
         }
       }

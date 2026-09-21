@@ -201,7 +201,7 @@ class _RoleManagementScreenState extends State<RoleManagementScreen> {
                                               child:  Icon(
                                                 Icons.delete_outline_outlined,
                                                 size: AppSizes.icon,
-                                                color: Colors.red,
+                                                color: Colors.redAccent,
                                               ),
                                             ),
                                           ],

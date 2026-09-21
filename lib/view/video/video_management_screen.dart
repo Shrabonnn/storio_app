@@ -307,7 +307,7 @@ class _VideoManagementScreenState extends State<VideoManagementScreen> {
                                       child: Icon(
                                         Icons.delete_outline_outlined,
                                         size: AppSizes.iconLarge,
-                                        color: Colors.red,
+                                        color: Colors.redAccent,
                                       ),
                                     ),
                                   ],

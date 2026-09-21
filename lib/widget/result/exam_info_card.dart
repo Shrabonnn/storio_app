@@ -199,7 +199,7 @@ class ExamInfoCard extends StatelessWidget {
 
                     GestureDetector(
                       onTap: deleteTap,
-                      child: Icon(Icons.delete_outline_outlined,size: AppSizes.icon,color: Colors.red,),
+                      child: Icon(Icons.delete_outline_outlined,size: AppSizes.icon,color: Colors.redAccent,),
                     ),
                   ],
                 )

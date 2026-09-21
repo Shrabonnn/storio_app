@@ -82,7 +82,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
             onPressed: () => Navigator.pop(dialogContext, true),
             child: const Text(
               "Delete",
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color: Colors.redAccent),
             ),
           ),
         ],
@@ -165,7 +165,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
                       child: Center(
                         child: TextBodyStyleWidget(
                           title: viewModel.errorMessage!,
-                          color: Colors.red,
+                          color: Colors.redAccent,
                         ),
                       ),
                     ),
@@ -291,7 +291,7 @@ class _FaqManagementScreenState extends State<FaqManagementScreen> {
                                               child: Icon(
                                                 Icons
                                                     .delete_outline_outlined,
-                                                color: Colors.red,
+                                                color: Colors.redAccent,
                                                 size: AppSizes.icon,
                                               ),
                                             ),

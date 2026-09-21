@@ -44,12 +44,12 @@ class AppTheme {
 
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
+          borderSide: const BorderSide(color: Colors.redAccent, width: 1),
         ),
 
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
-          borderSide: const BorderSide(color: Colors.red, width: 1.5),
+          borderSide: const BorderSide(color: Colors.redAccent, width: 1.5),
         ),
 
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppSizes.buttonRadius)),
@@ -81,7 +81,10 @@ class AppTheme {
           color: color.primary,
           width: 2.0,
         ),
-      )
+      ),
+      iconTheme: IconThemeData(
+        color: color.primary,
+      ),
 
 
 

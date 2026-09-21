@@ -13,7 +13,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:storio_app/utils/theme/app_theme.dart';
 import 'package:storio_app/viewModel/Authenticaion/auth_view_model.dart';
 import 'package:storio_app/viewModel/Content/activity_view_model.dart';
+import 'package:storio_app/viewModel/Content/admission_view_model.dart';
 import 'package:storio_app/viewModel/Content/blog_view_model.dart';
+import 'package:storio_app/viewModel/Content/calender_view_model.dart';
 import 'package:storio_app/viewModel/Content/career_view_model.dart';
 import 'package:storio_app/viewModel/Content/contact_view_model.dart';
 import 'package:storio_app/viewModel/Content/event_view_model.dart';
@@ -68,6 +70,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ExamResultViewModel()),
           ChangeNotifierProvider(create: (_) => ReelViewModel()),
           ChangeNotifierProvider(create: (_) => HeroSlideViewModel()),
+          ChangeNotifierProvider(create: (_) => AdmissionViewModel()),
+          ChangeNotifierProvider(create: (_) => CalendarViewModel()),
 
           ChangeNotifierProvider(create: (_) => StaffViewModel()),
           ChangeNotifierProvider(create: (_) => LeadershipMessageViewModel()),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:storio_app/utils/app_colors.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card2.dart';
 
 import '../../utils/app_sizes.dart';
 import '../../utils/theme/theme_ext.dart';
+import '../../viewModel/Content/calender_view_model.dart';
 import '../../widget/custom_button/custom_buttom.dart';
 import '../../widget/universal/custom_app_bar.dart';
 import '../../widget/universal/custom_card.dart';
@@ -18,33 +19,107 @@ class CalenderSetting extends StatefulWidget {
 }
 
 class _CalenderSettingState extends State<CalenderSetting> {
-
-
   final List<String> weekendDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    "Sunday", // Index 0
+    "Monday", // Index 1
+    "Tuesday", // Index 2
+    "Wednesday", // Index 3
+    "Thursday", // Index 4
+    "Friday", // Index 5
+    "Saturday", // Index 6
   ];
 
   List<String> selectedDays = ["Friday", "Saturday"];
+  bool _isSaving = false;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadExistingSettings();
+    });
+  }
+
+  // API থেকে আসা বর্তমান Weekend Settings লোড করা
+  void _loadExistingSettings() async {
+    final viewModel = context.read<CalendarViewModel>();
+
+    // সেটিংস লোড না থাকলে লোড করা
+    if (viewModel.settings == null) {
+      await viewModel.getSettings();
+    }
+
+    if (viewModel.settings != null && viewModel.settings!.weekendDays!.isNotEmpty) {
+      final rawDays = viewModel.settings!.weekendDays; // Example: "5,6"
+      final indexes = rawDays!.split(',').map((e) => e.trim()).toList();
+
+      setState(() {
+        selectedDays.clear();
+        for (var idxStr in indexes) {
+          final idx = int.tryParse(idxStr);
+          if (idx != null && idx >= 0 && idx < weekendDays.length) {
+            selectedDays.add(weekendDays[idx]);
+          }
+        }
+      });
+    }
+  }
+
+  // সেটিংস API-তে সেভ করার মেথড
+  Future<void> _saveSettings() async {
+    setState(() {
+      _isSaving = true;
+    });
+
+    final viewModel = context.read<CalendarViewModel>();
+
+    // Selected Day নামগুলোকে Index এ কনভার্ট করা ( e.g. Friday -> 5, Saturday -> 6 )
+    final List<int> indexList = selectedDays
+        .map((day) => weekendDays.indexOf(day))
+        .where((idx) => idx != -1)
+        .toList()..sort();
+
+    final String weekendDaysString = indexList.join(','); // "5,6" format
+
+    final success = await viewModel.updateSettings(weekendDaysString);
+
+    if (mounted) {
+      setState(() {
+        _isSaving = false;
+      });
+
+      if (success) {
+        // ক্যালেন্ডার ডাটা রিফ্রেশ করা
+        viewModel.getSettings();
+        viewModel.getEventApi();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Settings saved successfully!")),
+        );
+        Navigator.pop(context, true);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(viewModel.errorMessage ?? "Failed to save settings"),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final color = context.Appcolor;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          CustomSliverAppBar(
-            title:"Calendar Settings",
+          const CustomSliverAppBar(
+            title: "Calendar Settings",
             showBackButton: true,
           ),
           SliverPadding(
-            padding: EdgeInsetsGeometry.all(AppSizes.screenPadding),
+            padding: EdgeInsets.all(AppSizes.screenPadding),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 Column(
@@ -57,15 +132,14 @@ class _CalenderSettingState extends State<CalenderSetting> {
                             title: "Select Weekend Days",
                             color: color.primary,
                           ),
-
                           SizedBox(height: AppSizes.itemGap),
-
                           GridView.builder(
                             shrinkWrap: true,
                             padding: EdgeInsets.zero,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: weekendDays.length,
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               crossAxisSpacing: 12,
                               mainAxisSpacing: 12,
@@ -77,6 +151,7 @@ class _CalenderSettingState extends State<CalenderSetting> {
 
                               return CustomCard2(
                                 child: InkWell(
+                                  borderRadius: BorderRadius.circular(8),
                                   onTap: () {
                                     setState(() {
                                       if (isSelected) {
@@ -103,8 +178,10 @@ class _CalenderSettingState extends State<CalenderSetting> {
                                         materialTapTargetSize:
                                         MaterialTapTargetSize.shrinkWrap,
                                       ),
-
-                                      TextTitleWidget(title: day,color: color.primary,)
+                                      TextTitleWidget(
+                                        title: day,
+                                        color: color.primary,
+                                      )
                                     ],
                                   ),
                                 ),
@@ -114,25 +191,34 @@ class _CalenderSettingState extends State<CalenderSetting> {
                         ],
                       ),
                     ),
+                    SizedBox(height: AppSizes.sectionGap),
 
-
-                    SizedBox(height: AppSizes.sectionGap,),
+                    // Action Buttons (Cancel & Save)
                     Row(
-                      mainAxisAlignment: .spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
-                        SizedBox(width: AppSizes.appbarGap,),
-                        Flexible(child: CustomButton(text:"Save Settings", onTap: (){},)),
+                        CustomButton(
+                          text: "Cancel",
+                          onTap: () => Navigator.pop(context),
+                          width: 30.w,
+                          backgroundColor: color.cardBackground,
+                          foregroundColor: color.primary,
+                        ),
+                        SizedBox(width: AppSizes.appbarGap),
+                        Flexible(
+                          child: CustomButton(
+                            text: _isSaving ? "Saving..." : "Save Settings",
+                            onTap: _isSaving ? null : _saveSettings,
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(height: AppSizes.sectionGap),
                   ],
                 )
-
               ]),
             ),
           ),
-
         ],
       ),
     );

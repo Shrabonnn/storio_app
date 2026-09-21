@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storio_app/data/model/Content/admission/admission_model.dart';
 import 'package:storio_app/data/model/Content/blog/blog_model.dart';
 import 'package:storio_app/data/model/Content/career/career_model.dart';
 import 'package:storio_app/data/model/Content/contact/contact_model.dart';
@@ -353,7 +354,10 @@ class Routes {
       case RoutesName.admission_general_setting:
         return MaterialPageRoute(builder: (context)=> AdmissionGeneralSetting());
       case RoutesName.view_admission:
-        return MaterialPageRoute(builder: (context)=> ViewAdmissionScreen());
+        final args = setting.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(builder: (context)=> ViewAdmissionScreen(
+            application:   args?['application'] as AdmissionApplicationModel?,
+        ));
 
 
 

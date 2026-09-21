@@ -442,7 +442,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                                     TextBodyStyleWidget(
                                       title: provider
                                           .albumErrorMessage!,
-                                      color: Colors.red,
+                                      color: Colors.redAccent,
                                     ),
                                   )
 
@@ -570,7 +570,7 @@ class _ManageAlbumsState extends State<ManageAlbums> {
                                                     Icons
                                                         .delete_outline,
                                                     color:
-                                                    Colors.red,
+                                                    Colors.redAccent,
                                                     size: AppSizes
                                                         .iconLarge,
                                                   ),

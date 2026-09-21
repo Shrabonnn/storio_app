@@ -125,7 +125,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
               onPressed: () => Navigator.pop(context, true),
               child: const Text(
                 "Delete",
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.redAccent),
               ),
             ),
           ],
@@ -342,7 +342,7 @@ class _ManageStaffDepartmentState extends State<ManageStaffDepartment> {
                                                 icon: Icon(
                                                   Icons.delete_outline_outlined,
                                                   size: AppSizes.iconLarge,
-                                                  color: Colors.red,
+                                                  color: Colors.redAccent,
                                                 ),
                                               ),
                                             ],

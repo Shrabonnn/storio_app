@@ -625,7 +625,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: TextBodyStyleWidget(
               title: "Failed to load media: ${viewModel.libraryError}",
-              color: Colors.red,
+              color: Colors.redAccent,
             ),
           );
         }
@@ -850,7 +850,7 @@ class _MediaManageDetailsScreenState extends State<MediaManageDetailsScreen> {
                   child: CustomButton(
                     height: 4.h,
                     text: viewModel.isDeleting ? "Deleting..." : "Delete Permanently",
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.redAccent,
                     onTap: (viewModel.isDeleting || selected == null)
                         ? null
                         : _deleteSelected,

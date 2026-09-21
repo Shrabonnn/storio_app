@@ -284,7 +284,7 @@ class _PublishResultState extends State<PublishResult> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close, color: Colors.red),
+                    icon: const Icon(Icons.close, color: Colors.redAccent),
                     onPressed: _removeFile,
                   ),
                 ],

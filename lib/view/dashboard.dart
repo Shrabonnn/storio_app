@@ -91,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
                                     Icon(
                                       Icons.circle_rounded,
                                       size: AppSizes.iconLarge,
-                                      color: Colors.red,
+                                      color: Colors.redAccent,
                                     ),
                                     SizedBox(width: AppSizes.itemGap,),
                                     CustomButton(width: 20.w,height: 3.5.h,text: "Visit Site", onTap: (){}),

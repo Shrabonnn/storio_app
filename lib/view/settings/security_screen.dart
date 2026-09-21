@@ -90,7 +90,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         SizedBox(height: AppSizes.appbarGap),
                         TextBodyStyleWidget(title: "Devices currently logged into your account.",size: AppSizes.cardTitle,fontbold: false,maxLines: 2,),
                         SizedBox(height: AppSizes.smallGap,),
-                        CustomButton(icon: Icons.logout,text: "Log out All Others", backgroundColor: color.lightVersionOfPrimaryLightVersion,foregroundColor:Colors.red,onTap: (){}),
+                        CustomButton(icon: Icons.logout,text: "Log out All Others", backgroundColor: color.lightVersionOfPrimaryLightVersion,foregroundColor:Colors.redAccent,onTap: (){}),
 
                         SizedBox(height: AppSizes.smallGap,),
                         Divider(

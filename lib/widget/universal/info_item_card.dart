@@ -31,7 +31,7 @@ class InfoItemCard extends StatelessWidget {
                 Row(
                   children: [
                     if(icons != null)...[
-                      Icon(icons, size: AppSizes.icon),
+                      Icon(icons, size: AppSizes.icon,color: color.primary,),
 
                       SizedBox(width: AppSizes.appbarGap),
                     ],
