@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:storio_app/viewModel/Authenticaion/auth_view_model.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
@@ -52,6 +53,16 @@ class _DashboardState extends State<Dashboard> {
 
       final noticeVM = context.read<NoticeViewModel>();
       if (noticeVM.noticeList.isEmpty) noticeVM.getNoticeApi();
+
+      final authVM = context.read<AuthViewModel>();
+      final currentUser = authVM.currentUser;
+      if (currentUser != null) {
+        final slug = currentUser.slug ?? currentUser.username;
+        if (slug.isNotEmpty) {
+          authVM.fetchUserProfileApi(slug);
+        }
+      }
+
     });
   }
 
@@ -89,6 +100,12 @@ class _DashboardState extends State<Dashboard> {
     final blogVM = context.watch<BlogViewModel>();
     final eventVM = context.watch<EventViewModel>();
     final noticeVM = context.watch<NoticeViewModel>();
+    final authVM = context.watch<AuthViewModel>();
+    final user = authVM.currentUser;
+    final userName = (user?.firstName != null && user!.firstName!.isNotEmpty)
+        ? user.firstName!.toUpperCase()
+        : (user?.username.isNotEmpty == true ? user!.username.toUpperCase() : "USER");
+    final userImage = user?.profilePicture;
 
     String statValue({
       required bool loading,
@@ -178,26 +195,40 @@ class _DashboardState extends State<Dashboard> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    AppbarTextStyle(title: 'Hello, MAIYASHA👋',),
+                                    AppbarTextStyle(title: 'Hello, ${userName.toUpperCase()}👋',),
                                     SizedBox(height: AppSizes.appbarGap,),
                                     TextBodyStyleWidget(title: "Welcome back to Storio",color: color.textAppbar,),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: color.secondary,
-                                          width: 1,
+                                    GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, RoutesName.profile);
+                                      },
+                                      child: Container(
+                                        width: 12.w,
+                                        height: 12.w,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: color.secondary,
+                                            width: 1.5,
+                                          ),
                                         ),
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 23,
-                                        backgroundColor: color.primaryLightVersion,
-                                        backgroundImage: AssetImage(
+                                        clipBehavior: Clip.antiAlias,
+                                        child: (userImage != null && userImage.isNotEmpty)
+                                            ? Image.network(
+                                          userImage,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => Image.asset(
+                                            "assets/images/person.png",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                            : Image.asset(
                                           "assets/images/person.png",
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),

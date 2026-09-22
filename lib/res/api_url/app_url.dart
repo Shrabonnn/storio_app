@@ -12,6 +12,18 @@ class AppUrl {
 
   static const String logoutApi = "$baseUrl/api/auth/logout/";
 
+// User Management
+  static const String createUserApi = "$baseUrl/api/auth/users/create/";
+  static const String userListApi = "$baseUrl/api/auth/users/";
+  static String userDetailApi(int id) => "$baseUrl/api/auth/users/$id/";
+  static const String assignRoleApi = "$baseUrl/api/auth/users/assign-role/";
+  static const String bulkUserApi = "$baseUrl/api/auth/users/bulk/";
+  static const String rolesListApi = "$baseUrl/api/auth/roles/";
+  static String resetPasswordApi(int id) => "$baseUrl/api/auth/users/$id/reset-password/";
+
+  // User Profile
+  static String userProfileApi(String slug) => "$baseUrl/api/auth/profile/$slug/";
+  static String changePasswordApi(String slug) => "$baseUrl/api/auth/profile/$slug/change-password/";
 
   // Institute Profile
   static const String institutionProfile = "$baseUrl/api/institution-profile/";

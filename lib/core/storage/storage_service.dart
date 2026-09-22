@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
+import '../../data/model/Auth/user_model.dart';
 class TokenStorage {
   static const FlutterSecureStorage _storage = FlutterSecureStorage();
 
@@ -37,10 +38,30 @@ class TokenStorage {
   }
 
   // ============================================================
+  // User Data Storage
+  // ============================================================
+  static Future<void> saveUser(UserModel user) async {
+    final jsonString = jsonEncode(user.toJson());
+    await _storage.write(key: "user_data", value: jsonString);
+  }
+
+  static Future<UserModel?> getUser() async {
+    final jsonString = await _storage.read(key: "user_data");
+    if (jsonString != null && jsonString.isNotEmpty) {
+      return UserModel.fromJson(jsonDecode(jsonString));
+    }
+    return null;
+  }
+
+  static Future<void> deleteUser() async {
+    await _storage.delete(key: "user_data");
+  }
+
+  // ============================================================
   // Convenience Helpers
   // ============================================================
 
-  // Login response থেকে access + refresh একসাথে সেভ করার জন্য
+  // Login response থ
   static Future<void> saveTokens({
     required String accessToken,
     required String refreshToken,
@@ -49,9 +70,10 @@ class TokenStorage {
     await saveRefreshToken(refreshToken);
   }
 
-  // Logout / refresh-token-expired হলে সব টোকেন মুছে ফেলার জন্য
+  // Logout / refresh-token-expired
   static Future<void> clearTokens() async {
     await deleteToken();
     await deleteRefreshToken();
+    await deleteUser();
   }
 }

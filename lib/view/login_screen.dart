@@ -8,6 +8,7 @@ import 'package:storio_app/utils/app_sizes.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 
+import '../data/model/Auth/user_model.dart';
 import '../utils/snackbar_message.dart';
 import '../utils/theme/theme_ext.dart';
 import '../viewModel/Authenticaion/auth_view_model.dart';
@@ -20,7 +21,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -34,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
   }
+
   void clear() {
     _emailController.clear();
     _passwordController.clear();
@@ -212,8 +213,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             return auth.loading
                                 ? Center(child: CircularProgressIndicator())
                                 : ElevatedButton(
-                                    onPressed: () async{
-                                     await _loginUser(auth,context);
+                                    onPressed: () async {
+                                      await _loginUser(auth, context);
                                     },
                                     child: Text("Sign in"),
                                   );
@@ -233,26 +234,29 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> _loginUser(AuthViewModel auth, BuildContext context)async{
-    if(_formKey.currentState!.validate()){
-      Map<String,dynamic>loginData = {
-        "email" :_emailController.text.trim(),
-        "password": _passwordController.text
-      };
-      final String?errorMessage =  await auth.loginApi(loginData);
+  Future<void> _loginUser(AuthViewModel auth, BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      if (_formKey.currentState!.validate()) {
+        final loginData = LoginRequestModel(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        );
 
-      if(errorMessage == null){
-        clear();
-        if(mounted){
-          Navigator.pushReplacementNamed(context, RoutesName.nav_bar);
-        }
-      }else{
-        if(mounted){
-          SnackBarMessage.showSnackBar(
-            context,
-            errorMessage,
-            backgroundColor: Colors.redAccent,
-          );
+        final String? errorMessage = await auth.loginApi(loginData);
+
+        if (errorMessage == null) {
+          clear();
+          if (mounted) {
+            Navigator.pushReplacementNamed(context, RoutesName.nav_bar);
+          }
+        } else {
+          if (mounted) {
+            SnackBarMessage.showSnackBar(
+              context,
+              errorMessage,
+              backgroundColor: Colors.redAccent,
+            );
+          }
         }
       }
     }
@@ -311,8 +315,6 @@ class _AuthTabSwitcher extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
 class _TopWaveOuterClipper extends CustomClipper<Path> {

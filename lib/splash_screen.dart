@@ -1,8 +1,11 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:provider/provider.dart';
 import 'package:storio_app/routes/routes_name.dart';
 import 'package:storio_app/view/login_screen.dart';
+import 'package:storio_app/viewModel/Authenticaion/auth_view_model.dart';
 
 import 'core/storage/storage_service.dart';
 
@@ -91,20 +94,24 @@ class _StorioSplashScreenState extends State<StorioSplashScreen>
     });
   }
   Future<void> checkLogin() async {
-
     final token = await TokenStorage.getToken();
 
     if (!mounted) return;
 
-     if (token == null || token.isEmpty) {
+    // ১. টোকেন না থাকলে সরাসরি Login Screen এ নিয়ে যাবে
+    if (token == null || token.isEmpty) {
+      Navigator.pushReplacementNamed(context, RoutesName.login);
+      return;
+    }
 
-       Navigator.pushReplacementNamed(context, RoutesName.login);
-       return;
-     }
-     Navigator.pushNamed(context, RoutesName.nav_bar);
+    // ২. টোকেন থাকলে ViewModel ইনিশিয়ালাইজ এবং Saved User Data লোড করবে
+    final authViewModel = context.read<AuthViewModel>();
+    await authViewModel.checkLoginStatus();
 
-    //Admin12345@
-//alfasunny94@gmail.com
+    if (!mounted) return;
+
+    // ৩. এবার Safe Navigation (pushReplacement)
+    Navigator.pushReplacementNamed(context, RoutesName.nav_bar);
   }
 
   @override
