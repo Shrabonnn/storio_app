@@ -22,11 +22,12 @@ import 'package:storio_app/viewModel/Content/event_view_model.dart';
 import 'package:storio_app/viewModel/Content/exam_result_view_model.dart';
 import 'package:storio_app/viewModel/Content/faq_view_model.dart';
 import 'package:storio_app/viewModel/Content/gallery_view_model.dart';
-import 'package:storio_app/viewModel/Content/hero_view_model.dart';
+import 'package:storio_app/viewModel/Content/hero_slide_view_model.dart';
 import 'package:storio_app/viewModel/Content/notice_view_model.dart';
 import 'package:storio_app/viewModel/Content/promotion_view_model.dart';
 import 'package:storio_app/viewModel/Content/reel_view_model.dart';
 import 'package:storio_app/viewModel/Content/testimonial_view_model.dart';
+import 'package:storio_app/viewModel/Institute_Profile/institute_profile_view_model.dart';
 import 'package:storio_app/viewModel/Media/media_view_model.dart';
 import 'package:storio_app/viewModel/hero_view_model.dart';
 import 'package:storio_app/viewModel/organization/card_view_model.dart';
@@ -38,6 +39,8 @@ import 'package:storio_app/viewModel/organization/team_member_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
 import 'package:storio_app/viewModel/user_manage/role_view_model.dart';
 import 'package:storio_app/viewModel/user_manage/user_view_model.dart';
+
+import 'core/network/navigation_service.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +60,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
           ChangeNotifierProvider(create: (_) => NoticeViewModel()),
           ChangeNotifierProvider(create: (_) => MediaViewModel()),
+          ChangeNotifierProvider(create: (_) => InstitutionProfileViewModel()),
 
           ChangeNotifierProvider(create: (_) => BlogViewModel()),
           ChangeNotifierProvider(create: (_) => CareerViewModel()),
@@ -88,6 +92,7 @@ class MyApp extends StatelessWidget {
           builder: (context, themeProvider, _) {
             return MaterialApp(
 
+              navigatorKey: NavigationService.navigatorKey,
               debugShowCheckedModeBanner: false,
 
               localizationsDelegates: const [

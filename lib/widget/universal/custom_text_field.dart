@@ -21,6 +21,8 @@ class CustomTextFieldWidget extends StatelessWidget {
 
   // Optional password field support
   final bool obscureText;
+  final bool readOnly;
+
 
   const CustomTextFieldWidget({
     super.key,
@@ -36,6 +38,7 @@ class CustomTextFieldWidget extends StatelessWidget {
 
     // Default false, so existing usages won't change
     this.obscureText = false,
+    this.readOnly =false,
   });
 
   // ============================================================
@@ -115,7 +118,7 @@ class CustomTextFieldWidget extends StatelessWidget {
               // Password support
               obscureText: obscureText,
 
-              readOnly: isPicker,
+              readOnly: readOnly || isPicker,
 
               minLines: minLines ?? 1,
               maxLines: obscureText ? 1 : (maxLines ?? 2),

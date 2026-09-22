@@ -14,7 +14,7 @@ import 'package:storio_app/widget/universal/search_text_field.dart';
 import '../../data/model/hero/hero_slide_model.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/theme/theme_ext.dart';
-import '../../viewModel/Content/hero_view_model.dart';
+import '../../viewModel/Content/hero_slide_view_model.dart';
 import '../../widget/hero/preview_mode_button_row.dart';
 import '../../widget/textStyle/text_title_style.dart';
 import '../../widget/universal/confirm_action.dart';

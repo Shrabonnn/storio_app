@@ -42,7 +42,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
   String selectedImageShape = "square";
   bool isVisible = true;
 
-  final List<String> imageShapeOptions = ["square", "circle", ];
+  final List<String> imageShapeOptions = ["square", "circle"];
 
   @override
   void initState() {
@@ -71,6 +71,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
     super.dispose();
   }
 
+  // Media Manage Details থেকে ইমেজ সিলেক্ট করার ফাংশন
   Future<void> _openMediaManage() async {
     final result = await Navigator.pushNamed(
       context,
@@ -81,9 +82,12 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
 
     if (result is Map<String, dynamic>) {
       setState(() {
+        // ID ও URL সেট করা হচ্ছে
         selectedAttachmentId = result['id'] as int?;
-        selectedImageUrl = result['file'] as String?;
-        if (selectedImageUrl == null && result['localPath'] != null) {
+        selectedImageUrl = result['file']?.toString() ?? result['url']?.toString();
+
+        // ফাইল পাথ থাকলে Local File হিসেবে সেট করা
+        if (result['localPath'] != null) {
           selectedImage = File(result['localPath']);
         } else {
           selectedImage = null;
@@ -116,7 +120,6 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
       isSaving = true;
     });
 
-    // imageShape বা image_shape পাঠাতে হবে
     final TeamMemberModel newMember = TeamMemberModel(
       fullname: fullNameController.text.trim(),
       designation: positionController.text.trim(),
@@ -162,7 +165,7 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
               delegate: SliverChildListDelegate([
                 Column(
                   children: [
-                    // Profile Photo & Shape Selection
+                    // Profile Photo & Shape Selection Card
                     CustomCard(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,12 +182,16 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                               CustomButton(
                                 height: 4.h,
                                 width: 30.w,
-                                text: "Select Image",
+                                text: (selectedImage != null || selectedImageUrl != null)
+                                    ? "Change Image"
+                                    : "Select Image",
                                 onTap: _openMediaManage,
                               ),
                             ],
                           ),
                           SizedBox(height: AppSizes.itemGap),
+
+                          // Image Display Logic
                           if (selectedImage != null)
                             Container(
                               width: 100.w,
@@ -199,7 +206,8 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                                 fit: BoxFit.cover,
                               ),
                             )
-                          else if (selectedImageUrl != null)
+                          else if (selectedImageUrl != null &&
+                              selectedImageUrl!.isNotEmpty)
                             Container(
                               width: 100.w,
                               height: 20.h,
@@ -212,7 +220,13 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                                 selectedImageUrl!,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.broken_image);
+                                  return const Center(
+                                    child: Icon(
+                                      Icons.broken_image,
+                                      size: 40,
+                                      color: Colors.grey,
+                                    ),
+                                  );
                                 },
                               ),
                             )
@@ -407,10 +421,10 @@ class _AddNewTeamMemberState extends State<AddNewTeamMember> {
                         ),
                         SizedBox(width: AppSizes.appbarGap),
                         Flexible(
-                          child:CustomButton(
+                          child: CustomButton(
                             text: isSaving ? "Saving..." : "Create Member",
                             onTap: isSaving ? null : _handleSaveMember,
-                          )
+                          ),
                         ),
                       ],
                     ),

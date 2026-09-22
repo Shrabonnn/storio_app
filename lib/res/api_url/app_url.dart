@@ -12,6 +12,12 @@ class AppUrl {
 
   static const String logoutApi = "$baseUrl/api/auth/logout/";
 
+
+  // Institute Profile
+  static const String institutionProfile = "$baseUrl/api/institution-profile/";
+  static const String v2InstitutionProfile = "$baseUrl/api/v2/template/institution-profile/";
+
+
   // Notice
   static const String getNotice = "$baseUrl/api/notice/";
   static const String getManagementNotice = "$baseUrl/api/management/notice/";

@@ -101,7 +101,7 @@ class _StorioSplashScreenState extends State<StorioSplashScreen>
        Navigator.pushReplacementNamed(context, RoutesName.login);
        return;
      }
-     Navigator.pushNamed(context, RoutesName.login);
+     Navigator.pushNamed(context, RoutesName.nav_bar);
 
     //Admin12345@
 //alfasunny94@gmail.com

@@ -10,7 +10,7 @@ import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import '../../data/model/hero/hero_slide_model.dart';
 import '../../utils/app_sizes.dart';
 import '../../utils/theme/theme_ext.dart';
-import '../../viewModel/Content/hero_view_model.dart';
+import '../../viewModel/Content/hero_slide_view_model.dart';
 import '../../widget/hero/color_picket_dialog_widget.dart';
 import '../../widget/universal/custom_app_bar.dart';
 

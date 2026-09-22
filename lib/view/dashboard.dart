@@ -1,19 +1,28 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
 
+import '../data/model/Content/event/event_model.dart';
+import '../data/model/Content/notice/notice_model.dart';
 import '../routes/routes_name.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_sizes.dart';
 import '../utils/theme/theme_ext.dart';
+import '../viewModel/Content/blog_view_model.dart';
+import '../viewModel/Content/event_view_model.dart';
+import '../viewModel/Content/notice_view_model.dart';
+import '../viewModel/user_manage/user_view_model.dart';
 import '../widget/dashboard/action_grid.dart';
 import '../widget/dashboard/action_tile.dart';
 import '../widget/dashboard/stat_card.dart';
 import '../widget/textStyle/appbar_text_style.dart';
+import '../widget/universal/epmty_state_widget.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -24,8 +33,71 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      // Only fetch if not already loaded elsewhere in the app — avoids
+      // refetching every time the dashboard re-mounts.
+      final userVM = context.read<UserViewModel>();
+      if (userVM.userList.isEmpty) userVM.fetchUsers();
+
+      final blogVM = context.read<BlogViewModel>();
+      if (blogVM.blogList.isEmpty) blogVM.getBlogApi();
+
+      final eventVM = context.read<EventViewModel>();
+      if (eventVM.eventList.isEmpty) eventVM.getEventApi();
+
+      final noticeVM = context.read<NoticeViewModel>();
+      if (noticeVM.noticeList.isEmpty) noticeVM.getNoticeApi();
+    });
+  }
+
+  // ============================================================
+  // Date helpers
+  // ============================================================
+
+  String _ordinalSuffix(int day) {
+    if (day >= 11 && day <= 13) return 'th';
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+
+  String _formatNoticeDate(DateTime date) {
+    final day = date.day;
+    final suffix = _ordinalSuffix(day);
+    final month = DateFormat('MMMM').format(date);
+    return '$day$suffix $month, ${date.year}';
+  }
+
+  @override
   Widget build(BuildContext context) {
     final color = context.Appcolor;
+
+    // Reactive stat counts.
+    final userVM = context.watch<UserViewModel>();
+    final blogVM = context.watch<BlogViewModel>();
+    final eventVM = context.watch<EventViewModel>();
+    final noticeVM = context.watch<NoticeViewModel>();
+
+    String statValue({
+      required bool loading,
+      required int count,
+    }) {
+      if (loading && count == 0) return "-";
+      return count.toString();
+    }
+
     return SafeArea(
       top: false,
       child: SingleChildScrollView(
@@ -53,9 +125,9 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          left: AppSizes.cardPadding,
-                          right: AppSizes.cardPadding,
-                          top: AppSizes.cardPadding*4
+                            left: AppSizes.cardPadding,
+                            right: AppSizes.cardPadding,
+                            top: AppSizes.cardPadding*4
                         ),
                         child: Column(
                           children: [
@@ -157,19 +229,43 @@ class _DashboardState extends State<Dashboard> {
               child: Row(
                 children: [
                   Expanded(
-                    child: StatCard(label: "Total Users", value: "5"),
+                    child: StatCard(
+                      label: "Total Users",
+                      value: statValue(
+                        loading: userVM.loading,
+                        count: userVM.userList.length,
+                      ),
+                    ),
                   ),
                   SizedBox(width: 2.w),
                   Expanded(
-                    child: StatCard(label: "Blog Posts", value: "8"),
+                    child: StatCard(
+                      label: "Blog Posts",
+                      value: statValue(
+                        loading: blogVM.loading,
+                        count: blogVM.blogList.length,
+                      ),
+                    ),
                   ),
                   SizedBox(width: 2.w),
                   Expanded(
-                    child: StatCard(label: "Total Events", value: "10"),
+                    child: StatCard(
+                      label: "Total Events",
+                      value: statValue(
+                        loading: eventVM.loading,
+                        count: eventVM.eventList.length,
+                      ),
+                    ),
                   ),
                   SizedBox(width: 2.w),
                   Expanded(
-                    child: StatCard(label: "Total Notices", value: "3"),
+                    child: StatCard(
+                      label: "Total Notices",
+                      value: statValue(
+                        loading: noticeVM.loading,
+                        count: noticeVM.noticeList.length,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -367,64 +463,118 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                   SizedBox(height: AppSizes.smallGap),
-                  // Notice card
-                  CustomCard(child: ListView.separated(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 2,
-                    separatorBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal:AppSizes.smallPadding),
-                        child: Divider(
-       color: color.lightVersionOfPrimaryLightVersion,
-       height: 1, ),
-                      );
-                    },
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: 6.h,
-                        padding: EdgeInsets.all(2.w),
-                        decoration: BoxDecoration(
-                          //color: color.cartBackgroundLight,
-                          borderRadius: BorderRadius.circular(3.w),
-                        ),
-                        child: Row(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding:  EdgeInsets.only(right: 2.w),
-                                  child: Icon(
-                                    color: AppColors.primary,
-                                    Icons.south_east,
-                                    size: AppSizes.icon,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+                  // Notice card — top 2, real data
+                  Consumer<NoticeViewModel>(
+                    builder: (context, provider, child) {
+                      if (provider.loading && provider.noticeList.isEmpty) {
+                        return CustomCard(
+                          child: SizedBox(
+                            height: 12.h,
+                            child: const Center(
+                              child: CircularProgressIndicator(),
                             ),
-                            SizedBox(width: AppSizes.smallGap,),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Column(
-                                   crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                        );
+                      }
+
+                      final topNotices = provider.noticeList.take(2).toList();
+
+                      if (topNotices.isEmpty) {
+                        return CustomCard(
+                          child: EmptyStateWidget(
+                            title: "No notices yet",
+                            subtitle:
+                            "New notices will appear here once published.",
+                            icon: Icons.campaign_outlined,
+                            compact: true,
+                          ),
+                        );
+                      }
+
+                      return CustomCard(
+                        child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: topNotices.length,
+                          separatorBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal:AppSizes.smallPadding),
+                              child: Divider(
+                                color: color.lightVersionOfPrimaryLightVersion,
+                                height: 1, ),
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            final NoticeModel notice = topNotices[index];
+                            final displayDate = notice.publishDate ??
+                                notice.createDate;
+
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  RoutesName.notice,
+                                  arguments: {
+                                    'notice': notice,
+                                    'showBackButton':true
+                                  },
+                                );
+                              },
+                              child: Flexible(
+                                child: Container(
+                                  padding: EdgeInsets.all(2.w),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3.w),
+                                  ),
+                                  child: Row(
                                     children: [
-                                      Expanded(
-                                        child: TextTitleWidget(title: "Admission will be open ")
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding:  EdgeInsets.only(right: 2.w),
+                                            child: Icon(
+                                              color: AppColors.primary,
+                                              Icons.south_east,
+                                              size: AppSizes.icon,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      TextBodyStyleWidget(title: "26th July, 2026")
+                                      SizedBox(width: AppSizes.smallGap,),
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  TextTitleWidget(
+                                                    title: notice.title ?? "Untitled Notice",
+                                                    maxLines: 1,
+                                                  ),
+                                                  TextBodyStyleWidget(
+                                                    title: displayDate != null
+                                                        ? _formatNoticeDate(displayDate)
+                                                        : "",
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       );
                     },
-                  ),),
+                  ),
 
 
 
@@ -456,87 +606,145 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                   SizedBox(height: AppSizes.smallGap),
-                  // Upcoming event card
-                  CustomCard(child: ListView.separated(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 2,
-                    separatorBuilder: (context, index) {
-                      return Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 2.w),
-                        child: Divider(
-       color: color.lightVersionOfPrimaryLightVersion,
-       height: 1, ),
+                  // Upcoming event card — top 2 upcoming, real data
+                  Consumer<EventViewModel>(
+                    builder: (context, provider, child) {
+                      if (provider.loading && provider.eventList.isEmpty) {
+                        return CustomCard(
+                          child: SizedBox(
+                            height: 12.h,
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        );
+                      }
+
+                      final now = DateTime.now();
+                      final upcoming = provider.eventList
+                          .where((e) =>
+                      e.startDate != null && e.startDate!.isAfter(now))
+                          .toList()
+                        ..sort((a, b) => a.startDate!.compareTo(b.startDate!));
+
+                      final topEvents = upcoming.take(2).toList();
+
+                      if (topEvents.isEmpty) {
+                        return CustomCard(
+                          child: EmptyStateWidget(
+                            title: "No upcoming events",
+                            subtitle:
+                            "Check back soon for newly scheduled events.",
+                            icon: Icons.event_available_outlined,
+                            compact: true,
+                          ),
+                        );
+                      }
+
+                      return CustomCard(
+                        child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: topEvents.length,
+                          separatorBuilder: (context, index) {
+                            return Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: 2.w),
+                              child: Divider(
+                                color: color.lightVersionOfPrimaryLightVersion,
+                                height: 1, ),
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            final EventModel event = topEvents[index];
+                            final start = event.startDate!;
+                            final month = DateFormat('MMM').format(start).toUpperCase();
+                            final day = start.day.toString();
+                            final time = DateFormat('h:mm a').format(start);
+
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  RoutesName.event,
+                                  arguments: {'event': event},
+                                );
+                              },
+                              child: Container(
+                                height: 6.h,
+                                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3.w),
+                                ),
+                                child: Row(
+                                  children: [
+                                    // Date Card
+                                    Container(
+                                      width: 16.w,
+                                      margin: EdgeInsets.symmetric(vertical: AppSizes.smallPadding),
+                                      padding: EdgeInsets.symmetric(vertical: AppSizes.smallPadding),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+                                        color: color.lightVersionOfPrimaryLightVersion,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.08),
+                                            blurRadius: 5,
+                                            spreadRadius: 2,
+                                            offset: Offset(0, 4),
+                                          ),
+                                        ],
+                                      ),
+
+                                      child: Column(
+                                        children: [
+                                          Flexible(
+                                            child: TextBodyStyleWidget(title: month,color: color.primary,),
+                                          ),
+                                          Flexible(
+                                            child: TextTitleWidget(title: day,color: color.primary,),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(width: 2.5.w),
+                                    // Event info
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          TextTitleWidget(
+                                            title: event.title ?? "Untitled Event",
+                                            color: color.textPrimary,
+                                            maxLines: 1,
+                                          ),
+                                          SizedBox(height: AppSizes.appbarGap,),
+                                          TextBodyStyleWidget(
+                                            title: _formatNoticeDate(start),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // Time
+                                    Container(
+                                      padding: EdgeInsets.all(AppSizes.contentPadding),
+                                      decoration: BoxDecoration(
+                                        color: color.lightVersionOfPrimaryLightVersion,
+                                        borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+                                      ),
+                                      child: TextBodyStyleWidget(title: time,color: color.primary,),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       );
                     },
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: 6.h,
-                        padding: EdgeInsets.symmetric(horizontal: 2.w),
-                        decoration: BoxDecoration(
-
-                          borderRadius: BorderRadius.circular(3.w),
-                        ),
-                        child: Row(
-                          children: [
-                            // Date Card
-                            Container(
-                              width: 16.w,
-                              margin: EdgeInsets.symmetric(vertical: AppSizes.smallPadding),
-                              padding: EdgeInsets.symmetric(vertical: AppSizes.smallPadding),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
-                                color: color.lightVersionOfPrimaryLightVersion,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.08),
-                                    blurRadius: 5,
-                                    spreadRadius: 2,
-                                    offset: Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-
-                              child: Column(
-                                children: [
-                                  Flexible(
-                                    child: TextBodyStyleWidget(title: "AUG",color: color.primary,),
-                                  ),
-                                  Flexible(
-                                    child: TextTitleWidget(title: "10",color: color.primary,),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 2.5.w),
-                            // Exam info
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  TextTitleWidget(title: "Exam Starts",color: color.textPrimary,),
-                                  SizedBox(height: AppSizes.appbarGap,),
-                                  TextBodyStyleWidget(title: "10 August, 2026",),
-                                ],
-                              ),
-                            ),
-                            // Time
-                            Container(
-                              padding: EdgeInsets.all(AppSizes.contentPadding),
-                              decoration: BoxDecoration(
-                                color: color.lightVersionOfPrimaryLightVersion,
-                                borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
-                              ),
-                              child: TextBodyStyleWidget(title: "10: 00 AM",color: color.primary,),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),),
+                  ),
 
 
                   SizedBox(height: 2.5.h),
@@ -614,4 +822,10 @@ class _DashboardState extends State<Dashboard> {
       ],
     );
   }
+
+
 }
+
+
+
+

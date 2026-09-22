@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/utils/app_sizes.dart';
+import 'package:storio_app/widget/custom_button/custom_buttom.dart';
+import 'package:storio_app/widget/universal/custom_text_field.dart';
 
 import '../../data/model/form_field/form_feild_data.dart';
 import '../../utils/theme/theme_ext.dart';
@@ -45,26 +47,17 @@ class InfrastructureDropDown extends StatelessWidget {
             children: [
               TextBodyStyleWidget(title: field.title,),
               SizedBox(height: AppSizes.smallGap),
-              TextField(
-                controller: field.controller,
-                minLines: 1,
-                maxLines: 3,
-                decoration: InputDecoration(
-                  hintText: field.hint,
-                  border: OutlineInputBorder(
-                    borderRadius:
-                    BorderRadius.circular(AppSizes.cardRadius),
-                  ),
-                ),
-              ),
+              CustomTextFieldWidget(controller: field.controller,
+                  hintText: field.hint,)
             ],
           ),
         )),
 
         if(showIconPicker) ...[
-          SizedBox(height: AppSizes.itemGap),
+          SizedBox(height: AppSizes.smallGap),
 
           TextBodyStyleWidget(title: "Select Icon"),
+          SizedBox(height: AppSizes.smallGap),
           Wrap(
             spacing: 10,
             runSpacing: 10,
@@ -83,15 +76,15 @@ class InfrastructureDropDown extends StatelessWidget {
               return InkWell(
                 onTap: () => onIconSelected?.call(icon),
                 child: Container(
-                  padding:  EdgeInsets.only(top:AppSizes.cardPadding),
+                  padding:  EdgeInsets.all(2),
                   decoration: BoxDecoration(
                     color: selected
                         ? color.primary.withValues(alpha: .1)
-                        : Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(AppSizes.containerRadius),
+                        : color.lightVersionOfPrimaryLightVersion,
+                    borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
                     border: Border.all(
                       color: selected
-                          ? color.primary
+                          ? color.secondary
                           : Colors.transparent,
                     ),
                   ),
@@ -113,7 +106,10 @@ class InfrastructureDropDown extends StatelessWidget {
 
         if (showSaveButton) ...[
           SizedBox( height: AppSizes.itemGap, ),
-          ElevatedButton( onPressed: onSave, child: const Text("Add"), ), ],
+          CustomButton(text: "Add", onTap: onSave),
+          SizedBox( height: AppSizes.itemGap, ),
+
+        ]
 
         ]
     );

@@ -43,8 +43,7 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
           children: [
             TextTitleWidget(
               title: widget.title,
-              size: AppSizes.sectionTitle,
-              color: color.primary,
+
             ),
             if (widget.showIcon)
              IconButton(
@@ -54,7 +53,8 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
                    duration: const Duration(milliseconds: 300),
                    child: Icon(
                      widget.userIcon,
-                     size: AppSizes.icon,
+                     size: AppSizes.iconLarge,
+                     color: color.primary,
 
                    ),
                  ),)
@@ -71,7 +71,7 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
               borderRadius: BorderRadius.circular(AppSizes.cardRadius),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
+                  color: color.textPrimary.withValues(alpha: 0.08),
                   blurRadius: 2,
                   spreadRadius: 2,
                   offset: Offset(0,0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/universal/bottom_height_widget.dart';
@@ -113,7 +114,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
             color: cat['bg'] as Color,
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(AppSizes.cardRadius),
             border: Border.all(color: (cat['text'] as Color).withOpacity(0.3)),
           ),
           child: Row(
@@ -358,7 +359,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               });
                             },
                             headerStyle: HeaderStyle(
-
+                              headerPadding: EdgeInsets.zero,
                               leftChevronIcon: Icon(
                                 Icons.chevron_left,
                                 color: color.primary,
@@ -388,6 +389,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               ),
                             ),
                             calendarBuilders: CalendarBuilders(
+
+                              
+
 
                               markerBuilder: (context, day, events) => const SizedBox.shrink(),
 

@@ -3,6 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:file_saver/file_saver.dart';
+
+import '../../data/model/Content/admission/admission_model.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/app_sizes.dart';
 import '../../utils/theme/theme_ext.dart';
@@ -30,6 +35,7 @@ class AdmissionManagementScreen extends StatefulWidget {
 class _AdmissionManagementScreenState
     extends State<AdmissionManagementScreen> {
   final TextEditingController searchController = TextEditingController();
+  bool isExporting = false;
 
   final List<String> statusList = [
     "All",
@@ -58,6 +64,81 @@ class _AdmissionManagementScreenState
   void _refreshList() {
     final provider = context.read<AdmissionViewModel>();
     provider.getApplications(isFilterOrSearch: true);
+  }
+  Future<void> _handleExportAll(
+      List<AdmissionApplicationModel> list) async {
+    if (list.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("No applications to export")),
+      );
+      return;
+    }
+
+    setState(() => isExporting = true);
+
+    try {
+      final csvContent = _buildCsvForApplications(list);
+      final Uint8List bytes = Uint8List.fromList(utf8.encode(csvContent));
+      final safeName =
+          "admissions_export_${DateTime.now().millisecondsSinceEpoch}";
+
+      // Same as ViewAdmissionScreen — native "Save As" dialog, on-device,
+      // no bulk API hit needed since we already have the list loaded.
+      await FileSaver.instance.saveAs(
+        name: safeName,
+        bytes: bytes,
+        ext: "csv",
+        mimeType: MimeType.csv,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Applications exported")),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to export applications: $e")),
+      );
+    } finally {
+      if (mounted) setState(() => isExporting = false);
+    }
+  }
+
+  String _buildCsvForApplications(List<AdmissionApplicationModel> list) {
+    String escape(String value) => '"${value.replaceAll('"', '""')}"';
+
+    // Union of every form_data key across all applications, so every row
+    // has the same set of columns (missing fields become blank cells).
+    final formKeys = <String>{};
+    for (final app in list) {
+      if (app.formData != null) formKeys.addAll(app.formData!.keys);
+    }
+    final sortedFormKeys = formKeys.toList()..sort();
+
+    final headers = [
+      "Application Number",
+      "Status",
+      "Submitted At",
+      ...sortedFormKeys,
+      "Reviewer Notes",
+    ];
+
+    final buffer = StringBuffer();
+    buffer.writeln(headers.map(escape).join(','));
+
+    for (final app in list) {
+      final row = <String>[
+        app.applicationNumber ?? '',
+        app.status ?? '',
+        app.submittedAt?.toIso8601String() ?? '',
+        ...sortedFormKeys.map((key) => app.formData?[key]?.toString() ?? ''),
+        app.reviewerNotes ?? '',
+      ];
+      buffer.writeln(row.map(escape).join(','));
+    }
+
+    return buffer.toString();
   }
 
   @override
@@ -93,7 +174,17 @@ class _AdmissionManagementScreenState
                           controller: searchController,
                         ),
                         SizedBox(width: AppSizes.smallGap,),
-                        Expanded(child: CustomButton(height: 4.25.h,text: "Export CSV", onTap: (){}))
+                        Expanded(child: CustomButton(height: 4.25.h,
+                          text: "Export CSV",
+                          onTap: isExporting
+                              ? null
+                              : () =>
+                              _handleExportAll(
+                                context
+                                    .read<AdmissionViewModel>()
+                                    .applicationList,
+                              ),
+                        ))
 
                       ],
                     ),
