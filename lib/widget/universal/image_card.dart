@@ -89,6 +89,7 @@ class ImageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
+
                 // STATUS
                 if (status != null) ...[
                   Align(

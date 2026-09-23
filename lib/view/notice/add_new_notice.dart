@@ -245,7 +245,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Title",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -271,7 +271,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Content",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -438,7 +438,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                                   TextBodyStyleWidget(
                                     title: "Publish Date",
                                     color: color.primary,
-                                    size: AppSizes.cardTitle,
+                                    size: AppSizes.sectionTitle,
                                   ),
 
                                   SizedBox(
@@ -463,8 +463,8 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Publish Date",
-                                          color: color.primary,
-                                          size: AppSizes.cardTitle,
+                                          color: color.textPrimary,
+                                          size: AppSizes.sectionTitle,
                                         ),
 
                                         SizedBox(
@@ -490,8 +490,8 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Time",
-                                          color: color.primary,
-                                          size: AppSizes.cardTitle,
+                                          color: color.textPrimary,
+                                          size: AppSizes.sectionTitle,
                                         ),
 
                                         SizedBox(
@@ -535,15 +535,17 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                             });
                           },
                         ),
+                        SizedBox(width: AppSizes.itemGap,),
 
                         Expanded(
                           child: TextBodyStyleWidget(
                             title:
                             "Show PDF in view mode "
-                                "(embed PDF viewer on public page "
+                                "( embed PDF viewer on public page "
                                 "instead of showing only a download "
-                                "button)",
+                                "button )",
                             fontbold: false,
+                            maxLines: 3,
                           ),
                         ),
                       ],
@@ -568,7 +570,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Featured Image",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
 
@@ -653,7 +655,7 @@ class _AddNewNoticeState extends State<AddNewNotice> {
                       ),
 
                       SizedBox(
-                        width: AppSizes.appbarGap,
+                        width: AppSizes.smallGap,
                       ),
 
                       Flexible(

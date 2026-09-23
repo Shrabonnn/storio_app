@@ -472,7 +472,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                         // Event Title
                         TextBodyStyleWidget(
                           title: "Event Title*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -505,9 +505,9 @@ class _AddNewEventState extends State<AddNewEvent> {
                                     title:
                                     "Start Date *",
                                     color:
-                                    color.primary,
+                                    color.textPrimary,
                                     size:
-                                    AppSizes.cardTitle,
+                                    AppSizes.sectionTitle,
                                   ),
 
                                   SizedBox(
@@ -538,11 +538,11 @@ class _AddNewEventState extends State<AddNewEvent> {
                                 children: [
                                   TextBodyStyleWidget(
                                     title:
-                                    "Start Time *",
+                                    "End Time *",
                                     color:
-                                    color.primary,
+                                    color.textPrimary,
                                     size:
-                                    AppSizes.cardTitle,
+                                    AppSizes.sectionTitle,
                                   ),
 
                                   SizedBox(
@@ -582,9 +582,9 @@ class _AddNewEventState extends State<AddNewEvent> {
                                     title:
                                     "End Date",
                                     color:
-                                    color.primary,
+                                    color.textPrimary,
                                     size:
-                                    AppSizes.cardTitle,
+                                    AppSizes.sectionTitle,
                                   ),
 
                                   SizedBox(
@@ -617,9 +617,9 @@ class _AddNewEventState extends State<AddNewEvent> {
                                     title:
                                     "End Time",
                                     color:
-                                    color.primary,
+                                    color.textPrimary,
                                     size:
-                                    AppSizes.cardTitle,
+                                    AppSizes.sectionTitle,
                                   ),
 
                                   SizedBox(
@@ -650,7 +650,7 @@ class _AddNewEventState extends State<AddNewEvent> {
 
                         TextBodyStyleWidget(
                           title: "Location",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -675,7 +675,7 @@ class _AddNewEventState extends State<AddNewEvent> {
 
                         TextBodyStyleWidget(
                           title: "Short Description",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -708,7 +708,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Event Description",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -816,7 +816,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Status",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
 
@@ -878,7 +878,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                               TextBodyStyleWidget(
                                 title: "Category",
                                 color:
-                                color.primary,
+                                color.textPrimary,
                                 size: AppSizes
                                     .sectionTitle,
                               ),
@@ -924,7 +924,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                             TextBodyStyleWidget(
                               title: "Category",
                               color:
-                              color.primary,
+                              color.textPrimary,
                               size: AppSizes
                                   .sectionTitle,
                             ),
@@ -977,10 +977,8 @@ class _AddNewEventState extends State<AddNewEvent> {
                         Checkbox(
                           value: isFeatured,
                           side: BorderSide(
-                            color: color.primary,
+                            color: color.textPrimary,
                           ),
-                          activeColor:
-                          color.primary,
                           onChanged: (value) {
                             setState(() {
                               isFeatured =
@@ -988,6 +986,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                             });
                           },
                         ),
+                        SizedBox(width: AppSizes.itemGap,),
 
                         Expanded(
                           child:
@@ -1025,7 +1024,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                                 title:
                                 "Featured Image",
                                 color:
-                                color.primary,
+                                color.textPrimary,
                                 size: AppSizes
                                     .sectionTitle,
                               ),
@@ -1143,7 +1142,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                                 title:
                                 "SEO Settings",
                                 color:
-                                color.primary,
+                                color.textPrimary,
                                 size: AppSizes
                                     .sectionTitle,
                               ),
@@ -1153,7 +1152,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                                     : Icons
                                     .keyboard_arrow_down,
                                 color:
-                                color.primary,
+                                color.textPrimary,
                               ),
                             ],
                           ),
@@ -1215,7 +1214,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                       ),
 
                       SizedBox(
-                        width: AppSizes.appbarGap,
+                        width: AppSizes.smallGap,
                       ),
 
                       Expanded(

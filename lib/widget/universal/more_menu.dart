@@ -32,7 +32,7 @@ class MoreMenu extends StatelessWidget {
     return PopupMenuButton<MoreMenuAction>(
       padding: EdgeInsets.zero,
       color: color.primary,
-      icon:  Icon(Icons.more_vert,color: color.primary,),
+      child:  Icon(Icons.more_vert,color: color.primary,),
       onSelected: onSelected,
       itemBuilder: (context) {
         return items.map((item) {

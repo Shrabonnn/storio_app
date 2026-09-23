@@ -155,7 +155,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                           mainAxisAlignment: .spaceBetween,
                           children: [
                             CustomStatusBadge(
-                              title: event.status ?? "",
+                              title: event.status!.toUpperCase() ?? "",
                               size: AppSizes.cardTitle,
                             ),
                             Row(
@@ -167,6 +167,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                                     arguments: {'event': event},
                                   );
                                 }),
+                                SizedBox(width: AppSizes.itemGap,),
                                 MoreMenu(
                                   items: [
                                     MoreMenuAction.edit,
@@ -244,12 +245,13 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                             )
                           ],
                         ),
+                        SizedBox(height: AppSizes.itemGap,),
                         TextTitleWidget(
                           title: event.title ?? "",
-                          color: color.primary,
+                          color: color.textPrimary,
                           maxLines: 1,
                         ),
-                        SizedBox(height: AppSizes.appbarGap),
+                        SizedBox(height: AppSizes.smallGap),
                         Row(
                           children: [
                             Icon(Icons.calendar_month_outlined,
@@ -262,6 +264,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                                     : "",
                                 maxLines: 1,
                                 size: AppSizes.cardTitle,
+                                fontbold: false,
                               ),
                             ),
                           ],
@@ -277,6 +280,7 @@ class _EventManagementScreenState extends State<EventManagementScreen> {
                                 title: event.location ?? "",
                                 maxLines: 1,
                                 size: AppSizes.cardTitle,
+                                fontbold: false,
                               ),
                             ),
                           ],

@@ -33,9 +33,10 @@ import 'package:storio_app/viewModel/hero_view_model.dart';
 import 'package:storio_app/viewModel/organization/card_view_model.dart';
 import 'package:storio_app/viewModel/organization/important_view_model.dart';
 import 'package:storio_app/viewModel/organization/leadership_message_view_model.dart';
-import 'package:storio_app/viewModel/organization/social_link_view_model.dart';
 import 'package:storio_app/viewModel/organization/staff_view_model.dart';
 import 'package:storio_app/viewModel/organization/team_member_view_model.dart';
+import 'package:storio_app/viewModel/setting/general_setting_view_model.dart';
+import 'package:storio_app/viewModel/setting/security_view_model.dart';
 import 'package:storio_app/viewModel/setting/theme_view_model.dart';
 import 'package:storio_app/viewModel/user_manage/role_view_model.dart';
 import 'package:storio_app/viewModel/user_manage/user_view_model.dart';
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AuthViewModel()),
           ChangeNotifierProvider(create: (_) => HeroProvider()),
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => GeneralSettingViewModel()),
+          ChangeNotifierProvider(create: (_) => SecurityViewModel()),
           ChangeNotifierProvider(create: (_) => NoticeViewModel()),
           ChangeNotifierProvider(create: (_) => MediaViewModel()),
           ChangeNotifierProvider(create: (_) => InstitutionProfileViewModel()),
@@ -80,7 +83,6 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => StaffViewModel()),
           ChangeNotifierProvider(create: (_) => LeadershipMessageViewModel()),
           ChangeNotifierProvider(create: (_) => TeamViewModel()),
-          ChangeNotifierProvider(create: (_) => SocialLinkViewModel()),
           ChangeNotifierProvider(create: (_) => ImportantLinkViewModel()),
           ChangeNotifierProvider(create: (_) => CardViewModel()),
 
@@ -107,6 +109,15 @@ class MyApp extends StatelessWidget {
               initialRoute: RoutesName.splash_screen,
               onGenerateRoute: Routes.generateRoute,
               theme: themeProvider.currentTheme,
+
+              color: themeProvider.currentTheme.scaffoldBackgroundColor,
+
+              builder: (context, child) {
+                return Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: child,
+                );
+              },
             );
           },
         ),

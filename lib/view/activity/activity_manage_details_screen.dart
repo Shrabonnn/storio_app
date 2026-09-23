@@ -192,7 +192,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextBodyStyleWidget(title: "Title*", color: color.primary, size: AppSizes.sectionTitle),
+                          TextBodyStyleWidget(title: "Title*", color: color.textPrimary, size: AppSizes.sectionTitle),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(
                             hintText: "e.g., Annual Tech Conference 2026",
@@ -210,7 +210,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextBodyStyleWidget(title: "Category", color: color.primary, size: AppSizes.sectionTitle),
+                              TextBodyStyleWidget(title: "Category", color: color.textPrimary, size: AppSizes.sectionTitle),
                               SizedBox(height: AppSizes.appbarGap),
                               if (provider.categoryLoading)
                                 const Center(child: CircularProgressIndicator())
@@ -247,7 +247,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                             children: [
                               TextBodyStyleWidget(
                                 title: "Featured Image",
-                                color: color.primary,
+                                color: color.textPrimary,
                                 size: AppSizes.sectionTitle,
                               ),
                               SizedBox(width: AppSizes.appbarGap),
@@ -305,7 +305,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextBodyStyleWidget(title: "Content*", color: color.primary, size: AppSizes.sectionTitle),
+                          TextBodyStyleWidget(title: "Content*", color: color.textPrimary, size: AppSizes.sectionTitle),
                           SizedBox(height: AppSizes.appbarGap),
                           Column(
                             children: [
@@ -366,12 +366,12 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    TextBodyStyleWidget(title: "Author Name", color: color.primary, size: AppSizes.cardTitle),
+                                    TextBodyStyleWidget(title: "Author Name", color: color.textPrimary, size: AppSizes.sectionTitle),
                                     SizedBox(height: AppSizes.appbarGap),
                                     CustomTextFieldWidget(hintText: "e.g. Hasibul Islam", controller: authorNameController),
                                     SizedBox(height: AppSizes.itemGap),
 
-                                    TextBodyStyleWidget(title: "Status", color: color.primary, size: AppSizes.cardTitle),
+                                    TextBodyStyleWidget(title: "Status", color: color.textPrimary, size: AppSizes.sectionTitle),
                                     SizedBox(height: AppSizes.appbarGap),
                                     if (provider.statusLoading)
                                       const Center(child: CircularProgressIndicator())
@@ -405,6 +405,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                                             setState(() => isFeatured = value ?? false);
                                           },
                                         ),
+                                        SizedBox(width: AppSizes.itemGap,),
                                         Expanded(
                                           child: TextBodyStyleWidget(
                                             title: "Mark as Featured",
@@ -471,7 +472,7 @@ class _ActivityManageDetailsScreenState extends State<ActivityManageDetailsScree
                           backgroundColor: color.cardBackground,
                           foregroundColor: color.primary,
                         ),
-                        SizedBox(width: AppSizes.appbarGap),
+                        SizedBox(width: AppSizes.smallGap),
                         Flexible(
                           child: CustomButton(
                             text: isSaving ? "Saving..." : "Save",

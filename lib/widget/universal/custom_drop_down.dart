@@ -121,7 +121,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 child: TextBodyStyleWidget(
                   title: item,
                   color: isSelected ? Colors.purple[400] : color.cardBackground,
-                  size: AppSizes.cardSubTitle,
+                  size: AppSizes.cardTitle,
                 ),
               ),
             );

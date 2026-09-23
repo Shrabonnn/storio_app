@@ -67,11 +67,11 @@ class _ViewNoticeScreenState extends State<ViewNoticeScreen> {
                                 children: [
                                   Icon(Icons.calendar_month_outlined,color: color.primary,size: AppSizes.icon,),
                                   SizedBox(width: AppSizes.appbarGap,),
-                                  Flexible(child: TextBodyStyleWidget(title: "Last Updated: ${formatDate(widget.notice.updateDate!)} · ${formatTime(widget.notice.updateDate!)}",maxLines: 2,size: AppSizes.cardTitle)),
+                                  Flexible(child: TextBodyStyleWidget(title: "Last Updated: ${formatDate(widget.notice.updateDate!)} · ${formatTime(widget.notice.updateDate!)}",maxLines: 2,size: AppSizes.cardTitle,fontbold: false,)),
                                 ],
                               ),
                             ),
-                            CustomStatusBadge(title: widget.notice.status ?? "",size: AppSizes.cardTitle,),
+                            CustomStatusBadge(title: widget.notice.status!.toUpperCase() ?? "",size: AppSizes.sectionTitle,),
                           ],
                         ),
                         SizedBox(height: AppSizes.itemGap),
@@ -84,7 +84,7 @@ class _ViewNoticeScreenState extends State<ViewNoticeScreen> {
                               TextBodyStyleWidget(title: widget.notice.content ?? ""
                                 ,color: color.primary,
                                 fontbold: false
-                                ,size: AppSizes.cardTitle,maxLines: 20,),
+                                ,size: AppSizes.sectionTitle,maxLines: 20,),
 
 
                             ],

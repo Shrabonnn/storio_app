@@ -433,7 +433,7 @@ class _EditEventState extends State<EditEvent> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Event Title",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
 
@@ -463,9 +463,9 @@ class _EditEventState extends State<EditEvent> {
                                         title:
                                         "Start Date *",
                                         color:
-                                        color.primary,
+                                        color.textPrimary,
                                         size:
-                                        AppSizes.cardTitle,
+                                        AppSizes.sectionTitle,
                                       ),
 
                                       SizedBox(
@@ -496,11 +496,11 @@ class _EditEventState extends State<EditEvent> {
                                     children: [
                                       TextBodyStyleWidget(
                                         title:
-                                        "Start Time *",
+                                        "End Time *",
                                         color:
-                                        color.primary,
+                                        color.textPrimary,
                                         size:
-                                        AppSizes.cardTitle,
+                                        AppSizes.sectionTitle,
                                       ),
 
                                       SizedBox(
@@ -537,9 +537,9 @@ class _EditEventState extends State<EditEvent> {
                                         title:
                                         "End Date",
                                         color:
-                                        color.primary,
+                                        color.textPrimary,
                                         size:
-                                        AppSizes.cardTitle,
+                                        AppSizes.sectionTitle,
                                       ),
 
                                       SizedBox(
@@ -572,9 +572,9 @@ class _EditEventState extends State<EditEvent> {
                                         title:
                                         "End Time",
                                         color:
-                                        color.primary,
+                                        color.textPrimary,
                                         size:
-                                        AppSizes.cardTitle,
+                                        AppSizes.sectionTitle,
                                       ),
 
                                       SizedBox(
@@ -602,7 +602,7 @@ class _EditEventState extends State<EditEvent> {
                             // Location
                             TextBodyStyleWidget(
                               title: "Location",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
 
@@ -623,7 +623,7 @@ class _EditEventState extends State<EditEvent> {
                             // Excerpt
                             TextBodyStyleWidget(
                               title: "Excerpt",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
 
@@ -663,7 +663,7 @@ class _EditEventState extends State<EditEvent> {
                                     title:
                                     "Featured Image",
                                     color:
-                                    color.primary,
+                                    color.textPrimary,
                                     size:
                                     AppSizes.sectionTitle,
                                   ),
@@ -723,7 +723,7 @@ class _EditEventState extends State<EditEvent> {
                             TextBodyStyleWidget(
                               title:
                               "Event Description",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size:
                               AppSizes.sectionTitle,
                             ),
@@ -835,7 +835,7 @@ class _EditEventState extends State<EditEvent> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Status",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size:
                               AppSizes.sectionTitle,
                             ),
@@ -901,7 +901,7 @@ class _EditEventState extends State<EditEvent> {
                                     title:
                                     "Category",
                                     color:
-                                    color.primary,
+                                    color.textPrimary,
                                     size:
                                     AppSizes.sectionTitle,
                                   ),
@@ -915,7 +915,7 @@ class _EditEventState extends State<EditEvent> {
                                     title:
                                     "No category available",
                                     color:
-                                    color.primary,
+                                    color.textPrimary,
                                   ),
                                 ],
                               );
@@ -954,7 +954,7 @@ class _EditEventState extends State<EditEvent> {
                                 TextBodyStyleWidget(
                                   title: "Category",
                                   color:
-                                  color.primary,
+                                  color.textPrimary,
                                   size:
                                   AppSizes.sectionTitle,
                                 ),
@@ -1013,7 +1013,7 @@ class _EditEventState extends State<EditEvent> {
                                 });
                               },
                             ),
-
+                            SizedBox(width: AppSizes.itemGap,),
                             Expanded(
                               child:
                               TextBodyStyleWidget(
@@ -1053,6 +1053,7 @@ class _EditEventState extends State<EditEvent> {
                           isEventSettingSeoExpanded,
                           expandableChild:
                           InfrastructureDropDown(
+                            showSaveButton: false,
                             fields: [
                               FormFieldData(
                                 title:
@@ -1102,7 +1103,7 @@ class _EditEventState extends State<EditEvent> {
 
                           SizedBox(
                             width:
-                            AppSizes.appbarGap,
+                            AppSizes.smallGap,
                           ),
 
                           Flexible(

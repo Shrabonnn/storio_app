@@ -189,14 +189,16 @@ class _AdmissionManagementScreenState
                       ],
                     ),
                     SizedBox(height: AppSizes.smallGap),
-                    StatusButtonRow(
-                      items: statusList,
-                      selectedIndex: selectedStatus,
-                      onSelected: (index) {
-                        setState(() {
-                          selectedStatus = index;
-                        });
-                      },
+                    Center(
+                      child: StatusButtonRow(
+                        items: statusList,
+                        selectedIndex: selectedStatus,
+                        onSelected: (index) {
+                          setState(() {
+                            selectedStatus = index;
+                          });
+                        },
+                      ),
                     ),
                     SizedBox(height: AppSizes.sectionGap),
                   ],
@@ -370,7 +372,7 @@ class _AdmissionManagementScreenState
                                   ? formatDate(app.submittedAt!)
                                   : "N/A",
                             ),
-                            SizedBox(height: AppSizes.itemGap),
+
                           ],
                         ),
                       ),

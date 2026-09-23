@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
 import 'package:storio_app/widget/custom_button/view_button.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
+import 'package:storio_app/widget/universal/bottom_height_widget.dart';
 import 'package:storio_app/widget/universal/custom_status_badge.dart';
 import 'package:storio_app/widget/universal/more_menu.dart';
 
@@ -167,6 +168,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                 ),
               ]),
             ),
+
           ),
           Consumer<ActivityViewModel>(
             builder: (context, provider, child) {
@@ -228,8 +230,8 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomStatusBadge(
-                            title: activity.statusDisplay ?? activity.status ?? "",
-                            size: AppSizes.cardTitle,
+                            title: (activity.statusDisplay ?? activity.status)!.toUpperCase() ?? "",
+                            size: AppSizes.sectionTitle,
                           ),
                           Row(
                             children: [
@@ -242,7 +244,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                                   );
                                 },
                               ),
-                              SizedBox(width: AppSizes.smallGap),
+                              SizedBox(width: AppSizes.itemGap),
                               MoreMenu(
                                 items: const [
                                   MoreMenuAction.edit,
@@ -310,27 +312,34 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                               ),
                             ],
                           ),
+
                         ],
                       ),
-                      title: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: AppSizes.smallPadding),
-                        child: TextBodyStyleWidget(
-                          title: activity.title ?? "",
-                          size: AppSizes.sectionTitle,
-                          color: color.primary,
-                        ),
-                      ),
+
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: AppSizes.smallPadding),
                         child: Column(
+                          crossAxisAlignment: .start,
                           children: [
+
+                            TextBodyStyleWidget(
+                              title: activity.title ?? "",
+                              size: AppSizes.sectionTitle,
+                              color: color.textPrimary,
+                            ),
+
+                            SizedBox(height: AppSizes.smallGap,),
                             Row(
                               children: [
                                 Icon(Icons.category, color: color.primary, size: AppSizes.icon),
                                 SizedBox(width: AppSizes.appbarGap),
-                                const Text("Category"),
+                                TextBodyStyleWidget(
+                                  title: "Category",
+                                  size: AppSizes.cardTitle,
+
+                                ),
                                 const Spacer(),
-                                Text(categoryName),
+                                TextBodyStyleWidget(title:categoryName),
                               ],
                             ),
                             SizedBox(height: AppSizes.appbarGap),
@@ -338,9 +347,13 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
                               children: [
                                 Icon(Icons.person, color: color.primary, size: AppSizes.icon),
                                 SizedBox(width: AppSizes.appbarGap),
-                                const Text("Author"),
+                                TextBodyStyleWidget(
+                                  title: "Author",
+                                  size: AppSizes.cardTitle,
+
+                                ),
                                 const Spacer(),
-                                Text(activity.author ?? "—"),
+                                TextBodyStyleWidget(title:activity.author ?? "—"),
                               ],
                             ),
                           ],
@@ -352,6 +365,7 @@ class _ActivityManageScreenState extends State<ActivityManageScreen> {
               );
             },
           ),
+          BottomHeightWidget(),
 
         ],
       ),

@@ -409,7 +409,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                     children: [
                       TextBodyStyleWidget(
                         title: "Form Title",
-                        color: color.primary,
+                        color: color.textPrimary,
                         size: AppSizes.sectionTitle,
                       ),
                       SizedBox(height: AppSizes.appbarGap),
@@ -421,7 +421,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
 
                       TextBodyStyleWidget(
                         title: "Description",
-                        color: color.primary,
+                        color: color.textPrimary,
                         size: AppSizes.sectionTitle,
                       ),
                       SizedBox(height: AppSizes.appbarGap),
@@ -435,7 +435,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
 
                       TextBodyStyleWidget(
                         title: "Application Deadline",
-                        color: color.primary,
+                        color: color.textPrimary,
                         size: AppSizes.sectionTitle,
                       ),
                       SizedBox(height: AppSizes.appbarGap),
@@ -514,10 +514,9 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextBodyStyleWidget(
+                      TextTitleWidget(
                         title: "Form Fields (${_formFields.length})",
-                        color: color.primary,
-                        size: AppSizes.sectionTitle,
+
                       ),
                       CustomButton(
                         width: 32.w,
@@ -554,7 +553,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                           children: [
                             TextTitleWidget(
                               title: "Field #${index + 1}",
-                              color: color.primary,
+                              color: color.textPrimary,
                             ),
                             IconButton(
                               onPressed: () => _removeField(index),
@@ -573,7 +572,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
 
                         TextBodyStyleWidget(
                           title: "Field Label",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -585,7 +584,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
 
                         TextBodyStyleWidget(
                           title: "Field ID (Internal Name)",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -597,7 +596,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
 
                         TextBodyStyleWidget(
                           title: "Type",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -632,13 +631,17 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                           ),
                         ],
 
+
+                        SizedBox(height: AppSizes.smallGap),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextBodyStyleWidget(
                               title: "Required",
-                              color: color.primary,
+                              color: color.textPrimary,
                             ),
+
+                            SizedBox(width: AppSizes.itemGap),
                             Checkbox(
                               value: field.isRequired,
                               activeColor: color.primary,
@@ -650,6 +653,8 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                             ),
                           ],
                         ),
+
+                        SizedBox(height: AppSizes.smallGap),
                         Divider(
                           color: color.lightVersionOfPrimaryLightVersion,
                           height: 1,
@@ -661,7 +666,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Conditional Logic",
-                              color: color.primary,
+                              color: color.textPrimary,
                             ),
                             GestureDetector(
                               onTap: () {
@@ -714,7 +719,6 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                             ),
                           ),
                         ],
-                        SizedBox(height: AppSizes.smallGap),
                       ],
                     ),
                   ),
@@ -744,7 +748,7 @@ class _AdmissionFormBuilderState extends State<AdmissionFormBuilder> {
                       backgroundColor: color.cardBackground,
                       foregroundColor: color.primary,
                     ),
-                    SizedBox(width: AppSizes.appbarGap),
+                    SizedBox(width: AppSizes.smallGap),
                     Flexible(
                       child: CustomButton(
                         text: isSaving ? "Saving..." : "Save Form",

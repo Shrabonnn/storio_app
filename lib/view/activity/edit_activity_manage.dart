@@ -256,7 +256,7 @@ class _EditActivityManageDetailsScreenState
                         children: [
                           TextBodyStyleWidget(
                             title: "Title*",
-                            color: color.primary,
+                            color: color.textPrimary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -283,7 +283,7 @@ class _EditActivityManageDetailsScreenState
                             children: [
                               TextBodyStyleWidget(
                                 title: "Category",
-                                color: color.primary,
+                                color: color.textPrimary,
                                 size: AppSizes.sectionTitle,
                               ),
 
@@ -345,7 +345,7 @@ class _EditActivityManageDetailsScreenState
                             children: [
                               TextBodyStyleWidget(
                                 title: "Featured Image",
-                                color: color.primary,
+                                color: color.textPrimary,
                                 size: AppSizes.sectionTitle,
                               ),
 
@@ -418,7 +418,7 @@ class _EditActivityManageDetailsScreenState
                         children: [
                           TextBodyStyleWidget(
                             title: "Content*",
-                            color: color.primary,
+                            color: color.textPrimary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -511,8 +511,8 @@ class _EditActivityManageDetailsScreenState
                                     // AUTHOR
                                     TextBodyStyleWidget(
                                       title: "Author Name",
-                                      color: color.primary,
-                                      size: AppSizes.cardTitle,
+                                      color: color.textPrimary,
+                                      size: AppSizes.sectionTitle,
                                     ),
 
                                     SizedBox(height: AppSizes.appbarGap),
@@ -527,8 +527,8 @@ class _EditActivityManageDetailsScreenState
                                     // STATUS
                                     TextBodyStyleWidget(
                                       title: "Status",
-                                      color: color.primary,
-                                      size: AppSizes.cardTitle,
+                                      color: color.textPrimary,
+                                      size: AppSizes.sectionTitle,
                                     ),
 
                                     SizedBox(height: AppSizes.appbarGap),
@@ -589,10 +589,6 @@ class _EditActivityManageDetailsScreenState
                                       children: [
                                         Checkbox(
                                           value: isFeatured,
-                                          side: BorderSide(
-                                            color: color.primary,
-                                          ),
-                                          activeColor: color.primary,
                                           onChanged: isUpdating
                                               ? null
                                               : (value) {
@@ -602,6 +598,7 @@ class _EditActivityManageDetailsScreenState
                                                 },
                                         ),
 
+                                        SizedBox(width: AppSizes.itemGap,),
                                         Expanded(
                                           child: TextBodyStyleWidget(
                                             title: "Mark as Featured",
@@ -686,7 +683,7 @@ class _EditActivityManageDetailsScreenState
                           foregroundColor: color.primary,
                         ),
 
-                        SizedBox(width: AppSizes.appbarGap),
+                        SizedBox(width: AppSizes.smallGap),
 
                         Flexible(
                           child: CustomButton(

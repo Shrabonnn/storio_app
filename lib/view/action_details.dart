@@ -23,62 +23,72 @@ class _ActionDetailsState extends State<ActionDetails> {
   Widget build(BuildContext context) {
     final color = context.Appcolor;
     return Scaffold(
-      body:  CustomScrollView(
+      body: CustomScrollView(
         slivers: [
-          CustomSliverAppBar(title: "Action Details View",showBackButton: true,),
+          CustomSliverAppBar(
+            title: "Action Details View",
+            showBackButton: true,
+          ),
           SliverPadding(
             padding: EdgeInsetsGeometry.all(4.w),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 Column(
                   children: [
-
                     // Overlapping Card
-                    CustomCard(child:  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextTitleWidget(title: "Content",color: color.primary,size: 17,),
-                        SizedBox(height: 1.h,),
-                        // 8 Actions
-                        _buildContentActionGrid(context),
+                    CustomCard(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextTitleWidget(
+                            title: "Content",
+                            color: color.primary,
+                            size: 17,
+                          ),
+                          SizedBox(height: 1.h),
+                          // 8 Actions
+                          _buildContentActionGrid(context),
 
+                          SizedBox(height: 1.h),
+                          Divider(
+                            color: color.lightVersionOfPrimaryLightVersion,
+                            height: 1,
+                          ),
+                          SizedBox(height: 1.h),
 
-                        SizedBox(height: 1.h,),
-                        Divider(
-       color: color.lightVersionOfPrimaryLightVersion,
-       height: 1, ),
-                        SizedBox(height: 1.h,),
+                          //Oraganization
+                          TextTitleWidget(
+                            title: "Organization",
+                            color: color.primary,
+                            size: 17,
+                          ),
 
+                          SizedBox(height: 1.h),
 
-                        //Oraganization
-                        TextTitleWidget(title: "Organization",color: color.primary,size: 17,),
+                          // 8 Actions
+                          _buildOrganizationActionGrid(context),
 
-                        SizedBox(height: 1.h,),
+                          SizedBox(height: 1.h),
+                          Divider(
+                            color: color.lightVersionOfPrimaryLightVersion,
+                            height: 1,
+                          ),
+                          SizedBox(height: 1.h),
 
-                        // 8 Actions
-                        _buildOrganizationActionGrid(context),
+                          //User Manage
+                          TextTitleWidget(
+                            title: "User Manage",
+                            color: color.primary,
+                            size: 17,
+                          ),
 
-
-                        SizedBox(height: 1.h,),
-                        Divider(
-       color: color.lightVersionOfPrimaryLightVersion,
-       height: 1, ),
-                        SizedBox(height: 1.h,),
-
-
-                        //User Manage
-                        TextTitleWidget(title: "User Manage",color: color.primary,size: 17,),
-
-                        SizedBox(height: 1.h,),
-                        // 8 Actions
-                        _buildUserManagerActionGrid(context),
-
-
-                      ],
-                    ),),
-                    SizedBox(height: 2.5.h,)
-
-
+                          SizedBox(height: 1.h),
+                          // 8 Actions
+                          _buildUserManagerActionGrid(context),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 2.5.h),
                   ],
                 ),
               ]),
@@ -96,9 +106,11 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.notifications_none,
           label: "Notice",
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.notice,arguments: {
-              'showBackButton' :true,
-            });
+            Navigator.pushNamed(
+              context,
+              RoutesName.notice,
+              arguments: {'showBackButton': true},
+            );
           },
         ),
         ActionTile(
@@ -209,6 +221,7 @@ class _ActionDetailsState extends State<ActionDetails> {
       ],
     );
   }
+
   ActionGrid _buildOrganizationActionGrid(BuildContext context) {
     return ActionGrid(
       items: [
@@ -223,7 +236,6 @@ class _ActionDetailsState extends State<ActionDetails> {
           icon: Icons.link,
           label: "Links",
           onTap: () {
-
             Navigator.pushNamed(context, RoutesName.important_links);
           },
         ),
@@ -251,6 +263,7 @@ class _ActionDetailsState extends State<ActionDetails> {
       ],
     );
   }
+
   ActionGrid _buildUserManagerActionGrid(BuildContext context) {
     return ActionGrid(
       items: [

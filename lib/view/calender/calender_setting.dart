@@ -40,11 +40,10 @@ class _CalenderSettingState extends State<CalenderSetting> {
     });
   }
 
-  // API থেকে আসা বর্তমান Weekend Settings লোড করা
+
   void _loadExistingSettings() async {
     final viewModel = context.read<CalendarViewModel>();
 
-    // সেটিংস লোড না থাকলে লোড করা
     if (viewModel.settings == null) {
       await viewModel.getSettings();
     }
@@ -65,7 +64,6 @@ class _CalenderSettingState extends State<CalenderSetting> {
     }
   }
 
-  // সেটিংস API-তে সেভ করার মেথড
   Future<void> _saveSettings() async {
     setState(() {
       _isSaving = true;
@@ -73,7 +71,6 @@ class _CalenderSettingState extends State<CalenderSetting> {
 
     final viewModel = context.read<CalendarViewModel>();
 
-    // Selected Day নামগুলোকে Index এ কনভার্ট করা ( e.g. Friday -> 5, Saturday -> 6 )
     final List<int> indexList = selectedDays
         .map((day) => weekendDays.indexOf(day))
         .where((idx) => idx != -1)
@@ -89,7 +86,6 @@ class _CalenderSettingState extends State<CalenderSetting> {
       });
 
       if (success) {
-        // ক্যালেন্ডার ডাটা রিফ্রেশ করা
         viewModel.getSettings();
         viewModel.getEventApi();
 
@@ -130,7 +126,6 @@ class _CalenderSettingState extends State<CalenderSetting> {
                         children: [
                           TextTitleWidget(
                             title: "Select Weekend Days",
-                            color: color.primary,
                           ),
                           SizedBox(height: AppSizes.itemGap),
                           GridView.builder(
@@ -178,9 +173,11 @@ class _CalenderSettingState extends State<CalenderSetting> {
                                         materialTapTargetSize:
                                         MaterialTapTargetSize.shrinkWrap,
                                       ),
+                                      SizedBox(width: AppSizes.itemGap,),
                                       TextTitleWidget(
                                         title: day,
                                         color: color.primary,
+                                        size: AppSizes.sectionTitle,
                                       )
                                     ],
                                   ),

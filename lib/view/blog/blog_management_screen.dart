@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/widget/custom_button/view_button.dart';
+import 'package:storio_app/widget/universal/bottom_height_widget.dart';
 import 'package:storio_app/widget/universal/search_text_field.dart';
 import 'package:storio_app/widget/skeleton/status_row_skeleton.dart';
 
@@ -241,8 +242,8 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomStatusBadge(
-                                title: blog.statusDisplay ?? blog.status ?? "",
-                                size: AppSizes.cardTitle,
+                                title: (blog.statusDisplay ?? blog.status)!.toUpperCase() ?? "",
+                                size: AppSizes.sectionTitle,
                               ),
                               Row(
                                 children: [
@@ -255,6 +256,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                                       );
                                     },
                                   ),
+                                  SizedBox(width: AppSizes.itemGap,),
                                   MoreMenu(
                                     items: const [
                                       MoreMenuAction.edit,
@@ -342,20 +344,21 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                           SizedBox(height: AppSizes.smallGap),
                           TextTitleWidget(
                             title: blog.title ?? "",
-                            color: color.primary,
+                            color: color.textPrimary,
                           ),
-                          SizedBox(height: AppSizes.appbarGap),
+                          SizedBox(height: AppSizes.smallGap),
                           TextBodyStyleWidget(
                             title: blog.excerpt?.isNotEmpty == true
                                 ? blog.excerpt!
                                 : (blog.content ?? ""),
-                            maxLines: 4,
+                            maxLines: 3,
                           ),
                           SizedBox(height: AppSizes.smallGap),
                           Divider(
                             color: color.lightVersionOfPrimaryLightVersion,
                             height: 1,
                           ),
+                          SizedBox(height: AppSizes.smallGap),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -367,7 +370,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                                     color: color.primary,
                                   ),
                                   SizedBox(width: AppSizes.appbarGap),
-                                  TextBodyStyleWidget(title: blog.author ?? ""),
+                                  TextBodyStyleWidget(title: blog.author ?? "",fontbold: false,),
                                 ],
                               ),
                               Row(
@@ -384,6 +387,8 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
                                         : (blog.createDate != null
                                               ? formatDate(blog.createDate!)
                                               : ""),
+
+                                    fontbold: false,
                                   ),
                                 ],
                               ),
@@ -397,6 +402,7 @@ class _BlogManagementScreenState extends State<BlogManagementScreen> {
               );
             },
           ),
+          BottomHeightWidget()
         ],
       ),
       floatingActionButton: Column(

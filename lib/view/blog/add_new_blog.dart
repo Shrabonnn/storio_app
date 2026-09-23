@@ -337,7 +337,7 @@ class _AddBlogState extends State<AddBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Title*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -348,7 +348,7 @@ class _AddBlogState extends State<AddBlog> {
                         SizedBox(height: AppSizes.itemGap),
                         TextBodyStyleWidget(
                           title: "URL Slug*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -359,7 +359,7 @@ class _AddBlogState extends State<AddBlog> {
                         SizedBox(height: AppSizes.itemGap),
                         TextBodyStyleWidget(
                           title: "Author*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -386,7 +386,7 @@ class _AddBlogState extends State<AddBlog> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Featured Image",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
                             SizedBox(width: AppSizes.appbarGap),
@@ -453,7 +453,7 @@ class _AddBlogState extends State<AddBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Content*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -534,7 +534,7 @@ class _AddBlogState extends State<AddBlog> {
                         if (provider.statusChoices.isEmpty) {
                           return TextBodyStyleWidget(
                             title: "No status available",
-                            color: color.primary,
+                            color: color.textPrimary,
                           );
                         }
 
@@ -559,7 +559,7 @@ class _AddBlogState extends State<AddBlog> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Status*",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
                             SizedBox(height: AppSizes.appbarGap),
@@ -596,7 +596,7 @@ class _AddBlogState extends State<AddBlog> {
                                 children: [
                                   TextBodyStyleWidget(
                                     title: "Publish Date",
-                                    color: color.primary,
+                                    color: color.textPrimary,
                                     size: AppSizes.cardTitle,
                                   ),
                                   SizedBox(height: AppSizes.appbarGap),
@@ -619,7 +619,7 @@ class _AddBlogState extends State<AddBlog> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Publish Date",
-                                          color: color.primary,
+                                          color: color.textPrimary,
                                           size: AppSizes.cardTitle,
                                         ),
                                         SizedBox(height: AppSizes.appbarGap),
@@ -639,7 +639,7 @@ class _AddBlogState extends State<AddBlog> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Time",
-                                          color: color.primary,
+                                          color: color.textPrimary,
                                           size: AppSizes.cardTitle,
                                         ),
                                         SizedBox(height: AppSizes.appbarGap),
@@ -680,7 +680,7 @@ class _AddBlogState extends State<AddBlog> {
                         if (provider.categoryList.isEmpty) {
                           return TextBodyStyleWidget(
                             title: "No category available",
-                            color: color.primary,
+                            color: color.textPrimary,
                           );
                         }
 
@@ -701,7 +701,7 @@ class _AddBlogState extends State<AddBlog> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Category",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
                             SizedBox(height: AppSizes.appbarGap),
@@ -736,7 +736,7 @@ class _AddBlogState extends State<AddBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Excerpt",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -762,7 +762,7 @@ class _AddBlogState extends State<AddBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Add Tags",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -793,6 +793,8 @@ class _AddBlogState extends State<AddBlog> {
                             });
                           },
                         ),
+
+                        SizedBox(width: AppSizes.itemGap,),
                         Expanded(
                           child: TextBodyStyleWidget(
                             title: "Mark as Featured Post",
@@ -859,7 +861,7 @@ class _AddBlogState extends State<AddBlog> {
                           Navigator.pop(context);
                         },
                       ),
-                      SizedBox(width: AppSizes.appbarGap),
+                      SizedBox(width: AppSizes.smallGap),
                       Flexible(
                         child: CustomButton(
                           text: isSaving ? "Saving..." : "Save Post",

@@ -116,9 +116,11 @@ class _ViewBlogScreenState extends State<ViewBlogScreen> {
                                 Expanded(
                                   child: InfoItemCard(
                                     title: "Published Date",
-                                    name:  widget.blog.publishDate != null
+                                    name: widget.blog.publishDate != null
                                         ? formatDate(widget.blog.publishDate!)
-                                        : "",
+                                        : (widget.blog.createDate != null
+                                        ? formatDate(widget.blog.createDate!)
+                                        : ""),
                                     icons: Icons.calendar_month_outlined,
                                   ),
                                 ),

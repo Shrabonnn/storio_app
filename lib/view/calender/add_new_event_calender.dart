@@ -192,7 +192,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                             children: [
                               TextBodyStyleWidget(
                                 title: "Title",
-                                color: color.primary,
+                                color: color.textPrimary,
                                 size: AppSizes.sectionTitle,
                               ),
                               SizedBox(height: AppSizes.appbarGap),
@@ -203,7 +203,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                               SizedBox(height: AppSizes.itemGap),
                               TextBodyStyleWidget(
                                 title: "Description",
-                                color: color.primary,
+                                color: color.textPrimary,
                                 size: AppSizes.sectionTitle,
                               ),
                               SizedBox(height: AppSizes.appbarGap),
@@ -228,8 +228,8 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                                   children: [
                                     TextBodyStyleWidget(
                                       title: "Start Date",
-                                      color: color.primary,
-                                      size: AppSizes.cardTitle,
+                                      color: color.textPrimary,
+                                      size: AppSizes.sectionTitle,
                                     ),
                                     SizedBox(height: AppSizes.appbarGap),
                                     GestureDetector(
@@ -245,14 +245,14 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                                   ],
                                 ),
                               ),
-                              SizedBox(width: AppSizes.smallGap),
+                              SizedBox(width: AppSizes.itemGap),
                               Flexible(
                                 child: Column(
                                   children: [
                                     TextBodyStyleWidget(
                                       title: "End Date",
-                                      color: color.primary,
-                                      size: AppSizes.cardTitle,
+                                      color: color.textPrimary,
+                                      size: AppSizes.sectionTitle,
                                     ),
                                     SizedBox(height: AppSizes.appbarGap),
                                     GestureDetector(
@@ -286,8 +286,8 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Category",
-                                          color: color.primary,
-                                          size: AppSizes.cardTitle,
+                                          color: color.textPrimary,
+                                          size: AppSizes.sectionTitle,
                                         ),
                                         SizedBox(height: AppSizes.appbarGap),
                                         CustomDropdown(
@@ -304,14 +304,14 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(width: AppSizes.appbarGap),
+                                  SizedBox(width: AppSizes.itemGap),
                                   Flexible(
                                     child: Column(
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Level",
-                                          color: color.primary,
-                                          size: AppSizes.cardTitle,
+                                          color: color.textPrimary,
+                                          size: AppSizes.sectionTitle,
                                         ),
                                         SizedBox(height: AppSizes.appbarGap),
                                         CustomDropdown(
@@ -348,7 +348,7 @@ class _AddNewEventCalenderState extends State<AddNewEventCalender> {
                               backgroundColor: color.cardBackground,
                               foregroundColor: color.primary,
                             ),
-                            SizedBox(width: AppSizes.appbarGap),
+                            SizedBox(width: AppSizes.smallGap),
                             Flexible(
                               child: viewModel.isSubmitting
                                   ? const Center(

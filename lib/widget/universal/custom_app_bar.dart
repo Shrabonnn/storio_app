@@ -30,59 +30,85 @@ class CustomSliverAppBar extends StatelessWidget {
       elevation: 0,
       collapsedHeight: 8.h,
       automaticallyImplyLeading: false,
-      flexibleSpace: Container(
-        decoration:  BoxDecoration(
-          gradient: LinearGradient(
-            begin: AlignmentGeometry.topCenter,
-            end: AlignmentGeometry.bottomCenter,
-            colors: [
-              color.primaryLightVersion,
-              color.primary,
-            ],
-          ),
+      backgroundColor: Colors.transparent, // Background transparent rakhun
+
+
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
         ),
-        child: SafeArea(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (showBackButton) ...[
-                IconButton(
-                  onPressed: onTap ?? () => Navigator.pop(context),
-                  icon:  Icon(
-                    Icons.arrow_back_ios_new,
-                    color: color.cardBackground,
+      ),
+      flexibleSpace:ClipRRect(
+        borderRadius: const BorderRadius.vertical(
+          bottom: Radius.circular(20),
+        ),
+        child: Container(
+
+          decoration:  BoxDecoration(
+            gradient: LinearGradient(
+              begin: AlignmentGeometry.topCenter,
+              end: AlignmentGeometry.bottomCenter,
+              colors: [
+                color.primaryLightVersion,
+                color.primary.withValues(alpha: .7),
+              ],
+            ),
+          ),
+          child: SafeArea(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (showBackButton) ...[
+                  SizedBox(width: AppSizes.itemGap,),
+                  Container(
+                    height: 5.h,
+                    width: 12.w,
+                    decoration: BoxDecoration(
+                      color: color.primary.withValues(alpha: .2),
+                      borderRadius: BorderRadius.circular(AppSizes.containerRadius)
+                    ),
+                    child: Center(
+                      child: IconButton(
+                        onPressed: onTap ?? () => Navigator.pop(context),
+                        icon:  Icon(
+                          Icons.arrow_back_ios_new,
+                          color: color.cardBackground,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+
+                Expanded(
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: AppSizes.screenPadding),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppbarTextStyle(
+                          title: title,
+                          size: AppSizes.appBarTitle,
+                        ),
+
+                        if (subtitle != null) ...[
+
+                          SizedBox(height: AppSizes.appbarGap),
+
+                          TextTitleWidget(
+                            title: subtitle!,
+                            size: AppSizes.appBarSubTitle,
+                            color: color.cardBackground.withValues(alpha: 0.7),
+                          ),
+
+                        ],
+                      ],
+                    ),
                   ),
                 ),
               ],
-
-              Expanded(
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: AppSizes.screenPadding),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppbarTextStyle(
-                        title: title,
-                        size: AppSizes.appBarTitle,
-                      ),
-
-                      if (subtitle != null) ...[
-
-                        SizedBox(height: AppSizes.appbarGap),
-
-                        TextTitleWidget(
-                          title: subtitle!,
-                          size: AppSizes.appBarSubTitle,
-                          color: color.cardBackground.withValues(alpha: 0.7),
-                        ),
-
-                      ],
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

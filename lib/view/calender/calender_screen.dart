@@ -129,7 +129,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 ),
               ),
               const SizedBox(width: 4),
-              TextBodyStyleWidget(title: cat['name'] as String, size: 13.8.sp, color: cat['text'] as Color,)
+              TextBodyStyleWidget(title: cat['name'] as String, size: AppSizes.cardSubTitle, color: cat['text'] as Color,)
             ],
           ),
         );
@@ -424,7 +424,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
                         SizedBox(height: AppSizes.sectionGap),
                         // Category Color Legend (Hint Chart Header)
-                        _buildCategoryLegend(),
+                        Center(child: _buildCategoryLegend()),
 
                         SizedBox(height: AppSizes.itemGap),
 
@@ -437,6 +437,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               TextTitleWidget(
                                 title: "Calendar Statistics",
                                 color: color.primary,
+
                               ),
                               SizedBox(height: AppSizes.smallGap),
                               Row(
@@ -554,7 +555,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                     color: color.textPrimary,
                                   ),
                                 ),
-                               SizedBox(height: AppSizes.appbarGap),
+                               SizedBox(height: AppSizes.smallGap),
                               Row(
                                 children: [
                                   Container(
@@ -562,14 +563,14 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                         horizontal: 8, vertical: 3),
                                     decoration: BoxDecoration(
                                       color: catBgColor,
-                                      borderRadius:
-                                      BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(4),
                                     ),
                                     child:  TextBodyStyleWidget(
                                       title: event.categoryDisplay ?? event.category ?? ""
-                                      ,size: AppSizes.cardSubTitle,),
+                                      ,size: AppSizes.cardSubTitle,
+                                    color: Colors.black,),
                                   ),
-                                  const SizedBox(width: 8),
+                                   SizedBox(width: AppSizes.itemGap),
                                   TextBodyStyleWidget(title: "${_formatDate(event.startDate)} - ${_formatDate(event.endDate)}",size: AppSizes.cardSubTitle,),
                                 ],
                               ),

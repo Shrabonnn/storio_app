@@ -54,7 +54,7 @@ class StatusButton extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: foregroundColor ?? color.cardBackground,
-                fontSize: size ?? AppSizes.cardSubTitle,
+                fontSize: size ?? AppSizes.cardTitle,
                 fontWeight: FontWeight.w600,
               ),
             ),

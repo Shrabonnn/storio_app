@@ -130,7 +130,7 @@ class CustomTextFieldWidget extends StatelessWidget {
                   : null,
 
               style: TextStyle(
-                fontSize: AppSizes.cardSubTitle,
+                fontSize: AppSizes.cardTitle,
                 fontWeight: FontWeight.w500,
               ),
 

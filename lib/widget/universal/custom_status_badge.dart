@@ -18,12 +18,12 @@ class CustomStatusBadge extends StatelessWidget {
     final color = context.Appcolor;
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 3.w,
-          vertical: 0.5.h,),
+          vertical: .7.h,),
         decoration: BoxDecoration(
           color: backgroundColor ?? color.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppSizes.containerRadius),
         ),
-        child: TextTitleWidget(title: title,color: foregroundColor ?? color.primary,size: size ?? AppSizes.cardSubTitle,)
+        child: TextTitleWidget(title: title,color: foregroundColor ?? color.primary,size: size ?? AppSizes.cardTitle,)
     );
   }
 }

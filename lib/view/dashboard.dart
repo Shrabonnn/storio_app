@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:storio_app/viewModel/Authenticaion/auth_view_model.dart';
 import 'package:storio_app/widget/custom_button/custom_buttom.dart';
+import 'package:storio_app/widget/dashboard/blink_icon_widget.dart';
 import 'package:storio_app/widget/textStyle/text_body_style.dart';
 import 'package:storio_app/widget/textStyle/text_title_style.dart';
 import 'package:storio_app/widget/universal/custom_card.dart';
@@ -169,18 +170,11 @@ class _DashboardState extends State<Dashboard> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.search_sharp,
-                                        color: color.cardBackground,
-                                        size: AppSizes.iconLarge,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.circle_rounded,
-                                      size: AppSizes.iconLarge,
-                                      color: Colors.redAccent,
+
+                                    BlinkingIcon(
+                                      icon :Icons.circle_rounded,
+                                      size: AppSizes.icon,
+                                      color: Colors.red,
                                     ),
                                     SizedBox(width: AppSizes.itemGap,),
                                     CustomButton(width: 20.w,height: 3.5.h,text: "Visit Site", onTap: (){}),

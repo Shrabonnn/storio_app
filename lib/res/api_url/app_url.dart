@@ -30,6 +30,31 @@ class AppUrl {
   static const String v2InstitutionProfile = "$baseUrl/api/v2/template/institution-profile/";
 
 
+
+
+  // General Settings
+  static const String publicGeneralSettings = "$baseUrl/api/settings/general/";
+  static const String managementGeneralSettings = "$baseUrl/api/management/settings/general/";
+  static const String updateGeneralSettings = "$baseUrl/api/management/settings/general/update/";
+
+  // Social Links
+  static const String socialLinks = "$baseUrl/api/management/social-links/";
+  static const String socialLinkPlatformChoices = "$baseUrl/api/management/social-links/platform-choices/";
+
+  static String socialLinkDetail(int id) => "$baseUrl/api/management/social-links/$id/";
+
+
+  //  Security (Sessions & Password Reset)
+  static String get authSessions => "$baseUrl/api/auth/sessions/";
+
+  static String authSessionLogout(int id) => "$baseUrl/api/auth/sessions/$id/logout/";
+
+  static String get authSessionsLogoutOthers => "$baseUrl/api/auth/sessions/logout-others/";
+
+  static String get passwordResetRequest => "$baseUrl/api/auth/password-reset/request/";
+
+  static String get passwordResetConfirm => "$baseUrl/api/auth/password-reset/confirm/";
+
   // Notice
   static const String getNotice = "$baseUrl/api/notice/";
   static const String getManagementNotice = "$baseUrl/api/management/notice/";
@@ -352,13 +377,6 @@ class AppUrl {
   static const String bulkTeamMemberOperations = "$baseUrl/api/management/team/members/bulk-operations/";
 
   static const String imageShapeChoices = "$baseUrl/api/management/team/image-shape-choices/";
-
-
-
-  // Social Links
-  static const String getSocialLinks = "$baseUrl/api/management/social-links/";
-  static const String getSocialLinkPlatformChoices = "${getSocialLinks}platform-choices/";
-  static String socialLinkDetail(int id) => "${getSocialLinks}$id/";
 
 
 

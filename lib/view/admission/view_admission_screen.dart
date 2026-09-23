@@ -328,7 +328,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                     ),
                                     icon: Icon(
                                       Icons.check_circle_outline,
-                                      size: AppSizes.iconLarge,
+                                      size: AppSizes.appBarIcon,
                                       color: Colors.green,
                                     ),
                                   ),
@@ -344,7 +344,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                     ),
                                     icon: Icon(
                                       Icons.cancel_outlined,
-                                      size: AppSizes.iconLarge,
+                                      size: AppSizes.appBarIcon,
                                       color: Colors.redAccent,
                                     ),
                                   ),
@@ -360,7 +360,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                     ),
                                     icon: Icon(
                                       Icons.visibility_outlined,
-                                      size: AppSizes.iconLarge,
+                                      size: AppSizes.appBarIcon,
                                       color: Colors.orange,
                                     ),
                                   ),
@@ -376,7 +376,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                     ),
                                     icon: Icon(
                                       Icons.access_time,
-                                      size: AppSizes.iconLarge,
+                                      size: AppSizes.appBarIcon,
                                       color: color.primary,
                                     ),
                                   ),
@@ -388,7 +388,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                     icon: isDownloading
                                         ? SizedBox(
                                       width: AppSizes.iconLarge,
-                                      height: AppSizes.iconLarge,
+                                      height: AppSizes.appBarIcon,
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2,
                                         color: color.primary,
@@ -396,7 +396,7 @@ class _ViewAdmissionScreenState extends State<ViewAdmissionScreen> {
                                     )
                                         : Icon(
                                       Icons.download_outlined,
-                                      size: AppSizes.iconLarge,
+                                      size: AppSizes.appBarIcon,
                                       color: color.primary,
                                     ),
                                   ),

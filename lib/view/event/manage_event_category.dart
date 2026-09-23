@@ -140,18 +140,15 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                       child: Column(
                         crossAxisAlignment: .start,
                         children: [
-                          TextBodyStyleWidget(
+                          TextTitleWidget(
                             title:categoryId != null ? "Edit Category" : "Create New Categories",
-                            color: color.primary,
-                            size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.sectionGap),
 
                           // Title
-                          TextBodyStyleWidget(
+                          TextTitleWidget(
                             title: "Name",
-                            color: color.primary,
-                            size: AppSizes.cardTitle,
+                            size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(
@@ -162,10 +159,9 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
 
 
                           // Description
-                          TextBodyStyleWidget(
+                          TextTitleWidget(
                             title: "Description",
-                            color: color.primary,
-                            size: AppSizes.cardTitle,
+                            size: AppSizes.sectionTitle,
                           ),
                           SizedBox(height: AppSizes.appbarGap),
                           CustomTextFieldWidget(
@@ -210,10 +206,9 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                         child: Column(
                           crossAxisAlignment: .start,
                           children: [
-                            TextBodyStyleWidget(
+                            TextTitleWidget(
                               title: "Existing Category ( ${provider.categoryList.length} )",
-                              color: color.primary,
-                              size: AppSizes.sectionTitle,
+
                             ),
                             SizedBox(height: AppSizes.itemGap),
                             if (provider.categoryLoading)
@@ -254,9 +249,9 @@ class _ManageEventCategoryState extends State<ManageEventCategory> {
                                             child: Column(
                                               crossAxisAlignment: .start,
                                               children: [
-                                                TextTitleWidget(
+                                                TextBodyStyleWidget(
                                                   title: category.name ?? "",
-                                                  color: color.primary,
+                                                  size: AppSizes.sectionTitle,
                                                   maxLines: 1,
                                                 ),
 

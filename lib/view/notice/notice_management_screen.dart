@@ -234,8 +234,8 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomStatusBadge(
-                                  title: notice.status ?? "",
-                                  size: AppSizes.cardTitle,
+                                  title: notice.status!.toUpperCase() ?? "",
+                                  size: AppSizes.sectionTitle,
                                 ),
 
                                 Row(
@@ -249,6 +249,8 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                         );
                                       },
                                     ),
+                                    SizedBox(width: AppSizes.sectionGap,),
+
 
                                     MoreMenu(
                                       items: const [
@@ -360,12 +362,11 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                 ),
                               ],
                             ),
-
-                            SizedBox(height: AppSizes.smallGap),
+                            SizedBox(height: AppSizes.itemGap),
 
                             TextTitleWidget(
                               title: notice.title ?? "",
-                              color: color.primary,
+                              color: color.textPrimary,
                               maxLines: 1,
                             ),
 
@@ -373,25 +374,26 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
 
                             TextBodyStyleWidget(
                               title: notice.content ?? "",
-                              maxLines: 2,
+                              maxLines: 3,
                               size: AppSizes.cardTitle,
                             ),
 
-                            SizedBox(height: AppSizes.smallGap),
+                            SizedBox(height: AppSizes.appbarGap),
 
                             Divider(
                               color: color.lightVersionOfPrimaryLightVersion,
                               height: 1,
                             ),
 
-                            SizedBox(height: AppSizes.smallGap),
+
+                            SizedBox(height: AppSizes.appbarGap),
 
                             Row(
                               children: [
                                 Icon(
                                   Icons.calendar_month_outlined,
                                   color: color.primary,
-                                  size: AppSizes.icon,
+                                  size: AppSizes.iconLarge,
                                 ),
 
                                 SizedBox(width: AppSizes.appbarGap),
@@ -402,6 +404,7 @@ class _NoticeManagementScreenState extends State<NoticeManagementScreen> {
                                         "Last Updated: ${notice.updateDate != null ? '${formatDate(notice.updateDate!)} · ${formatTime(notice.updateDate!)}' : ''}",
                                     maxLines: 1,
                                     size: AppSizes.cardTitle,
+                                    fontbold: false,
                                   ),
                                 ),
                               ],

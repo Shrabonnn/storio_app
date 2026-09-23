@@ -98,20 +98,17 @@ class _StorioSplashScreenState extends State<StorioSplashScreen>
 
     if (!mounted) return;
 
-    // ১. টোকেন না থাকলে সরাসরি Login Screen এ নিয়ে যাবে
     if (token == null || token.isEmpty) {
       Navigator.pushReplacementNamed(context, RoutesName.login);
       return;
     }
 
-    // ২. টোকেন থাকলে ViewModel ইনিশিয়ালাইজ এবং Saved User Data লোড করবে
     final authViewModel = context.read<AuthViewModel>();
     await authViewModel.checkLoginStatus();
 
     if (!mounted) return;
 
-    // ৩. এবার Safe Navigation (pushReplacement)
-    Navigator.pushReplacementNamed(context, RoutesName.nav_bar);
+    Navigator.pushReplacementNamed(context, RoutesName.login);
   }
 
   @override

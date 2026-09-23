@@ -233,7 +233,7 @@ class _EditNoticeState extends State<EditNotice> {
 
 
                         // Title
-                        TextBodyStyleWidget(title: "Title", color: color.primary,size: AppSizes.sectionTitle,),
+                        TextBodyStyleWidget(title: "Title", color: color.textPrimary,size: AppSizes.sectionTitle,),
                         SizedBox(height: AppSizes.appbarGap),
                         CustomTextFieldWidget(hintText: "e.g. Notice Title", controller: titleController),
 
@@ -251,7 +251,7 @@ class _EditNoticeState extends State<EditNotice> {
 
                           TextBodyStyleWidget(
                             title: "Content",
-                            color: color.primary,
+                            color: color.textPrimary,
                             size: AppSizes.sectionTitle,
                           ),
 
@@ -374,7 +374,7 @@ class _EditNoticeState extends State<EditNotice> {
                             children: [
                               TextBodyStyleWidget(
                                 title: "Status",
-                                color: color.primary,
+                                color: color.textPrimary,
                                 size: AppSizes.sectionTitle,
                               ),
 
@@ -414,8 +414,8 @@ class _EditNoticeState extends State<EditNotice> {
                                   children: [
                                     TextBodyStyleWidget(
                                       title: "Publish Date",
-                                      color: color.primary,
-                                      size: AppSizes.cardTitle,
+                                      color: color.textPrimary,
+                                      size: AppSizes.sectionTitle,
                                     ),
 
                                     SizedBox(height: AppSizes.appbarGap),
@@ -436,8 +436,8 @@ class _EditNoticeState extends State<EditNotice> {
                                         children: [
                                           TextBodyStyleWidget(
                                             title: "Publish Date",
-                                            color: color.primary,
-                                            size: AppSizes.cardTitle,
+                                            color: color.textPrimary,
+                                            size: AppSizes.sectionTitle,
                                           ),
 
                                           SizedBox(height: AppSizes.appbarGap),
@@ -459,8 +459,8 @@ class _EditNoticeState extends State<EditNotice> {
                                         children: [
                                           TextBodyStyleWidget(
                                             title: "Time",
-                                            color: color.primary,
-                                            size: AppSizes.cardTitle,
+                                            color: color.textPrimary,
+                                            size: AppSizes.sectionTitle,
                                           ),
 
                                           SizedBox(height: AppSizes.appbarGap),
@@ -494,10 +494,11 @@ class _EditNoticeState extends State<EditNotice> {
                             });
                           },
                         ),
+                        SizedBox(width: AppSizes.itemGap,),
 
                         Expanded(
                           child: TextBodyStyleWidget(
-                            title:  "Show PDF in view mode (embed PDF viewer on public page instead of showing only a download button ",fontbold: false,
+                            title:  "Show PDF in view mode ( embed PDF viewer on public page instead of showing only a download button )",fontbold: false,maxLines: 3,
                           ),
                         ),
                       ],
@@ -513,7 +514,7 @@ class _EditNoticeState extends State<EditNotice> {
                         Row(
                           mainAxisAlignment: .spaceBetween,
                           children: [
-                            TextBodyStyleWidget(title: "Featured Image", color: color.primary,size: AppSizes.sectionTitle,),
+                            TextBodyStyleWidget(title: "Featured Image", color: color.textPrimary,size: AppSizes.sectionTitle,),
                             SizedBox(width: AppSizes.appbarGap),
                             CustomButton(
                               height: 4.h,
@@ -552,7 +553,7 @@ class _EditNoticeState extends State<EditNotice> {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         CustomButton(text: "Cancel", onTap: (){},width: 30.w,backgroundColor: color.cardBackground,foregroundColor: color.primary,),
-                        SizedBox(width: AppSizes.appbarGap,),
+                        SizedBox(width: AppSizes.smallGap,),
                         Flexible(
                           child: CustomButton(
                             text: isSaving ? "Updating..." : "Update Post",

@@ -43,10 +43,16 @@ class _InstituteOverviewScreenState extends State<InstituteOverviewScreen> with 
           children: [
             TextTitleWidget(
               title: widget.title,
+              size: AppSizes.sectionTitle,
 
             ),
             if (widget.showIcon)
              IconButton(
+               padding: EdgeInsets.zero,
+                 constraints: BoxConstraints(),
+                 style: IconButton.styleFrom(
+                   tapTargetSize: MaterialTapTargetSize.shrinkWrap
+                 ),
                  onPressed: widget.onTap,
                  icon: AnimatedRotation(
                    turns: widget.isExpanded ? 0.50 : 0,

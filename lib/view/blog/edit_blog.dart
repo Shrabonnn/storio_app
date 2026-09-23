@@ -379,7 +379,7 @@ class _EditBlogState extends State<EditBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Title*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -390,7 +390,7 @@ class _EditBlogState extends State<EditBlog> {
                         SizedBox(height: AppSizes.itemGap),
                         TextBodyStyleWidget(
                           title: "URL Slug*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -401,7 +401,7 @@ class _EditBlogState extends State<EditBlog> {
                         SizedBox(height: AppSizes.itemGap),
                         TextBodyStyleWidget(
                           title: "Author*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -428,7 +428,7 @@ class _EditBlogState extends State<EditBlog> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Featured Image",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
                             SizedBox(width: AppSizes.appbarGap),
@@ -467,7 +467,7 @@ class _EditBlogState extends State<EditBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Content*",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -548,7 +548,7 @@ class _EditBlogState extends State<EditBlog> {
                         if (provider.statusChoices.isEmpty) {
                           return TextBodyStyleWidget(
                             title: "No status available",
-                            color: color.primary,
+                            color: color.textPrimary,
                           );
                         }
 
@@ -572,7 +572,7 @@ class _EditBlogState extends State<EditBlog> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Status*",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
                             SizedBox(height: AppSizes.appbarGap),
@@ -607,7 +607,7 @@ class _EditBlogState extends State<EditBlog> {
                                 children: [
                                   TextBodyStyleWidget(
                                     title: "Publish Date",
-                                    color: color.primary,
+                                    color: color.textPrimary,
                                     size: AppSizes.cardTitle,
                                   ),
                                   SizedBox(height: AppSizes.appbarGap),
@@ -630,7 +630,7 @@ class _EditBlogState extends State<EditBlog> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Publish Date",
-                                          color: color.primary,
+                                          color: color.textPrimary,
                                           size: AppSizes.cardTitle,
                                         ),
                                         SizedBox(height: AppSizes.appbarGap),
@@ -650,7 +650,7 @@ class _EditBlogState extends State<EditBlog> {
                                       children: [
                                         TextBodyStyleWidget(
                                           title: "Time",
-                                          color: color.primary,
+                                          color: color.textPrimary,
                                           size: AppSizes.cardTitle,
                                         ),
                                         SizedBox(height: AppSizes.appbarGap),
@@ -691,7 +691,7 @@ class _EditBlogState extends State<EditBlog> {
                         if (provider.categoryList.isEmpty) {
                           return TextBodyStyleWidget(
                             title: "No category available",
-                            color: color.primary,
+                            color: color.textPrimary,
                           );
                         }
 
@@ -712,7 +712,7 @@ class _EditBlogState extends State<EditBlog> {
                           children: [
                             TextBodyStyleWidget(
                               title: "Category",
-                              color: color.primary,
+                              color: color.textPrimary,
                               size: AppSizes.sectionTitle,
                             ),
                             SizedBox(height: AppSizes.appbarGap),
@@ -747,7 +747,7 @@ class _EditBlogState extends State<EditBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Excerpt",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -773,7 +773,7 @@ class _EditBlogState extends State<EditBlog> {
                       children: [
                         TextBodyStyleWidget(
                           title: "Add Tags",
-                          color: color.primary,
+                          color: color.textPrimary,
                           size: AppSizes.sectionTitle,
                         ),
                         SizedBox(height: AppSizes.appbarGap),
@@ -796,14 +796,14 @@ class _EditBlogState extends State<EditBlog> {
                       children: [
                         Checkbox(
                           value: isFeatured,
-                          side: BorderSide(color: color.primary),
-                          activeColor: color.primary,
+
                           onChanged: (value) {
                             setState(() {
                               isFeatured = value ?? false;
                             });
                           },
                         ),
+                        SizedBox(width: AppSizes.itemGap,),
                         Expanded(
                           child: TextBodyStyleWidget(
                             title: "Mark as Featured Post",
@@ -833,7 +833,9 @@ class _EditBlogState extends State<EditBlog> {
                         });
                       },
                       isExpanded: isSeoExpanded,
+
                       expandableChild: InfrastructureDropDown(
+                        showSaveButton: false,
                         fields: [
                           FormFieldData(
                             title: "Meta Title",
@@ -869,7 +871,7 @@ class _EditBlogState extends State<EditBlog> {
                           Navigator.pop(context);
                         },
                       ),
-                      SizedBox(width: AppSizes.appbarGap),
+                      SizedBox(width: AppSizes.smallGap),
                       Flexible(
                         child: CustomButton(
                           text: isSaving ? "Updating..." : "Update Post",
